@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, SacisActivity!</string>
+    <string name="app_name">Sacis</string>
+    <string name="sys_admin">Sistema Administrador</string>
+    <string name="sys_user">Sistema Usuario</string>
+    <string name="choose_system">Escolha o sistema</string>
+</resources>
