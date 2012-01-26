@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:weightSum="1" android:orientation="vertical">
+	<TextView android:layout_height="wrap_content" android:id="@+id/textView1"
+		android:layout_marginTop="12dp" android:layout_weight="0.01"
+		android:layout_width="wrap_content" android:layout_gravity="center"
+		android:text="@string/sys_admin_enter_data"
+		android:layout_marginBottom="12dp"></TextView>
+	<RelativeLayout android:id="@+id/name_and_text"
+		android:orientation="vertical" android:layout_width="fill_parent"
+		android:layout_height="31dp">
+		<TextView android:layout_height="wrap_content" android:id="@+id/textView2"
+			android:layout_weight="0.01" android:layout_width="wrap_content"
+			android:text="@string/sys_admin_name" android:layout_centerVertical="true"></TextView>
+		<EditText android:inputType="textPersonName"
+			android:layout_width="218dp" android:layout_height="32dp"
+			android:layout_centerHorizontal="true" android:id="@+id/nameText"  android:layout_toRightOf="@+id/textView2">
+			<requestFocus></requestFocus>
+		</EditText>
+	</RelativeLayout>
+
+	<RelativeLayout android:id="@+id/login_and_text"
+		android:orientation="vertical" android:layout_width="fill_parent"
+		android:layout_height="31dp">
+		<TextView android:id="@+id/textView3" android:layout_height="wrap_content"
+			android:text="@string/sys_admin_login" android:layout_width="wrap_content"
+			android:layout_centerVertical="true" android:layout_alignParentLeft="true"></TextView>
+		<EditText android:layout_height="32dp" android:layout_weight="0.01"
+			android:layout_width="218dp" android:id="@+id/loginText"
+			android:layout_centerHorizontal="true"  android:layout_toRightOf="@+id/textView3"></EditText>
+
+	</RelativeLayout>
+	<RelativeLayout android:id="@+id/login_and_text"
+		android:orientation="vertical" android:layout_width="fill_parent"
+		android:layout_height="31dp">
+		<TextView android:layout_height="wrap_content" android:id="@+id/textView4"
+			android:layout_weight="0.01" android:layout_width="wrap_content"
+			android:text="@string/sys_admin_password"
+			android:layout_centerVertical="true"></TextView>
+		<EditText android:layout_height="32dp" android:layout_weight="0.01"
+			android:layout_width="218dp" android:inputType="textPassword"
+			android:id="@+id/passwordText" android:layout_centerHorizontal="true"  android:layout_toRightOf="@+id/textView4"></EditText>
+	</RelativeLayout>
+
+	<RelativeLayout android:id="@+id/login_and_text"
+		android:orientation="vertical" android:layout_width="fill_parent"
+		android:layout_height="31dp">
+		<TextView android:layout_height="wrap_content" android:id="@+id/textView5"
+			android:layout_weight="0.01" android:layout_width="wrap_content"
+			android:text="@string/sys_admin_expire"
+			android:layout_centerVertical="true"></TextView>
+		<EditText android:layout_height="32dp" android:layout_weight="0.01"
+			android:layout_width="218dp" android:inputType="date" android:id="@+id/expireText"
+			android:layout_centerVertical="true" android:layout_toRightOf="@+id/textView5"></EditText>
+
+	</RelativeLayout>
+
+</LinearLayout>

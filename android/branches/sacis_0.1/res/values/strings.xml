@@ -5,4 +5,9 @@
     <string name="sys_admin">Sistema Administrador</string>
     <string name="sys_user">Sistema Usuario</string>
     <string name="choose_system">Escolha o sistema</string>
+    <string name="sys_admin_enter_data">Entre com os dados corretamente</string>
+    <string name="sys_admin_name">Nome:</string>
+    <string name="sys_admin_login">Login:</string>
+    <string name="sys_admin_password">Senha:</string>
+    <string name="sys_admin_expire">Validade:</string>
 </resources>
