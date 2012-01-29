@@ -5,7 +5,7 @@
 	android:scrollbarAlwaysDrawVerticalTrack="true" android:scrollbarStyle="outsideInset"
 	android:scrollbars="vertical">
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:weightSum="1" android:orientation="vertical">
 		<TextView android:layout_height="wrap_content" android:id="@+id/textView1"
 			android:layout_marginTop="12dp" android:layout_weight="0.01"
@@ -16,7 +16,7 @@
 			android:orientation="vertical" android:layout_width="fill_parent"
 			android:layout_height="wrap_content">
 			<TextView android:layout_height="wrap_content"
-				android:layout_weight="0.01" android:layout_width="63dp"
+				android:layout_width="63dp"
 				android:text="@string/sys_admin_name" android:layout_centerVertical="true"
 				android:id="@+id/nameTextView"></TextView>
 			<EditText android:id="@+id/nameEditText"
@@ -31,7 +31,7 @@
 			<TextView android:layout_height="wrap_content" android:text="@string/sys_admin_login"
 				android:layout_width="63dp" android:layout_centerVertical="true"
 				android:layout_alignParentLeft="true" android:id="@+id/loginTextView"></TextView>
-			<EditText android:id="@+id/loginEditText"
+			<EditText android:id="@+id/loginEditText" android:inputType="text"
 				android:layout_width="218dp" android:layout_height="wrap_content"
 				android:layout_alignParentTop="true" android:layout_toRightOf="@+id/loginTextView">
 			</EditText>
@@ -41,7 +41,7 @@
 			android:orientation="vertical" android:layout_width="fill_parent"
 			android:layout_height="wrap_content">
 			<TextView android:layout_height="wrap_content"
-				android:layout_weight="0.01" android:layout_width="63dp"
+				android:layout_width="63dp"
 				android:text="@string/sys_admin_password"
 				android:layout_centerVertical="true" android:layout_alignParentLeft="true"
 				android:id="@+id/passwordTextView"></TextView>
@@ -55,7 +55,7 @@
 			android:orientation="vertical" android:layout_width="fill_parent"
 			android:layout_height="wrap_content">
 			<TextView android:layout_height="wrap_content"
-				android:layout_weight="0.01" android:layout_width="63dp"
+				android:layout_width="63dp"
 				android:text="@string/sys_admin_expire"
 				android:layout_centerVertical="true" android:layout_alignParentLeft="true"
 				android:id="@+id/expireTextView"></TextView>
@@ -83,7 +83,7 @@
 			<Button android:id="@+id/sendButton" android:text="@string/sys_admin_send"
 				android:layout_width="93dp" android:layout_height="40dp"
 				android:layout_alignParentTop="true"
-				android:layout_centerHorizontal="true"></Button>
+				android:layout_centerHorizontal="true" android:onClick="sendInfoToServer"></Button>
 		</RelativeLayout>
 	</LinearLayout>
 </ScrollView>
