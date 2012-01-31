@@ -1,17 +1,14 @@
 package com.project.sacis;
 
-import java.io.File;
-import java.net.URI;
-
-import com.project.sacis.utils.DBConnector;
-import com.project.sacis.utils.ToastUtils;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import com.project.sacis.utils.AdminFormUtils;
+import com.project.sacis.utils.ToastUtils;
 
 /**
  * Proposito da classe: TODO: explicar proposito da classe
@@ -29,22 +26,20 @@ public class SysAdminActivity extends Activity {
 		setContentView(R.layout.sys_admin);
 		getKeyEditText().setKeyListener(null);
 	}
-	
+
 	/**
 	 * Ação ao clicar no botão de enviar os dados.
 	 * */
-	public void sendInfoToServer(View view)
-	{
-		if (isDataValid())
-		{
-			boolean existUser = new DBConnector().isUserExist(getLoginEditText().getText().toString());
-			if (existUser)
-			{
-				ToastUtils.makeToast(this, "Login já existe!");
+	public void sendInfoToServer(View view) {
+		if (AdminFormUtils.isDataValid()) {
+			String loginText = getLoginEditText().getText().toString();
+			boolean existUser = AdminFormUtils.isUserExist(loginText);
+			if (existUser) {
+				ToastUtils.makeToast(this, "Login já existe, tente novamente!");
 			}
 		}
 	}
-	
+
 	/**
 	 * Ação ao clicar no botão de escolher a chave.
 	 * */
@@ -56,7 +51,7 @@ public class SysAdminActivity extends Activity {
 				Intent.createChooser(fileChooserIntent, "Selecione a chave"),
 				AttachFileRequestCode);
 	}
-	
+
 	/**
 	 * Ao receber o resultado de uma atividade
 	 * */
@@ -71,26 +66,30 @@ public class SysAdminActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Verifica se a requisição para escolher o arquivo foi concluida com sucesso.
+	 * @param requestCode
+	 * @param resultCode
+	 * @return {@link Boolean}
+	 * */
 	private boolean isFileChooseOk(final int requestCode, final int resultCode) {
 		return (requestCode == AttachFileRequestCode && resultCode == RESULT_OK);
 	}
-	
-	private EditText getKeyEditText()
-	{
+
+	/**
+	 * Obtém a editText da chave.
+	 * @return {@link EditText}
+	 * */
+	private EditText getKeyEditText() {
 		return (EditText) this.findViewById(R.id.keyEditText);
 	}
-	
-	private EditText getLoginEditText()
-	{
+
+	/**
+	 * Obtém a editText do login.
+	 * @return {@link EditText}
+	 * */
+	private EditText getLoginEditText() {
 		return (EditText) this.findViewById(R.id.loginEditText);
 	}
-	
-	/**
-	 * Método para validar os dados dos campos do formulário.
-	 * @return true se os dados estão válidos.
-	 * */
-	private boolean isDataValid()
-	{
-		return true;
-	}
+
 }

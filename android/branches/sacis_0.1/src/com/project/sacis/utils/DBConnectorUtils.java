@@ -12,43 +12,26 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.util.Log;
+public class DBConnectorUtils {
+	private final static String SERVER_URL = "http://www.sacis.com.br/";
 
-public class DBConnector {
-	private final String SERVER_URL = "http://www.sacis.com.br/";
-
-	public DBConnector() {
+	public DBConnectorUtils() {
 
 	}
 
-	public boolean isUserExist(final String userName) {
-		ArrayList<NameValuePair> dataToSend = new ArrayList<NameValuePair>(1);
-		dataToSend.add(new BasicNameValuePair("username", userName));
-		try {
-			InputStream is = this.sendData(dataToSend, "checkUser.php");
-			if (is == null)
-			{
-				return false;
-			}
-			else
-			{
-				inputStreamToJson(is);
-				return true;
-			}
-			
-		} catch (IOException ex) {
-			Log.e("[DBConnector]", ex.getMessage(), ex);
-		} catch (JSONException ex) {
-			Log.e("[DBConnector]", ex.getMessage(), ex);
-		}
-		return false;
-	}
-
-	private InputStream sendData(ArrayList<NameValuePair> data,
+	/**
+	 * Método para enviar o request http para o site e obter o resultado de
+	 * acordo com o filename passado.
+	 * 
+	 * @param data
+	 * @param fileName
+	 * @return {@link JSONArray}
+	 * 
+	 * */
+	public static InputStream sendData(ArrayList<NameValuePair> data,
 			final String fileName) throws IOException {
 		try {
 			String server = SERVER_URL + fileName;
@@ -59,10 +42,16 @@ public class DBConnector {
 			return response.getEntity().getContent();
 		} catch (IOException ex) {
 			throw ex;
-		}
+		} 
 	}
 
-	private JSONArray inputStreamToJson(final InputStream is) throws IOException, JSONException {
+	/**
+	 * Método para converter um {@link InputStream} em {@link JSONArray}
+	 * @param is
+	 * @return {@link JSONArray}
+	 * */
+	public static JSONArray inputStreamToJson(final InputStream is)
+			throws IOException, JSONException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is,
 				"iso-8859-1"), 8);
 		StringBuilder sb = new StringBuilder();
