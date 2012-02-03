@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PushbackReader;
 import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
@@ -42,20 +43,20 @@ public class DBConnectorUtils {
 			return response.getEntity().getContent();
 		} catch (IOException ex) {
 			throw ex;
-		} 
+		}
 	}
 
 	/**
 	 * Método para converter um {@link InputStream} em {@link JSONArray}
+	 * 
 	 * @param is
 	 * @return {@link JSONArray}
 	 * */
 	public static JSONArray inputStreamToJson(final InputStream is)
 			throws IOException, JSONException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is,
-				"iso-8859-1"), 8);
+		InputStreamReader isReader = new InputStreamReader(is, "iso-8859-1");
+		BufferedReader reader = new BufferedReader(isReader, 8);
 		StringBuilder sb = new StringBuilder();
-
 		sb.append(reader.readLine() + "\n");
 
 		String line = "0";
@@ -63,6 +64,9 @@ public class DBConnectorUtils {
 			sb.append(line + "\n");
 		}
 		is.close();
-		return new JSONArray(sb.toString());
+		reader.close();
+		isReader.close();
+		String fromSb = sb.toString().trim();
+		return (fromSb.equalsIgnoreCase("null") ? null : new JSONArray(fromSb));
 	}
 }
