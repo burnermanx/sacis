@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import android.util.Log;
 
@@ -42,9 +44,12 @@ public class AdminFormUtils {
 			InputStream inputStreamFromCheckUser = DBConnectorUtils.sendData(
 					dataToSend, "checkUser.php");
 			if (inputStreamFromCheckUser != null) {
-				return true;
+				JSONArray jsonArray = DBConnectorUtils.inputStreamToJson(inputStreamFromCheckUser);
+				return (jsonArray == null ? false : true);
 			}
 		} catch (IOException ex) {
+			Log.e("[DBConnector]", ex.getMessage(), ex);
+		} catch (JSONException ex) {
 			Log.e("[DBConnector]", ex.getMessage(), ex);
 		}
 		return false;
