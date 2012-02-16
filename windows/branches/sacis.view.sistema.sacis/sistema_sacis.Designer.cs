@@ -38,11 +38,11 @@
             this.sacis_combo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sacis_combo.FormattingEnabled = true;
             this.sacis_combo.Items.AddRange(new object[] {
-            "Armazenamento",
-            "Envio de Mensagens"});
-            this.sacis_combo.Location = new System.Drawing.Point(54, 86);
+            "Armazenamento de Arquivos",
+            "Gerenciamento de Mensagens"});
+            this.sacis_combo.Location = new System.Drawing.Point(43, 86);
             this.sacis_combo.Name = "sacis_combo";
-            this.sacis_combo.Size = new System.Drawing.Size(121, 21);
+            this.sacis_combo.Size = new System.Drawing.Size(153, 21);
             this.sacis_combo.TabIndex = 0;
             // 
             // label1
@@ -65,7 +65,7 @@
             this.sacis_ok.UseVisualStyleBackColor = true;
             this.sacis_ok.Click += new System.EventHandler(this.click_sacis);
             // 
-            // form_sacis
+            // sistema_sacis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -73,12 +73,12 @@
             this.Controls.Add(this.sacis_ok);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sacis_combo);
-            this.Name = "form_sacis";
+            this.KeyPreview = true;
+            this.Name = "sistema_sacis";
             this.Text = "Projeto S.A.C.I.S.";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.click_sacis);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.KeyPreview = true;
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.click_sacis);
 
         }
 

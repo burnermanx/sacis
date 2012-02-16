@@ -89,8 +89,9 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 if (gerenciaServlet.consultaUsuario(name, hash))
                 {
 
-                    //gerenciaMensagem newForm = new gerenciaMensagem(name);
-                    gerenciaMensagem newForm = new gerenciaMensagem();
+                    gerenciaServlet.atualizaUsuario(name, hash);
+
+                    gerenciaMensagem newForm = new gerenciaMensagem(name);
                     newForm.FormClosed += new FormClosedEventHandler(form_visivel);
                     this.Visible = false;
                     newForm.ShowDialog();
