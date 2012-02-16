@@ -22,6 +22,10 @@ namespace sacis.model.utilitarios
 
         private static string MSG_ERRO_LEITURA = "Erro ao Ler Arquivo";
         private static string MSG_ERRO_GRAVACAO = "Erro ao Gravar Arquivo";
+        private static string MSG_ERRO_ESCRITA = "Erro ao Escrever no Arquivo";
+        private static string MSG_ERRO_CRIACAO = "Erro ao Criar Arquivo ou Diretorio";
+        private static string CAMINHO_USUARIOS = @"C:\sacis\usuarios\";
+        private static string CAMINHO_LOG = @"C:\sacis\sacis.log";             
 
         /**
         *
@@ -38,14 +42,9 @@ namespace sacis.model.utilitarios
             try
             {
                 
-                //StreamWriter write = new StreamWriter(destino);
-                //write.Write(conteudo);
-                //write.Close();
-                FileInfo fi = new FileInfo(destino);
-                FileStream fs = fi.OpenWrite();
-                Byte[] info = new UTF8Encoding(true).GetBytes(conteudo);
-                fs.Write(info, 0, info.Length);
-                fs.Close();
+                StreamWriter write = new StreamWriter(destino);
+                write.Write(conteudo);
+                write.Close();
 
             }
             catch (Exception except)
@@ -71,21 +70,10 @@ namespace sacis.model.utilitarios
             try
             {
                                 
-                //StreamReader le = new StreamReader(caminho,true);
-                //conteudo = le.ReadToEnd();                
-                //le.Close();
-                FileInfo fi = new FileInfo(caminho);
-                FileStream fs = fi.OpenRead();
-                byte[] b = new byte[1024];
-                UTF8Encoding temp = new UTF8Encoding(true);
-                
-                while (fs.Read(b, 0, b.Length) > 0)
-                {
-                    conteudo += temp.GetString(b);
-                }
-
-                fs.Close();
-                
+                StreamReader le = new StreamReader(caminho,true);
+                conteudo = le.ReadToEnd();                
+                le.Close();  
+             
                 return conteudo;
 
             }
@@ -95,6 +83,76 @@ namespace sacis.model.utilitarios
                 throw new excecao.excecao(MSG_ERRO_LEITURA);
             }
             
+        }
+
+        /**
+        *
+        * Metodo para atualizar arquivo de log
+        * 
+        * @param login            Variavel do tipo string
+        * @param hash             Variavel do tipo string     
+        *
+        * @throw excecao
+        * 
+        */
+        public static void atualizaLog(string login, string hash)
+        {
+
+            try
+            {
+                //atualizar arquivo de log com login e hash
+                StreamWriter wr = new StreamWriter(CAMINHO_LOG, true);
+
+                //Escrevendo no arquivo
+                wr.WriteLine(login + " " + hash);
+
+                //fechando o arquivo
+                wr.Close();
+            
+            }
+            catch (Exception except)
+            {
+
+                throw new excecao.excecao(MSG_ERRO_ESCRITA);
+            }
+
+        }
+
+        /**
+        *
+        * Método para verificar a existência do diretorio principal e do usuario localmente
+        * e criá-los caso nao exista junto com o arquivo de log
+        * 
+        * @throw excecao
+        * 
+        */
+        public static void verificaDiretorio()
+        {
+
+            try
+            {
+                DirectoryInfo info = new DirectoryInfo(CAMINHO_USUARIOS);
+
+                if (!info.Exists)
+                {
+
+                    info.Create();
+
+                    //Cria o arquivo na pasta do programa. 
+                    //False sobrescreve todos os dados no arquivo enquanto true agrega.                
+                    StreamWriter wr = new StreamWriter(CAMINHO_LOG, false);
+
+                    //fechando o arquivo
+                    wr.Close();
+
+                }
+            }
+            catch (Exception except)
+            {
+
+                throw new excecao.excecao(MSG_ERRO_CRIACAO);
+            }
+
         }
 
     }
