@@ -18,9 +18,6 @@ using System.IO;
 namespace sacis.model.entidades
 {
         
-    public class XmlMsg
-    {
-
         [XmlRootAttribute(ElementName = "mensagem", IsNullable = false)]
         public class Mensagem
         {
@@ -175,7 +172,7 @@ namespace sacis.model.entidades
         }
 
 
-    }
+    
 
 
 }
