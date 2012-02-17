@@ -1,4 +1,4 @@
-package com.project.sacis.utils;
+package com.sacis.utils;
 
 import android.app.Activity;
 import android.widget.Toast;
