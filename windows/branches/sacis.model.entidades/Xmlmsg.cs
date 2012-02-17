@@ -1,4 +1,10 @@
-﻿
+﻿/**
+ * 
+ * 
+ *  Classe Base para Objeto hierarquico de Mensagem 
+ * 
+ * 
+ */ 
 
 using System;
 using System.Collections.Generic;
@@ -15,17 +21,12 @@ namespace sacis.model.entidades
     public class XmlMsg
     {
 
-        /// <summary>
-        /// Classe Base para Objeto hierarquico de Mensagem 
-        /// </summary>
         [XmlRootAttribute(ElementName = "mensagem", IsNullable = false)]
         public class Mensagem
         {
 
-            //public Mensagem()
-            //{
-            //default constructor
-            //}
+            //public Mensagem(){}
+
             private String mheader;
             private String mfrom;
             private String mto;
@@ -85,12 +86,15 @@ namespace sacis.model.entidades
             }
 
 
-
-            /// <summary>
-            /// Converte o Unicode Byte Array (UTF-8 encoded) para uma String.
-            /// </summary>
-            /// <param name="characters">Unicode Byte Array a ser convertido para String</param>
-            /// <returns>String convertida do Unicode Byte Array</returns>
+            /**
+             * 
+             *  Converte o Unicode Byte Array (UTF-8 encoded) para uma String.
+             *  
+             * @param characters     Unicode Byte Array a ser convertido para String
+             * 
+             * @return String        String convertida do Unicode Byte Array
+             * 
+             */
             public String UTF8ByteArrayToString(Byte[] characters)
             {
                 UTF8Encoding encoding = new UTF8Encoding();
@@ -99,11 +103,15 @@ namespace sacis.model.entidades
             }
 
 
-            /// <summary>
-            /// Converte a String para UTF8 Byte array a ser usada para Deserialization
-            /// </summary>
-            /// <param name="pXmlString"></param>
-            /// <returns>Byte[]</returns>
+            /**
+             * 
+             *  Converte a String para UTF8 Byte array a ser usada para Deserialization
+             *  
+             * @param pXmlString
+             * 
+             * @return  Byte[]
+             * 
+             */ 
             public Byte[] StringToUTF8ByteArray(String pXmlString)
             {
                 UTF8Encoding encoding = new UTF8Encoding();
@@ -112,11 +120,15 @@ namespace sacis.model.entidades
             }
 
 
-            /// <summary>
-            /// Metodo para converter um Objeto customizado para string XML 
-            /// </summary>
-            /// <param name="pObject">Objeto a ser serializado para XML</param>
-            /// <returns>XML string</returns>
+            /**
+             * 
+             * Metodo para converter um Objeto customizado para string XML 
+             * 
+             * @param pObject      Objeto a ser serializado para XML
+             * 
+             * @return XML string
+             * 
+             */
             public String SerializeObject(Object pObject)
             {
 
@@ -141,11 +153,15 @@ namespace sacis.model.entidades
             }
 
 
-            /// <summary>
-            /// Metodo para reconstruir um Objeto a partir de uma string XML 
-            /// </summary>
-            /// <param name="pXmlizedString"></param>
-            /// <returns></returns>
+            /**
+             * 
+             * Metodo para reconstruir um Objeto a partir de uma string XML 
+             * 
+             * @param pXmlizedString
+             * 
+             * @returns Object
+             * 
+             */
             public Object DeserializeObject(String pXmlizedString)
             {
                 XmlSerializer xs = new XmlSerializer(typeof(Mensagem));
