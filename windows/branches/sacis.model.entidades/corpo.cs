@@ -16,16 +16,16 @@ using System.Text;
 namespace sacis.model.entidades
 {
             
-        public class Corpo
+        public class corpo
         {
 
             private String nome = "";
             private String chave = "";
             private String conteudo = "";
 
-            public Corpo() {}
+            public corpo() {}
 
-            public Corpo(String n, String k, String c)
+            public corpo(String n, String k, String c)
             {
                 this.nome = n;
                 this.chave = k;

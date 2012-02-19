@@ -41,7 +41,7 @@ namespace sacis.model.utilitarios
             if (!texto.Contains(barra)) throw new excecao.excecao(MSG_ERRO);
             
             int indice = texto.LastIndexOf(barra);
-            string novoNome = texto.Substring(indice);
+            string novoNome = texto.Substring(indice+1);
 
             return novoNome;
 

@@ -33,10 +33,11 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private static string ENTRADA = "Entrada";
         private static string ENVIADOS = "Enviados";
         private string caminhoCompleto = null;
+        private string usuario;
 
         /**
         *
-        * Metodo para inicializar os componentes do formularios
+        * Metodo para inicializar os componentes do formulario
         *
         */
         public gerenciaMensagem()
@@ -55,6 +56,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         public gerenciaMensagem(string nome)
         {
             InitializeComponent();
+            usuario = nome;
             MCLoad(nome);
 
         }
@@ -181,10 +183,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         */
         private void novo_Click(object sender, EventArgs e)
         {
-/*
-            Novo.cliente_novo newform = new Novo.cliente_novo();
+
+            novaMensagem newform = new novaMensagem(usuario);
             newform.ShowDialog();
-*/
+
         }
 
         /**

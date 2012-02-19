@@ -19,7 +19,7 @@ namespace sacis.model.entidades
 {
         
         [XmlRootAttribute(ElementName = "mensagem", IsNullable = false)]
-        public class Mensagem
+        public class mensagemXML
         {
 
             //public Mensagem(){}
@@ -133,7 +133,7 @@ namespace sacis.model.entidades
                 {
                     String XmlizedString = null;
                     MemoryStream memoryStream = new MemoryStream();
-                    XmlSerializer xs = new XmlSerializer(typeof(Mensagem));
+                    XmlSerializer xs = new XmlSerializer(typeof(mensagemXML));
                     XmlTextWriter xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
 
                     xs.Serialize(xmlTextWriter, pObject);
@@ -161,18 +161,13 @@ namespace sacis.model.entidades
              */
             public Object DeserializeObject(String pXmlizedString)
             {
-                XmlSerializer xs = new XmlSerializer(typeof(Mensagem));
+                XmlSerializer xs = new XmlSerializer(typeof(mensagemXML));
                 MemoryStream memoryStream = new MemoryStream(StringToUTF8ByteArray(pXmlizedString));
                 XmlTextWriter xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
 
                 return xs.Deserialize(memoryStream);
             }
 
-
-        }
-
-
+        }     
     
-
-
 }
