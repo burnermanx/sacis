@@ -41,9 +41,9 @@ namespace sacis.model.utilitarios
             if (arq.Length != 0)
             {
                 // Cria vetor de Corpos de anexos
-                Corpo[] corpo = null;
+                corpo[] corpo = null;
 
-                corpo[0] = new Corpo();
+                corpo[0] = new corpo();
 
                 string co = "";
                 string ch = "";
@@ -68,7 +68,7 @@ namespace sacis.model.utilitarios
                     }
 
                     // guarda a chave e conteudo do arq anexo (cifrado ou claro) no vetor de corpos de anexos
-                    corpo[k] = new Corpo(a, ch, co);
+                    corpo[k] = new corpo(a, ch, co);
 
                     k++;
 
@@ -243,13 +243,13 @@ namespace sacis.model.utilitarios
          * 
          */
 
-        public static Corpo[] parserAttachment(string s)
+        public static corpo[] parserAttachment(string s)
         {
 
             //usa a lista dinamica até saber o numero de elementos  (j+1)
-            List<Corpo> list = new List<Corpo>();
+            List<corpo> list = new List<corpo>();
 
-            Corpo c;
+            corpo c;
 
             string novaTag = "";
             string conteudoTemp = "";
@@ -285,7 +285,7 @@ namespace sacis.model.utilitarios
                         return null;
                     }
 
-                    c = new Corpo(conteudoTemp, "", "");
+                    c = new corpo(conteudoTemp, "", "");
 
                     list.Add(c);
 
@@ -316,7 +316,7 @@ namespace sacis.model.utilitarios
 
 
             // copia os elementos da lista para um vetor de tamanho j+1
-            Corpo[] corpo = list.ToArray();
+            corpo[] corpo = list.ToArray();
 
             // recupera as tags "ch" de chaves dos arquivos anexos        
             tagInicio = "ch";
