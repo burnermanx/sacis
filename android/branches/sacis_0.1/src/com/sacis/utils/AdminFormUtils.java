@@ -17,11 +17,9 @@ import android.util.Log;
  * 
  * @author Davi - since 30/01/2012
  */
-public class AdminFormUtils
-{
+public class AdminFormUtils {
 
-	public AdminFormUtils()
-	{
+	public AdminFormUtils() {
 
 	}
 
@@ -30,8 +28,7 @@ public class AdminFormUtils
 	 * 
 	 * @return true se os dados estão válidos.
 	 * */
-	public static boolean isDataValid()
-	{
+	public static boolean isDataValid() {
 		return true;
 	}
 
@@ -41,29 +38,25 @@ public class AdminFormUtils
 	 * @param userName
 	 *            - login do usuário
 	 * @return {@link Boolean} se o usuario existe ou nao.
-	 * @throws IOException 
-	 * @throws JSONException 
+	 * @throws IOException
+	 * @throws JSONException
 	 * */
-	public static boolean isUserExist(final String userName) throws IOException, JSONException
-	{
+	public static boolean isUserExist(final String userName)
+			throws IOException, JSONException {
 		ArrayList<NameValuePair> dataToSend = new ArrayList<NameValuePair>(1);
 		dataToSend.add(new BasicNameValuePair("username", userName));
-		try
-		{
+		try {
 			InputStream inputStreamFromCheckUser = DBConnectorUtils.sendData(
 					dataToSend, "checkUser.php");
-			if (inputStreamFromCheckUser != null)
-			{
+			if (inputStreamFromCheckUser != null) {
 				JSONArray jsonArray = DBConnectorUtils
 						.inputStreamToJson(inputStreamFromCheckUser);
 				return (jsonArray == null ? false : true);
 			}
-		} catch (IOException ex)
-		{
+		} catch (IOException ex) {
 			Log.e("[AdminFormUtils]", ex.getMessage(), ex);
 			throw ex;
-		} catch (JSONException ex)
-		{
+		} catch (JSONException ex) {
 			Log.e("[AdminFormUtils]", ex.getMessage(), ex);
 			throw ex;
 		}
@@ -81,8 +74,7 @@ public class AdminFormUtils
 	 * @return {@link Boolean} se ocorreu erro ou nao.
 	 * */
 	public static String insertUser(String login, String password,
-			String keyPath, String name, String expiration)
-	{
+			String keyPath, String name, String expiration) {
 		/* { loginText, password, key, name, expiration } */
 		ArrayList<NameValuePair> dataToSend = new ArrayList<NameValuePair>(4);
 		dataToSend.add(new BasicNameValuePair("login", login));
@@ -90,15 +82,14 @@ public class AdminFormUtils
 		dataToSend.add(new BasicNameValuePair("name", name));
 		dataToSend.add(new BasicNameValuePair("expiration", expiration));
 
-		try
-		{
+		try {
 			InputStream is = DBConnectorUtils.sendData(dataToSend,
 					"insertUser.php");
 			return DBConnectorUtils.inputStreamToString(is);
-		} catch (IOException ex)
-		{
+		} catch (IOException ex) {
 			Log.e("[DBConnector]", ex.getMessage(), ex);
 		}
 		return null;
 	}
+
 }
