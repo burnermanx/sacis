@@ -33,7 +33,7 @@ public class DBConnectorUtils
 	}
 
 	/**
-	 * MÈtodo para enviar o request http para o site e obter o resultado de
+	 * M√©todo para enviar o request http para o site e obter o resultado de
 	 * acordo com o filename passado.
 	 * 
 	 * @param data
@@ -59,7 +59,7 @@ public class DBConnectorUtils
 	}
 
 	/**
-	 * MÈtodo para converter um {@link InputStream} em {@link JSONArray}
+	 * M√©todo para converter um {@link InputStream} em {@link JSONArray}
 	 * 
 	 * @param is
 	 * @return {@link JSONArray}
@@ -94,7 +94,7 @@ public class DBConnectorUtils
 	}
 	
 	/**
-	 * MÈtodo para verificar se existe conex„o com a internet.
+	 * M√©todo para verificar se existe conex√£o com a internet.
 	 * */
 	public static boolean isOnline(ConnectivityManager cm) {
 	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -107,6 +107,7 @@ public class DBConnectorUtils
 	public static String fileUpload(final String login, final String filePath) {
 		HttpURLConnection connection = null;
 		DataOutputStream outputStream = null;
+    FileInputStream fileInputStream = null;
 
 		String urlServer = SERVER_URL + "fileUpload.php";
 		String lineEnd = "\r\n";
@@ -118,7 +119,7 @@ public class DBConnectorUtils
 		int maxBufferSize = 1 * 1024 * 1024;
 
 		try {
-			FileInputStream fileInputStream = new FileInputStream(new File(
+			fileInputStream = new FileInputStream(new File(
 					filePath));
 
 			URL url = new URL(urlServer);
@@ -165,13 +166,14 @@ public class DBConnectorUtils
 			connection.getResponseCode();
 			String serverResponseMessage = connection.getResponseMessage();
 
-			fileInputStream.close();
-			outputStream.flush();
-			outputStream.close();
-			return serverResponseMessage;
+  		return serverResponseMessage;
 		} catch (Exception ex) {
 			// Exception handling
-		}
+		} finally {
+      fileInputStream.close();
+			outputStream.flush();
+			outputStream.close();
+	  }
 
 		return null;
 	}
