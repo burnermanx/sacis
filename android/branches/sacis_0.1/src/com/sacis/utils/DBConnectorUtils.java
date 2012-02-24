@@ -129,6 +129,7 @@ public class DBConnectorUtils
 			connection.setDoInput(true);
 			connection.setDoOutput(true);
 			connection.setUseCaches(false);
+      connection.setChunkedStreamingMode(0);
 
 			// Enable POST method
 			connection.setRequestMethod("POST");
@@ -173,6 +174,7 @@ public class DBConnectorUtils
       fileInputStream.close();
 			outputStream.flush();
 			outputStream.close();
+      connection.disconnect();
 	  }
 
 		return null;
