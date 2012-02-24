@@ -211,8 +211,12 @@ public class SysAdminActivity extends Activity
 					publishProgress("Enviando dados...");
 					String response = AdminFormUtils.insertUser(params[0], params[1], params[2],
 							params[3], params[4]);
+					final String successMessage = "User added.";
 					System.out.println(response);
-					DBConnectorUtils.fileUpload(params[0], getKeyEditText().toString());
+					if (successMessage.equals(response))
+					{
+						DBConnectorUtils.fileUpload(params[0], getKeyEditText().toString());
+					}
 				}
 			} catch (IOException ex)
 			{
