@@ -15,15 +15,17 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using sacis.view.control;
+using System.Collections;
 
 namespace sacis.view.sistema.gerenciamento.mensagem
 {
     public partial class novaMensagemAnexar : Form
     {
-        private HashSet<string> AnexarFiles = new HashSet<string>();
         private HashSet<string> ConjFiles = new HashSet<string>();
         private HashSet<string> CriptoFiles = new HashSet<string>();
         private HashSet<string> PlainFiles = new HashSet<string>();
+        private HashSet<string> cancelaPlain = new HashSet<string>();
+        private HashSet<string> cancelaCripto = new HashSet<string>();
         private static int contador;
 
         /**
@@ -39,8 +41,8 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
             if (anexar.ShowDialog() == DialogResult.OK)
             {
-                foreach (String file in anexar.FileNames) AnexarFiles.Add(file);
-                dataGridInserir(AnexarFiles);
+                foreach (String file in anexar.FileNames) ConjFiles.Add(file);
+                dataGridInserir(ConjFiles);
             }
 
             exibeDatagrid();
@@ -57,18 +59,19 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         */
         public novaMensagemAnexar(HashSet<string> cripto, HashSet<string> plain)
         {
-
             InitializeComponent();
             contador = 0;
-            dataGridCripto(cripto);
-            dataGridInserir(plain);
+            cancelaCripto = cripto;
+            cancelaPlain = plain;
 
             if (anexar.ShowDialog() == DialogResult.OK)
             {
-                foreach (String file in anexar.FileNames) AnexarFiles.Add(file);
-                dataGridInserir(AnexarFiles);
+                foreach (String file in anexar.FileNames) ConjFiles.Add(file);                
             }
 
+            uniaoHash(cripto);
+            uniaoHash(plain);
+            dataGridInserir(ConjFiles);
             exibeDatagrid();
 
         }
@@ -93,26 +96,16 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             return this.PlainFiles;
         }
 
-        /**
-         *
-         * Metodo _para inserir os dados escolhidos _para criptografia do hashset no dataGridView
-         *
-         * @param _arquivoCripto         Variavel do tipo HashSet<string>
-         * 
-         */
-        private void dataGridCripto(HashSet<string> cripto)
-        {
-            foreach (String file in cripto)
-            {
-                    String ret = gerenciaServlet.retornaNome(file);
-                    ConjFiles.Add(file);
+        // faz a uniao dos hashsets e remove duplicidade de nomes
+        private void uniaoHash(HashSet<string> hash) {
 
-                    anexos_dataGridView.Rows.Add(1);
-                    anexos_dataGridView.Rows[contador].Cells[0].Value = ret;
-                    anexos_dataGridView.Rows[contador].Cells[1].Value = false;
-                    anexos_dataGridView.Rows[contador].Cells[2].Value = true;
-                    contador++;
-            }       
+            HashSet<string> uniao = new HashSet<string>();
+            IEnumerable<string> IAnexos = ConjFiles.Union<string>(hash);
+            
+            foreach (string str in IAnexos) uniao.Add(str);
+            ConjFiles.Clear();
+            ConjFiles = uniao;
+        
         }
 
         /**
@@ -126,16 +119,24 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         {            
             foreach (String file in anexar)
             {
-                    ConjFiles.Add(file);
-                    String ret = gerenciaServlet.retornaNome(file);
+                String ret = gerenciaServlet.retornaNome(file);
 
-                    anexos_dataGridView.Rows.Add(1);
-                    anexos_dataGridView.Rows[contador].Cells[0].Value = ret;
-                    anexos_dataGridView.Rows[contador].Cells[1].Value = false;
-                    anexos_dataGridView.Rows[contador].Cells[2].Value = false;                    
-                    contador++;
+                anexos_dataGridView.Rows.Add(1);
+                anexos_dataGridView.Rows[contador].Cells[0].Value = ret;
+                anexos_dataGridView.Rows[contador].Cells[1].Value = false;
+                anexos_dataGridView.Rows[contador].Cells[2].Value = false;
+
+                if (cancelaCripto.Count != 0)
+                {
+                    foreach (string str in cancelaCripto)
+                    {
+                        if (file.Equals(str)) anexos_dataGridView.Rows[contador].Cells[2].Value = true;                        
+                    }
+                }
+
+                contador++;
             }                                
-        }
+        }        
 
         /**
         *
@@ -215,10 +216,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         *
         */
         private void okButton_Click(object sender, EventArgs e)
-        {
+        {            
             removeArquivos();
             atualizaHashset();
-            this.Close();
+            fecharForm();
         }
 
         /**
@@ -231,11 +232,13 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         */
         private void cancelarButton_Click(object sender, EventArgs e)
         {
-
-            ConjFiles.Clear();
-            this.Close();
-
+            fecharForm();
         }
+
+        private void fecharForm() {
+
+            this.Close();
         
+        }
     }
 }
