@@ -1,4 +1,4 @@
-﻿/**
+﻿ /**
  * 
  * 
  *  Classe Base para Objeto hierarquico de Mensagem 

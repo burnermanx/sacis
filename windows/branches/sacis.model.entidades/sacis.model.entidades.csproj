@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="corpo.cs" />
     <Compile Include="mensagemNovo.cs" />
     <Compile Include="usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

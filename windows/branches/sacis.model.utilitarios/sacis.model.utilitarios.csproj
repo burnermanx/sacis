@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="manipulaArquivo.cs" />
     <Compile Include="manipulaString.cs" />
-    <Compile Include="parser.cs" />
     <Compile Include="serial.cs" />
     <Compile Include="verificaCampos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
