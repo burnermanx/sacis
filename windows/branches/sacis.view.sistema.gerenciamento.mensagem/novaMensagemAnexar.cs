@@ -1,6 +1,6 @@
 ﻿/*
  * 
- * Implementação do formulario de anexar arquivos para a mensagem nova
+ * Implementação do formulario _de anexar arquivos _para a mensagem nova
  *
  * @author Fabio Augusto
  * 
@@ -28,7 +28,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo construtor para inicializar os componentes do formulario
+        * Metodo construtor _para inicializar os componentes do formulario
         *
         */
         public novaMensagemAnexar()
@@ -49,10 +49,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo construtor para inicializar os componentes do formulario
+        * Metodo construtor _para inicializar os componentes do formulario
         *
-        * @param arquivoCripto         Variavel do tipo HashSet<string>
-        * @param arquivoPlain          Variavel do tipo HashSet<string>
+        * @param _arquivoCripto         Variavel do tipo HashSet<string>
+        * @param _arquivoPlain          Variavel do tipo HashSet<string>
         * 
         */
         public novaMensagemAnexar(HashSet<string> cripto, HashSet<string> plain)
@@ -75,7 +75,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo get para retornar hashset dos arquivos a serem criptografados
+        * Metodo get _para retornar hashset dos arquivos a serem criptografados
         *
         */
         public HashSet<string> getCriptoFiles()
@@ -85,7 +85,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo get para retornar hashset dos arquivos que não serão criptografados
+        * Metodo get _para retornar hashset dos arquivos que não serão criptografados
         *
         */
         public HashSet<string> getPlainFiles()
@@ -95,9 +95,9 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
          *
-         * Metodo para inserir os dados escolhidos para criptografia do hashset no dataGridView
+         * Metodo _para inserir os dados escolhidos _para criptografia do hashset no dataGridView
          *
-         * @param arquivoCripto         Variavel do tipo HashSet<string>
+         * @param _arquivoCripto         Variavel do tipo HashSet<string>
          * 
          */
         private void dataGridCripto(HashSet<string> cripto)
@@ -107,19 +107,19 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                     String ret = gerenciaServlet.retornaNome(file);
                     ConjFiles.Add(file);
 
-                    dataGridView1.Rows.Add(1);
-                    dataGridView1.Rows[contador].Cells[0].Value = ret;
-                    dataGridView1.Rows[contador].Cells[1].Value = false;
-                    dataGridView1.Rows[contador].Cells[2].Value = true;
+                    anexos_dataGridView.Rows.Add(1);
+                    anexos_dataGridView.Rows[contador].Cells[0].Value = ret;
+                    anexos_dataGridView.Rows[contador].Cells[1].Value = false;
+                    anexos_dataGridView.Rows[contador].Cells[2].Value = true;
                     contador++;
             }       
         }
 
         /**
          *
-         * Metodo para inserir os dados do hashset no dataGridView
+         * Metodo _para inserir os dados do hashset no dataGridView
          *
-         * @param arquivoCripto         Variavel do tipo HashSet<string>
+         * @param _arquivoCripto         Variavel do tipo HashSet<string>
          * 
          */
         private void dataGridInserir(HashSet<string> anexar)
@@ -129,28 +129,28 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                     ConjFiles.Add(file);
                     String ret = gerenciaServlet.retornaNome(file);
 
-                    dataGridView1.Rows.Add(1);
-                    dataGridView1.Rows[contador].Cells[0].Value = ret;
-                    dataGridView1.Rows[contador].Cells[1].Value = false;
-                    dataGridView1.Rows[contador].Cells[2].Value = false;                    
+                    anexos_dataGridView.Rows.Add(1);
+                    anexos_dataGridView.Rows[contador].Cells[0].Value = ret;
+                    anexos_dataGridView.Rows[contador].Cells[1].Value = false;
+                    anexos_dataGridView.Rows[contador].Cells[2].Value = false;                    
                     contador++;
             }                                
         }
 
         /**
         *
-        * Metodo para exibir dataGridView
+        * Metodo _para exibir dataGridView
         * 
         */
         private void exibeDatagrid() {
 
-            dataGridView1.Visible = true;
+            anexos_dataGridView.Visible = true;
         
         }
 
         /**
         *
-        * Metodo para remover os arquivos selecionados no dataGridView
+        * Metodo _para remover os arquivos selecionados no dataGridView
         * 
         */
         private void removeArquivos()
@@ -158,10 +158,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             for (int i = 0; i < contador; i++)
             {
                 //Se o checkbox Remover estiver checked
-                if (dataGridView1.Rows[i].Cells[1].Value.Equals(true))
+                if (anexos_dataGridView.Rows[i].Cells[1].Value.Equals(true))
                 {
                     //apaga linha do dataGridView1
-                    dataGridView1.Rows.Remove(dataGridView1.Rows[i]);
+                    anexos_dataGridView.Rows.Remove(anexos_dataGridView.Rows[i]);
                     i--;
                     contador--;
                 }
@@ -170,7 +170,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para inserir o caminho dos arquivos nos hashsets CriptoFiles e PlainFiles 
+        * Metodo _para inserir o caminho dos arquivos nos hashsets CriptoFiles e PlainFiles 
         * 
         */
         private void atualizaHashset() {
@@ -178,13 +178,13 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             for (int i = 0; i < contador; i++)
             {
                 //Se checkbox Criptografar estiver checked
-                if (dataGridView1.Rows[i].Cells[2].Value.Equals(true))
+                if (anexos_dataGridView.Rows[i].Cells[2].Value.Equals(true))
                 {                    
                     foreach (string f in ConjFiles)
                     {
 
                         String ret = gerenciaServlet.retornaNome(f);
-                        String ret2 = dataGridView1.Rows[i].Cells[0].Value.ToString();
+                        String ret2 = anexos_dataGridView.Rows[i].Cells[0].Value.ToString();
 
                         if (ret.Equals(ret2)) CriptoFiles.Add(f);
 
@@ -197,7 +197,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                     {
 
                         String ret = gerenciaServlet.retornaNome(f);
-                        String ret2 = dataGridView1.Rows[i].Cells[0].Value.ToString();
+                        String ret2 = anexos_dataGridView.Rows[i].Cells[0].Value.ToString();
 
                         if (ret.Equals(ret2)) PlainFiles.Add(f);
 
@@ -208,10 +208,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para o botao de ok
+        * Metodo _para o botao _de ok
         *
         * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
+        * @param e             Objeto base _para classes que contém dados _de evento
         *
         */
         private void okButton_Click(object sender, EventArgs e)
@@ -223,10 +223,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para o botao de cancelar
+        * Metodo _para o botao _de cancelar
         *
         * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
+        * @param e             Objeto base _para classes que contém dados _de evento
         *
         */
         private void cancelarButton_Click(object sender, EventArgs e)

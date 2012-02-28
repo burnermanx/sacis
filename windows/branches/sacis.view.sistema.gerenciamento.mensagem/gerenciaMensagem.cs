@@ -1,6 +1,6 @@
 ﻿/*
  * 
- * Implementação do formulario de gerenciamento de mensagem
+ * Implementação do formulario _de gerenciamento _de mensagem
  *
  * @author Fabio Augusto
  * 
@@ -30,14 +30,14 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private static string MSG_CONFIRMA_APAGAR = "Deseja realmente apagar a mensagem?";
         private static string MSG_CONFIRMA_SAIDA = "Deseja realmente sair?";
         private static string MSG_SAIR = "Saida do Sistema";
-        private static string ENTRADA = "Entrada";
-        private static string ENVIADOS = "Enviados";
+        private static string ENTRADA = "entrada";
+        private static string ENVIADOS = "enviados";
         private string caminhoCompleto = null;
         private string usuario;
 
         /**
         *
-        * Metodo para inicializar os componentes do formulario
+        * Metodo _para inicializar os componentes do formulario
         *
         */
         public gerenciaMensagem()
@@ -47,7 +47,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para inicializar os componentes do formularios
+        * Metodo _para inicializar os componentes do formularios
         * e chamar o metodo MCLoad
         * 
         * @param nome       Variavel do tipo string
@@ -63,7 +63,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para carregar a treewiew automaticamente
+        * Metodo _para carregar a treewiew automaticamente
         * 
         * @param nome       Variavel do tipo string
         * @throw excecao
@@ -75,7 +75,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             try
             {
                 DirectoryInfo info = gerenciaServlet.listaDiretorios(nome);
-
+                
                 TreeNode root = new TreeNode(info.Name);
                 
                 GetDirectories(info.GetDirectories(), root);
@@ -96,7 +96,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para visualizar diretorios
+        * Metodo _para visualizar diretorios
         * 
         * @param subDirs            Variavel do tipo DirectoryInfo
         * @param nodeToAddTo        Variável do tipo TreeNode 
@@ -127,7 +127,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para visualizar conteudo de um nó da treeview e colocá-la numa 
+        * Metodo _para visualizar conteudo _de um nó da treeview e colocá-la numa 
         * listview atraves do mouse
         *
         * @param sender        Objeto com os dados do formulário
@@ -175,10 +175,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para o botao novo chamar formulario
+        * Metodo _para o botao novo chamar formulario
         *
         * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
+        * @param e             Objeto base _para classes que contém dados _de evento
         *
         */
         private void novo_Click(object sender, EventArgs e)
@@ -191,10 +191,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para o botao de sair
+        * Metodo _para o botao _de sair
         *
         * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
+        * @param e             Objeto base _para classes que contém dados _de evento
         *
         */
         private void sair_Click(object sender, EventArgs e)
@@ -206,7 +206,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para o botao de sair
+        * Metodo _para o botao _de sair
         *
         * @param sender        Objeto com os dados do formulário
         * @param e             Objeto base contendo a tecla acionada no evento.
@@ -236,10 +236,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para ordenar colunas
+        * Metodo _para ordenar colunas
         *
         * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
+        * @param e             Objeto base _para classes que contém dados _de evento
         * 
         */
         private void coluna_click(object sender, ColumnClickEventArgs e)
@@ -256,10 +256,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para abrir a mensagem com duplo click
+        * Metodo _para abrir a mensagem com duplo click
         *
         * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
+        * @param e             Objeto base _para classes que contém dados _de evento
         * 
         */
         private void duplo_click(object sender, EventArgs e)
@@ -273,7 +273,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Método para apagar mensagem
+        * Método _para apagar mensagem
         *
         * @param sender        Objeto com os dados do formulário
         * @param e             Objeto base contendo a tecla acionada no evento.
@@ -299,12 +299,25 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             }
 
         }
-        
+
+        /**
+        *
+        * Metodo _para o botao Catálogo chamar formulario
+        *
+        * @param sender        Objeto com os dados do formulário
+        * @param e             Objeto base _para classes que contém dados _de evento
+        *
+        */
+        private void catalogoGeral_Click(object sender, EventArgs e)
+        {
+            catalogoGeral newform = new catalogoGeral(usuario);
+            newform.ShowDialog();        
+        }
     }
 
     /**
     *
-    * Classe para ordenar as mensagens
+    * Classe _para ordenar as mensagens
     *
     */
     public class OrdenaListView : IComparer
@@ -315,7 +328,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo construtor para inicializar as variaveis da classe
+        * Metodo construtor _para inicializar as variaveis da classe
         * 
         * @param sortOrder          Variavel do tipo SortOrder
         * @param col                Variável do tipo inteiro 
@@ -332,7 +345,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para comparar dois objetos da classe para ordená-los
+        * Metodo _para comparar dois objetos da classe _para ordená-los
         * 
         * @param x          Variavel do tipo object
         * @param y          Variável do tipo object 

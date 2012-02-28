@@ -1,8 +1,8 @@
-﻿/*
- * Classe para implementação do servlet de controle do gerenciamento de mensagens 
- *
- * @author Fabio Augusto
- */
+﻿///<summary>
+/// Classe _para implementação do servlet _de controle do gerenciamento _de mensagens 
+///
+/// @author Fabio Augusto
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -21,22 +21,21 @@ namespace sacis.view.control
         private static string CAMINHO_USUARIOS = @"C:\sacis\usuarios\";
         private static string CAMINHO_CHAVEIRO = @"C:\sacis\server\chaveiro\";
         private static string CAMINHO_SERVER = @"C:\sacis\server\";
-
         private static string MSG_PASTA_NAO_ENCONTRADA = @"Pasta nao encontrada";
         private static string EXTENSAO = ".key";
         private static string BARRA = @"\";
 
         private static localhost.Service1 WService = new localhost.Service1();
 
-        /**
-        *
-        * Método que retorna uma string em hash
-        *
-        * @param texto          Variavel string
-        * 
-        * @return string        Retorna texto em hash
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método que retorna uma string em hash
+        ///
+        /// @param _texto          Variavel string
+        /// 
+        /// @return string        Retorna _texto em hash
+        /// 
+        ///</summary>
         public static string geraHash(string texto)
         {
 
@@ -44,17 +43,17 @@ namespace sacis.view.control
 
         }
 
-        /**
-        *
-        * Método para consultar usuario no web service
-        *
-        * @param login          Variavel do tipo string
-        * @param senha          Variavel do tipo string
-        *
-        * @return bool          Retorna verdadeiro caso exista e falso caso não
-        * @throw excecao
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método _para consultar usuario no web service
+        ///
+        /// @param login          Variavel do tipo string
+        /// @param senha          Variavel do tipo string
+        ///
+        /// @return bool          Retorna verdadeiro caso exista e falso caso não
+        /// @throw excecao
+        /// 
+        ///</summary>
         public static bool consultaUsuario(string login, string senha) {                       
 
             try
@@ -77,16 +76,16 @@ namespace sacis.view.control
 
         }
 
-        /**
-        *
-        * Método para atualizar usuario novo localmente
-        *
-        * @param login          Variavel do tipo string
-        * @param senha          Variavel do tipo string
-        *
-        * @throw excecao
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método _para atualizar usuario novo localmente
+        ///
+        /// @param login          Variavel do tipo string
+        /// @param senha          Variavel do tipo string
+        ///
+        /// @throw excecao
+        /// 
+        ///</summary>
         public static void atualizaUsuario(string login, string senha) {
 
             try
@@ -96,8 +95,8 @@ namespace sacis.view.control
                 if (verificaUsuario.verifica_usuario(login, senha) == false)
                 {
 
-                    //mudar codigo para acessar webservice
-                    //copiar chave publica para diretorio do usuario
+                    //mudar codigo _para acessar webservice
+                    //copiar chave publica _para diretorio do usuario
                     FileInfo arquivo = new FileInfo(CAMINHO_CHAVEIRO + login + EXTENSAO);
                     arquivo.CopyTo(CAMINHO_USUARIOS + login + EXTENSAO);
 
@@ -114,13 +113,13 @@ namespace sacis.view.control
         
         }
 
-        /**
-        *
-        * Método para retornar diretorio referente ao usuario passado
-        *
-        * @param nome          Variavel do tipo string
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método _para retornar diretorio referente ao usuario passado
+        ///
+        /// @param nome          Variavel do tipo string
+        /// 
+        ///</summary>
         public static DirectoryInfo listaDiretorios(string nome) {
 
             DirectoryInfo info = new DirectoryInfo(CAMINHO_SERVER + nome);
@@ -131,13 +130,13 @@ namespace sacis.view.control
         
         }
 
-        /**
-        *
-        * Método para retornar caminho para abertura de arquivo
-        *
-        * @param nome          Variavel do tipo string
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método _para retornar caminho _para abertura _de arquivo
+        ///
+        /// @param nome          Variavel do tipo string
+        /// 
+        ///</summary>
         public static string caminhoTotal(string path){
 
             string caminho = CAMINHO_SERVER + path + BARRA;
@@ -146,40 +145,40 @@ namespace sacis.view.control
 
         }
 
-        /**
-        *
-        * Método para abrir arquivo solicitado
-        *
-        * @param path          Variavel do tipo string
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método _para abrir arquivo solicitado
+        ///
+        /// @param path          Variavel do tipo string
+        /// 
+        ///</summary>
         public static void abreArquivo(string path) {
 
             System.Diagnostics.Process.Start(path);
         
         }
 
-        /**
-        *
-        * Método para apagar arquivo solicitado
-        *
-        * @param path          Variavel do tipo string
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método _para apagar arquivo solicitado
+        ///
+        /// @param path          Variavel do tipo string
+        /// 
+        ///</summary>
         public static void apagaArquivo(string path) {
 
             System.IO.File.Delete(path);
 
         }
 
-        /**
-        *
-        * Método para apagar arquivo solicitado
-        *
-        * @param path        Variavel do tipo string
-        * @return nome       String com o nome do arquivo
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método _para apagar arquivo solicitado
+        ///
+        /// @param path        Variavel do tipo string
+        /// @return nome       String com o nome do arquivo
+        /// 
+        ///</summary>
         public static string retornaNome(string path) {
 
             string nome = manipulaString.retornaNome(path);
@@ -188,14 +187,15 @@ namespace sacis.view.control
         
         }
 
-        /**
-        *
-        * Método de criação da mensagem 
-        *
-        * @param msg        Variavel do tipo mensagemNovo
-        * 
-        */
-        public static bool enviaMensagem(mensagemNovo msg) {
+        ///<summary>
+        ///
+        /// Método _de criação da mensagem 
+        ///
+        /// @param msg        Variavel do tipo mensagemNovo
+        /// 
+        ///</summary>
+        public static bool enviaMensagem(preMensagem msg)
+        {
 
             Console.Out.WriteLine(msg.getAssinar());
             Console.Out.WriteLine(msg.getAssunto());            
@@ -206,55 +206,140 @@ namespace sacis.view.control
             foreach (String file in msg.getArquivoCripto()) Console.Out.WriteLine(file);
             foreach (String file in msg.getArquivoPlain()) Console.Out.WriteLine(file);
 
+            string xml = serial.Serializar(msg);
+
+            Console.Out.WriteLine(xml);
+
             return true;
-            /*
-            String mensagem = null;
-            String anexo = null;
+       
+        }
 
-            //Se existir arquivo a Criptografar 
-            if (this.CriptoFiles.Count != 0)
+        ///<summary>
+        ///
+        /// Método _para retornar todos os contatos do sistema 
+        ///
+        /// @return List        Lista com todos os contatos existentes no sistema
+        /// @throw excecao
+        /// 
+        ///</summary>
+        public static List<contato> buscaContatosGeral()
+        { 
+            //============= teste ===========
+/*
+            anexo[] next = new anexo[3];
+            next[0] = new anexo("anexo1", "isto é um teste<teste> para o anexo1");
+            next[1] = new anexo("anexo2", "isto é um<teste> </teste> teste para o anexo2");
+            next[2] = new anexo("anexo3", "isto é um <contato> </contato>teste para o anexo3");
+
+            msg mens = new msg("Fabio", "femtokiller", next);
+
+            string x = serial.Serializar(mens);
+            Console.Out.WriteLine(x);
+
+            msg test = serial.Deserializar(x, typeof(msg)) as msg;
+
+            Console.Out.WriteLine(test.getDe());
+            Console.Out.WriteLine(test.getPara());
+            foreach (anexo n in test.getAnexos())
             {
-                foreach (String f in CriptoFiles)
-                {
-                    // chamar funcao de leitura de arquivo (gerarq)
-                    // chamar funcao criptografia simetrica (cripto_hash)
-                    MessageBox.Show("[" + f + "]", "Criptografando ", MessageBoxButtons.OK);
-                }
+                Console.Out.WriteLine(n.getNome());
+                Console.Out.WriteLine(n.getConteudo());
             }
-            else
+*/            
+            //===========================
+
+            try
             {
-                foreach (String f in PlainFiles)
-                {
-                    // chamar funcao de leitura de arquivo (gerarq)
-                    MessageBox.Show("[" + f + "]", "Criptografando ", MessageBoxButtons.OK);
-                }
-            }
+                string xml = WService.retornaContato();
 
-            //Se Criptografar esta selecionada
-            if (novo_cripto.Checked)
+                List<contato> lista = serial.Deserializar(xml, typeof(List<contato>)) as List<contato>;
+
+                return lista;
+            }
+            catch (excecao except)
             {
-                // chamar funcao criptografia simetrica
-                MessageBox.Show("[Criptografar Msg]", " ", MessageBoxButtons.OK);
+                
+                throw except;
             }
-            else
+        }
+
+        ///<summary>
+        ///
+        /// Método _para inserir contatos no sistema 
+        ///
+        /// @param lista            Variável do tipo List<contato>
+        /// @param user             Variável do tipo string
+        /// @return bool            Verdadeiro caso cadastro tenha sucesso
+        ///                         Falso caso contrario
+        /// @throw excecao
+        /// 
+        ///</summary>
+        public static bool insereContatos(List<contato> lista, string user) {
+
+            try
             {
+                string xml = serial.Serializar(lista);
 
-                mensagem = novo_texto.Text;
-
+                if (WService.cadastraContato(xml, user)) return true;
+                else return false;
             }
+            catch (excecao except)
+            {                
+                throw except;
+            }          
 
-            //Se Assinar esta selecionada
-            if (novo_assina.Checked)
+        }
+
+        ///<summary>
+        ///
+        /// Método _para retornar todos os contatos do usuario 
+        ///
+        /// @return List<contato>        Lista com todos os contatos existentes no sistema
+        /// @throw excecao
+        /// 
+        ///</summary>
+        public static List<contato> buscaContatosPessoais(string user)
+        {
+            try
             {
-                // chamar funcao assimetrica
-                // passando hash da mensagem e arquivos(???)
-                MessageBox.Show("[Assinar Msg]", " ", MessageBoxButtons.OK);
+                string xml = WService.retornaContatoPessoal(user);
+                List<contato> lista = new List<contato>();
+
+                if(xml.Length != 0) lista = serial.Deserializar(xml, typeof(List<contato>)) as List<contato>;
+                
+                return lista;
             }
+            catch (excecao except)
+            {
+                throw except;
+            }
+        }
 
+        ///<summary>
+        ///
+        /// Método _para remover contatos no catalogo pessoal 
+        ///
+        /// @param lista            Variável do tipo List<contato>
+        /// @param user             Variável do tipo string
+        /// @return bool            Verdadeiro caso cadastro tenha sucesso
+        ///                         Falso caso contrario
+        /// @throw excecao
+        /// 
+        ///</summary>
+        public static bool removeContatos(List<contato> lista, string user) {
 
-            //SerializaXml(mensagem, anexo);        
+            try
+            {
+                string xml = serial.Serializar(lista);
 
-*/        
+                if (WService.removeContato(xml, user)) return true;
+                else return false;
+            }
+            catch (excecao except)
+            {
+                throw except;
+            }    
+        
         }
 
     }

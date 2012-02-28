@@ -1,5 +1,5 @@
 ﻿/*
- * Classe contendo implementação para manipular strings
+ * Classe contendo implementação _para manipular strings
  * 
  *
  * @author Fabio Augusto
@@ -27,10 +27,10 @@ namespace sacis.model.utilitarios
 
         /**
         *
-        * Metodo para remover todo o conteudo de um caminho anterior ao \         
+        * Metodo _para remover todo o conteudo _de um caminho anterior ao \         
         * e retornando apenas o nome do arquivo.
         * 
-        * @param texto          String com o caminho
+        * @param _texto          String com o caminho
         * @return string        Retorna nome do arquivo
         * @throw excecao         
         *
@@ -49,7 +49,7 @@ namespace sacis.model.utilitarios
 
         /**
         *
-        * Metodo para renomear o arquivo salvando sua extensao com _ e adicionando 
+        * Metodo _para renomear o arquivo salvando sua extensao com _ e adicionando 
         * a extensao .sac
         * 
         * @param arquivo          Variavel do tipo string
@@ -74,7 +74,7 @@ namespace sacis.model.utilitarios
 
         /**
         *
-        * Metodo para recuperar o nome do arquivo original excluindo a extensao .sac 
+        * Metodo _para recuperar o nome do arquivo original excluindo a extensao .sac 
         * e restaurando a extensao original
         * 
         * @param arquivo          Variavel do tipo string

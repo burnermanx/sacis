@@ -1,8 +1,10 @@
-﻿/*
- * Classe para tratamento de exceções (erros) personalizadas.
- *
- * @author Fabio Augusto
- */
+﻿///<summary>
+///
+/// Classe para tratamento de exceções (erros) personalizadas.
+/// 
+/// @author Fabio Augusto
+///
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -13,12 +15,13 @@ namespace sacis.model.excecao
 {
     public class excecao: Exception{
 
-        /*
-        * Metodo que recebe a mensagem e passa para a base EXCEPTION.
-        *
-        * @param mensagem       Variavel do tipo String
-        * 
-        */
+        ///<summary>
+        ///
+        /// Metodo que recebe a mensagem e passa para a base EXCEPTION.
+        /// 
+        /// @param mensagem       Variavel do tipo String
+        ///
+        ///</summary>
         public excecao(string mensagem) : base(mensagem)
         {            
 

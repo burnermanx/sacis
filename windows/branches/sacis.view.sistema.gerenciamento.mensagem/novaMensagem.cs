@@ -1,10 +1,8 @@
-﻿/*
- * 
- * Implementação do formulario de nova mensagem
- *
- * @author Fabio Augusto
- * 
- */
+﻿///<summary>
+/// Implementação do formulario _de nova mensagem
+///
+/// @author Fabio Augusto
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -21,7 +19,6 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 {
     public partial class novaMensagem : Form
     {
-
         private static string MSG_CONFIRMA_SAIDA = "Deseja realmente descartar a mensagem?";
         private static string MSG_SAIR = "Sair da Mensagem";
         private static string MSG_ENVIO_OK = "Mensagem enviada com Sucesso!";
@@ -34,12 +31,15 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         private HashSet<String> CriptoFiles = new HashSet<String>();
         private HashSet<String> PlainFiles = new HashSet<String>();
+        private List<contato> lista = new List<contato>();
 
-        /**
-        *
-        * Metodo contrutor para inicializar os componentes do formulario
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo contrutor _para inicializar os componentes do formulario
+        ///
+        /// @param nome       Variável do tipo string
+        /// 
+        ///</summary>
         public novaMensagem(string nome)
         {
             usuario = nome;
@@ -47,14 +47,59 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             InitializeComponent();
         }
 
-        /**
-        *
-        * Metodo para chamar formulario para anexar arquivos
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo _para chamar formulario _para catalogo pessoal
+        ///
+        /// @param sender        Objeto com os dados do formulário
+        /// @param e             Objeto base _para classes que contém dados _de evento
+        /// 
+        ///</summary>
+        private void para_label_Click(object sender, EventArgs e)
+        {
+            catalogoPessoal newForm;
+
+            if (lista.Count == 0)
+            {
+                newForm = new catalogoPessoal(usuario);
+            }
+            else
+            {
+                newForm = new catalogoPessoal(usuario,lista);
+            }                     
+                        
+            newForm.FormClosed += new FormClosedEventHandler(form_visivel);
+            newForm.ShowDialog();
+
+            lista = newForm.getListaContatos();
+
+            exibeNomeContatos();
+
+        }
+
+        ///<summary>
+        ///
+        /// Metodo _para exibir nome dos contatos no textbox _para
+        /// 
+        ///</summary>
+        private void exibeNomeContatos() {
+
+            string contatos = "";
+
+            foreach (contato c in lista) contatos += c.getNome() + "; ";
+
+            novo_para.Text = contatos;
+        
+        }
+
+        ///<summary>
+        ///
+        /// Metodo _para chamar formulario _para anexar arquivos
+        ///
+        /// @param sender        Objeto com os dados do formulário
+        /// @param e             Objeto base _para classes que contém dados _de evento
+        ///
+        ///</summary>
         private void anexar_Click(object sender, EventArgs e)
         {
 
@@ -83,11 +128,11 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             
         }
 
-        /**
-        *
-        * Metodo para exibir o nome dos arquivos escolhidos no campo de anexos
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo _para exibir o nome dos arquivos escolhidos no campo _de _anexos
+        ///
+        ///</summary>
         private void exibeNomeArquivos() {
 
             String naText = "";
@@ -110,18 +155,18 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 
         }
 
-        /**
-        *
-        * Metodo para o botao de enviar
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo _para o botao _de enviar
+        ///
+        /// @param sender        Objeto com os dados do formulário
+        /// @param e             Objeto base _para classes que contém dados _de evento
+        ///
+        ///</summary>
         private void novo_enviar_Click(object sender, EventArgs e)
         {
 
-            mensagemNovo msg = new mensagemNovo(usuario, novo_para.Text, novo_assunto.Text, novo_texto.Text, novo_cripto.Checked, novo_assina.Checked, CriptoFiles, PlainFiles);
+            preMensagem msg = new preMensagem(usuario, novo_para.Text, novo_assunto.Text, novo_texto.Text, novo_cripto.Checked, novo_assina.Checked, CriptoFiles, PlainFiles);
             bool ret = gerenciaServlet.enviaMensagem(msg);
 
             if (ret) MessageBox.Show(MSG_ENVIO_OK, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -131,14 +176,14 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         }
 
-        /**
-        *
-        * Metodo para o botao de fechar
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo _para o botao _de fechar
+        ///
+        /// @param sender        Objeto com os dados do formulário
+        /// @param e             Objeto base _para classes que contém dados _de evento
+        ///
+        ///</summary>
         private void fechar_Click(object sender, EventArgs e)
         {
 
@@ -147,75 +192,73 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         }
 
-        /**
-        *
-        * Metodo para mudar a cor do label com o mouse sobre ele
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo _para mudar a cor do label com o mouse sobre ele
+        ///
+        /// @param sender        Objeto com os dados do formulário
+        /// @param e             Objeto base _para classes que contém dados _de evento
+        ///
+        ///</summary>
         private void anexar_over(object sender, EventArgs e)
         {
             novo_anarq.BorderStyle = BorderStyle.Fixed3D;
             novo_anarq.BackColor = System.Drawing.Color.PaleGoldenrod;
         }
 
-        /**
-        *
-        * Metodo para mudar a cor do label com o mouse fora dele
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo _para mudar a cor do label com o mouse fora dele
+        ///
+        /// @param sender        Objeto com os dados do formulário
+        /// @param e             Objeto base _para classes que contém dados _de evento
+        ///
+        ///</summary>
         private void anexar_out(object sender, EventArgs e)
         {
             novo_anarq.BorderStyle = BorderStyle.None;
             novo_anarq.BackColor = System.Drawing.Color.Empty;
         }
 
-        /**
-        *
-        * Metodo para mudar a cor do label com o mouse sobre ele
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo _para mudar a cor do label com o mouse sobre ele
+        ///
+        /// @param sender        Objeto com os dados do formulário
+        /// @param e             Objeto base _para classes que contém dados _de evento
+        ///
+        ///</summary>
         private void para_over(object sender, EventArgs e)
         {
             para_label.BorderStyle = BorderStyle.Fixed3D;
             para_label.BackColor = System.Drawing.Color.PaleGoldenrod;
         }
 
-        /**
-        *
-        * Metodo para mudar a cor do label com o mouse fora dele
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo _para mudar a cor do label com o mouse fora dele
+        ///
+        /// @param sender        Objeto com os dados do formulário
+        /// @param e             Objeto base _para classes que contém dados _de evento
+        ///
+        ///</summary>
         private void para_out(object sender, EventArgs e)
         {
             para_label.BorderStyle = BorderStyle.None;
             para_label.BackColor = System.Drawing.Color.Empty;
         }
-        
-        /**
-        *
-        * Método para tornar o formulário visivel
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base contendo a tecla acionada no evento.
-        *
-        */
+
+        ///<summary>
+        ///
+        /// Método _para tornar o formulário visivel
+        ///
+        /// @param sender        Objeto com os dados do formulário
+        /// @param e             Objeto base contendo a tecla acionada no evento.
+        ///
+        ///</summary>
         private void form_visivel(object sender, FormClosedEventArgs e)
         {
-
             this.Visible = true;
-
         }
         
     }

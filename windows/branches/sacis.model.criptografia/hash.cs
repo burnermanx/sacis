@@ -1,8 +1,8 @@
-﻿/*
- * Classe para implementação do hash 
- *
- * @author Fabio Augusto
- */
+﻿///<summary>
+/// Classe para implementação do hash 
+///
+/// @author Fabio Augusto
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -15,16 +15,13 @@ namespace sacis.model.criptografia
 {
     public class hash
     {
-
-        /**
-        *
-        * Método para criar um hash de um texto utilizando SHA512
-        *
-        * @Param text                  Variável do tipo string
-        * 
-        * @return string                Hash do texto passado
-        * 
-        */
+        ///<summary>
+        /// Método para criar um hash de um texto utilizando SHA512
+        ///
+        /// @param text                  Variável do tipo string
+        /// @return string                Hash do texto passado
+        /// 
+        ///</summary>
         public static string hashing(string text)
         {
 
