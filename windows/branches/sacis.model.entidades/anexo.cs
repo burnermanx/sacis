@@ -9,13 +9,17 @@ namespace sacis.model.entidades
     {
 
         private string _nome;
+        private bool _cripto;
+        private string _chave;
         private string _conteudo;
 
         public anexo() { }
 
-        public anexo(string nome, string conteudo)
+        public anexo(string nome, bool cripto, string chave, string conteudo)
         {
             _nome = nome;
+            _cripto = cripto;
+            _chave = chave;
             _conteudo = conteudo;
         }
 
@@ -25,6 +29,24 @@ namespace sacis.model.entidades
             get { return _nome; }
 
             set { _nome = value; }
+
+        }
+
+        public bool cripto
+        {
+
+            get { return _cripto; }
+
+            set { _cripto = value; }
+
+        }
+
+        public string chave
+        {
+
+            get { return _chave; }
+
+            set { _chave = value; }
 
         }
 
@@ -42,16 +64,41 @@ namespace sacis.model.entidades
             return _nome;
         }
 
-        public string getConteudo() {
+        public bool getCripto()
+        {
+
+            return _cripto;
+
+        }
+
+        public string getChave()
+        {
+
+            return _chave;
+
+        }
+
+        public string getConteudo()
+        {
 
             return _conteudo;
-        
+
         }
 
         public void setNome(string nome) {
 
             _nome = nome;
 
+        }
+
+        public void setCripto(bool cripto)
+        {
+            _cripto = cripto;
+        }
+
+        public void setChave(string chave)
+        {
+            _chave = chave;
         }
 
         public void setConteudo(string conteudo)
