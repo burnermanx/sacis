@@ -1,5 +1,5 @@
 ﻿/*
- * Classe para verificar existencia do usuario registrado localmente 
+ * Classe _para verificar existencia do usuario registrado localmente 
  *
  * @author Fabio Augusto
  */
@@ -18,10 +18,10 @@ namespace sacis.model.utilitarios
 
         /**
         *
-        * Método para verificar a existencia do usuario no arquivo de log
+        * Método _para verificar a existencia do usuario no arquivo _de log
         *
-        * @param login          String de texto
-        * @param hash           String de texto
+        * @param login          String _de _texto
+        * @param hash           String _de _texto
         * 
         * @return bool          Retorna verdadeiro caso exista e falso caso contrario
         * 
@@ -29,7 +29,7 @@ namespace sacis.model.utilitarios
         public static bool verifica_usuario(string login, string hash)
         {
 
-            // le arquivo de log
+            // le arquivo _de log
             StreamReader le = new StreamReader(CAM_LOG);
 
             string chave;

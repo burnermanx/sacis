@@ -1,8 +1,8 @@
-﻿/*
- * Classe para realizar a conexao com o banco de dados MYSQL 
- *
- * @author Fabio Augusto
- */
+﻿///<summary>
+/// Classe para realizar a conexao com o banco de dados MYSQL
+///
+/// @author Fabio Augusto
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -22,15 +22,14 @@ namespace sacis.model.bd
         private static string MSG_DESCONEXAO = "Erro Desconectando ao Banco de Dados!";
         private static MySqlConnection bdConn;
 
-        /**
-        *
-        * Método que realiza a conexão com o banco de dados
-        *
-        * 
-        * @return MySqlConnection       Objeto do mesmo tipo
-        * @throw excecao                Retorna mensagem de erro caso haja erro na conexão 
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método que realiza a conexão com o banco de dados
+        ///
+        /// @return MySqlConnection       Objeto do mesmo tipo
+        /// @throw excecao                Retorna mensagem de erro caso haja erro na conexão 
+        /// 
+        ///</summary>
         public static MySqlConnection conectaMSQL()
         {
 
@@ -50,14 +49,13 @@ namespace sacis.model.bd
         
         }
 
-        /**
-         *
-         * Método que realiza a desconexão com o banco de dados
-         *
-         * 
-         * @throw excecao                Retorna mensagem de erro caso haja erro na conexão 
-         * 
-         */
+        ///<summary>
+        ///
+        /// Método que realiza a desconexão com o banco de dados
+        ///
+        /// @throw excecao                Retorna mensagem de erro caso haja erro na conexão 
+        /// 
+        ///</summary>
         public static void desconectaMSQL()
         {
 

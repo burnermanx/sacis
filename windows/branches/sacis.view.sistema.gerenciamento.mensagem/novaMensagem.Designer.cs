@@ -54,6 +54,7 @@
             this.para_label.TabIndex = 0;
             this.para_label.Text = "      Para:";
             this.para_label.MouseLeave += new System.EventHandler(this.para_out);
+            this.para_label.Click += new System.EventHandler(this.para_label_Click);
             this.para_label.MouseHover += new System.EventHandler(this.para_over);
             // 
             // label2

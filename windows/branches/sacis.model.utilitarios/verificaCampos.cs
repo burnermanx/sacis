@@ -1,5 +1,5 @@
 ﻿/*
- * Classe para validar os atributos do objeto do tipo Usuario 
+ * Classe _para validar os atributos do objeto do tipo Usuario 
  *
  * @author Fabio Augusto
  */
@@ -24,7 +24,7 @@ namespace sacis.model.utilitarios
         * @param user           Objeto do tipo usuario
         * 
         * @return bool          Verdadeiro caso usuario seja válido
-        * @throw excecao        Retorna mensagem de erro caso usuario seja inválido
+        * @throw excecao        Retorna mensagem _de erro caso usuario seja inválido
         * 
         */
         public static bool verificaUser(usuario user) {
@@ -43,24 +43,24 @@ namespace sacis.model.utilitarios
 
         /**
         *
-        * Método que verifica se o texto passado está de acordo com os parametros determinados na função
+        * Método que verifica se o _texto passado está _de acordo com os parametros determinados na função
         *
-        * @param texto       Variável do tipo String
+        * @param _texto       Variável do tipo String
         * 
-        * @return bool       Verdadeiro caso inválido ou Falso no caso de válido
+        * @return bool       Verdadeiro caso inválido ou Falso no caso _de válido
         * 
         */
         public static bool verificacampos(string texto) {
 
             int cont = 0, i;
 
-            // Verifica se texto é nulo, vazio ou tem menos de 8 caracteres
+            // Verifica se _texto é nulo, vazio ou tem menos _de 8 caracteres
             if (texto == "" || texto.Length == 0 || texto.Length < 8) return true;
 
-            // Verifica se texto inicia com caracteres abaixo do 32, del e espaço em ASCII
+            // Verifica se _texto inicia com caracteres abaixo do 32, del e espaço em ASCII
             if (texto[0] <= 32 || texto[0] == 127 || texto[0] == 240 || texto[0] == 255) return true;
 
-            // Verifica se texto termina com caracteres abaixo do 32, del e espaço em ASCII
+            // Verifica se _texto termina com caracteres abaixo do 32, del e espaço em ASCII
             if (texto[texto.Length - 1] <= 32 || texto[texto.Length - 1] == 127 || texto[texto.Length - 1] == 240 || texto[texto.Length - 1] == 255) return true;
 
             // Verifica caracteres da string se contem dois espaços seguidos, estao entre 32 e 255 e tem del

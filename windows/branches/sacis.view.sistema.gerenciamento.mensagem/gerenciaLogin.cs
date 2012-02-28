@@ -1,6 +1,6 @@
 ﻿/*
  * 
- * Implementação do formulario de login
+ * Implementação do formulario _de login
  *
  * @author Fabio Augusto
  * 
@@ -28,7 +28,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Metodo para inicializar os componentes do formularios
+        * Metodo _para inicializar os componentes do formularios
         *
         */
         public gerenciaLogin()
@@ -38,10 +38,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Método para chamar o metodo login atraves do click no botao de OK
+        * Método _para chamar o metodo login atraves do click no botao _de OK
         *
         * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
+        * @param e             Objeto base _para classes que contém dados _de evento
         *
         */
         private void click_cliente(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Método para chamar formulário para gerenciar as mensagens atraves do teclado
+        * Método _para chamar formulário _para gerenciar as mensagens atraves do teclado
         *
         * @param sender        Objeto com os dados do formulário
         * @param e             Objeto base contendo a tecla acionada no evento.
@@ -74,7 +74,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Método para chamar formulário para gerenciar as mensagens
+        * Método _para chamar formulário _para gerenciar as mensagens
         *
         */
         private void login() {
@@ -117,7 +117,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Método para tornar o formulário visivel
+        * Método _para tornar o formulário visivel
         *
         * @param sender        Objeto com os dados do formulário
         * @param e             Objeto base contendo a tecla acionada no evento.
@@ -134,7 +134,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         /**
         *
-        * Método para limpar os campos do formulário
+        * Método _para limpar os campos do formulário
         *
         */
         private void limpa_campos()

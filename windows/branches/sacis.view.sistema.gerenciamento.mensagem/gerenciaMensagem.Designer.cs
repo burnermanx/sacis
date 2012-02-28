@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(gerenciaMensagem));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mc_novo = new System.Windows.Forms.ToolStripMenuItem();
-            this.opçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogo_geral = new System.Windows.Forms.ToolStripMenuItem();
             this.sair = new System.Windows.Forms.ToolStripMenuItem();
             this.mc_split = new System.Windows.Forms.SplitContainer();
             this.mc_treeview = new System.Windows.Forms.TreeView();
@@ -53,7 +53,7 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mc_novo,
-            this.opçõesToolStripMenuItem,
+            this.catalogo_geral,
             this.sair});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -72,13 +72,14 @@
             this.mc_novo.Text = "&Novo";
             this.mc_novo.Click += new System.EventHandler(this.novo_Click);
             // 
-            // opçõesToolStripMenuItem
+            // catalogo_geral
             // 
-            this.opçõesToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.opçõesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("opçõesToolStripMenuItem.Image")));
-            this.opçõesToolStripMenuItem.Name = "opçõesToolStripMenuItem";
-            this.opçõesToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
-            this.opçõesToolStripMenuItem.Text = "&Catálogo";
+            this.catalogo_geral.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.catalogo_geral.Image = ((System.Drawing.Image)(resources.GetObject("catalogo_geral.Image")));
+            this.catalogo_geral.Name = "catalogo_geral";
+            this.catalogo_geral.Size = new System.Drawing.Size(83, 20);
+            this.catalogo_geral.Text = "&Catálogo";
+            this.catalogo_geral.Click += new System.EventHandler(this.catalogoGeral_Click);
             // 
             // sair
             // 
@@ -88,7 +89,6 @@
             this.sair.Size = new System.Drawing.Size(72, 20);
             this.sair.Text = "&Fechar";
             this.sair.Click += new System.EventHandler(this.sair_Click);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sair_Click);
             // 
             // mc_split
             // 
@@ -191,7 +191,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mc_novo;
-        private System.Windows.Forms.ToolStripMenuItem opçõesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catalogo_geral;
         private System.Windows.Forms.ToolStripMenuItem sair;
         private System.Windows.Forms.SplitContainer mc_split;
         private System.Windows.Forms.TreeView mc_treeview;

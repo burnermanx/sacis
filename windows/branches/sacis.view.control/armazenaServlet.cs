@@ -1,5 +1,5 @@
 ﻿/*
- * Classe para implementação do servlet de controle do armazenamento 
+ * Classe _para implementação do servlet _de controle do armazenamento 
  *
  * @author Fabio Augusto
  */
@@ -22,9 +22,9 @@ namespace sacis.view.control
         *
         * Método que retorna uma string em hash
         *
-        * @param texto          String de texto
+        * @param _texto          String _de _texto
         * 
-        * @return string        Retorna texto em hash
+        * @return string        Retorna _texto em hash
         * 
         */
         public static string geraHash(string texto) {
@@ -35,10 +35,10 @@ namespace sacis.view.control
 
         /**
         *
-        * Método que chama função para verificar a existencia de usuario localmente
+        * Método que chama função _para verificar a existencia _de usuario localmente
         *
-        * @param login          String de texto
-        * @param senha          String de texto
+        * @param login          String _de _texto
+        * @param senha          String _de _texto
         * 
         * @return bool          Retorna verdadeiro caso exista e falso caso contrario
         * 
@@ -52,7 +52,7 @@ namespace sacis.view.control
 
         /**
          *
-         * Método para manipular as strings, cifrar e decifrar os arquivos 
+         * Método _para manipular as strings, cifrar e decifrar os arquivos 
          *
          * @param origem           Variável tipo string
          * @param destino          Variável tipo string
@@ -75,7 +75,7 @@ namespace sacis.view.control
                 if (flag == 1) {
                     
                     novoArquivo = manipulaString.mudaExtensao(arquivo);
-                    // conteudoFinal = (metodo criptografar passando conteudo do arquivo e retornado conteudo cifrado)
+                    // conteudoFinal = (metodo _criptografar passando conteudo do arquivo e retornado conteudo cifrado)
                 
                 }
                 else if (flag == 2) {

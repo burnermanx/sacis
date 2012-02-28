@@ -1,5 +1,5 @@
 ﻿/*
- * Classe para implementação do servlet de controle do cadastro 
+ * Classe _para implementação do servlet _de controle do cadastro 
  *
  * @author Fabio Augusto
  */
@@ -22,12 +22,12 @@ namespace sacis.view.control
 
         /**
         *
-        * Método que verifica a validade dos dados do usuario antes de cadastrá-lo
+        * Método que verifica a validade dos dados do usuario antes _de cadastrá-lo
         *
         * @param user        Objeto do tipo usuario
         * 
         * @return bool       Verdadeiro caso seja valido o cadastro
-        * @throw excecao     Retorna mensagem de erro caso usuario seja inválido 
+        * @throw excecao     Retorna mensagem _de erro caso usuario seja inválido 
         * 
         */
         public static bool antescadastro(usuario user) {
@@ -52,11 +52,11 @@ namespace sacis.view.control
 
         /**
         *
-        * Método para enviar ao web service o usuario a ser cadastrado com o hash da senha
+        * Método _para enviar ao web service o usuario a ser cadastrado com o hash da senha
         *
         * @param user        Objeto do tipo usuario
         * 
-        * @throw excecao     Retorna mensagem de erro caso haja erro no cadastro 
+        * @throw excecao     Retorna mensagem _de erro caso haja erro no cadastro 
         * 
         */
         private static void cadastro(usuario user) { 
@@ -67,7 +67,7 @@ namespace sacis.view.control
                 string pass = hash.hashing(user.getsenha());
                 user.setsenha(pass);
                 
-                // Serializando o usuario para enviar ao webservice
+                // Serializando o usuario _para enviar ao webservice
                 string xml = serial.Serializar(user);
 
                 WService.cadastramento(xml);

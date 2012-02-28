@@ -1,10 +1,10 @@
-﻿/*
- * Classe contendo a implementação para transformar um objeto em XML e vice-versa
- * 
- *
- * @author Fabio Augusto
- * 
- */
+﻿///<summary>
+/// Classe contendo a implementação _para transformar um objeto em XML e vice-versa
+/// 
+///
+/// @author Fabio Augusto
+/// 
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -19,14 +19,14 @@ namespace sacis.model.utilitarios
     public class serial
     {
 
-        /**
-        *
-        * Método para serializar um objeto em XML
-        *
-        * @param objeto        Objeto qualquer passado
-        * @return string       string em XML do objeto passado
-        *
-        */
+        ///<summary>
+        ///
+        /// Método _para serializar um objeto em XML
+        ///
+        /// @param objeto        Objeto qualquer passado
+        /// @return string       string em XML do objeto passado
+        ///
+        ///</summary>
         public static string Serializar(object objeto) {
 
             StringWriter texto = new StringWriter();
@@ -37,25 +37,28 @@ namespace sacis.model.utilitarios
 
          }
 
-        /**
-        *
-        * Método para deserializar uma XML em objeto
-        *
-        * @param XML            XML do objeto
-        * @param tipo           Tipo do objeto passado em XML
-        * 
-        * @return object        Objeto deserializado
-        *
-        */
+        ///<summary>
+        ///
+        /// Método _para deserializar uma XML em objeto
+        ///
+        /// @param XML            XML do objeto
+        /// @param tipo           Tipo do objeto passado em XML
+        /// 
+        /// @return object        Objeto deserializado
+        ///
+        ///<summary>
         public static object Deserializar(string xml, Type tipo) {
 
-             StringReader leitor = new StringReader(xml);
-             XmlSerializer serial = new XmlSerializer(tipo);
+            StringReader leitor = new StringReader(xml);
+            XmlSerializer serial = new XmlSerializer(tipo);
 
-             return serial.Deserialize(leitor);
+            object obj = (object)serial.Deserialize(leitor);
+             
+            return obj;
 
          }
 
-
     }
 }
+
+ 

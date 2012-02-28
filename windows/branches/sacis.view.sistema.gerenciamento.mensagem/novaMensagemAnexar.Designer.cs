@@ -28,105 +28,105 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.anexos_dataGridView = new System.Windows.Forms.DataGridView();
             this.anexar = new System.Windows.Forms.OpenFileDialog();
-            this.okButton = new System.Windows.Forms.Button();
-            this.cancelarButton = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.ok_botao = new System.Windows.Forms.Button();
+            this.cancelar_botao = new System.Windows.Forms.Button();
+            this.coluna_arquivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.coluna_remover = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.coluna_criptografar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.anexos_dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // anexos_dataGridView
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Menu;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
-            this.dataGridView1.Location = new System.Drawing.Point(8, 10);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 21;
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView1.Size = new System.Drawing.Size(424, 213);
-            this.dataGridView1.TabIndex = 10;
-            this.dataGridView1.Visible = false;
+            this.anexos_dataGridView.AllowUserToAddRows = false;
+            this.anexos_dataGridView.AllowUserToDeleteRows = false;
+            this.anexos_dataGridView.AllowUserToOrderColumns = true;
+            this.anexos_dataGridView.AllowUserToResizeColumns = false;
+            this.anexos_dataGridView.AllowUserToResizeRows = false;
+            this.anexos_dataGridView.BackgroundColor = System.Drawing.SystemColors.Menu;
+            this.anexos_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.anexos_dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.coluna_arquivo,
+            this.coluna_remover,
+            this.coluna_criptografar});
+            this.anexos_dataGridView.Location = new System.Drawing.Point(8, 10);
+            this.anexos_dataGridView.Name = "anexos_dataGridView";
+            this.anexos_dataGridView.RowHeadersVisible = false;
+            this.anexos_dataGridView.RowHeadersWidth = 21;
+            this.anexos_dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.anexos_dataGridView.Size = new System.Drawing.Size(424, 213);
+            this.anexos_dataGridView.TabIndex = 10;
+            this.anexos_dataGridView.Visible = false;
             // 
             // anexar
             // 
             this.anexar.Multiselect = true;
             this.anexar.Title = "Selecionar Arquivos";
             // 
-            // okButton
+            // ok_botao
             // 
-            this.okButton.Location = new System.Drawing.Point(130, 229);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 11;
-            this.okButton.Text = "Ok";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            this.ok_botao.Location = new System.Drawing.Point(130, 232);
+            this.ok_botao.Name = "ok_botao";
+            this.ok_botao.Size = new System.Drawing.Size(75, 23);
+            this.ok_botao.TabIndex = 11;
+            this.ok_botao.Text = "Ok";
+            this.ok_botao.UseVisualStyleBackColor = true;
+            this.ok_botao.Click += new System.EventHandler(this.okButton_Click);
             // 
-            // cancelarButton
+            // cancelar_botao
             // 
-            this.cancelarButton.Location = new System.Drawing.Point(242, 233);
-            this.cancelarButton.Name = "cancelarButton";
-            this.cancelarButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelarButton.TabIndex = 12;
-            this.cancelarButton.Text = "Cancelar";
-            this.cancelarButton.UseVisualStyleBackColor = true;
-            this.cancelarButton.Click += new System.EventHandler(this.cancelarButton_Click);
+            this.cancelar_botao.Location = new System.Drawing.Point(242, 232);
+            this.cancelar_botao.Name = "cancelar_botao";
+            this.cancelar_botao.Size = new System.Drawing.Size(75, 23);
+            this.cancelar_botao.TabIndex = 12;
+            this.cancelar_botao.Text = "Cancelar";
+            this.cancelar_botao.UseVisualStyleBackColor = true;
+            this.cancelar_botao.Click += new System.EventHandler(this.cancelarButton_Click);
             // 
-            // Column1
+            // coluna_arquivo
             // 
-            this.Column1.HeaderText = "Arquivo";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 264;
+            this.coluna_arquivo.HeaderText = "Arquivo";
+            this.coluna_arquivo.Name = "coluna_arquivo";
+            this.coluna_arquivo.Width = 264;
             // 
-            // Column2
+            // coluna_remover
             // 
-            this.Column2.HeaderText = "Remover";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 70;
+            this.coluna_remover.HeaderText = "Remover";
+            this.coluna_remover.Name = "coluna_remover";
+            this.coluna_remover.Width = 70;
             // 
-            // Column3
+            // coluna_criptografar
             // 
-            this.Column3.HeaderText = "Criptografar";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 70;
+            this.coluna_criptografar.HeaderText = "Criptografar";
+            this.coluna_criptografar.Name = "coluna_criptografar";
+            this.coluna_criptografar.Width = 70;
             // 
-            // novo1
+            // novaMensagemAnexar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 264);
-            this.Controls.Add(this.cancelarButton);
-            this.Controls.Add(this.okButton);
-            this.Controls.Add(this.dataGridView1);
-            this.Name = "novo1";
+            this.Controls.Add(this.cancelar_botao);
+            this.Controls.Add(this.ok_botao);
+            this.Controls.Add(this.anexos_dataGridView);
+            this.Name = "novaMensagemAnexar";
             this.Text = "Anexos";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anexos_dataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView anexos_dataGridView;
         private System.Windows.Forms.OpenFileDialog anexar;
-        private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.Button cancelarButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
+        private System.Windows.Forms.Button ok_botao;
+        private System.Windows.Forms.Button cancelar_botao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn coluna_arquivo;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn coluna_remover;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn coluna_criptografar;
 
     }
 }

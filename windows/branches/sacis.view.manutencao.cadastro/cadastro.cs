@@ -1,6 +1,6 @@
 ﻿/*
  * Formulário contendo a interface que o administrador irá utilizar,
- * para cadastrar o usuário do sistema.
+ * _para cadastrar o usuário do sistema.
  *
  * @author Fabio Augusto
  */
@@ -30,7 +30,7 @@ namespace sacis.view.manutencao.cadastro
 
         /**
         *
-        * Metodo para inicializar os componentes do formularios
+        * Metodo _para inicializar os componentes do formularios
         *
         */        
         public cadastro()
@@ -40,11 +40,11 @@ namespace sacis.view.manutencao.cadastro
 
         /**
         *
-        * Método para receber os dados do formulário através do clique no botao OK
+        * Método _para receber os dados do formulário através do clique no botao OK
         * e chamar o metodo privado
         *
         * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
+        * @param e             Objeto base _para classes que contém dados _de evento
         *
         */
         private void click_privado (object sender, EventArgs e) {
@@ -55,7 +55,7 @@ namespace sacis.view.manutencao.cadastro
 
         /**
         *
-        * Método para receber os dados do formulário através do teclado
+        * Método _para receber os dados do formulário através do teclado
         * e chamar o metodo privado
         *
         * @param sender        Objeto com os dados do formulário
@@ -74,7 +74,7 @@ namespace sacis.view.manutencao.cadastro
 
         /**
         *
-        * Metodo para criar o objeto usuario e chamar o servlet para cadastro
+        * Metodo _para criar o objeto usuario e chamar o servlet _para cadastro
         * 
         * @throw excecao
         *
@@ -114,10 +114,10 @@ namespace sacis.view.manutencao.cadastro
 
         /**
         *
-        * Método para chamar o metodo busca_chave através do clique do botão OK
+        * Método _para chamar o metodo busca_chave através do clique do botão OK
         *
         * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
+        * @param e             Objeto base _para classes que contém dados _de evento
         *
         */
         private void button_chave_Click(object sender, EventArgs e)
@@ -128,7 +128,7 @@ namespace sacis.view.manutencao.cadastro
 
         /**
         *
-        * Método para chamar o metodo busca_chave através do teclado
+        * Método _para chamar o metodo busca_chave através do teclado
         *
         * @param sender        Objeto com os dados do formulário
         * @param e             Objeto base contendo a tecla acionada no evento.
@@ -148,7 +148,7 @@ namespace sacis.view.manutencao.cadastro
 
         /**
         *
-        * Método para visualizar os arquivos e imprimir o nome do arquivo
+        * Método _para visualizar os arquivos e imprimir o nome do arquivo
         * no campo textBoxp_chave
         *
         */
@@ -169,7 +169,7 @@ namespace sacis.view.manutencao.cadastro
         
         /**
         *
-        * Método para limpar os campos do formulário
+        * Método _para limpar os campos do formulário
         *
         */
         private void limpa_campos()

@@ -33,6 +33,10 @@ namespace sacis.model.webService.localhost {
         
         private System.Threading.SendOrPostCallback cadastramentoOperationCompleted;
         
+        private System.Threading.SendOrPostCallback consultaUsuarioOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback retornaContatoOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -78,6 +82,12 @@ namespace sacis.model.webService.localhost {
         public event cadastramentoCompletedEventHandler cadastramentoCompleted;
         
         /// <remarks/>
+        public event consultaUsuarioCompletedEventHandler consultaUsuarioCompleted;
+        
+        /// <remarks/>
+        public event retornaContatoCompletedEventHandler retornaContatoCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/verificaUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public bool verificaUsuario(string login) {
             object[] results = this.Invoke("verificaUsuario", new object[] {
@@ -108,29 +118,87 @@ namespace sacis.model.webService.localhost {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/cadastramento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void cadastramento(usuario user) {
+        public void cadastramento(string xmluser) {
             this.Invoke("cadastramento", new object[] {
-                        user});
+                        xmluser});
         }
         
         /// <remarks/>
-        public void cadastramentoAsync(usuario user) {
-            this.cadastramentoAsync(user, null);
+        public void cadastramentoAsync(string xmluser) {
+            this.cadastramentoAsync(xmluser, null);
         }
         
         /// <remarks/>
-        public void cadastramentoAsync(usuario user, object userState) {
+        public void cadastramentoAsync(string xmluser, object userState) {
             if ((this.cadastramentoOperationCompleted == null)) {
                 this.cadastramentoOperationCompleted = new System.Threading.SendOrPostCallback(this.OncadastramentoOperationCompleted);
             }
             this.InvokeAsync("cadastramento", new object[] {
-                        user}, this.cadastramentoOperationCompleted, userState);
+                        xmluser}, this.cadastramentoOperationCompleted, userState);
         }
         
         private void OncadastramentoOperationCompleted(object arg) {
             if ((this.cadastramentoCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.cadastramentoCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/consultaUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool consultaUsuario(string login, string senha) {
+            object[] results = this.Invoke("consultaUsuario", new object[] {
+                        login,
+                        senha});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void consultaUsuarioAsync(string login, string senha) {
+            this.consultaUsuarioAsync(login, senha, null);
+        }
+        
+        /// <remarks/>
+        public void consultaUsuarioAsync(string login, string senha, object userState) {
+            if ((this.consultaUsuarioOperationCompleted == null)) {
+                this.consultaUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnconsultaUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("consultaUsuario", new object[] {
+                        login,
+                        senha}, this.consultaUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnconsultaUsuarioOperationCompleted(object arg) {
+            if ((this.consultaUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.consultaUsuarioCompleted(this, new consultaUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/retornaContato", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string retornaContato() {
+            object[] results = this.Invoke("retornaContato", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void retornaContatoAsync() {
+            this.retornaContatoAsync(null);
+        }
+        
+        /// <remarks/>
+        public void retornaContatoAsync(object userState) {
+            if ((this.retornaContatoOperationCompleted == null)) {
+                this.retornaContatoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnretornaContatoOperationCompleted);
+            }
+            this.InvokeAsync("retornaContato", new object[0], this.retornaContatoOperationCompleted, userState);
+        }
+        
+        private void OnretornaContatoOperationCompleted(object arg) {
+            if ((this.retornaContatoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.retornaContatoCompleted(this, new retornaContatoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -151,15 +219,6 @@ namespace sacis.model.webService.localhost {
             }
             return false;
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "2.0.50727.5420")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class usuario {
     }
     
     /// <remarks/>
@@ -191,6 +250,58 @@ namespace sacis.model.webService.localhost {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
     public delegate void cadastramentoCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void consultaUsuarioCompletedEventHandler(object sender, consultaUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class consultaUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal consultaUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void retornaContatoCompletedEventHandler(object sender, retornaContatoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class retornaContatoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal retornaContatoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

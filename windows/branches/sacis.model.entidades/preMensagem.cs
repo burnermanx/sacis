@@ -1,5 +1,5 @@
 ﻿/*
- * Classe para objetos do tipo mensagem nova 
+ * Classe para objetos do tipo preMensagem 
  *
  * @author Fabio Augusto
  */
@@ -11,7 +11,7 @@ using System.Text;
 
 namespace sacis.model.entidades
 {
-    public class mensagemNovo
+    public class preMensagem
     {
         private string _de;
         private string _para;
@@ -19,7 +19,8 @@ namespace sacis.model.entidades
         private string _texto;
         private bool _criptografar;
         private bool _assinar;
-
+        private HashSet<string> _arquivoCripto;
+        private HashSet<string> _arquivoPlain;
 
         ///<summary>
         ///
@@ -50,7 +51,7 @@ namespace sacis.model.entidades
             get { return _texto; }
             set { _texto = value; }
         }
-        
+
         public bool criptografar
         {
             get { return _criptografar; }
@@ -63,20 +64,32 @@ namespace sacis.model.entidades
             set { _assinar = value; }
         }
 
+        public HashSet<string> arquivoCripto
+        {
+            get { return _arquivoCripto; }
+            set { _arquivoCripto = value; }
+        }
+
+        public HashSet<string> arquivoPlain
+        {
+            get { return _arquivoPlain; }
+            set { _arquivoPlain = value; }
+        }
 
         ///<summary>
         ///
         /// Método contrutor para inicializar o objeto
         ///
         ///</summary>
-        public mensagemNovo() { }
+        public preMensagem() { }
 
         /**
         *
         * Método contrutor para inicializar o objeto
         *
         */
-        public mensagemNovo(string from, string to, string subject, string text, bool cript, bool sign, HashSet<string> cripto, HashSet<string> plain) {
+        public preMensagem(string from, string to, string subject, string text, bool cript, bool sign, HashSet<string> cripto, HashSet<string> plain)
+        {
 
             _de = from;
             _para = to;
@@ -84,7 +97,9 @@ namespace sacis.model.entidades
             _texto = text;
             _criptografar = cript;
             _assinar = sign;
-        
+            _arquivoCripto = cripto;
+            _arquivoPlain = plain;
+
         }
 
         /**
@@ -94,7 +109,8 @@ namespace sacis.model.entidades
         * @return _de       Variavel do tipo String      
         *
         */
-        public string getDe(){
+        public string getDe()
+        {
 
             return _de;
 
@@ -254,7 +270,61 @@ namespace sacis.model.entidades
 
         }
 
+        /**
+        *
+        * Método get para a variavel _arquivoCripto
+        *
+        * @return _arquivoCripto       Variavel do tipo HashSet<string>      
+        *
+        */
+        public HashSet<string> getArquivoCripto()
+        {
 
+            return _arquivoCripto;
+
+        }
+
+        /**
+        *
+        * Método set para a variavel _arquivoCripto
+        *
+        * @param _arquivoCripto       Variavel do tipo HashSet<string>      
+        *
+        */
+        public void setArquivoCripto(HashSet<string> cripto)
+        {
+
+            _arquivoCripto = cripto;
+
+        }
+
+        /**
+        *
+        * Método get para a variavel _arquivoPlain
+        *
+        * @return _arquivoPlain       Variavel do tipo HashSet<string>      
+        *
+        */
+        public HashSet<string> getArquivoPlain()
+        {
+
+            return _arquivoPlain;
+
+        }
+
+        /**
+        *
+        * Método set para a variavel _arquivoPlain
+        *
+        * @param _arquivoPlain       Variavel do tipo HashSet<string>      
+        *
+        */
+        public void setArquivoPlain(HashSet<string> plain)
+        {
+
+            _arquivoPlain = plain;
+
+        }
 
 
     }
