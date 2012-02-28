@@ -19,6 +19,7 @@ namespace sacis.model.entidades
         private string _texto;
         private bool _criptografar;
         private bool _assinar;
+        private List<anexo> _anexos;
 
 
         ///<summary>
@@ -63,6 +64,11 @@ namespace sacis.model.entidades
             set { _assinar = value; }
         }
 
+        public List<anexo> anexos
+        {
+            get { return _anexos; }
+            set { _anexos = value; }
+        }
 
         ///<summary>
         ///
@@ -76,7 +82,7 @@ namespace sacis.model.entidades
         * Método contrutor para inicializar o objeto
         *
         */
-        public mensagemNovo(string from, string to, string subject, string text, bool cript, bool sign, HashSet<string> cripto, HashSet<string> plain) {
+        public mensagemNovo(string from, string to, string subject, string text, bool cript, bool sign, List<anexo> attachments) {
 
             _de = from;
             _para = to;
@@ -84,7 +90,8 @@ namespace sacis.model.entidades
             _texto = text;
             _criptografar = cript;
             _assinar = sign;
-        
+            _anexos = attachments;
+
         }
 
         /**
@@ -255,7 +262,35 @@ namespace sacis.model.entidades
         }
 
 
+        /**
+        *
+        * Método get para a variavel _anexos
+        *
+        * @return _anexos       Variavel do tipo List<anexo>      
+        *
+        */
+        public List<anexo> getAnexos()
+        {
 
+            return _anexos;
+
+        }
+
+        /**
+        *
+        * Método set para a variavel _anexos
+        *
+        * @param sign       Variavel do tipo List<anexo>      
+        *
+        */
+        public void setAnexos(List<anexo> attachments)
+        {
+
+            _anexos = attachments;
+
+        }
+
+        
 
     }
 }
