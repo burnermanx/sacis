@@ -26,9 +26,6 @@ namespace sacis.model.bd
         ///
         /// Método que realiza a conexão com o banco de dados
         ///
-        /// @return MySqlConnection       Objeto do mesmo tipo
-        /// @throw excecao                Retorna mensagem de erro caso haja erro na conexão 
-        /// 
         ///</summary>
         public static MySqlConnection conectaMSQL()
         {
@@ -53,8 +50,6 @@ namespace sacis.model.bd
         ///
         /// Método que realiza a desconexão com o banco de dados
         ///
-        /// @throw excecao                Retorna mensagem de erro caso haja erro na conexão 
-        /// 
         ///</summary>
         public static void desconectaMSQL()
         {

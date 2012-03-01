@@ -48,7 +48,6 @@
     <Compile Include="anexo.cs" />
     <Compile Include="contato.cs" />
     <Compile Include="mensagemNovo.cs" />
-    <Compile Include="msg.cs" />
     <Compile Include="preMensagem.cs" />
     <Compile Include="usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

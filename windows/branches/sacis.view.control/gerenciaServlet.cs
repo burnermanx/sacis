@@ -197,15 +197,6 @@ namespace sacis.view.control
         public static bool enviaMensagem(preMensagem msg)
         {
 
-            Console.Out.WriteLine(msg.getAssinar());
-            Console.Out.WriteLine(msg.getAssunto());            
-            Console.Out.WriteLine(msg.getCriptografar());
-            Console.Out.WriteLine(msg.getDe());
-            Console.Out.WriteLine(msg.getPara());
-            Console.Out.WriteLine(msg.getTexto());
-            foreach (String file in msg.getArquivoCripto()) Console.Out.WriteLine(file);
-            foreach (String file in msg.getArquivoPlain()) Console.Out.WriteLine(file);
-
             string xml = serial.Serializar(msg);
 
             Console.Out.WriteLine(xml);
@@ -224,30 +215,6 @@ namespace sacis.view.control
         ///</summary>
         public static List<contato> buscaContatosGeral()
         { 
-            //============= teste ===========
-/*
-            anexo[] next = new anexo[3];
-            next[0] = new anexo("anexo1", "isto é um teste<teste> para o anexo1");
-            next[1] = new anexo("anexo2", "isto é um<teste> </teste> teste para o anexo2");
-            next[2] = new anexo("anexo3", "isto é um <contato> </contato>teste para o anexo3");
-
-            msg mens = new msg("Fabio", "femtokiller", next);
-
-            string x = serial.Serializar(mens);
-            Console.Out.WriteLine(x);
-
-            msg test = serial.Deserializar(x, typeof(msg)) as msg;
-
-            Console.Out.WriteLine(test.getDe());
-            Console.Out.WriteLine(test.getPara());
-            foreach (anexo n in test.getAnexos())
-            {
-                Console.Out.WriteLine(n.getNome());
-                Console.Out.WriteLine(n.getConteudo());
-            }
-*/            
-            //===========================
-
             try
             {
                 string xml = WService.retornaContato();

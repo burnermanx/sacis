@@ -1,4 +1,10 @@
-﻿using System;
+﻿///<summary>
+/// Classe para objetos do tipo anexo
+///
+/// @author Fabio Augusto
+///</summary>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +19,18 @@ namespace sacis.model.entidades
         private string _chave;
         private string _conteudo;
 
+        ///<summary>
+        ///
+        /// Método contrutor para inicializar o objeto
+        ///
+        ///</summary>
         public anexo() { }
 
+        ///<summary>
+        ///
+        /// Método contrutor para inicializar o objeto atraves de parâmetros
+        ///
+        ///</summary>
         public anexo(string nome, bool cripto, string chave, string conteudo)
         {
             _nome = nome;
@@ -23,6 +39,12 @@ namespace sacis.model.entidades
             _conteudo = conteudo;
         }
 
+        ///<summary>
+        ///
+        /// Métodos nome, cripto, chave e conteudo sao gets e sets usados para 
+        /// a serialização e deserialização do objeto em XML
+        ///
+        ///</summary>
         public string nome
         {
 
@@ -59,11 +81,21 @@ namespace sacis.model.entidades
 
         }
 
+        ///<summary>
+        ///
+        /// Método get para o nome   
+        ///
+        ///</summary>
         public string getNome() {
 
             return _nome;
         }
 
+        ///<summary>
+        ///
+        /// Método get para cripto   
+        ///
+        ///</summary>
         public bool getCripto()
         {
 
@@ -71,6 +103,11 @@ namespace sacis.model.entidades
 
         }
 
+        ///<summary>
+        ///
+        /// Método get para a chave   
+        ///
+        ///</summary>
         public string getChave()
         {
 
@@ -78,6 +115,11 @@ namespace sacis.model.entidades
 
         }
 
+        ///<summary>
+        ///
+        /// Método get para o conteudo   
+        ///
+        ///</summary>
         public string getConteudo()
         {
 
@@ -85,22 +127,42 @@ namespace sacis.model.entidades
 
         }
 
+        ///<summary>
+        ///
+        /// Método set para o nome   
+        ///
+        ///</summary>
         public void setNome(string nome) {
 
             _nome = nome;
 
         }
 
+        ///<summary>
+        ///
+        /// Método set para cripto   
+        ///
+        ///</summary>
         public void setCripto(bool cripto)
         {
             _cripto = cripto;
         }
 
+        ///<summary>
+        ///
+        /// Método set para a chave   
+        ///
+        ///</summary>
         public void setChave(string chave)
         {
             _chave = chave;
         }
 
+        ///<summary>
+        ///
+        /// Método set para o conteudo   
+        ///
+        ///</summary>
         public void setConteudo(string conteudo)
         {
             _conteudo = conteudo;

@@ -178,6 +178,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 bool vazio = true;
                 int contagem = catalogoPessoal_dataGridView.Rows.Count;
                 List<contato> lista = new List<contato>();
+                List<int> cels = new List<int>();
 
                 for (int i = 0; i < contagem; i++)
                 {
@@ -190,13 +191,17 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                     }
                     else if (catalogoPessoal_dataGridView.Rows[i].Cells[3].Value.Equals(true))
                     {
-                        catalogoPessoal_dataGridView.Rows.Remove(catalogoPessoal_dataGridView.CurrentRow);
-                        contagem--;
-                        vazio = false;
-                        catalogoPessoal_dataGridView.Refresh();
+                        cels.Add(i);
+                        vazio = false;                        
                     }
                 }
 
+                cels.Reverse();
+
+                foreach (int i in cels) catalogoPessoal_dataGridView.Rows.Remove(catalogoPessoal_dataGridView.Rows[i]);
+
+                catalogoPessoal_dataGridView.Refresh();                
+                
                 if (vazio) MessageBox.Show(MSG_SELECAO, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else if (gerenciaServlet.removeContatos(lista, user)) MessageBox.Show(MSG_REMOCAO_OK, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
 

@@ -16,11 +16,9 @@ namespace sacis.model.criptografia
     public class hash
     {
         ///<summary>
+        ///
         /// Método para criar um hash de um texto utilizando SHA512
         ///
-        /// @param text                  Variável do tipo string
-        /// @return string                Hash do texto passado
-        /// 
         ///</summary>
         public static string hashing(string text)
         {

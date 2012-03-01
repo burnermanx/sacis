@@ -1,5 +1,5 @@
 ﻿///<summary>
-/// Classe _para objetos do tipo contato
+/// Classe para objetos do tipo contato
 ///
 /// @author Fabio Augusto
 ///</summary>
@@ -19,7 +19,25 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Métodos nome e email sao gets e sets usados _para 
+        /// Método contrutor para inicializar o objeto
+        ///
+        ///</summary>
+        public contato() { }
+
+        ///<summary>
+        ///
+        /// Método contrutor para inicializar o objeto atraves de parâmetros
+        ///
+        ///</summary>
+        public contato(string name, string email)
+        {
+            _nome = name;
+            _email = email;
+        }
+
+        ///<summary>
+        ///
+        /// Métodos nome e email sao gets e sets usados para 
         /// a serialização e deserialização do objeto em XML
         ///
         ///</summary>
@@ -43,37 +61,7 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método contrutor _para inicializar o objeto
-        ///
-        ///</summary>
-        public contato()
-        {
-
-            _nome = "";
-            _email = "";
-
-        }
-
-        ///<summary>
-        ///
-        /// Método contrutor _para inicializar o objeto
-        ///
-        /// @param name        Variavel do tipo String 
-        /// @param email       Variavel do tipo String     
-        ///
-        ///</summary>
-        public contato(string name, string email) {
-
-            _nome = name;
-            _email = email;
-
-        }
-
-        ///<summary>
-        ///
-        /// Método set _para o nome
-        ///
-        /// @param name       Variavel do tipo String      
+        /// Método set para o nome   
         ///
         ///</summary>
         public void setNome(string name)
@@ -85,9 +73,7 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método get _para o nome
-        ///
-        /// @return nome       Variavel do tipo String      
+        /// Método get para o nome
         ///
         ///</summary>
         public string getNome(){
@@ -98,9 +84,7 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método set _para o email
-        ///
-        /// @param email       Variavel do tipo String      
+        /// Método set para o email
         ///
         ///</summary>
         public void setEmail(string email)
@@ -112,9 +96,7 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método get _para o email
-        ///
-        /// @return _email       Variavel do tipo String      
+        /// Método get para o email
         ///
         ///</summary>
         public string getEmail(){
@@ -126,8 +108,6 @@ namespace sacis.model.entidades
         ///<summary>
         ///
         /// Método de sobrecarga para comparação de objetos
-        ///
-        /// @return bool       Variavel do tipo booleano      
         ///
         ///</summary>
         public bool Equals(contato other)
@@ -141,9 +121,7 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método _de sobrecarga _para obter o hash do objeto
-        ///
-        /// @return hash      Variavel do tipo String      
+        /// Método de sobrecarga para obter o hash do objeto
         ///
         ///</summary>
         public override int GetHashCode()

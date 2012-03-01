@@ -1,5 +1,5 @@
 ﻿///<summary>
-/// Classe _para objetos do tipo Usuario
+/// Classe para objetos do tipo Usuario
 ///
 /// @author Fabio Augusto
 ///</summary>
@@ -62,7 +62,7 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método contrutor _para inicializar o objeto        
+        /// Método contrutor para inicializar o objeto        
         ///
         ///</summary>
         public usuario()
@@ -77,13 +77,8 @@ namespace sacis.model.entidades
         
         ///<summary>
         ///
-        /// Método contrutor _para inicializar o objeto        
+        /// Método contrutor para inicializar o objeto atraves de parâmetros
         ///
-        /// @param name       Variavel do tipo String 
-        /// @param pass       Variavel do tipo String 
-        /// @param log        Variavel do tipo String 
-        /// @param key        Variavel do tipo String  
-        /// 
         ///</summary>
         public usuario(string name, string pass, string log, string key) {
 
@@ -96,10 +91,8 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método set _para o nome      
+        /// Método set para o nome      
         /// 
-        /// @param name       Variavel do tipo String 
-        ///
         ///</summary>
         public void setnome(string name)
         {
@@ -110,10 +103,8 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método get _para o nome      
+        /// Método get para o nome      
         /// 
-        /// @return nome       Variavel do tipo String  
-        ///
         ///</summary>
         public string getnome(){
         
@@ -123,10 +114,8 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método set _para a senha     
+        /// Método set para a senha     
         /// 
-        /// @param pass       Variavel do tipo String 
-        ///
         ///</summary>
         public void setsenha(string pass)
         {
@@ -137,10 +126,8 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método get _para a senha     
+        /// Método get para a senha     
         /// 
-        /// @return senha       Variavel do tipo String
-        ///
         ///</summary>
         public string getsenha(){
         
@@ -150,10 +137,8 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método set _para o login     
+        /// Método set para o login     
         /// 
-        /// @param log       Variavel do tipo String  
-        ///
         ///</summary>
         public void setlogin(string log)
         {
@@ -164,10 +149,8 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método get _para o login     
+        /// Método get para o login     
         /// 
-        /// @return login       Variavel do tipo String    
-        ///
         ///</summary>
         public string getlogin(){
         
@@ -177,10 +160,8 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método set _para a chave    
+        /// Método set para a chave    
         /// 
-        /// @param key       Variavel do tipo String    
-        ///
         ///</summary>
         public void setchave(string key)
         {
@@ -191,10 +172,8 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Método get _para a chave    
+        /// Método get para a chave    
         /// 
-        /// @return chave       Variavel do tipo String    
-        ///
         ///</summary>
         public string getchave(){
         
