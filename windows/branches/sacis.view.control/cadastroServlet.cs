@@ -1,8 +1,8 @@
-﻿/*
- * Classe _para implementação do servlet _de controle do cadastro 
- *
- * @author Fabio Augusto
- */
+﻿///<summary>
+/// Classe para implementação do servlet de controle do cadastro 
+///
+/// @author Fabio Augusto
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -20,67 +20,53 @@ namespace sacis.view.control
 
         private static localhost.Service1 WService = new localhost.Service1();
 
-        /**
-        *
-        * Método que verifica a validade dos dados do usuario antes _de cadastrá-lo
-        *
-        * @param user        Objeto do tipo usuario
-        * 
-        * @return bool       Verdadeiro caso seja valido o cadastro
-        * @throw excecao     Retorna mensagem _de erro caso usuario seja inválido 
-        * 
-        */
-        public static bool antescadastro(usuario user) {
-
+        ///<summary>
+        ///
+        /// Método que verifica a validade dos dados e existência do usuario passado 
+        /// retornando verdadeiro caso cadastro seja realizado
+        /// 
+        /// Retorna excecao: Erro de usuário inválido
+        /// 
+        ///</summary>
+        public static bool antesCadastro(usuario user) 
+        {
             try {
 
-                if(verificaCampos.verificaUser(user)){                    
+                if(verificaCampos.verificaValidadeUsuario(user)){                    
                     
                     if (WService.verificaUsuario(user.getlogin())) return false;
-                    else cadastro(user);
-                
+                    else cadastro(user);                
                 }
 
-            } catch (excecao except) {
-                
-                throw except.GetBaseException();
+            } catch (excecao except) {                
+                throw except;
             }
 
             return true;
-
         }
 
-        /**
-        *
-        * Método _para enviar ao web service o usuario a ser cadastrado com o hash da senha
-        *
-        * @param user        Objeto do tipo usuario
-        * 
-        * @throw excecao     Retorna mensagem _de erro caso haja erro no cadastro 
-        * 
-        */
-        private static void cadastro(usuario user) { 
-        
+        ///<summary>
+        ///
+        /// Método para cadastrar o usuario passado no servidor web 
+        /// 
+        /// Retorna excecao: Erro de cadastro
+        /// 
+        ///</summary>
+        private static void cadastro(usuario user) 
+        {        
             try
-            {
-                
+            {                
                 string pass = hash.hashing(user.getsenha());
                 user.setsenha(pass);
-                
-                // Serializando o usuario _para enviar ao webservice
-                string xml = serial.Serializar(user);
 
-                WService.cadastramento(xml);
-                
+                string xml = serial.serializarObjeto(user);
+
+                WService.cadastraUsuario(xml);                
             }
             catch (excecao except)
-            {
-                
+            {                
                 throw except;
-
-            }
-            
-        }
-    
+            }            
+        }    
     }
 }

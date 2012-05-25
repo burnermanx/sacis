@@ -17,7 +17,7 @@ namespace sacis.model.criptografia
     {
         ///<summary>
         ///
-        /// Método para criar um hash de um texto utilizando SHA512
+        /// Método para retornar o hash de uma string passada utilizando SHA512
         ///
         ///</summary>
         public static string hashing(string text)

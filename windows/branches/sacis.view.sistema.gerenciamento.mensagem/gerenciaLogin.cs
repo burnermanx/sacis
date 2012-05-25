@@ -89,7 +89,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 if (gerenciaServlet.consultaUsuario(name, hash))
                 {
 
-                    gerenciaServlet.atualizaUsuario(name, hash);
+                    gerenciaServlet.atualizaUsuarioLogLocal(name, hash);
 
                     gerenciaMensagem newForm = new gerenciaMensagem(name);
                     newForm.FormClosed += new FormClosedEventHandler(form_visivel);

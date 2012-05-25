@@ -1,9 +1,7 @@
 ﻿///<summary>
-/// Classe contendo implementação _para manipular arquivos e diretorios
-/// 
+/// Classe contendo implementação para manipular arquivos e diretorios
 ///
-/// @author Fabio Augusto
-/// 
+/// @author Fabio Augusto 
 ///</summary>
 
 using System;
@@ -29,11 +27,10 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Metodo _para criar arquivo
-        /// 
-        /// @param destino            String com o caminho destino do arquivo a ser criado
-        /// @param conteudo           String com o conteudo do arquivo      
-        /// @throw excecao
+        /// Método para criar arquivo através de uma string contendo o caminho destino completo incluindo 
+        /// o nome do arquivo e sua extensão e uma string contendo o conteúdo do arquivo
+        ///       
+        /// Retorna excecao: Erro de gravação
         ///
         ///</summary>
         public static void criaArquivo(string destino, string conteudo)
@@ -52,11 +49,10 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Metodo _para ler arquivo
+        /// Método para retornar o conteúdo do arquivo passado através de uma string contendo 
+        /// o caminho completo incluindo o nome do arquivo e sua extensão
         /// 
-        /// @param caminho             String com o caminho _de origem do arquivo a ser lido
-        /// @return conteudo           String com o conteudo do arquivo
-        /// @throw excecao
+        /// Retorna excecao: Erro de leitura de arquivo
         ///
         ///</summary>
         public static string leArquivo(string caminho)
@@ -67,8 +63,13 @@ namespace sacis.model.utilitarios
             {                                
                 StreamReader le = new StreamReader(caminho,true);
                 conteudo = le.ReadToEnd();                
-                le.Close();  
-             
+                le.Close();
+                //Console.Out.WriteLine("copia - " + conteudo.Length);
+                //Console.Out.WriteLine(conteudo);
+                //FileInfo file = new FileInfo(caminho);
+                //FileStream f2 = file.OpenRead();
+                
+                //Console.Out.WriteLine(file.Length.ToString());
                 return conteudo;
             }
             catch (Exception except)
@@ -79,19 +80,16 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Metodo _para atualizar arquivo _de log
+        /// Metodo para atualizar arquivo de log local com o login e o hash da senha
         /// 
-        /// @param login            Variavel do tipo string
-        /// @param hash             Variavel do tipo string     
-        ///
-        /// @throw excecao
+        /// Retorna excecao: Erro de escrita no arquivo
         /// 
         ///</summary>
         public static void atualizaLog(string login, string hash)
         {
             try
             {
-                //atualizar arquivo _de log com login e hash
+                //atualizar arquivo de log com login e hash
                 StreamWriter wr = new StreamWriter(CAMINHO_LOG, true);
 
                 //Escrevendo no arquivo
@@ -108,13 +106,12 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Método _para verificar a existência do diretorio principal e do usuario localmente
-        /// e criá-los caso nao exista junto com o arquivo _de log
+        /// Método para criar diretório para o usuário local e arquivo de log
         /// 
-        /// @throw excecao
+        /// Retorna excecao: Erro de criação de arquivo ou diretório
         /// 
         ///</summary>
-        public static void verificaDiretorio()
+        public static void criaDiretorioLogLocal()
         {
             try
             {
@@ -140,10 +137,9 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Método _para criar diretorio
+        /// Método para criar diretorio
         ///
-        /// @param path         Variavel do tipo String
-        /// @throw excecao     
+        /// Retorna excecao: Erro de criação de diretório
         /// 
         ///</summary>
         public static void criaDiretorio(string path) {
@@ -159,11 +155,10 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Método _para copiar arquivo
+        /// Método para copiar um arquivo através de uma string contendo o nome do arquivo e uma string 
+        /// contendo apenas o caminho destino
         ///
-        /// @param nomeArquivo         Variavel do tipo String
-        /// @param caminhodestino         Variavel do tipo String
-        /// @throw excecao     
+        /// Retorna excecao: Erro de copia de arquivo 
         /// 
         ///</summary>
         public static void copiaArquivo(string nomeArquivo, string caminhodestino) {
@@ -180,12 +175,11 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Método _para escrever no arquivo
+        /// Método para escrever no arquivo através de uma string contendo o caminho destino incluindo
+        /// o nome do arquivo e sua extensão, uma string contendo o conteúdo a ser escrito no arquivo e
+        /// um parâmetro tipo booleano para determinar a sobrescrita(false) ou inclusão(true)
         ///
-        /// @param path          Variavel do tipo String
-        /// @param conteudo      Variavel do tipo String
-        /// @param tipo          Variavel do tipo booleano
-        /// @throw excecao     
+        /// Retorna excecao: Erro de escrita de arquivo   
         /// 
         ///</summary>
         public static void escreveArquivo(string path, string conteudo, bool tipo)

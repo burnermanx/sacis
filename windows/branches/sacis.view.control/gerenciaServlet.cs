@@ -1,5 +1,5 @@
 ﻿///<summary>
-/// Classe _para implementação do servlet _de controle do gerenciamento _de mensagens 
+/// Classe para implementação do servlet de controle do gerenciamento de mensagens 
 ///
 /// @author Fabio Augusto
 ///</summary>
@@ -29,113 +29,86 @@ namespace sacis.view.control
 
         ///<summary>
         ///
-        /// Método que retorna uma string em hash
+        /// Método que retorna o hash de uma string passada.
         ///
-        /// @param _texto          Variavel string
-        /// 
-        /// @return string        Retorna _texto em hash
-        /// 
         ///</summary>
         public static string geraHash(string texto)
         {
-
             return hash.hashing(texto);
-
         }
 
         ///<summary>
         ///
-        /// Método _para consultar usuario no web service
+        /// Método que consulta a existência do usuário através do login e hash da senha passados
+        /// no servidor web e retorna verdadeiro caso exista.
         ///
-        /// @param login          Variavel do tipo string
-        /// @param senha          Variavel do tipo string
-        ///
-        /// @return bool          Retorna verdadeiro caso exista e falso caso não
-        /// @throw excecao
+        /// Retorna excecao
         /// 
         ///</summary>
-        public static bool consultaUsuario(string login, string senha) {                       
-
+        public static bool consultaUsuario(string login, string senha) 
+        {
             try
             {
                 if (WService.consultaUsuario(login, senha))
                 {
-
                     return true;
-
                 }
-                else return false;                
-
+                else return false;             
             }
             catch (excecao except)
             {
-
                 throw except;
-
             }
-
         }
 
         ///<summary>
         ///
-        /// Método _para atualizar usuario novo localmente
+        /// Método que atualiza usuario nao registrado localmente no arquivo local 
+        /// através do login e hash da senha passados.
         ///
-        /// @param login          Variavel do tipo string
-        /// @param senha          Variavel do tipo string
-        ///
-        /// @throw excecao
+        /// Retorna excecao: erro de escrita ou criação de arquivo ou diretorio.
         /// 
         ///</summary>
-        public static void atualizaUsuario(string login, string senha) {
-
+        public static void atualizaUsuarioLogLocal(string login, string senha) 
+        {
             try
             {
-                manipulaArquivo.verificaDiretorio();
+                manipulaArquivo.criaDiretorioLogLocal();
 
-                if (verificaUsuario.verifica_usuario(login, senha) == false)
+                if (verificaUsuario.verificaCadastroUsuarioLocal(login, senha) == false)
                 {
-
-                    //mudar codigo _para acessar webservice
-                    //copiar chave publica _para diretorio do usuario
+                    //mudar este codigo para acessar webservice e
+                    //copiar chave publica para diretorio do chaveiro local
                     FileInfo arquivo = new FileInfo(CAMINHO_CHAVEIRO + login + EXTENSAO);
                     arquivo.CopyTo(CAMINHO_USUARIOS + login + EXTENSAO);
 
                     manipulaArquivo.atualizaLog(login, senha);
-
                 }
             }
             catch (excecao except)
             {
-
                 throw except;
-
-            }   
-        
+            }           
         }
 
         ///<summary>
         ///
-        /// Método _para retornar diretorio referente ao usuario passado
+        /// Método que retorna o conteúdo do diretorio do usuario passado.
         ///
-        /// @param nome          Variavel do tipo string
-        /// 
         ///</summary>
-        public static DirectoryInfo listaDiretorios(string nome) {
+        public static DirectoryInfo listaDiretorios(string nomeUsuario) {
 
-            DirectoryInfo info = new DirectoryInfo(CAMINHO_SERVER + nome);
+            DirectoryInfo info = new DirectoryInfo(CAMINHO_SERVER + nomeUsuario);
 
             if (info.Exists) return info;
             else throw new excecao(MSG_PASTA_NAO_ENCONTRADA);
-
         
         }
 
         ///<summary>
         ///
-        /// Método _para retornar caminho _para abertura _de arquivo
+        /// Método que retorna o caminho completo.
         ///
-        /// @param nome          Variavel do tipo string
-        /// 
         ///</summary>
         public static string caminhoTotal(string path){
 
@@ -147,9 +120,7 @@ namespace sacis.view.control
 
         ///<summary>
         ///
-        /// Método _para abrir arquivo solicitado
-        ///
-        /// @param path          Variavel do tipo string
+        /// Método que abre o arquivo referente ao caminho passado.
         /// 
         ///</summary>
         public static void abreArquivo(string path) {
@@ -160,10 +131,8 @@ namespace sacis.view.control
 
         ///<summary>
         ///
-        /// Método _para apagar arquivo solicitado
+        /// Método que apaga o arquivo referente ao caminho passado.
         ///
-        /// @param path          Variavel do tipo string
-        /// 
         ///</summary>
         public static void apagaArquivo(string path) {
 
@@ -173,15 +142,12 @@ namespace sacis.view.control
 
         ///<summary>
         ///
-        /// Método _para apagar arquivo solicitado
+        /// Método que retorna o nome do arquivo referente ao caminho passado.
         ///
-        /// @param path        Variavel do tipo string
-        /// @return nome       String com o nome do arquivo
-        /// 
         ///</summary>
         public static string retornaNome(string path) {
 
-            string nome = manipulaString.retornaNome(path);
+            string nome = manipulaString.retornaNomeArquivo(path);
 
             return nome;
         
@@ -189,81 +155,147 @@ namespace sacis.view.control
 
         ///<summary>
         ///
-        /// Método _de criação da mensagem 
+        /// Método que retorna a lista de contatos convertida de uma string passada.
         ///
-        /// @param msg        Variavel do tipo mensagemNovo
+        /// Retorna excecao: Erro de contato inválido.
         /// 
         ///</summary>
-        public static bool enviaMensagem(preMensagem msg)
+        public static List<contato> converteParaLista(string para)
         {
-
-            string xml = serial.Serializar(msg);
-
-            Console.Out.WriteLine(xml);
-
-            return true;
-       
+            try
+            {
+                List<contato> contatos = manipulaString.retornaListaContatos(para);
+                return contatos;
+            }
+            catch (excecao except)
+            {                
+                throw except;
+            }
         }
 
         ///<summary>
         ///
-        /// Método _para retornar todos os contatos do sistema 
+        /// Método que cria mensagem a ser enviada a partir da pre-mensagem passada retornando 
+        /// verdadeiro caso o envio seja feito com sucesso.
         ///
-        /// @return List        Lista com todos os contatos existentes no sistema
-        /// @throw excecao
+        /// Retorna excecao.
         /// 
+        ///</summary>
+        public static bool criaMensagem(preMensagem msg)
+        {
+            // tem que arrumar ainda a criptografia e assinatura do body. 
+            // Provavelmente desmembrar este metodo em outros metodos
+            try
+            {
+                string[] para = manipulaString.retornaLoginsContatos(msg.getPara());
+                string de = msg.getDe();
+                string assunto = msg.getAssunto();
+                string body = msg.getTexto();
+                string assinatura = "ok";
+                bool cripto = msg.getCriptografar();
+                bool sign = msg.getAssinar();
+                List<anexo> arquivosPlain = new List<anexo>();
+                List<anexo> arquivosCripto = new List<anexo>();
+                 
+                foreach (string s in msg.getArquivoPlain())
+                {
+                    string conteudo = manipulaArquivo.leArquivo(s);
+                    string nome = manipulaString.retornaNomeArquivo(s);
+                    anexo next = new anexo(nome, false, "", conteudo);
+                    arquivosPlain.Add(next);
+                }
+
+                foreach (string nome in para)
+                {
+                    arquivosCripto.Clear();
+
+                    foreach (string s in msg.getArquivoCripto())
+                    {
+                        string conteudo = manipulaArquivo.leArquivo(s);
+                        string name = manipulaString.retornaNomeArquivo(s);
+                        string nomeCodificado = manipulaString.mudaExtensaoArquivo(name);
+
+                        // fazer chamada para enviar conteudo lido para ser cifrado,
+                        // retorná-lo junto com a chave simetrica
+                        // cifrar a chave simetrica com a cifra assimetrica
+
+                        anexo next = new anexo(nomeCodificado, true, "cifra assimétrica da chave simetrica", conteudo);
+                        arquivosCripto.Add(next);
+                    }
+
+                    if (sign) {
+                    
+                        // fazer a parte da assinatura
+
+                    }
+
+                    foreach (anexo a in arquivosCripto) arquivosPlain.Add(a);
+
+                    mensagemNovo mensagem = new mensagemNovo(de, nome, assunto, body, assinatura, cripto, sign, arquivosPlain);
+                    
+                    string xml = serial.serializarObjeto(mensagem);
+                    //Console.Out.WriteLine(xml);
+                    manipulaArquivo.criaArquivo(@"d:\"+nome+".txt", xml);
+
+                }                               
+
+                return true;
+            }
+            catch (excecao except)
+            {
+                throw except;
+            }       
+        }
+
+        ///<summary>
+        ///
+        /// Método que retorna a lista dos contatos existentes no sistema.
+        /// 
+        /// Retorna excecao.
+        ///
         ///</summary>
         public static List<contato> buscaContatosGeral()
         { 
             try
             {
-                string xml = WService.retornaContato();
-
+                string xml = WService.retornaContatos();
                 List<contato> lista = serial.Deserializar(xml, typeof(List<contato>)) as List<contato>;
 
                 return lista;
             }
             catch (excecao except)
-            {
-                
+            {                
                 throw except;
             }
         }
 
         ///<summary>
         ///
-        /// Método _para inserir contatos no sistema 
+        /// Método que insere nos contatos do catalogo pessoal do usuario passado a lista de contatos
+        /// passada.
         ///
-        /// @param lista            Variável do tipo List<contato>
-        /// @param user             Variável do tipo string
-        /// @return bool            Verdadeiro caso cadastro tenha sucesso
-        ///                         Falso caso contrario
-        /// @throw excecao
+        /// Retorna excecao.
         /// 
         ///</summary>
-        public static bool insereContatos(List<contato> lista, string user) {
-
+        public static bool insereContatosPessoal(List<contato> lista, string user) 
+        {
             try
             {
-                string xml = serial.Serializar(lista);
+                string xml = serial.serializarObjeto(lista);
 
-                if (WService.cadastraContato(xml, user)) return true;
+                if (WService.cadastraContatoPessoal(xml, user)) return true;
                 else return false;
             }
             catch (excecao except)
             {                
                 throw except;
-            }          
-
+            }      
         }
 
         ///<summary>
         ///
-        /// Método _para retornar todos os contatos do usuario 
+        /// Método que retorna os contatos pessoais do usuario passado
         ///
-        /// @return List<contato>        Lista com todos os contatos existentes no sistema
-        /// @throw excecao
-        /// 
         ///</summary>
         public static List<contato> buscaContatosPessoais(string user)
         {
@@ -284,30 +316,25 @@ namespace sacis.view.control
 
         ///<summary>
         ///
-        /// Método _para remover contatos no catalogo pessoal 
+        /// Método que remove os contatos no catalogo pessoal do usuario passado a lista de contatos
+        /// passada.
         ///
-        /// @param lista            Variável do tipo List<contato>
-        /// @param user             Variável do tipo string
-        /// @return bool            Verdadeiro caso cadastro tenha sucesso
-        ///                         Falso caso contrario
-        /// @throw excecao
-        /// 
+        /// Retorna excecao.
+        ///
         ///</summary>
-        public static bool removeContatos(List<contato> lista, string user) {
-
+        public static bool removeContatosPessoal(List<contato> lista, string user) 
+        {
             try
             {
-                string xml = serial.Serializar(lista);
+                string xml = serial.serializarObjeto(lista);
 
-                if (WService.removeContato(xml, user)) return true;
+                if (WService.removeContatoPessoal(xml, user)) return true;
                 else return false;
             }
             catch (excecao except)
             {
                 throw except;
-            }    
-        
+            }            
         }
-
     }
 }

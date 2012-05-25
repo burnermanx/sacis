@@ -17,6 +17,7 @@ namespace sacis.model.entidades
         private string _para;
         private string _assunto;
         private string _texto;
+        private string _assinatura;
         private bool _criptografar;
         private bool _assinar;
         private List<anexo> _anexos;
@@ -52,6 +53,12 @@ namespace sacis.model.entidades
             set { _texto = value; }
         }
         
+        public string assinatura {
+
+            get { return _assinatura; }
+            set { _assinatura = value; }
+        }
+
         public bool criptografar
         {
             get { return _criptografar; }
@@ -82,12 +89,13 @@ namespace sacis.model.entidades
         /// Método contrutor para inicializar o objeto atraves de parâmetros
         ///
         ///</summary>
-        public mensagemNovo(string from, string to, string subject, string text, bool cript, bool sign, List<anexo> attachments) {
+        public mensagemNovo(string from, string to, string subject, string text, string signature, bool cript, bool sign, List<anexo> attachments) {
 
             _de = from;
             _para = to;
             _assunto = subject;
             _texto = text;
+            _assinatura = signature;
             _criptografar = cript;
             _assinar = sign;
             _anexos = attachments;
@@ -173,6 +181,26 @@ namespace sacis.model.entidades
         public void setTexto(string text)
         {
             _texto = text;
+        }
+
+        ///<summary>
+        ///
+        /// Método get para a assinatura da mensagem
+        ///
+        ///</summary>
+        public string getAssinatura()
+        {
+            return _assinatura;
+        }
+
+        ///<summary>
+        ///
+        /// Método set para a assinatura da mensagem
+        ///
+        ///</summary>
+        public void setAssinatura(string signature)
+        {
+            _assinatura = signature;
         }
 
         ///<summary>

@@ -29,19 +29,21 @@ namespace sacis.view.control.localhost {
     [System.Web.Services.WebServiceBindingAttribute(Name="Service1Soap", Namespace="http://tempuri.org/")]
     public partial class Service1 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
+        private System.Threading.SendOrPostCallback testeOperationCompleted;
+        
         private System.Threading.SendOrPostCallback verificaUsuarioOperationCompleted;
         
-        private System.Threading.SendOrPostCallback cadastramentoOperationCompleted;
+        private System.Threading.SendOrPostCallback cadastraUsuarioOperationCompleted;
         
         private System.Threading.SendOrPostCallback consultaUsuarioOperationCompleted;
         
-        private System.Threading.SendOrPostCallback retornaContatoOperationCompleted;
+        private System.Threading.SendOrPostCallback retornaContatosOperationCompleted;
         
-        private System.Threading.SendOrPostCallback cadastraContatoOperationCompleted;
+        private System.Threading.SendOrPostCallback cadastraContatoPessoalOperationCompleted;
         
         private System.Threading.SendOrPostCallback retornaContatoPessoalOperationCompleted;
         
-        private System.Threading.SendOrPostCallback removeContatoOperationCompleted;
+        private System.Threading.SendOrPostCallback removeContatoPessoalOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -82,25 +84,55 @@ namespace sacis.view.control.localhost {
         }
         
         /// <remarks/>
+        public event testeCompletedEventHandler testeCompleted;
+        
+        /// <remarks/>
         public event verificaUsuarioCompletedEventHandler verificaUsuarioCompleted;
         
         /// <remarks/>
-        public event cadastramentoCompletedEventHandler cadastramentoCompleted;
+        public event cadastraUsuarioCompletedEventHandler cadastraUsuarioCompleted;
         
         /// <remarks/>
         public event consultaUsuarioCompletedEventHandler consultaUsuarioCompleted;
         
         /// <remarks/>
-        public event retornaContatoCompletedEventHandler retornaContatoCompleted;
+        public event retornaContatosCompletedEventHandler retornaContatosCompleted;
         
         /// <remarks/>
-        public event cadastraContatoCompletedEventHandler cadastraContatoCompleted;
+        public event cadastraContatoPessoalCompletedEventHandler cadastraContatoPessoalCompleted;
         
         /// <remarks/>
         public event retornaContatoPessoalCompletedEventHandler retornaContatoPessoalCompleted;
         
         /// <remarks/>
-        public event removeContatoCompletedEventHandler removeContatoCompleted;
+        public event removeContatoPessoalCompletedEventHandler removeContatoPessoalCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/teste", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string teste() {
+            object[] results = this.Invoke("teste", new object[0]);
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void testeAsync() {
+            this.testeAsync(null);
+        }
+        
+        /// <remarks/>
+        public void testeAsync(object userState) {
+            if ((this.testeOperationCompleted == null)) {
+                this.testeOperationCompleted = new System.Threading.SendOrPostCallback(this.OntesteOperationCompleted);
+            }
+            this.InvokeAsync("teste", new object[0], this.testeOperationCompleted, userState);
+        }
+        
+        private void OntesteOperationCompleted(object arg) {
+            if ((this.testeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.testeCompleted(this, new testeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/verificaUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -132,30 +164,30 @@ namespace sacis.view.control.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/cadastramento", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void cadastramento(string xmluser) {
-            this.Invoke("cadastramento", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/cadastraUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void cadastraUsuario(string xmluser) {
+            this.Invoke("cadastraUsuario", new object[] {
                         xmluser});
         }
         
         /// <remarks/>
-        public void cadastramentoAsync(string xmluser) {
-            this.cadastramentoAsync(xmluser, null);
+        public void cadastraUsuarioAsync(string xmluser) {
+            this.cadastraUsuarioAsync(xmluser, null);
         }
         
         /// <remarks/>
-        public void cadastramentoAsync(string xmluser, object userState) {
-            if ((this.cadastramentoOperationCompleted == null)) {
-                this.cadastramentoOperationCompleted = new System.Threading.SendOrPostCallback(this.OncadastramentoOperationCompleted);
+        public void cadastraUsuarioAsync(string xmluser, object userState) {
+            if ((this.cadastraUsuarioOperationCompleted == null)) {
+                this.cadastraUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OncadastraUsuarioOperationCompleted);
             }
-            this.InvokeAsync("cadastramento", new object[] {
-                        xmluser}, this.cadastramentoOperationCompleted, userState);
+            this.InvokeAsync("cadastraUsuario", new object[] {
+                        xmluser}, this.cadastraUsuarioOperationCompleted, userState);
         }
         
-        private void OncadastramentoOperationCompleted(object arg) {
-            if ((this.cadastramentoCompleted != null)) {
+        private void OncadastraUsuarioOperationCompleted(object arg) {
+            if ((this.cadastraUsuarioCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.cadastramentoCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.cadastraUsuarioCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -191,60 +223,60 @@ namespace sacis.view.control.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/retornaContato", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string retornaContato() {
-            object[] results = this.Invoke("retornaContato", new object[0]);
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/retornaContatos", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string retornaContatos() {
+            object[] results = this.Invoke("retornaContatos", new object[0]);
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void retornaContatoAsync() {
-            this.retornaContatoAsync(null);
+        public void retornaContatosAsync() {
+            this.retornaContatosAsync(null);
         }
         
         /// <remarks/>
-        public void retornaContatoAsync(object userState) {
-            if ((this.retornaContatoOperationCompleted == null)) {
-                this.retornaContatoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnretornaContatoOperationCompleted);
+        public void retornaContatosAsync(object userState) {
+            if ((this.retornaContatosOperationCompleted == null)) {
+                this.retornaContatosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnretornaContatosOperationCompleted);
             }
-            this.InvokeAsync("retornaContato", new object[0], this.retornaContatoOperationCompleted, userState);
+            this.InvokeAsync("retornaContatos", new object[0], this.retornaContatosOperationCompleted, userState);
         }
         
-        private void OnretornaContatoOperationCompleted(object arg) {
-            if ((this.retornaContatoCompleted != null)) {
+        private void OnretornaContatosOperationCompleted(object arg) {
+            if ((this.retornaContatosCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.retornaContatoCompleted(this, new retornaContatoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.retornaContatosCompleted(this, new retornaContatosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/cadastraContato", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool cadastraContato(string xml, string user) {
-            object[] results = this.Invoke("cadastraContato", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/cadastraContatoPessoal", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool cadastraContatoPessoal(string xml, string user) {
+            object[] results = this.Invoke("cadastraContatoPessoal", new object[] {
                         xml,
                         user});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void cadastraContatoAsync(string xml, string user) {
-            this.cadastraContatoAsync(xml, user, null);
+        public void cadastraContatoPessoalAsync(string xml, string user) {
+            this.cadastraContatoPessoalAsync(xml, user, null);
         }
         
         /// <remarks/>
-        public void cadastraContatoAsync(string xml, string user, object userState) {
-            if ((this.cadastraContatoOperationCompleted == null)) {
-                this.cadastraContatoOperationCompleted = new System.Threading.SendOrPostCallback(this.OncadastraContatoOperationCompleted);
+        public void cadastraContatoPessoalAsync(string xml, string user, object userState) {
+            if ((this.cadastraContatoPessoalOperationCompleted == null)) {
+                this.cadastraContatoPessoalOperationCompleted = new System.Threading.SendOrPostCallback(this.OncadastraContatoPessoalOperationCompleted);
             }
-            this.InvokeAsync("cadastraContato", new object[] {
+            this.InvokeAsync("cadastraContatoPessoal", new object[] {
                         xml,
-                        user}, this.cadastraContatoOperationCompleted, userState);
+                        user}, this.cadastraContatoPessoalOperationCompleted, userState);
         }
         
-        private void OncadastraContatoOperationCompleted(object arg) {
-            if ((this.cadastraContatoCompleted != null)) {
+        private void OncadastraContatoPessoalOperationCompleted(object arg) {
+            if ((this.cadastraContatoPessoalCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.cadastraContatoCompleted(this, new cadastraContatoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.cadastraContatoPessoalCompleted(this, new cadastraContatoPessoalCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -278,33 +310,33 @@ namespace sacis.view.control.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/removeContato", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool removeContato(string xml, string user) {
-            object[] results = this.Invoke("removeContato", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/removeContatoPessoal", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool removeContatoPessoal(string xml, string user) {
+            object[] results = this.Invoke("removeContatoPessoal", new object[] {
                         xml,
                         user});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void removeContatoAsync(string xml, string user) {
-            this.removeContatoAsync(xml, user, null);
+        public void removeContatoPessoalAsync(string xml, string user) {
+            this.removeContatoPessoalAsync(xml, user, null);
         }
         
         /// <remarks/>
-        public void removeContatoAsync(string xml, string user, object userState) {
-            if ((this.removeContatoOperationCompleted == null)) {
-                this.removeContatoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnremoveContatoOperationCompleted);
+        public void removeContatoPessoalAsync(string xml, string user, object userState) {
+            if ((this.removeContatoPessoalOperationCompleted == null)) {
+                this.removeContatoPessoalOperationCompleted = new System.Threading.SendOrPostCallback(this.OnremoveContatoPessoalOperationCompleted);
             }
-            this.InvokeAsync("removeContato", new object[] {
+            this.InvokeAsync("removeContatoPessoal", new object[] {
                         xml,
-                        user}, this.removeContatoOperationCompleted, userState);
+                        user}, this.removeContatoPessoalOperationCompleted, userState);
         }
         
-        private void OnremoveContatoOperationCompleted(object arg) {
-            if ((this.removeContatoCompleted != null)) {
+        private void OnremoveContatoPessoalOperationCompleted(object arg) {
+            if ((this.removeContatoPessoalCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.removeContatoCompleted(this, new removeContatoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.removeContatoPessoalCompleted(this, new removeContatoPessoalCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -324,6 +356,32 @@ namespace sacis.view.control.localhost {
                 return true;
             }
             return false;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void testeCompletedEventHandler(object sender, testeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class testeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal testeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
         }
     }
     
@@ -355,7 +413,7 @@ namespace sacis.view.control.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
-    public delegate void cadastramentoCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void cadastraUsuarioCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
@@ -385,17 +443,17 @@ namespace sacis.view.control.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
-    public delegate void retornaContatoCompletedEventHandler(object sender, retornaContatoCompletedEventArgs e);
+    public delegate void retornaContatosCompletedEventHandler(object sender, retornaContatosCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class retornaContatoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class retornaContatosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal retornaContatoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal retornaContatosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -411,17 +469,17 @@ namespace sacis.view.control.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
-    public delegate void cadastraContatoCompletedEventHandler(object sender, cadastraContatoCompletedEventArgs e);
+    public delegate void cadastraContatoPessoalCompletedEventHandler(object sender, cadastraContatoPessoalCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class cadastraContatoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class cadastraContatoPessoalCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal cadastraContatoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal cadastraContatoPessoalCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -463,17 +521,17 @@ namespace sacis.view.control.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
-    public delegate void removeContatoCompletedEventHandler(object sender, removeContatoCompletedEventArgs e);
+    public delegate void removeContatoPessoalCompletedEventHandler(object sender, removeContatoPessoalCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class removeContatoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class removeContatoPessoalCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal removeContatoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal removeContatoPessoalCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

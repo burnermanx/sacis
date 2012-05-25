@@ -203,7 +203,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 catalogoPessoal_dataGridView.Refresh();                
                 
                 if (vazio) MessageBox.Show(MSG_SELECAO, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                else if (gerenciaServlet.removeContatos(lista, user)) MessageBox.Show(MSG_REMOCAO_OK, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else if (gerenciaServlet.removeContatosPessoal(lista, user)) MessageBox.Show(MSG_REMOCAO_OK, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (excecao except)
