@@ -43,7 +43,7 @@
             this.armazena_button.TabIndex = 3;
             this.armazena_button.Text = "Ok";
             this.armazena_button.UseVisualStyleBackColor = true;
-            this.armazena_button.Click += new System.EventHandler(this.armazena_button_Click);
+            this.armazena_button.Click += new System.EventHandler(this.armazenaButtonClick);
             // 
             // label1
             // 
@@ -91,7 +91,7 @@
             this.KeyPreview = true;
             this.Name = "login";
             this.Text = "Login Armazenamento";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.armazena_button_Click);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.armazenaButtonClick);
             this.ResumeLayout(false);
             this.PerformLayout();
 

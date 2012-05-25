@@ -1,8 +1,8 @@
-﻿/*
- * Formulário contendo a interface que o usuario irá utilizar para manipular os arquivos.
- *
- * @author Fabio Augusto
- */
+﻿///<summary>
+/// Formulário contendo a interface que o usuario irá utilizar para manipular os arquivos.
+/// 
+/// @author Fabio Augusto
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -20,49 +20,43 @@ namespace sacis.view.sistema.armazenamento
 {
     public partial class armazena : Form
     {
-
         private static string MSG_CANCELAMENTO = "Deseja Realmente Cancelar o Armazenamento?";
         private static string MSG_AVISO = "Mensagem de Aviso!";
         private static string MSG_ERRO = "Mensagem de Erro!";
         private static string MSG_OPERACAO_CANCELADA = "Operação Cancelada";
         private static string MSG_CRIPTO = "Criptografia Realizada com Sucesso!";
         private static string MSG_DESCRIPTO = "Descriptografia Realizada com Sucesso!";
-
         private static HashSet<string> arquivos = new HashSet<string>();
         private static int valor;
         private static String pastaDestino;       
 
-        /**
-        *
-        * Metodo para inicializar os componentes do formulario e selecionar os arquivos
-        * desejados para sua manipulação
-        *
-        */    
+        ///<summary>
+        /// 
+        /// Metodo para inicializar os componentes do formulario e selecionar os arquivos
+        /// desejados para sua manipulação.
+        ///
+        ///</summary>   
         public armazena()
         {
             InitializeComponent();
 
-            //abre janela para escolher arquivos   
             if (anexar.ShowDialog() == DialogResult.OK)
             {
-                //insere o Array no DataGridView2
                 insereArquivos();
             }
             else
             {
                 this.Close();
-            }  
-           
+            }             
         }
 
-        /**
-        *
-        * Metodo para inserir os arquivos no dataGridView e no HashSet
-        *
-        */  
+        ///<summary>
+        /// 
+        /// Metodo para inserir os arquivos no dataGridView e no HashSet.
+        ///
+        ///</summary>
         private void insereArquivos()
         {
-
             valor = 0;
 
             foreach (String file in anexar.FileNames)
@@ -77,173 +71,128 @@ namespace sacis.view.sistema.armazenamento
             }
 
             dataGridView2.Visible = true;
-
         }
         
-        /**
-        *
-        * Método para chamar metodo cripto através do clique no botao criptografar
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
-        *
-        */
-        private void CriptoButton_Click(object sender, EventArgs e)
-        {
-           
-            cripto();
-            
+        ///<summary>
+        /// 
+        /// Método que chama metodo cripto através do clique no botao criptografar.
+        ///
+        ///</summary>
+        private void criptoButtonClick(object sender, EventArgs e)
+        {           
+            cripto();            
         }
 
-        /**
-        *
-        * Método para chamar metodo cripto através do teclado
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base contendo a tecla acionada no evento.
-        *
-        */
-        private void CriptoButton_Click(object sender, KeyEventArgs e) {
-
+        ///<summary>
+        /// 
+        /// Método que chama metodo cripto através do teclado.
+        ///
+        ///</summary>
+        private void criptoButtonClick(object sender, KeyEventArgs e) 
+        {
             if (e.KeyCode == Keys.Enter)
             {
-
                 cripto();
-
             }
-
         }
 
-        /**
-        *
-        * Método para chamar metodo manipulaArquivo 
-        *
-        */
-        private void cripto() {
-
+        ///<summary>
+        /// 
+        /// Método para cifrar arquivo.
+        ///
+        ///</summary>
+        private void cripto() 
+        {
             try
             {
                 int controle = 1;
-
                 manipulaArquivo(controle);
 
                 MessageBox.Show(MSG_CRIPTO, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.Close();
-
             }
             catch (excecao except)
-            {
-                
-                MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-            }     
-        
+            {                
+                MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Information);              
+            }           
         }
 
-        /**
-        *
-        * Método para chamar metodo descripto através do clique no botao descriptografar
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
-        *
-        */
-        private void DescButton_Click(object sender, EventArgs e)
+        ///<summary>
+        /// 
+        /// Método que chama metodo descripto através do clique no botao descriptografar.
+        ///
+        ///</summary>
+        private void descButtonClick(object sender, EventArgs e)
         {
-
             descripto();
-
         }
 
-        /**
-        *
-        * Método para chamar metodo descripto através do teclado
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base contendo a tecla acionada no evento.
-        *
-        */
-        private void DescButton_Click(object sender, KeyEventArgs e)
+        ///<summary>
+        /// 
+        /// Método que chama metodo descripto através do teclado.
+        ///
+        ///</summary>
+        private void descButtonClick(object sender, KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.Enter)
             {
-
                 descripto();
-
             }
-
         }
 
-        /**
-        *
-        * Método para chamar metodo manipulaArquivo 
-        *
-        */
-        private void descripto() {
-
+        ///<summary>
+        /// 
+        /// Método para decifrar arquivo. 
+        ///
+        ///</summary>
+        private void descripto() 
+        {
             try
             {
                 int controle = 2;
-
                 manipulaArquivo(controle);
 
                 MessageBox.Show(MSG_DESCRIPTO, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.Close();
-
             }
             catch (excecao except)
             {
-
                 MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            }         
-        
+            }               
         }
 
-        /**
-        *
-        * Método para chamar metodo cancela através do clique no botao cancelar
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base para classes que contém dados de evento
-        *
-        */
-        private void CancelarButton_Click(object sender, EventArgs e)
+        ///<summary>
+        /// 
+        /// Método para chamar metodo cancela através do clique no botao cancelar.
+        ///
+        ///</summary>
+        private void cancelarButtonClick(object sender, EventArgs e)
         {
-
             cancela();
-
         }
 
-        /**
-        *
-        * Método para chamar metodo cancela através do teclado
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base contendo a tecla acionada no evento.
-        *
-        */
-        private void CancelarButton_Click(object sender, KeyEventArgs e)
+        ///<summary>
+        /// 
+        /// Método para chamar metodo cancela através do teclado.
+        ///
+        ///</summary>
+        private void cancelarButtonClick(object sender, KeyEventArgs e)
         {
-
-            if (e.KeyCode == Keys.Enter) {
-
+            if (e.KeyCode == Keys.Enter) 
+            {
                 cancela();
-
             }
-
         }
 
-        /**
-        *
-        * Método para cancelar a operação de armazenamento
-        *
-        */
-        private void cancela() {
-
+        ///<summary>
+        /// 
+        /// Método para cancelar a operação de armazenamento.
+        ///
+        ///</summary>
+        private void cancela() 
+        {
             DialogResult result = MessageBox.Show(MSG_CANCELAMENTO, MSG_AVISO, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.OK)
@@ -253,92 +202,77 @@ namespace sacis.view.sistema.armazenamento
                 MessageBox.Show(MSG_OPERACAO_CANCELADA, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.Close();
-            }        
-        
+            }              
         }
 
-        /**
-        *
-        * Método para remover arquivos selecionados no dataGridView 
-        *
-        */
+        ///<summary>
+        /// 
+        /// Método para remover arquivos selecionados no dataGridView.
+        ///
+        ///</summary>
         private void removeArquivosSelecionados()
         {
             for (int i = 0; i < valor; i++)
             {
-                //Se checkbox Remover estiver marcado
                 if (dataGridView2.Rows[i].Cells[0].Value.Equals(true))
                 {
-                    //apaga linha do dataGridView1
                     dataGridView2.Rows.Remove(dataGridView2.Rows[i]);
                     i--;
                     valor--;
-
                 }
             }
         }
 
-        /**
-        *
-        * Método para atualizar o hashset com os arquivos selecionados
-        *
-        */
-        private void atualiza() {
-
+        ///<summary>
+        /// 
+        /// Método para atualizar o hashset com os arquivos selecionados.
+        ///
+        ///</summary>
+        private void atualiza() 
+        {
             arquivos.Clear();
 
             for (int i = 0; i < valor; i++)
             {
                 arquivos.Add(dataGridView2.Rows[i].Cells[1].Value.ToString());
-            }
-        
+            }        
         }
 
-        /**
-        *
-        * Método para selecionar pasta destino dos arquivos
-        *
-        */        
+        ///<summary>
+        /// 
+        /// Método para selecionar pasta destino dos arquivos.
+        ///
+        ///</summary>    
         private void selecionaPastaDestino()
         {
-
             folderBrowserDialog2.SelectedPath = "";
             folderBrowserDialog2.ShowDialog();
 
             if (folderBrowserDialog2.SelectedPath.Length != 0)
             {
                 pastaDestino = folderBrowserDialog2.SelectedPath;
-
             }
-
-
         }
 
-        /**
-        *
-        * Metodo para cifrar ou decifrar os arquivos selecionados através do metodo no
-        * armazenaServlet e uma flag.
-        * 
-        * @param flag       Variável inteiro representando a opção escolhida
-        * 
-        */ 
-        private void manipulaArquivo(int flag) {
-
+        ///<summary>
+        /// 
+        /// Metodo para armazenar arquivos selecionados localmente cifrados ou decifrados 
+        /// através de uma flag.
+        ///
+        ///</summary>  
+        private void manipulaArquivo(int flag) 
+        {
             removeArquivosSelecionados();
             atualiza();
             selecionaPastaDestino();
 
             for (int i = 0; i < valor; i++)
             {
-
                 String caminho;
                 caminho = dataGridView2.Rows[i].Cells[1].Value.ToString();
 
-                armazenaServlet.armazenando(caminho, pastaDestino, flag);
-
-            }        
-                
+                armazenaServlet.armazenaArquivo(caminho, pastaDestino, flag);
+            }                        
         }
-
     }
 }

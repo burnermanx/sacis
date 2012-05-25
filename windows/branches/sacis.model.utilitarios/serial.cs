@@ -1,9 +1,7 @@
 ﻿///<summary>
-/// Classe contendo a implementação _para transformar um objeto em XML e vice-versa
-/// 
+/// Classe contendo a implementação para transformar um objeto em XML e vice-versa
 ///
 /// @author Fabio Augusto
-/// 
 ///</summary>
 
 using System;
@@ -21,13 +19,10 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Método _para serializar um objeto em XML
-        ///
-        /// @param objeto        Objeto qualquer passado
-        /// @return string       string em XML do objeto passado
+        /// Método que retorna o XML serializado de um objeto passado
         ///
         ///</summary>
-        public static string Serializar(object objeto) {
+        public static string serializarObjeto(object objeto) {
 
             StringWriter texto = new StringWriter();
             XmlSerializer serial = new XmlSerializer(objeto.GetType());
@@ -39,14 +34,10 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Método _para deserializar uma XML em objeto
-        ///
-        /// @param XML            XML do objeto
-        /// @param tipo           Tipo do objeto passado em XML
+        /// Método que retorna o objeto deserializado a partir de um xml serializado 
+        /// e o tipo de objeto a deserializar passados
         /// 
-        /// @return object        Objeto deserializado
-        ///
-        ///<summary>
+        ///</summary>
         public static object Deserializar(string xml, Type tipo) {
 
             StringReader leitor = new StringReader(xml);

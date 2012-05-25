@@ -64,7 +64,7 @@
             this.button_privado.TabIndex = 7;
             this.button_privado.Text = "Ok";
             this.button_privado.UseVisualStyleBackColor = true;
-            this.button_privado.Click += new System.EventHandler(this.click_privado);
+            this.button_privado.Click += new System.EventHandler(this.clickPrivado);
             // 
             // textBoxp_nome
             // 
@@ -112,7 +112,7 @@
             this.button_chave.TabIndex = 5;
             this.button_chave.Text = "Chave";
             this.button_chave.UseVisualStyleBackColor = true;
-            this.button_chave.Click += new System.EventHandler(this.button_chave_Click);
+            this.button_chave.Click += new System.EventHandler(this.buttonChaveClick);
             // 
             // cadastro
             // 
@@ -131,7 +131,7 @@
             this.KeyPreview = true;
             this.Name = "cadastro";
             this.Text = "Sistema de Cadastro";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.click_privado);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.clickPrivado);
             this.ResumeLayout(false);
             this.PerformLayout();
 

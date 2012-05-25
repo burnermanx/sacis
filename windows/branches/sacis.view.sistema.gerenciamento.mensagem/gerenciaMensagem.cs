@@ -58,7 +58,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             InitializeComponent();
             usuario = nome;
             MCLoad(nome);
-
+          
         }
 
         /**

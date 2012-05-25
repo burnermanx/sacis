@@ -49,8 +49,8 @@
             this.CriptoButton.TabIndex = 2;
             this.CriptoButton.Text = "Criptografar";
             this.CriptoButton.UseVisualStyleBackColor = true;
-            this.CriptoButton.Click += new System.EventHandler(this.CriptoButton_Click);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CriptoButton_Click);
+            this.CriptoButton.Click += new System.EventHandler(this.criptoButtonClick);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.criptoButtonClick);
             // 
             // CancelarButton
             // 
@@ -60,8 +60,8 @@
             this.CancelarButton.TabIndex = 3;
             this.CancelarButton.Text = "Cancelar";
             this.CancelarButton.UseVisualStyleBackColor = true;
-            this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CancelarButton_Click);
+            this.CancelarButton.Click += new System.EventHandler(this.cancelarButtonClick);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cancelarButtonClick);
             // 
             // label1
             // 
@@ -89,8 +89,8 @@
             this.DescButton.TabIndex = 6;
             this.DescButton.Text = "Descriptografar";
             this.DescButton.UseVisualStyleBackColor = true;
-            this.DescButton.Click += new System.EventHandler(this.DescButton_Click);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DescButton_Click);
+            this.DescButton.Click += new System.EventHandler(this.descButtonClick);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.descButtonClick);
             // 
             // dataGridView2
             // 

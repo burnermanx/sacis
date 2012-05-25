@@ -1,5 +1,5 @@
 ﻿///<summary>
-/// Implementação do formulario _de nova mensagem
+/// Implementação do formulario de nova mensagem
 ///
 /// @author Fabio Augusto
 ///</summary>
@@ -14,6 +14,7 @@ using System.Text;
 using System.Windows.Forms;
 using sacis.view.control;
 using sacis.model.entidades;
+using sacis.model.excecao;
 
 namespace sacis.view.sistema.gerenciamento.mensagem
 {
@@ -57,24 +58,33 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///</summary>
         private void para_label_Click(object sender, EventArgs e)
         {
-            catalogoPessoal newForm;
-
-            if (lista.Count == 0)
+            try
             {
-                newForm = new catalogoPessoal(usuario);
+                catalogoPessoal newForm;
+
+                if (lista.Count == 0)
+                {
+                    newForm = new catalogoPessoal(usuario);
+                }
+                else
+                {
+                    lista.Clear();
+                    lista = gerenciaServlet.converteParaLista(novo_para.Text);
+                    newForm = new catalogoPessoal(usuario, lista);
+                }
+
+                newForm.FormClosed += new FormClosedEventHandler(form_visivel);
+                newForm.ShowDialog();
+
+                lista = newForm.getListaContatos();
+
+                exibeNomeContatos();
             }
-            else
+            catch (excecao except)
             {
-                newForm = new catalogoPessoal(usuario,lista);
-            }                     
-                        
-            newForm.FormClosed += new FormClosedEventHandler(form_visivel);
-            newForm.ShowDialog();
-
-            lista = newForm.getListaContatos();
-
-            exibeNomeContatos();
-
+                MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                novo_para.Clear();
+            }
         }
 
         ///<summary>
@@ -86,7 +96,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
             string contatos = "";
 
-            foreach (contato c in lista) contatos += c.getNome() + "; ";
+            foreach (contato c in lista) contatos += c.getNome() + "(" + c.getEmail() + ")" + ";";
 
             novo_para.Text = contatos;
         
@@ -166,13 +176,21 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private void novo_enviar_Click(object sender, EventArgs e)
         {
 
-            preMensagem msg = new preMensagem(usuario, novo_para.Text, novo_assunto.Text, novo_texto.Text, novo_cripto.Checked, novo_assina.Checked, CriptoFiles, PlainFiles);
-            bool ret = gerenciaServlet.enviaMensagem(msg);
+            try
+            {
+                preMensagem msg = new preMensagem(usuario, novo_para.Text, novo_assunto.Text, novo_texto.Text, novo_cripto.Checked, novo_assina.Checked, CriptoFiles, PlainFiles);
+                bool ret = gerenciaServlet.criaMensagem(msg);
 
-            if (ret) MessageBox.Show(MSG_ENVIO_OK, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            else MessageBox.Show(MSG_ENVIO_FAIL, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ret) MessageBox.Show(MSG_ENVIO_OK, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else MessageBox.Show(MSG_ENVIO_FAIL, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            this.Close();
+                this.Close();
+            }
+            catch (excecao except)
+            {
+                MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                novo_para.Clear();
+            }
 
         }
 

@@ -4,15 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.view.inicio", "sacis.view.inicio\sacis.view.inicio.csproj", "{A8DD6C48-A99D-40BD-BF7A-2A1B5C5A31F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.view.control", "sacis.view.control\sacis.view.control.csproj", "{26FF3171-8019-4F0C-AEEC-AF5E60313860}"
-	ProjectSection(ProjectDependencies) = postProject
-		{380EAE29-3162-488A-8333-8B5C7BB26FC7} = {380EAE29-3162-488A-8333-8B5C7BB26FC7}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.model.excecao", "sacis.model.excecao\sacis.model.excecao.csproj", "{F11AC024-7818-4B8B-AD14-D3369F5D5EA1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.model.utilitarios", "sacis.model.utilitarios\sacis.model.utilitarios.csproj", "{0A85CBB0-EFBC-4F2A-94AA-2AE7558998FF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.model.webService", "sacis.model.webService\sacis.model.webService.csproj", "{380EAE29-3162-488A-8333-8B5C7BB26FC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.model.bd", "sacis.model.bd\sacis.model.bd.csproj", "{48EC498E-6D89-4142-A655-5722D9C1723E}"
 EndProject
@@ -27,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.view.sistema.armazenamento.arquivos", "sacis.view.sistema.armazenamento.arquivo\sacis.view.sistema.armazenamento.arquivos.csproj", "{DF34E54B-7E39-443D-B060-F29C0D5BCD1E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.model.entidades", "sacis.model.entidades\sacis.model.entidades.csproj", "{F55F1E25-4A4A-4EA1-89CE-C953C3EE0221}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.model.webService", "sacis.model.webService\sacis.model.webService.csproj", "{2E1305CC-C405-4EDA-B878-C6BC0812EADA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,10 +47,6 @@ Global
 		{0A85CBB0-EFBC-4F2A-94AA-2AE7558998FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A85CBB0-EFBC-4F2A-94AA-2AE7558998FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A85CBB0-EFBC-4F2A-94AA-2AE7558998FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{380EAE29-3162-488A-8333-8B5C7BB26FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{380EAE29-3162-488A-8333-8B5C7BB26FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{380EAE29-3162-488A-8333-8B5C7BB26FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{380EAE29-3162-488A-8333-8B5C7BB26FC7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{48EC498E-6D89-4142-A655-5722D9C1723E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{48EC498E-6D89-4142-A655-5722D9C1723E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48EC498E-6D89-4142-A655-5722D9C1723E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -82,6 +75,10 @@ Global
 		{F55F1E25-4A4A-4EA1-89CE-C953C3EE0221}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F55F1E25-4A4A-4EA1-89CE-C953C3EE0221}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F55F1E25-4A4A-4EA1-89CE-C953C3EE0221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E1305CC-C405-4EDA-B878-C6BC0812EADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E1305CC-C405-4EDA-B878-C6BC0812EADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E1305CC-C405-4EDA-B878-C6BC0812EADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E1305CC-C405-4EDA-B878-C6BC0812EADA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

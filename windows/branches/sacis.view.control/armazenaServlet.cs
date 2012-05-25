@@ -1,8 +1,8 @@
-﻿/*
- * Classe _para implementação do servlet _de controle do armazenamento 
- *
- * @author Fabio Augusto
- */
+﻿///<summary>
+/// Classe para implementação do servlet de controle do armazenamento 
+///
+/// @author Fabio Augusto
+///</summary>
 
 using System;
 using System.IO;
@@ -18,54 +18,45 @@ namespace sacis.view.control
     public class armazenaServlet
     {
 
-        /**
-        *
-        * Método que retorna uma string em hash
-        *
-        * @param _texto          String _de _texto
-        * 
-        * @return string        Retorna _texto em hash
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método que retorna o hash de uma string passada
+        ///
+        ///</summary>
         public static string geraHash(string texto) {
 
             return hash.hashing(texto);            
         
         }
 
-        /**
-        *
-        * Método que chama função _para verificar a existencia _de usuario localmente
-        *
-        * @param login          String _de _texto
-        * @param senha          String _de _texto
-        * 
-        * @return bool          Retorna verdadeiro caso exista e falso caso contrario
-        * 
-        */
+        ///<summary>
+        ///
+        /// Método que verifica a existencia do login e hash da senha passados no arquivo local
+        /// retornando verdadeiro caso exista.
+        /// 
+        ///</summary>
         public static bool confirmaUsuario(string login, string senha) {
 
-            if (verificaUsuario.verifica_usuario(login, senha)) return true;
+            if (verificaUsuario.verificaCadastroUsuarioLocal(login, senha)) return true;
             else return false;
         
         }
 
-        /**
-         *
-         * Método _para manipular as strings, cifrar e decifrar os arquivos 
-         *
-         * @param origem           Variável tipo string
-         * @param destino          Variável tipo string
-         * @param flag             Variável tipo inteiro
-         * 
-         * @throw excecao
-         * 
-         */
-        public static void armazenando(string origem, string destino, int flag) {
-
+        ///<summary>
+        ///
+        /// Método que armazena o arquivo desejado selecionando o tipo de armazenamento de arquivo 
+        /// a ser feito através do inteiro (1 para cifrar ou 2 para decifrar), manipulando a string passada
+        /// contendo o caminho do arquivo completo incluindo o nome dele e sua extensão e a string 
+        /// passada contendo o caminho de destino do arquivo.
+        /// 
+        /// Retorna excecao: Erro de leitura ou gravação de arquivo
+        /// 
+        ///</summary>
+        public static void armazenaArquivo(string origem, string destino, int flag) 
+        {
             try
             {
-                string arquivo = manipulaString.retornaNome(origem);
+                string arquivo = manipulaString.retornaNomeArquivo(origem);
                 string conteudo = manipulaArquivo.leArquivo(origem);
 
                 string pastaDestino;
@@ -74,13 +65,13 @@ namespace sacis.view.control
 
                 if (flag == 1) {
                     
-                    novoArquivo = manipulaString.mudaExtensao(arquivo);
+                    novoArquivo = manipulaString.mudaExtensaoArquivo(arquivo);
                     // conteudoFinal = (metodo _criptografar passando conteudo do arquivo e retornado conteudo cifrado)
                 
                 }
                 else if (flag == 2) {
 
-                    novoArquivo = manipulaString.recuperaNome(arquivo);
+                    novoArquivo = manipulaString.recuperaNomeOriginalArquivo(arquivo);
                     // conteudoFinal = (metodo descriptografar passando conteudo do arquivo e retornado conteudo decifrado)
 
                 }
@@ -98,12 +89,9 @@ namespace sacis.view.control
  
             }
             catch (excecao except)
-            {
-                
+            {                
                 throw except;
-
             }     
         }
-
     }
 }

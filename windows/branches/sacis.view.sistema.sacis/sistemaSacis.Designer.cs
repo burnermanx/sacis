@@ -63,7 +63,7 @@
             this.sacis_ok.TabIndex = 2;
             this.sacis_ok.Text = "Ok";
             this.sacis_ok.UseVisualStyleBackColor = true;
-            this.sacis_ok.Click += new System.EventHandler(this.click_sacis);
+            this.sacis_ok.Click += new System.EventHandler(this.clickSacis);
             // 
             // sistema_sacis
             // 
@@ -76,7 +76,7 @@
             this.KeyPreview = true;
             this.Name = "sistema_sacis";
             this.Text = "Projeto S.A.C.I.S.";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.click_sacis);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.clickSacis);
             this.ResumeLayout(false);
             this.PerformLayout();
 

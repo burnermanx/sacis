@@ -26,7 +26,7 @@ namespace sacis.view.control.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:64020/Service1.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:51664/Service1.asmx")]
         public string sacis_view_control_localhost_Service1 {
             get {
                 return ((string)(this["sacis_view_control_localhost_Service1"]));

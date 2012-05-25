@@ -98,7 +98,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                     }
                 }
 
-                if (gerenciaServlet.insereContatos(lista, user)) MessageBox.Show(MSG_ADICIONAR, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (gerenciaServlet.insereContatosPessoal(lista, user)) MessageBox.Show(MSG_ADICIONAR, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 for (int i = 0; i < contagem; i++)
                 {

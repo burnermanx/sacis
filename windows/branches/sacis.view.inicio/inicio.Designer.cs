@@ -1,6 +1,6 @@
 ﻿namespace inicio
 {
-    partial class form_inicial
+    partial class inicio
     {
         /// <summary>
         /// Required designer variable.
@@ -51,7 +51,7 @@
             this.button_inicial.TabIndex = 2;
             this.button_inicial.Text = "Ok";
             this.button_inicial.UseVisualStyleBackColor = true;
-            this.button_inicial.Click += new System.EventHandler(this.click_inicial);
+            this.button_inicial.Click += new System.EventHandler(this.clickInicial);
             // 
             // comboBox_inicial
             // 
@@ -76,7 +76,7 @@
             this.KeyPreview = true;
             this.Name = "Form_inicial";
             this.Text = "Iniciando o Sistema...";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.click_inicial);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.clickInicial);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,8 +1,8 @@
-﻿/*
- * Classe _para validar os atributos do objeto do tipo Usuario 
- *
- * @author Fabio Augusto
- */
+﻿///<summary>
+/// Classe para validar os atributos do objeto do tipo Usuario
+///
+/// @author Fabio Augusto
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -17,21 +17,19 @@ namespace sacis.model.utilitarios
     {
         private static string MSG_ERRO = "Erro nos Dados";
 
-        /**
-        *
-        * Método que verifica a validade dos atributos do objeto usuario
-        *
-        * @param user           Objeto do tipo usuario
-        * 
-        * @return bool          Verdadeiro caso usuario seja válido
-        * @throw excecao        Retorna mensagem _de erro caso usuario seja inválido
-        * 
-        */
-        public static bool verificaUser(usuario user) {
+        ///<summary>
+        ///
+        /// Método que verifica a validade dos atributos do objeto usuario passado
+        /// e retorna verdadeiro caso seja válido.
+        ///
+        /// Retorna excecao: Erro nos dados
+        /// 
+        ///</summary>
+        public static bool verificaValidadeUsuario(usuario user) {
 
             if (user.getchave() == "" || user.getchave() == null ||
-                verificacampos(user.getnome()) == true || verificacampos(user.getsenha()) == true ||
-                verificacampos(user.getlogin()) == true || string.Compare(user.getlogin(), user.getsenha()) == 0 ||
+                verificaValidadeCampos(user.getnome()) == true || verificaValidadeCampos(user.getsenha()) == true ||
+                verificaValidadeCampos(user.getlogin()) == true || string.Compare(user.getlogin(), user.getsenha()) == 0 ||
                 string.Compare(user.getnome(), user.getsenha()) == 0 || string.Compare(user.getlogin(), user.getnome()) == 0)
             {
 
@@ -41,16 +39,13 @@ namespace sacis.model.utilitarios
                     
         }
 
-        /**
-        *
-        * Método que verifica se o _texto passado está _de acordo com os parametros determinados na função
-        *
-        * @param _texto       Variável do tipo String
-        * 
-        * @return bool       Verdadeiro caso inválido ou Falso no caso _de válido
-        * 
-        */
-        public static bool verificacampos(string texto) {
+        ///<summary>
+        ///
+        /// Método que verifica se o texto passado está de acordo com os parâmetros determinados 
+        /// na função retornando verdadeiro caso válido
+        /// 
+        ///</summary>
+        public static bool verificaValidadeCampos(string texto) {
 
             int cont = 0, i;
 
@@ -66,28 +61,21 @@ namespace sacis.model.utilitarios
             // Verifica caracteres da string se contem dois espaços seguidos, estao entre 32 e 255 e tem del
             for (i = 1; i < texto.Length; i++)
             {
-
                 if (texto[i] >= 32 && texto[i] <= 255)
                 {
-
                     if (texto[i] == 32 || texto[i] == 240 || texto[i] == 255)
                     {
-
                         cont++;
                         if (cont == 2) return true;
-
                     }
                     else cont = 0;
 
                     if (texto[i] == 127) return true;
-
                 }
                 else return true;
-
             }
 
-            return false;
-        
+            return false;        
         }
 
     }

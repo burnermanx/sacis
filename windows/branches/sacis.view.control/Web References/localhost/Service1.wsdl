@@ -2,6 +2,16 @@
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="teste">
+        <s:complexType />
+      </s:element>
+      <s:element name="testeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="testeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="verificaUsuario">
         <s:complexType>
           <s:sequence>
@@ -16,14 +26,14 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="cadastramento">
+      <s:element name="cadastraUsuario">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="xmluser" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="cadastramentoResponse">
+      <s:element name="cadastraUsuarioResponse">
         <s:complexType />
       </s:element>
       <s:element name="consultaUsuario">
@@ -41,17 +51,17 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="retornaContato">
+      <s:element name="retornaContatos">
         <s:complexType />
       </s:element>
-      <s:element name="retornaContatoResponse">
+      <s:element name="retornaContatosResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="retornaContatoResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="retornaContatosResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="cadastraContato">
+      <s:element name="cadastraContatoPessoal">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
@@ -59,10 +69,10 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="cadastraContatoResponse">
+      <s:element name="cadastraContatoPessoalResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="cadastraContatoResult" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="cadastraContatoPessoalResult" type="s:boolean" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -80,7 +90,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="removeContato">
+      <s:element name="removeContatoPessoal">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
@@ -88,26 +98,32 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="removeContatoResponse">
+      <s:element name="removeContatoPessoalResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="removeContatoResult" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="removeContatoPessoalResult" type="s:boolean" />
           </s:sequence>
         </s:complexType>
       </s:element>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="testeSoapIn">
+    <wsdl:part name="parameters" element="tns:teste" />
+  </wsdl:message>
+  <wsdl:message name="testeSoapOut">
+    <wsdl:part name="parameters" element="tns:testeResponse" />
+  </wsdl:message>
   <wsdl:message name="verificaUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:verificaUsuario" />
   </wsdl:message>
   <wsdl:message name="verificaUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:verificaUsuarioResponse" />
   </wsdl:message>
-  <wsdl:message name="cadastramentoSoapIn">
-    <wsdl:part name="parameters" element="tns:cadastramento" />
+  <wsdl:message name="cadastraUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:cadastraUsuario" />
   </wsdl:message>
-  <wsdl:message name="cadastramentoSoapOut">
-    <wsdl:part name="parameters" element="tns:cadastramentoResponse" />
+  <wsdl:message name="cadastraUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:cadastraUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="consultaUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:consultaUsuario" />
@@ -115,17 +131,17 @@
   <wsdl:message name="consultaUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:consultaUsuarioResponse" />
   </wsdl:message>
-  <wsdl:message name="retornaContatoSoapIn">
-    <wsdl:part name="parameters" element="tns:retornaContato" />
+  <wsdl:message name="retornaContatosSoapIn">
+    <wsdl:part name="parameters" element="tns:retornaContatos" />
   </wsdl:message>
-  <wsdl:message name="retornaContatoSoapOut">
-    <wsdl:part name="parameters" element="tns:retornaContatoResponse" />
+  <wsdl:message name="retornaContatosSoapOut">
+    <wsdl:part name="parameters" element="tns:retornaContatosResponse" />
   </wsdl:message>
-  <wsdl:message name="cadastraContatoSoapIn">
-    <wsdl:part name="parameters" element="tns:cadastraContato" />
+  <wsdl:message name="cadastraContatoPessoalSoapIn">
+    <wsdl:part name="parameters" element="tns:cadastraContatoPessoal" />
   </wsdl:message>
-  <wsdl:message name="cadastraContatoSoapOut">
-    <wsdl:part name="parameters" element="tns:cadastraContatoResponse" />
+  <wsdl:message name="cadastraContatoPessoalSoapOut">
+    <wsdl:part name="parameters" element="tns:cadastraContatoPessoalResponse" />
   </wsdl:message>
   <wsdl:message name="retornaContatoPessoalSoapIn">
     <wsdl:part name="parameters" element="tns:retornaContatoPessoal" />
@@ -133,44 +149,57 @@
   <wsdl:message name="retornaContatoPessoalSoapOut">
     <wsdl:part name="parameters" element="tns:retornaContatoPessoalResponse" />
   </wsdl:message>
-  <wsdl:message name="removeContatoSoapIn">
-    <wsdl:part name="parameters" element="tns:removeContato" />
+  <wsdl:message name="removeContatoPessoalSoapIn">
+    <wsdl:part name="parameters" element="tns:removeContatoPessoal" />
   </wsdl:message>
-  <wsdl:message name="removeContatoSoapOut">
-    <wsdl:part name="parameters" element="tns:removeContatoResponse" />
+  <wsdl:message name="removeContatoPessoalSoapOut">
+    <wsdl:part name="parameters" element="tns:removeContatoPessoalResponse" />
   </wsdl:message>
   <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="teste">
+      <wsdl:input message="tns:testeSoapIn" />
+      <wsdl:output message="tns:testeSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="verificaUsuario">
       <wsdl:input message="tns:verificaUsuarioSoapIn" />
       <wsdl:output message="tns:verificaUsuarioSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="cadastramento">
-      <wsdl:input message="tns:cadastramentoSoapIn" />
-      <wsdl:output message="tns:cadastramentoSoapOut" />
+    <wsdl:operation name="cadastraUsuario">
+      <wsdl:input message="tns:cadastraUsuarioSoapIn" />
+      <wsdl:output message="tns:cadastraUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="consultaUsuario">
       <wsdl:input message="tns:consultaUsuarioSoapIn" />
       <wsdl:output message="tns:consultaUsuarioSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="retornaContato">
-      <wsdl:input message="tns:retornaContatoSoapIn" />
-      <wsdl:output message="tns:retornaContatoSoapOut" />
+    <wsdl:operation name="retornaContatos">
+      <wsdl:input message="tns:retornaContatosSoapIn" />
+      <wsdl:output message="tns:retornaContatosSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="cadastraContato">
-      <wsdl:input message="tns:cadastraContatoSoapIn" />
-      <wsdl:output message="tns:cadastraContatoSoapOut" />
+    <wsdl:operation name="cadastraContatoPessoal">
+      <wsdl:input message="tns:cadastraContatoPessoalSoapIn" />
+      <wsdl:output message="tns:cadastraContatoPessoalSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="retornaContatoPessoal">
       <wsdl:input message="tns:retornaContatoPessoalSoapIn" />
       <wsdl:output message="tns:retornaContatoPessoalSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="removeContato">
-      <wsdl:input message="tns:removeContatoSoapIn" />
-      <wsdl:output message="tns:removeContatoSoapOut" />
+    <wsdl:operation name="removeContatoPessoal">
+      <wsdl:input message="tns:removeContatoPessoalSoapIn" />
+      <wsdl:output message="tns:removeContatoPessoalSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="teste">
+      <soap:operation soapAction="http://tempuri.org/teste" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="verificaUsuario">
       <soap:operation soapAction="http://tempuri.org/verificaUsuario" style="document" />
       <wsdl:input>
@@ -180,8 +209,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="cadastramento">
-      <soap:operation soapAction="http://tempuri.org/cadastramento" style="document" />
+    <wsdl:operation name="cadastraUsuario">
+      <soap:operation soapAction="http://tempuri.org/cadastraUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -198,8 +227,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="retornaContato">
-      <soap:operation soapAction="http://tempuri.org/retornaContato" style="document" />
+    <wsdl:operation name="retornaContatos">
+      <soap:operation soapAction="http://tempuri.org/retornaContatos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -207,8 +236,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="cadastraContato">
-      <soap:operation soapAction="http://tempuri.org/cadastraContato" style="document" />
+    <wsdl:operation name="cadastraContatoPessoal">
+      <soap:operation soapAction="http://tempuri.org/cadastraContatoPessoal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -225,8 +254,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="removeContato">
-      <soap:operation soapAction="http://tempuri.org/removeContato" style="document" />
+    <wsdl:operation name="removeContatoPessoal">
+      <soap:operation soapAction="http://tempuri.org/removeContatoPessoal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -237,6 +266,15 @@
   </wsdl:binding>
   <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="teste">
+      <soap12:operation soapAction="http://tempuri.org/teste" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="verificaUsuario">
       <soap12:operation soapAction="http://tempuri.org/verificaUsuario" style="document" />
       <wsdl:input>
@@ -246,8 +284,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="cadastramento">
-      <soap12:operation soapAction="http://tempuri.org/cadastramento" style="document" />
+    <wsdl:operation name="cadastraUsuario">
+      <soap12:operation soapAction="http://tempuri.org/cadastraUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -264,8 +302,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="retornaContato">
-      <soap12:operation soapAction="http://tempuri.org/retornaContato" style="document" />
+    <wsdl:operation name="retornaContatos">
+      <soap12:operation soapAction="http://tempuri.org/retornaContatos" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -273,8 +311,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="cadastraContato">
-      <soap12:operation soapAction="http://tempuri.org/cadastraContato" style="document" />
+    <wsdl:operation name="cadastraContatoPessoal">
+      <soap12:operation soapAction="http://tempuri.org/cadastraContatoPessoal" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -291,8 +329,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="removeContato">
-      <soap12:operation soapAction="http://tempuri.org/removeContato" style="document" />
+    <wsdl:operation name="removeContatoPessoal">
+      <soap12:operation soapAction="http://tempuri.org/removeContatoPessoal" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -303,10 +341,10 @@
   </wsdl:binding>
   <wsdl:service name="Service1">
     <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
-      <soap:address location="http://localhost:64020/Service1.asmx" />
+      <soap:address location="http://localhost:51664/Service1.asmx" />
     </wsdl:port>
     <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
-      <soap12:address location="http://localhost:64020/Service1.asmx" />
+      <soap12:address location="http://localhost:51664/Service1.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -15,7 +15,7 @@ namespace inicio
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new form_inicial());
+            Application.Run(new inicio());
         }
     }
 }
