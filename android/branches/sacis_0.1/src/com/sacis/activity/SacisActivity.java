@@ -22,4 +22,9 @@ public class SacisActivity extends Activity {
 				SysAdminActivity.class);
 		startActivityForResult(sysAdminIntent, 0);
 	}
+	
+	public void showUSerView(View view)
+	{
+		
+	}
 }

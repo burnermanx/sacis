@@ -23,10 +23,10 @@ import org.json.JSONException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-public class DBConnectorUtils {
-	private final static String SERVER_URL = "http://www.sacis.com.br/";
+public class DBConnector {
+	private final static String SERVER_URL = "http://www.sacis.com.br/php/";
 
-	public DBConnectorUtils() {
+	public DBConnector() {
 
 	}
 

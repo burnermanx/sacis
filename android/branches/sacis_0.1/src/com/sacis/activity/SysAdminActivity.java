@@ -15,8 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.sacis.utils.AdminFormUtils;
-import com.sacis.utils.DBConnectorUtils;
+import com.sacis.utils.UserDAO;
+import com.sacis.utils.DBConnector;
 import com.sacis.utils.ToastUtils;
 
 /**
@@ -63,7 +63,7 @@ public class SysAdminActivity extends Activity
 	 * */
 	public void sendInfoToServer(View view)
 	{
-		if (AdminFormUtils.isDataValid())
+		if (UserDAO.isDataValid())
 		{
 			String loginText = getLoginEditText().getText().toString();
 			String password = getPasswordEditText().getText().toString();
@@ -71,7 +71,7 @@ public class SysAdminActivity extends Activity
 			String name = getNameEditText().getText().toString();
 			String expiration = getExpireEditText().getText().toString();
 			ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-			if (DBConnectorUtils.isOnline(cm))
+			if (DBConnector.isOnline(cm))
 			{
 				String[] params = { loginText, password, key, name, expiration };
 				new SendDataTask().execute(params);
@@ -202,20 +202,20 @@ public class SysAdminActivity extends Activity
 			boolean userExist;
 			try
 			{
-				userExist = AdminFormUtils.isUserExist(params[0]);
+				userExist = UserDAO.isUserExist(params[0]);
 				if (userExist)
 				{
 					return false;
 				} else
 				{
 					publishProgress("Enviando dados...");
-					String response = AdminFormUtils.insertUser(params[0], params[1], params[2],
+					String response = UserDAO.insertUser(params[0], params[1], params[2],
 							params[3], params[4]);
 					final String successMessage = "User added.";
 					System.out.println(response);
 					if (successMessage.equals(response))
 					{
-						DBConnectorUtils.fileUpload(params[0], getKeyEditText().toString());
+						DBConnector.fileUpload(params[0], getKeyEditText().toString());
 					}
 				}
 			} catch (IOException ex)
