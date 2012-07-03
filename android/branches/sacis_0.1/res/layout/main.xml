@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:weightSum="1" android:orientation="vertical">
-    <TextView android:layout_height="0dip" android:text="@string/choose_system" android:id="@+id/textView1" android:layout_marginTop="18dp" android:layout_weight="0.01" android:layout_width="wrap_content" android:layout_gravity="center"></TextView>
-    <Button android:text="@string/sys_admin" android:layout_height="wrap_content" android:clickable="true" android:layout_marginTop="48dp" android:layout_width="188dp" android:layout_gravity="center" android:enabled="true" android:onClick="showAdminView" android:id="@+id/sys_admin"></Button>
-    <Button android:text="@string/sys_user" android:layout_height="wrap_content" android:layout_marginTop="48dp" android:layout_width="185dp" android:layout_gravity="center" android:clickable="true" android:enabled="false" android:id="@+id/sys_user"></Button>
-</LinearLayout>
