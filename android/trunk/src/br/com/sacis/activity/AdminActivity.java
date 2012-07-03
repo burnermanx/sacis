@@ -17,8 +17,9 @@ import android.widget.EditText;
 import br.com.sacis.AdminFormValidator;
 import br.com.sacis.R;
 import br.com.sacis.model.InsertUserParameter;
-import br.com.sacis.service.DataSender;
+import br.com.sacis.service.ConnectionService;
 import br.com.sacis.service.ToastService;
+import br.com.sacis.service.UserService;
 
 /**
  * Proposito da classe: TODO: explicar proposito da classe
@@ -73,10 +74,11 @@ public class AdminActivity extends Activity
 			String name = getNameEditText().getText().toString();
 			String expiration = getExpireEditText().getText().toString();
 			ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-			if (new DataSender().isOnline(cm))
+			if (new ConnectionService().isOnline(cm))
 			{
 				String[] params = { loginText, password, key, name, expiration };
-				new SendDataTask().execute(params);
+				sendData = new SendDataTask();
+				sendData.execute(params);
 			} else
 			{
 				makeToast("Sem conexão com a internet!");
@@ -204,29 +206,28 @@ public class AdminActivity extends Activity
 			boolean userExist;
 			try
 			{
-				AdminFormValidator validator = new AdminFormValidator();
-				userExist = validator.isUserRegistered(params[0]);
+				UserService service = new UserService();
+				userExist = service.isUserRegistered(params[0]);
 				if (userExist)
 				{
 					return false;
 				} else
 				{
 					publishProgress("Enviando dados...");
-					String response = validator
-							.insertUser(new InsertUserParameter(params[0],
-									params[1], params[2], params[3], params[4]));
+					InsertUserParameter p = new InsertUserParameter(params[0],
+							params[1], params[2], params[3], params[4]);
+					String response = service.insertUser(p);
 					System.out.println(response);
+					return true;
 				}
 			} catch (IOException ex)
 			{
 				Log.e("[DBConnector]", ex.getMessage(), ex);
-				return false;
 			} catch (JSONException ex)
 			{
 				Log.e("[DBConnector]", ex.getMessage(), ex);
-				return false;
 			}
-			return true;
+			return false;
 		}
 
 		@Override

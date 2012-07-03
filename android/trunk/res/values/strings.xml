@@ -13,4 +13,5 @@
     <string name="sys_admin_send">Enviar</string>
     <string name="user_breadcrumb">Sacis > User</string>
     <string name="sys_admin_breadcrumb">Sacis > Admin</string>
+    <string name="fileChooser">Escolher arquivos</string>
 </resources>
