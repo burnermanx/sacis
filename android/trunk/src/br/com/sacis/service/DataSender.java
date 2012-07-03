@@ -12,9 +12,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-
 public class DataSender
 {
 	private final static String SERVER_URL = "http://www.sacis.com.br/";
@@ -50,15 +47,4 @@ public class DataSender
 		}
 	}
 
-	/**
-	 * Método para verificar se existe conexão com a internet.
-	 * */
-	public boolean isOnline(ConnectivityManager cm) {
-	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-	        return true;
-	    }
-	    return false;
-	}	
-	
 }
