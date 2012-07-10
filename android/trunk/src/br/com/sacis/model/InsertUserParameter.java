@@ -2,7 +2,8 @@ package br.com.sacis.model;
 
 /**
  * Proposito da classe: TODO: explicar proposito da classe
- * @author  Davi - since 02/07/2012
+ * 
+ * @author Davi - since 02/07/2012
  */
 public class InsertUserParameter
 {
@@ -49,7 +50,8 @@ public class InsertUserParameter
 	}
 
 	/**
-	 * @param login the login to set
+	 * @param login
+	 *            the login to set
 	 */
 	public void setLogin(String login)
 	{
@@ -65,7 +67,8 @@ public class InsertUserParameter
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password)
 	{
@@ -81,7 +84,8 @@ public class InsertUserParameter
 	}
 
 	/**
-	 * @param keyPath the keyPath to set
+	 * @param keyPath
+	 *            the keyPath to set
 	 */
 	public void setKeyPath(String keyPath)
 	{
@@ -97,7 +101,8 @@ public class InsertUserParameter
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name)
 	{
@@ -113,7 +118,8 @@ public class InsertUserParameter
 	}
 
 	/**
-	 * @param expiration the expiration to set
+	 * @param expiration
+	 *            the expiration to set
 	 */
 	public void setExpiration(String expiration)
 	{
