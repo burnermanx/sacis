@@ -6,6 +6,7 @@ import org.json.JSONException;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -70,6 +71,7 @@ public class UserLoginActivity extends Activity
 	 */
 	public void sendLoginInfoToServer(View view)
 	{
+		//callFileChooserActivity(view);
 		String login = getLoginEditText(), password = getPasswordEditText();
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 		if (new ConnectionService().isOnline(cm))
@@ -82,6 +84,14 @@ public class UserLoginActivity extends Activity
 		{
 			makeToast("Sem conexão com a internet!");
 		}
+	}
+	
+	@SuppressWarnings("unused")
+	private void callFileChooserActivity(View view)
+	{
+		Intent intent = new Intent(view.getContext(),
+				FileChooserActivity.class);
+		startActivityForResult(intent, 0);
 	}
 	
 	private class SendDataTask extends AsyncTask<String, String, Boolean>
