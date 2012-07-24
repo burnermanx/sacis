@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import br.com.sacis.AdminFormValidator;
 import br.com.sacis.R;
+import br.com.sacis.crypto.Hash;
 import br.com.sacis.model.InsertUserParameter;
 import br.com.sacis.service.ConnectionService;
 import br.com.sacis.service.ToastService;
@@ -69,7 +70,7 @@ public class AdminActivity extends Activity
 		if (validator.isDataValid())
 		{
 			String loginText = getLoginEditText().getText().toString();
-			String password = getPasswordEditText().getText().toString();
+			String password = new Hash().makeHash(getPasswordEditText().getText().toString());
 			String key = getKeyEditText().getText().toString();
 			String name = getNameEditText().getText().toString();
 			String expiration = getExpireEditText().getText().toString();
