@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sacis.com.br/"
+	xmlns="http://www.sacis.com.br/" elementFormDefault="qualified">
+	<xs:element name="name" type="xs:string" />
+	
+	<xs:element name="user">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="name" />
+				<xs:element name="password" type="xs:string" />
+				<xs:element name="login" type="xs:string" />
+				<xs:element name="chave" type="xs:string" />
+				<xs:element name="validity" type="xs:string" />
+				<xs:element name="permission" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="contact">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="name" />
+				<xs:element name="email" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="attachment">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="name" />
+				<xs:element name="crypt" type="xs:boolean" />
+				<xs:element name="key" type="xs:string" />
+				<xs:element name="content" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="message">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="from" type="xs:string" />
+				<xs:element name="to" type="xs:string" />
+				<xs:element name="subject" type="xs:string" />
+				<xs:element name="body" type="xs:string" />
+				<xs:element name="textKey" type="xs:string" />
+				<xs:element name="signature" type="xs:string" />
+				<xs:element name="encrypt" type="xs:boolean" />
+				<xs:element name="sign" type="xs:boolean" />
+				<xs:element ref="attachment" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
