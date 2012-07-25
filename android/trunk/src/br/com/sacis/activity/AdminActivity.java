@@ -1,10 +1,11 @@
 package br.com.sacis.activity;
 
+import greendroid.app.GDActivity;
+
 import java.io.IOException;
 
 import org.json.JSONException;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -27,7 +28,7 @@ import br.com.sacis.service.UserService;
  * 
  * @author Davi - since 25/01/2012
  */
-public class AdminActivity extends Activity
+public class AdminActivity extends GDActivity
 {
 
 	private final int AttachFileRequestCode = 0;
@@ -41,7 +42,8 @@ public class AdminActivity extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.sys_admin);
+		setActionBarContentView(R.layout.sys_admin);
+		setTitle("Cadastro de Usuario");
 		getKeyEditText().setKeyListener(null);
 	}
 
@@ -73,11 +75,10 @@ public class AdminActivity extends Activity
 			String password = new Hash().makeHash(getPasswordEditText().getText().toString());
 			String key = getKeyEditText().getText().toString();
 			String name = getNameEditText().getText().toString();
-			String expiration = getExpireEditText().getText().toString();
 			ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 			if (new ConnectionService().isOnline(cm))
 			{
-				String[] params = { loginText, password, key, name, expiration };
+				String[] params = { loginText, password, key, name };
 				sendData = new SendDataTask();
 				sendData.execute(params);
 			} else
@@ -92,7 +93,7 @@ public class AdminActivity extends Activity
 
 	private void makeToast(final String toastMessage)
 	{
-		ToastService.makeToast(this, toastMessage);
+		ToastService.makeToast(getApplicationContext(), toastMessage);
 	}
 
 	/**
@@ -179,16 +180,6 @@ public class AdminActivity extends Activity
 	}
 
 	/**
-	 * Obtém a editText da validade.
-	 * 
-	 * @return {@link EditText}
-	 * */
-	private EditText getExpireEditText()
-	{
-		return (EditText) this.findViewById(R.id.expireEditText);
-	}
-
-	/**
 	 * Classe para executar em paralelo o envio.
 	 **/
 	private class SendDataTask extends AsyncTask<String, String, Boolean>
@@ -203,7 +194,7 @@ public class AdminActivity extends Activity
 		@Override
 		protected Boolean doInBackground(String... params)
 		{
-			/* { loginText, password, key, name, expiration } */
+			/* { loginText, password, key, name } */
 			boolean userExist;
 			try
 			{
@@ -216,7 +207,7 @@ public class AdminActivity extends Activity
 				{
 					publishProgress("Enviando dados...");
 					InsertUserParameter p = new InsertUserParameter(params[0],
-							params[1], params[2], params[3], params[4]);
+							params[1], params[2], params[3]);
 					String response = service.insertUser(p);
 					System.out.println(response);
 					return true;

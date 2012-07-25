@@ -3,6 +3,7 @@ package br.com.sacis.activity;
 import br.com.sacis.R;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -23,5 +24,14 @@ public class FileChooserActivity extends Activity
 	private ListView getListView()
 	{
 		return (ListView) this.findViewById(R.id.fileChooserListView);
+	}
+	
+	/**
+	 * Acao ao clicar no botao de escolher arquivo
+	 * @param view
+	 */
+	public void chooseFile(View view)
+	{
+		
 	}
 }

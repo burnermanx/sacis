@@ -16,12 +16,12 @@
 
         <TextView
             android:id="@+id/textView1"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="12dp"
             android:layout_marginTop="12dp"
-            android:layout_weight="0.01"
+            android:gravity="center"
             android:text="@string/sys_admin_enter_data" />
 
         <RelativeLayout
@@ -43,7 +43,7 @@
                 android:layout_width="218dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/nameTextView"
+                android:layout_marginLeft="70dp"
                 android:inputType="textPersonName" >
             </EditText>
         </RelativeLayout>
@@ -67,7 +67,7 @@
                 android:layout_width="218dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/loginTextView"
+                android:layout_marginLeft="70dp"
                 android:inputType="text" />
         </RelativeLayout>
 
@@ -91,7 +91,8 @@
                 android:layout_width="218dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/passwordTextView"
+                android:layout_marginLeft="70dp"
+                android:ems="10"
                 android:inputType="textPassword" >
             </EditText>
         </RelativeLayout>
@@ -101,24 +102,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/expireTextView"
-                android:layout_width="63dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/sys_admin_expire" >
-            </TextView>
-
-            <EditText
-                android:id="@+id/expireEditText"
-                android:layout_width="218dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/expireTextView"
-                android:inputType="date" >
-            </EditText>
         </RelativeLayout>
 
         <RelativeLayout
@@ -129,7 +112,7 @@
 
             <Button
                 android:id="@+id/keyButton"
-                android:layout_width="63dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
@@ -141,10 +124,10 @@
                 android:id="@+id/keyEditText"
                 android:layout_width="218dp"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/keyButton"
-                android:inputType="date" >
-            </EditText>
+                android:ems="10"
+                android:inputType="date" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -171,14 +154,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.01"
             android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/breadCrumbTextView"
-                android:layout_width="92dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="@string/sys_admin_breadcrumb" />
         </RelativeLayout>
     </LinearLayout>
 
