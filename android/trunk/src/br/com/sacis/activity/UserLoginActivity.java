@@ -1,10 +1,11 @@
 package br.com.sacis.activity;
 
+import greendroid.app.GDActivity;
+
 import java.io.IOException;
 
 import org.json.JSONException;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -18,20 +19,23 @@ import br.com.sacis.service.ConnectionService;
 import br.com.sacis.service.ToastService;
 import br.com.sacis.service.UserService;
 
-public class UserLoginActivity extends Activity
+public class UserLoginActivity extends GDActivity
 {
 	private ProgressDialog progressDialog;
-	
+
 	private SendDataTask sendData;
-	
+
+	private boolean bypassSend = true;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.user_login);
+		setActionBarContentView(R.layout.user_login);
+		setTitle("Acesso ao Sistema");
 	}
-	
+
 	/** Called when the activity is going to be destroyed. */
 	@Override
 	public void onPause()
@@ -45,55 +49,58 @@ public class UserLoginActivity extends Activity
 		{
 			sendData.cancel(true);
 			sendData = null;
-		}		
+		}
 	}
-	
+
 	private String getLoginEditText()
 	{
-		return ((EditText) this.findViewById(R.id.userLoginEditText)).getText().toString();
+		return ((EditText) this.findViewById(R.id.userLoginEditText)).getText()
+				.toString();
 	}
-	
+
 	private String getPasswordEditText()
 	{
-		return ((EditText) this.findViewById(R.id.userPasswordEditText)).getText().toString();
+		return ((EditText) this.findViewById(R.id.userPasswordEditText))
+				.getText().toString();
 	}
-	
-	
-	
+
 	private void makeToast(final String toastMessage)
 	{
-		ToastService.makeToast(this, toastMessage);
+		ToastService.makeToast(getApplicationContext(), toastMessage);
 	}
-	
+
 	/**
 	 * Ação ao clicar no botão de enviar dados.
+	 * 
 	 * @param view
 	 */
 	public void sendLoginInfoToServer(View view)
 	{
-		//callFileChooserActivity(view);
-		String login = getLoginEditText(), password = getPasswordEditText();
-		ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-		if (new ConnectionService().isOnline(cm))
+		if (bypassSend)
 		{
-			String[] params = { login, password };
-			sendData = new SendDataTask();
-			sendData.execute(params);
-		}
-		else
+			callFileChooserActivity(view);
+		} else
 		{
-			makeToast("Sem conexão com a internet!");
+			String login = getLoginEditText(), password = getPasswordEditText();
+			ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+			if (new ConnectionService().isOnline(cm))
+			{
+				String[] params = { login, password };
+				sendData = new SendDataTask();
+				sendData.execute(params);
+			} else
+			{
+				makeToast("Sem conexão com a internet!");
+			}
 		}
 	}
-	
-	@SuppressWarnings("unused")
+
 	private void callFileChooserActivity(View view)
 	{
-		Intent intent = new Intent(view.getContext(),
-				FileChooserActivity.class);
+		Intent intent = new Intent(view.getContext(), UserSystemActivity.class);
 		startActivityForResult(intent, 0);
 	}
-	
+
 	private class SendDataTask extends AsyncTask<String, String, Boolean>
 	{
 		@Override
@@ -102,8 +109,7 @@ public class UserLoginActivity extends Activity
 			progressDialog = ProgressDialog.show(UserLoginActivity.this,
 					"Enviando dados", "Verificando login...", true);
 		}
-		
-		
+
 		@Override
 		protected Boolean doInBackground(String... arg)
 		{
@@ -117,10 +123,10 @@ public class UserLoginActivity extends Activity
 			{
 				Log.e("[DBConnector]", ex.getMessage(), ex);
 			}
-			
+
 			return false;
 		}
-		
+
 		@Override
 		protected void onPostExecute(Boolean userExist)
 		{
@@ -131,6 +137,6 @@ public class UserLoginActivity extends Activity
 				makeToast("Login não existente ou senha incorreta!");
 			}
 		}
-		
+
 	}
 }

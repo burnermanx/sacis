@@ -1,12 +1,12 @@
 package br.com.sacis.service;
 
-import android.app.Activity;
+import android.content.Context;
 import android.widget.Toast;
 
 public class ToastService {
 	
-	public static void makeToast(final Activity activity, final String message)
+	public static void makeToast(final Context context, final String message)
 	{
-		Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+		Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 	}
 }

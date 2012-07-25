@@ -140,8 +140,6 @@ public class UserService
 				.getPassword()));
 		dataToSend
 				.add(new BasicNameValuePair("name", parameterObject.getName()));
-		dataToSend.add(new BasicNameValuePair("expiration", parameterObject
-				.getExpiration()));
 		return dataToSend;
 	}
 }

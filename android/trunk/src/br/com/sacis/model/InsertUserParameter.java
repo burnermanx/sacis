@@ -26,19 +26,16 @@ public class InsertUserParameter
 	/**
 	 * 
 	 */
-	private String expiration;
-
 	/**
 	 * 
 	 */
 	public InsertUserParameter(String login, String password, String keyPath,
-			String name, String expiration)
+			String name)
 	{
 		this.login = login;
 		this.password = password;
 		this.keyPath = keyPath;
 		this.name = name;
-		this.expiration = expiration;
 	}
 
 	/**
@@ -109,20 +106,4 @@ public class InsertUserParameter
 		this.name = name;
 	}
 
-	/**
-	 * @return the expiration
-	 */
-	public String getExpiration()
-	{
-		return expiration;
-	}
-
-	/**
-	 * @param expiration
-	 *            the expiration to set
-	 */
-	public void setExpiration(String expiration)
-	{
-		this.expiration = expiration;
-	}
 }

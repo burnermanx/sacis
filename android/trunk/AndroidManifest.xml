@@ -13,18 +13,18 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.GDCatalog"
         android:name="SacisApp">
-        <activity android:name=".activity.SacisActivity" />
-        <activity android:name=".activity.AdminActivity" />
-        <activity android:name=".activity.UserLoginActivity" />
+        <activity android:name=".activity.AdminActivity" android:configChanges="orientation" />
+        <activity android:name=".activity.UserLoginActivity" android:configChanges="orientation" />
         <activity
             android:name=".activity.SacisMainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.FileChooserActivity"></activity>
+        <activity android:name=".activity.UserSystemActivity"></activity>
         
     </application>
 
