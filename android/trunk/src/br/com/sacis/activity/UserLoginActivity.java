@@ -78,7 +78,7 @@ public class UserLoginActivity extends GDActivity
 	{
 		if (bypassSend)
 		{
-			callFileChooserActivity(view);
+			showUserSystemActivity(view);
 		} else
 		{
 			String login = getLoginEditText(), password = getPasswordEditText();
@@ -95,7 +95,7 @@ public class UserLoginActivity extends GDActivity
 		}
 	}
 
-	private void callFileChooserActivity(View view)
+	private void showUserSystemActivity(View view)
 	{
 		Intent intent = new Intent(view.getContext(), UserSystemActivity.class);
 		startActivityForResult(intent, 0);
