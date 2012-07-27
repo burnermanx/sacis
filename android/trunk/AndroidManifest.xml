@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".activity.FileChooserActivity"></activity>
         <activity android:name=".activity.UserSystemActivity"></activity>
+        <activity android:name=".activity.FileTabActivity"></activity>
         
     </application>
 
