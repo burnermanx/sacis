@@ -19,7 +19,7 @@ public class UserSystemActivity extends GDActivity
 	
 	public void showFileActivity(View view)
 	{
-		Intent intent = new Intent(view.getContext(), FileChooserActivity.class);
+		Intent intent = new Intent(view.getContext(), FileTabActivity.class);
 		startActivityForResult(intent, 0);
 	}
 	
