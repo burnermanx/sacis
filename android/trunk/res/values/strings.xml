@@ -11,4 +11,8 @@
     <string name="sys_admin_key">Chave</string>
     <string name="sys_admin_send">Enviar</string>
     <string name="fileChooser">Escolher arquivos</string>
+    <string name="user_message">mensagem</string>
+    <string name="user_encrypt_files">encrypt files</string>
+    <string name="sys_message">Sistema de Mensagens</string>
+    <string name="sys_files">Sistema de Arquivos</string>
 </resources>

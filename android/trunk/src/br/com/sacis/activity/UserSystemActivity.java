@@ -1,24 +1,31 @@
 package br.com.sacis.activity;
 
+import br.com.sacis.R;
+import greendroid.app.GDActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import greendroid.app.GDTabActivity;
+import android.view.View;
 
-public class UserSystemActivity extends GDTabActivity
+public class UserSystemActivity extends GDActivity
 {
-	private static final String TAB1 = "crypt";
-    private static final String TAB2 = "decrypt";
-    private static final String TAB3 = "messages";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setTitle("Sistema do Usuario");
-		Intent intent = new Intent(this, FileChooserActivity.class);
-		addTab(TAB1, "Criptografar", intent);
-		addTab(TAB2, "Descriptografar", intent);
-		addTab(TAB3, "Mensagens", intent);
+		setActionBarContentView(R.layout.user_system);
+	}
+	
+	public void showFileActivity(View view)
+	{
+		Intent intent = new Intent(view.getContext(), FileChooserActivity.class);
+		startActivityForResult(intent, 0);
+	}
+	
+	public void showMessageActivity(View view)
+	{
+		
 	}
 }
 
