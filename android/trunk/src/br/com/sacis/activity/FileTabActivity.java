@@ -15,7 +15,7 @@ public class FileTabActivity extends GDTabActivity
 		super.onCreate(savedInstanceState);
 		setTitle("Sistema de Arquivos");
 		Intent intent = new Intent(getApplicationContext(), FileChooserActivity.class);
-		addTab(TAB1, "Criptografar", intent);
-		addTab(TAB2, "Descriptografar", intent);
+		addTab(TAB1, "Criptografia", intent);
+		addTab(TAB2, "Descriptografia", intent);
 	}
 }
