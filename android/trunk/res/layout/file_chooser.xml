@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relativeLayout1"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="406dp"
-    android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/fileChooserButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/fileChooser" >
-    </Button>
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="8dp" >
 
     <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/fileChooserButton" >
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-        <ListView
-            android:id="@+id/fileChooserListView"
+        <Button
+            android:id="@+id/fileChooserButton"
             android:layout_width="wrap_content"
-            android:layout_height="240dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="chooseFile"
+            android:text="@string/fileChooser" >
+        </Button>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true" >
-        </ListView>
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/fileChooserButton" >
+
+            <ListView
+                android:id="@+id/fileChooserListView"
+                android:layout_width="wrap_content"
+                android:layout_height="240dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true" >
+            </ListView>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/cryptActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fileChooserButton"
+            android:layout_alignRight="@+id/fileChooserButton"
+            android:layout_below="@+id/relativeLayout2"
+            android:text="@string/file_chooser_save"
+            android:onClick="saveFiles" />
     </RelativeLayout>
-</RelativeLayout>
+
+</ScrollView>
