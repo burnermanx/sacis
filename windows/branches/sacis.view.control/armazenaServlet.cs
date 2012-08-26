@@ -17,6 +17,7 @@ namespace sacis.view.control
 {
     public class armazenaServlet
     {
+        private static string MSG_PASTA_DESTINO = "Selecione uma pasta de destino!";
 
         ///<summary>
         ///
@@ -44,37 +45,73 @@ namespace sacis.view.control
 
         ///<summary>
         ///
-        /// Método que armazena o arquivo desejado selecionando o tipo de armazenamento de arquivo 
-        /// a ser feito através do inteiro (1 para cifrar ou 2 para decifrar), manipulando a string passada
-        /// contendo o caminho do arquivo completo incluindo o nome dele e sua extensão e a string 
-        /// passada contendo o caminho de destino do arquivo.
+        /// Método para cifrar arquivo
         /// 
         /// Retorna excecao: Erro de leitura ou gravação de arquivo
         /// 
         ///</summary>
-        public static void armazenaArquivo(string origem, string destino, int flag) 
-        {
+        public static void criptoArquivo(string origem, string destino, string chave) {
+
             try
             {
                 string arquivo = manipulaString.retornaNomeArquivo(origem);
-                string conteudo = manipulaArquivo.leArquivo(origem);
+                string novoArquivo = manipulaString.mudaExtensaoArquivo(arquivo);
+                string destinoFinal = pastaDestino(destino, novoArquivo);
+
+                byte[] conteudoByte = manipulaArquivo.arquivoLeOriginal(origem);
+                string conteudo = serial.serializarObjeto(conteudoByte);               
+                string conteudoCifrado = simetrica.cifraArquivosLocais(chave, conteudo);
+
+                manipulaArquivo.criaArquivoTexto(destinoFinal, conteudoCifrado);
+                
+            }
+            catch (excecao except)
+            {
+                throw except;
+            }
+
+        }
+
+        ///<summary>
+        ///
+        /// Método para decifrar arquivo
+        /// 
+        /// Retorna excecao: Erro de leitura ou gravação de arquivo e de criptografia
+        /// 
+        ///</summary>
+        public static void descriptoArquivo(string origem, string destino, string chave) {
+
+            try
+            {
+                string arquivo = manipulaString.retornaNomeArquivo(origem);
+                string novoArquivo = manipulaString.recuperaNomeOriginalArquivo(arquivo);
+                string destinoFinal = pastaDestino(destino, novoArquivo);
+
+                string conteudoCifrado = manipulaArquivo.leArquivoTexto(origem);                
+                string conteudo = simetrica.decifraArquivosLocais(chave, conteudoCifrado);
+                byte[] conteudoByte = serial.Deserializar(conteudo, typeof(byte[])) as byte[]; 
+               
+                manipulaArquivo.arquivoCriaOriginal(destinoFinal, conteudoByte);
+
+            }
+            catch (excecao except)
+            {
+                throw except;
+
+            }            
+        
+        }
+
+        ///<summary>
+        ///
+        /// Método para criar arquivo local
+        /// 
+        ///</summary>
+        private static string pastaDestino(string destino, string novoArquivo) {
+                        
+            try{  
 
                 string pastaDestino;
-                string novoArquivo = null;                              
-                string conteudoFinal;
-
-                if (flag == 1) {
-                    
-                    novoArquivo = manipulaString.mudaExtensaoArquivo(arquivo);
-                    // conteudoFinal = (metodo _criptografar passando conteudo do arquivo e retornado conteudo cifrado)
-                
-                }
-                else if (flag == 2) {
-
-                    novoArquivo = manipulaString.recuperaNomeOriginalArquivo(arquivo);
-                    // conteudoFinal = (metodo descriptografar passando conteudo do arquivo e retornado conteudo decifrado)
-
-                }
 
                 if (destino.Length > 4)
                 {
@@ -82,16 +119,18 @@ namespace sacis.view.control
                 }
                 else
                 {
-                    pastaDestino = destino + novoArquivo;                
+                    pastaDestino = destino + novoArquivo;
                 }
-                
-                manipulaArquivo.criaArquivo(pastaDestino, conteudo);
- 
+
+                return pastaDestino;
+
+            } catch (NullReferenceException nre) {
+
+                throw new excecao(MSG_PASTA_DESTINO);
+            
             }
-            catch (excecao except)
-            {                
-                throw except;
-            }     
+
         }
+    
     }
 }

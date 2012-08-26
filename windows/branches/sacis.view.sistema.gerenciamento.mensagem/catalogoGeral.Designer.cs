@@ -28,36 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.catalogo_DataGridView = new System.Windows.Forms.DataGridView();
+            this.catalogoDataGridView = new System.Windows.Forms.DataGridView();
             this.coluna_nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.coluna_email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.coluna_adicionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.adiciona_botao = new System.Windows.Forms.Button();
-            this.cancelar_Botao = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.catalogo_DataGridView)).BeginInit();
+            this.adicionaBotao = new System.Windows.Forms.Button();
+            this.cancelarBotao = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.catalogoDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // catalogo_DataGridView
+            // catalogoDataGridView
             // 
-            this.catalogo_DataGridView.AllowUserToAddRows = false;
-            this.catalogo_DataGridView.AllowUserToDeleteRows = false;
-            this.catalogo_DataGridView.AllowUserToOrderColumns = true;
-            this.catalogo_DataGridView.AllowUserToResizeColumns = false;
-            this.catalogo_DataGridView.AllowUserToResizeRows = false;
-            this.catalogo_DataGridView.BackgroundColor = System.Drawing.SystemColors.Menu;
-            this.catalogo_DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.catalogo_DataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.catalogoDataGridView.AllowUserToAddRows = false;
+            this.catalogoDataGridView.AllowUserToDeleteRows = false;
+            this.catalogoDataGridView.AllowUserToOrderColumns = true;
+            this.catalogoDataGridView.AllowUserToResizeColumns = false;
+            this.catalogoDataGridView.AllowUserToResizeRows = false;
+            this.catalogoDataGridView.BackgroundColor = System.Drawing.SystemColors.Menu;
+            this.catalogoDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.catalogoDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.coluna_nome,
             this.coluna_email,
             this.coluna_adicionar});
-            this.catalogo_DataGridView.Location = new System.Drawing.Point(8, 10);
-            this.catalogo_DataGridView.Name = "catalogo_DataGridView";
-            this.catalogo_DataGridView.RowHeadersVisible = false;
-            this.catalogo_DataGridView.RowHeadersWidth = 21;
-            this.catalogo_DataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.catalogo_DataGridView.Size = new System.Drawing.Size(424, 213);
-            this.catalogo_DataGridView.TabIndex = 10;
-            this.catalogo_DataGridView.Visible = false;
+            this.catalogoDataGridView.Location = new System.Drawing.Point(8, 10);
+            this.catalogoDataGridView.Name = "catalogoDataGridView";
+            this.catalogoDataGridView.RowHeadersVisible = false;
+            this.catalogoDataGridView.RowHeadersWidth = 21;
+            this.catalogoDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.catalogoDataGridView.Size = new System.Drawing.Size(424, 213);
+            this.catalogoDataGridView.TabIndex = 10;
+            this.catalogoDataGridView.Visible = false;
             // 
             // coluna_nome
             // 
@@ -79,46 +79,46 @@
             this.coluna_adicionar.Name = "coluna_adicionar";
             this.coluna_adicionar.Width = 70;
             // 
-            // adiciona_botao
+            // adicionaBotao
             // 
-            this.adiciona_botao.Location = new System.Drawing.Point(130, 232);
-            this.adiciona_botao.Name = "adiciona_botao";
-            this.adiciona_botao.Size = new System.Drawing.Size(75, 23);
-            this.adiciona_botao.TabIndex = 11;
-            this.adiciona_botao.Text = "Adicionar";
-            this.adiciona_botao.UseVisualStyleBackColor = true;
-            this.adiciona_botao.Click += new System.EventHandler(this.adicionaBotao_Click);
+            this.adicionaBotao.Location = new System.Drawing.Point(130, 232);
+            this.adicionaBotao.Name = "adicionaBotao";
+            this.adicionaBotao.Size = new System.Drawing.Size(75, 23);
+            this.adicionaBotao.TabIndex = 11;
+            this.adicionaBotao.Text = "Adicionar";
+            this.adicionaBotao.UseVisualStyleBackColor = true;
+            this.adicionaBotao.Click += new System.EventHandler(this.adicionaBotaoClick);
             // 
-            // cancelar_Botao
+            // cancelarBotao
             // 
-            this.cancelar_Botao.Location = new System.Drawing.Point(242, 232);
-            this.cancelar_Botao.Name = "cancelar_Botao";
-            this.cancelar_Botao.Size = new System.Drawing.Size(75, 23);
-            this.cancelar_Botao.TabIndex = 12;
-            this.cancelar_Botao.Text = "Sair";
-            this.cancelar_Botao.UseVisualStyleBackColor = true;
-            this.cancelar_Botao.Click += new System.EventHandler(this.cancela_Click);
+            this.cancelarBotao.Location = new System.Drawing.Point(242, 232);
+            this.cancelarBotao.Name = "cancelarBotao";
+            this.cancelarBotao.Size = new System.Drawing.Size(75, 23);
+            this.cancelarBotao.TabIndex = 12;
+            this.cancelarBotao.Text = "Sair";
+            this.cancelarBotao.UseVisualStyleBackColor = true;
+            this.cancelarBotao.Click += new System.EventHandler(this.cancelaClick);
             // 
             // catalogoGeral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 264);
-            this.Controls.Add(this.cancelar_Botao);
-            this.Controls.Add(this.adiciona_botao);
-            this.Controls.Add(this.catalogo_DataGridView);
+            this.Controls.Add(this.cancelarBotao);
+            this.Controls.Add(this.adicionaBotao);
+            this.Controls.Add(this.catalogoDataGridView);
             this.Name = "catalogoGeral";
             this.Text = "Catálogo Geral";
-            ((System.ComponentModel.ISupportInitialize)(this.catalogo_DataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.catalogoDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView catalogo_DataGridView;
-        private System.Windows.Forms.Button adiciona_botao;
-        private System.Windows.Forms.Button cancelar_Botao;
+        private System.Windows.Forms.DataGridView catalogoDataGridView;
+        private System.Windows.Forms.Button adicionaBotao;
+        private System.Windows.Forms.Button cancelarBotao;
         private System.Windows.Forms.DataGridViewTextBoxColumn coluna_nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn coluna_email;
         private System.Windows.Forms.DataGridViewCheckBoxColumn coluna_adicionar;

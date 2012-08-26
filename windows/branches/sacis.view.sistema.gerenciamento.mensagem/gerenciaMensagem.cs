@@ -1,10 +1,8 @@
-﻿/*
- * 
- * Implementação do formulario _de gerenciamento _de mensagem
- *
- * @author Fabio Augusto
- * 
- */
+﻿///<summary>
+/// Implementação do formulario de gerenciamento de mensagem
+///
+/// @author Fabio Augusto
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -35,40 +33,33 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private string caminhoCompleto = null;
         private string usuario;
 
-        /**
-        *
-        * Metodo _para inicializar os componentes do formulario
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo para inicializar os componentes do formulario
+        ///
+        ///</summary>
         public gerenciaMensagem()
         {
             InitializeComponent();
         }
 
-        /**
-        *
-        * Metodo _para inicializar os componentes do formularios
-        * e chamar o metodo MCLoad
-        * 
-        * @param nome       Variavel do tipo string
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo para inicializar os componentes do formulario atraves do login
+        ///
+        ///</summary>
         public gerenciaMensagem(string nome)
         {
             InitializeComponent();
             usuario = nome;
-            MCLoad(nome);
-          
+            MCLoad(nome);          
         }
 
-        /**
-        *
-        * Metodo _para carregar a treewiew automaticamente
-        * 
-        * @param nome       Variavel do tipo string
-        * @throw excecao
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo para carregar a treewiew automaticamente
+        ///
+        ///</summary>
         private void MCLoad(string nome)
         {
 
@@ -80,7 +71,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 
                 GetDirectories(info.GetDirectories(), root);
 
-                mc_treeview.Nodes.Add(root);
+                mcTreeview.Nodes.Add(root);
 
                 root.Expand();
 
@@ -94,54 +85,39 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         }
 
-        /**
-        *
-        * Metodo _para visualizar diretorios
-        * 
-        * @param subDirs            Variavel do tipo DirectoryInfo
-        * @param nodeToAddTo        Variável do tipo TreeNode 
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo para visualizar o conteudo dos diretorios
+        ///
+        ///</summary>
         private void GetDirectories(DirectoryInfo[] subDirs, TreeNode nodeToAddTo)
         {
-
             foreach (DirectoryInfo subDir in subDirs)
             {
-
                 if (subDir.Name == ENTRADA || subDir.Name == ENVIADOS)
                 {
-
                     TreeNode aNode = new TreeNode(subDir.Name, 0, 0);
-
                     DirectoryInfo[] subSubDirs = subDir.GetDirectories();
-
                     GetDirectories(subSubDirs, aNode);
-
                     nodeToAddTo.Nodes.Add(aNode);
-
                 }
-
             }
-
         }
 
-        /**
-        *
-        * Metodo _para visualizar conteudo _de um nó da treeview e colocá-la numa 
-        * listview atraves do mouse
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param no            Objeto contendo conteudo do nó selecionado
-        * 
-        */
-        private void mc_treeview_node_click(object sender, TreeNodeMouseClickEventArgs no)
+        ///<summary>
+        ///
+        /// Metodo para visualizar conteudo de um nó da treeview e colocá-la numa 
+        /// listview atraves do mouse
+        ///
+        ///</summary>
+        private void mcTreeviewNodeClick(object sender, TreeNodeMouseClickEventArgs no)
         {
 
             caminhoCompleto = gerenciaServlet.caminhoTotal(no.Node.FullPath);
 
             TreeNode selecionado = no.Node;
 
-            mc_list.Items.Clear();
+            mcList.Items.Clear();
 
             DirectoryInfo nodir = gerenciaServlet.listaDiretorios(no.Node.FullPath);
 
@@ -163,25 +139,22 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
                     item.SubItems.AddRange(subitems);
 
-                    mc_list.Items.Add(item);
+                    mcList.Items.Add(item);
 
                 }
 
-                mc_list.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                mcList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
             }
 
         }
 
-        /**
-        *
-        * Metodo _para o botao novo chamar formulario
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base _para classes que contém dados _de evento
-        *
-        */
-        private void novo_Click(object sender, EventArgs e)
+        ///<summary>
+        ///
+        /// Metodo para abrir formulario para nova mensagem atraves do botao novo
+        ///
+        ///</summary>
+        private void novoClick(object sender, EventArgs e)
         {
 
             novaMensagem newform = new novaMensagem(usuario);
@@ -189,30 +162,24 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         }
 
-        /**
-        *
-        * Metodo _para o botao _de sair
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base _para classes que contém dados _de evento
-        *
-        */
-        private void sair_Click(object sender, EventArgs e)
+        ///<summary>
+        ///
+        /// Metodo para o botao sair atraves do botao fechar
+        ///
+        ///</summary>
+        private void sairClick(object sender, EventArgs e)
         {
 
             saidaSistema();
 
         }
 
-        /**
-        *
-        * Metodo _para o botao _de sair
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base contendo a tecla acionada no evento.
-        *
-        */
-        private void sair_Click(object sender, KeyEventArgs e)
+        ///<summary>
+        ///
+        /// Metodo para o botao sair atraves do teclado
+        ///
+        ///</summary>
+        private void sairClick(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
@@ -222,11 +189,11 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             }
         }
 
-        /**
-        *
-        * Metodo com a implementação do botao fechar 
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo para sair do sistema
+        ///
+        ///</summary>
         private void saidaSistema() {
 
             if (DialogResult.OK == MessageBox.Show(MSG_CONFIRMA_SAIDA, MSG_SAIR, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1))
@@ -234,65 +201,56 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         
         }
 
-        /**
-        *
-        * Metodo _para ordenar colunas
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base _para classes que contém dados _de evento
-        * 
-        */
-        private void coluna_click(object sender, ColumnClickEventArgs e)
+        ///<summary>
+        ///
+        /// Metodo para ordenar colunas
+        ///
+        ///</summary>
+        private void colunaClick(object sender, ColumnClickEventArgs e)
         {
 
-            this.mc_list.Sorting = ((this.mc_list.Sorting.Equals(SortOrder.Ascending)) ?
+            this.mcList.Sorting = ((this.mcList.Sorting.Equals(SortOrder.Ascending)) ?
                                     SortOrder.Descending : SortOrder.Ascending);
 
-            this.mc_list.ListViewItemSorter = new OrdenaListView(this.mc_list.Sorting, e.Column);
+            this.mcList.ListViewItemSorter = new OrdenaListView(this.mcList.Sorting, e.Column);
 
-            this.mc_list.Sort();
+            this.mcList.Sort();
 
         }
 
-        /**
-        *
-        * Metodo _para abrir a mensagem com duplo click
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base _para classes que contém dados _de evento
-        * 
-        */
-        private void duplo_click(object sender, EventArgs e)
+        ///<summary>
+        ///
+        /// Metodo para abrir a mensagem com duplo click
+        ///
+        ///</summary>
+        private void duploClick(object sender, EventArgs e)
         {
 
-            string arq = mc_list.SelectedItems[0].SubItems[0].Text;
+            string arq = mcList.SelectedItems[0].SubItems[0].Text;
 
             gerenciaServlet.abreArquivo(caminhoCompleto + arq);
 
         }
 
-        /**
-        *
-        * Método _para apagar mensagem
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base contendo a tecla acionada no evento.
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo para apagar mensagem
+        ///
+        ///</summary>
         private void apagar(object sender, KeyEventArgs e)
        {
 
             if (e.KeyCode == Keys.Delete)
             {
 
-                string arq = mc_list.SelectedItems[0].SubItems[0].Text;
+                string arq = mcList.SelectedItems[0].SubItems[0].Text;
 
                 if (DialogResult.OK == MessageBox.Show(MSG_CONFIRMA_APAGAR, MSG_APAGAR, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1))
                 {
 
                     gerenciaServlet.apagaArquivo(caminhoCompleto + arq);
-                    mc_list.Items.Remove(mc_list.SelectedItems[0]);
-                    mc_list.Refresh();
+                    mcList.Items.Remove(mcList.SelectedItems[0]);
+                    mcList.Refresh();
 
                 }
 
@@ -300,40 +258,35 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         }
 
-        /**
-        *
-        * Metodo _para o botao Catálogo chamar formulario
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base _para classes que contém dados _de evento
-        *
-        */
-        private void catalogoGeral_Click(object sender, EventArgs e)
+        ///<summary>
+        ///
+        /// Metodo para o botao Catálogo chamar formulario
+        ///
+        ///</summary>
+        private void catalogoGeralClick(object sender, EventArgs e)
         {
             catalogoGeral newform = new catalogoGeral(usuario);
             newform.ShowDialog();        
         }
     }
 
-    /**
-    *
-    * Classe _para ordenar as mensagens
-    *
-    */
+    ///<summary>
+    ///
+    /// Classe para ordenar as mensagens
+    ///
+    ///</summary>
     public class OrdenaListView : IComparer
     {
 
         private int col;
         private SortOrder sortOrder;
 
-        /**
-        *
-        * Metodo construtor _para inicializar as variaveis da classe
-        * 
-        * @param sortOrder          Variavel do tipo SortOrder
-        * @param col                Variável do tipo inteiro 
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo construtor para inicializar as variaveis da classe
+        /// atraves do modo da ordenação e a coluna a ser ordenada passados
+        /// 
+        ///</summary>
         public OrdenaListView(SortOrder sortOrder, int col)
         {
 
@@ -343,14 +296,11 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         #region IComparer Members
 
-        /**
-        *
-        * Metodo _para comparar dois objetos da classe _para ordená-los
-        * 
-        * @param x          Variavel do tipo object
-        * @param y          Variável do tipo object 
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo para comparar dois objetos passados da classe para ordená-los
+        /// 
+        ///</summary>
         public int Compare(object x, object y)
         {
 

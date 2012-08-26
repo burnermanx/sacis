@@ -17,10 +17,12 @@ namespace sacis.model.entidades
         private string _senha;
         private string _login;
         private string _chave;
-        
+        private string _validade;
+        private int _permissao;
+
         ///<summary>
         ///
-        /// Métodos nome, senha, login e chave sao gets e sets usados _para 
+        /// Métodos nome, senha, login, chave, validade e permissao sao gets e sets usados para 
         /// a serialização e deserialização do objeto em XML
         ///
         ///</summary>
@@ -53,10 +55,28 @@ namespace sacis.model.entidades
 
         public string chave
         {
-
+                     
             get { return _chave; }
 
             set { _chave = value; }
+
+        }
+
+        public string validade
+        {
+
+            get { return _validade; }
+
+            set { _validade = value; }
+
+        }
+
+        public int permissao
+        {
+
+            get { return _permissao; }
+
+            set { _permissao = value; }
 
         }
 
@@ -67,11 +87,12 @@ namespace sacis.model.entidades
         ///</summary>
         public usuario()
         {
-
+            _validade = "";
             _nome = "";
             _senha = "";
             _login = "";
             _chave = "";
+            _permissao = 0;
 
         }
         
@@ -80,12 +101,14 @@ namespace sacis.model.entidades
         /// Método contrutor para inicializar o objeto atraves de parâmetros
         ///
         ///</summary>
-        public usuario(string name, string pass, string log, string key) {
+        public usuario(string name, string pass, string log, string key, string validade, int permissao) {
 
             _nome = name;
             _senha = pass;
             _login = log;
             _chave = key;
+            _validade = validade;
+            _permissao = permissao;
 
         }
 
@@ -94,7 +117,7 @@ namespace sacis.model.entidades
         /// Método set para o nome      
         /// 
         ///</summary>
-        public void setnome(string name)
+        public void setNome(string name)
         {
 
             _nome = name;
@@ -106,7 +129,7 @@ namespace sacis.model.entidades
         /// Método get para o nome      
         /// 
         ///</summary>
-        public string getnome(){
+        public string getNome(){
         
             return _nome;
         
@@ -117,7 +140,7 @@ namespace sacis.model.entidades
         /// Método set para a senha     
         /// 
         ///</summary>
-        public void setsenha(string pass)
+        public void setSenha(string pass)
         {
 
             _senha = pass;
@@ -129,7 +152,7 @@ namespace sacis.model.entidades
         /// Método get para a senha     
         /// 
         ///</summary>
-        public string getsenha(){
+        public string getSenha(){
         
             return _senha;
         
@@ -140,7 +163,7 @@ namespace sacis.model.entidades
         /// Método set para o login     
         /// 
         ///</summary>
-        public void setlogin(string log)
+        public void setLogin(string log)
         {
 
             _login = log;
@@ -152,7 +175,7 @@ namespace sacis.model.entidades
         /// Método get para o login     
         /// 
         ///</summary>
-        public string getlogin(){
+        public string getLogin(){
         
             return _login;
         
@@ -163,7 +186,7 @@ namespace sacis.model.entidades
         /// Método set para a chave    
         /// 
         ///</summary>
-        public void setchave(string key)
+        public void setChave(string key)
         {
 
             _chave = key;
@@ -175,10 +198,58 @@ namespace sacis.model.entidades
         /// Método get para a chave    
         /// 
         ///</summary>
-        public string getchave(){
+        public string getChave(){
         
             return _chave;
         
+        }
+
+        ///<summary>
+        ///
+        /// Método set para a validade    
+        /// 
+        ///</summary>
+        public void setValidade(string validade)
+        {
+
+            _validade = validade;
+
+        }
+
+        ///<summary>
+        ///
+        /// Método get para a validade    
+        /// 
+        ///</summary>
+        public string getValidade()
+        {
+
+            return _validade;
+
+        }
+
+        ///<summary>
+        ///
+        /// Método set para a permissao    
+        /// 
+        ///</summary>
+        public void setPermissao(int permissao)
+        {
+
+            _permissao = permissao;
+
+        }
+
+        ///<summary>
+        ///
+        /// Método get para a permissao    
+        /// 
+        ///</summary>
+        public int getPermissao()
+        {
+
+            return _permissao;
+
         }
 
     }

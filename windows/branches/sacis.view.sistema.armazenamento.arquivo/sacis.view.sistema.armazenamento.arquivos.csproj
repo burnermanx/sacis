@@ -48,26 +48,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="login.cs">
+    <Compile Include="armazenamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="login.Designer.cs">
-      <DependentUpon>login.cs</DependentUpon>
+    <Compile Include="armazenamento.Designer.cs">
+      <DependentUpon>armazenamento.cs</DependentUpon>
     </Compile>
-    <Compile Include="armazena.cs">
+    <Compile Include="chave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="armazena.Designer.cs">
-      <DependentUpon>armazena.cs</DependentUpon>
+    <Compile Include="chave.Designer.cs">
+      <DependentUpon>chave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="armazenamentoLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="armazenamentoLogin.Designer.cs">
+      <DependentUpon>armazenamentoLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="armazena.resx">
-      <DependentUpon>armazena.cs</DependentUpon>
+    <EmbeddedResource Include="armazenamento.resx">
+      <DependentUpon>armazenamento.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="login.resx">
-      <DependentUpon>login.cs</DependentUpon>
+    <EmbeddedResource Include="chave.resx">
+      <DependentUpon>chave.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="armazenamentoLogin.resx">
+      <DependentUpon>armazenamentoLogin.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

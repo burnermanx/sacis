@@ -45,8 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assimetrica.cs" />
     <Compile Include="hash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="simetrica.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\sacis.model.excecao\sacis.model.excecao.csproj">
+      <Project>{F11AC024-7818-4B8B-AD14-D3369F5D5EA1}</Project>
+      <Name>sacis.model.excecao</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

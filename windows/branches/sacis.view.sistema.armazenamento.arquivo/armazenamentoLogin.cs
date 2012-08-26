@@ -16,17 +16,17 @@ using sacis.view.control;
 
 namespace sacis.view.sistema.armazenamento
 {
-    public partial class login : Form
+    public partial class armazenamentoLogin : Form
     {
         private static string MSG_ACESSO_NEGADO = "Acesso Negado!";
         private static string MSG_ERRO = "Erro";
 
         ///<summary>
         /// 
-        /// Metodo para inicializar os componentes do formularios.
+        /// Metodo para inicializar os componentes do formulario.
         ///
         ///</summary>
-        public login()
+        public armazenamentoLogin()
         {
             InitializeComponent();
         }
@@ -62,14 +62,14 @@ namespace sacis.view.sistema.armazenamento
         ///</summary>
         private void acessaArmazenamento() {
                          
-            string name = textbox_login.Text;
-            string pass = textbox_senha.Text;
+            string name = textboxLogin.Text;
+            string pass = textboxSenha.Text;
 
             string hashpass = armazenaServlet.geraHash(pass);
 
             if (armazenaServlet.confirmaUsuario(name, hashpass))
             {
-                armazena newForm = new armazena();
+                armazenamento newForm = new armazenamento();
                 newForm.FormClosed += new FormClosedEventHandler(formVisivel);
                 this.Visible = false;
                 newForm.ShowDialog();
@@ -89,8 +89,8 @@ namespace sacis.view.sistema.armazenamento
         private void formVisivel(object sender, FormClosedEventArgs e)
         {
             this.Visible = true;
-            textbox_login.Clear();
-            textbox_senha.Clear();
+            limpaCampos();
+
         }
 
         ///<summary>
@@ -100,8 +100,8 @@ namespace sacis.view.sistema.armazenamento
         ///</summary>  
         private void limpaCampos()
         {
-            this.textbox_login.Clear();
-            this.textbox_senha.Clear();
+            this.textboxLogin.Clear();
+            this.textboxSenha.Clear();
         }
     }
 }

@@ -72,7 +72,7 @@ namespace inicio{
         ///</summary>
         private void manutencao() 
         {
-            sacis.view.manutencao.cadastro.cadastro newForm = new sacis.view.manutencao.cadastro.cadastro();
+            sacis.view.manutencao.cadastro.manutencaoLogin newForm = new sacis.view.manutencao.cadastro.manutencaoLogin();
             newForm.FormClosed += new FormClosedEventHandler(formVisivel);
             this.Visible = false;
             newForm.ShowDialog();        
@@ -85,7 +85,7 @@ namespace inicio{
         ///</summary>
         private void cliente() 
         {
-            sistema_sacis newForm = new sistema_sacis();
+            sistemaSacis newForm = new sistemaSacis();
             newForm.FormClosed += new FormClosedEventHandler(formVisivel);
             this.Visible = false;
             newForm.ShowDialog();             

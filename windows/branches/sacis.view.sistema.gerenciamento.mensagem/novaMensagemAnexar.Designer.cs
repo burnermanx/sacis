@@ -28,62 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.anexos_dataGridView = new System.Windows.Forms.DataGridView();
-            this.anexar = new System.Windows.Forms.OpenFileDialog();
-            this.ok_botao = new System.Windows.Forms.Button();
-            this.cancelar_botao = new System.Windows.Forms.Button();
+            this.anexosDataGridView = new System.Windows.Forms.DataGridView();
             this.coluna_arquivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.coluna_remover = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.coluna_criptografar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.anexos_dataGridView)).BeginInit();
+            this.anexar = new System.Windows.Forms.OpenFileDialog();
+            this.okBotao = new System.Windows.Forms.Button();
+            this.cancelarBotao = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.anexosDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // anexos_dataGridView
+            // anexosDataGridView
             // 
-            this.anexos_dataGridView.AllowUserToAddRows = false;
-            this.anexos_dataGridView.AllowUserToDeleteRows = false;
-            this.anexos_dataGridView.AllowUserToOrderColumns = true;
-            this.anexos_dataGridView.AllowUserToResizeColumns = false;
-            this.anexos_dataGridView.AllowUserToResizeRows = false;
-            this.anexos_dataGridView.BackgroundColor = System.Drawing.SystemColors.Menu;
-            this.anexos_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.anexos_dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.anexosDataGridView.AllowUserToAddRows = false;
+            this.anexosDataGridView.AllowUserToDeleteRows = false;
+            this.anexosDataGridView.AllowUserToOrderColumns = true;
+            this.anexosDataGridView.AllowUserToResizeColumns = false;
+            this.anexosDataGridView.AllowUserToResizeRows = false;
+            this.anexosDataGridView.BackgroundColor = System.Drawing.SystemColors.Menu;
+            this.anexosDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.anexosDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.coluna_arquivo,
             this.coluna_remover,
             this.coluna_criptografar});
-            this.anexos_dataGridView.Location = new System.Drawing.Point(8, 10);
-            this.anexos_dataGridView.Name = "anexos_dataGridView";
-            this.anexos_dataGridView.RowHeadersVisible = false;
-            this.anexos_dataGridView.RowHeadersWidth = 21;
-            this.anexos_dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.anexos_dataGridView.Size = new System.Drawing.Size(424, 213);
-            this.anexos_dataGridView.TabIndex = 10;
-            this.anexos_dataGridView.Visible = false;
-            // 
-            // anexar
-            // 
-            this.anexar.Multiselect = true;
-            this.anexar.Title = "Selecionar Arquivos";
-            // 
-            // ok_botao
-            // 
-            this.ok_botao.Location = new System.Drawing.Point(130, 232);
-            this.ok_botao.Name = "ok_botao";
-            this.ok_botao.Size = new System.Drawing.Size(75, 23);
-            this.ok_botao.TabIndex = 11;
-            this.ok_botao.Text = "Ok";
-            this.ok_botao.UseVisualStyleBackColor = true;
-            this.ok_botao.Click += new System.EventHandler(this.okButton_Click);
-            // 
-            // cancelar_botao
-            // 
-            this.cancelar_botao.Location = new System.Drawing.Point(242, 232);
-            this.cancelar_botao.Name = "cancelar_botao";
-            this.cancelar_botao.Size = new System.Drawing.Size(75, 23);
-            this.cancelar_botao.TabIndex = 12;
-            this.cancelar_botao.Text = "Cancelar";
-            this.cancelar_botao.UseVisualStyleBackColor = true;
-            this.cancelar_botao.Click += new System.EventHandler(this.cancelarButton_Click);
+            this.anexosDataGridView.Location = new System.Drawing.Point(8, 10);
+            this.anexosDataGridView.Name = "anexosDataGridView";
+            this.anexosDataGridView.RowHeadersVisible = false;
+            this.anexosDataGridView.RowHeadersWidth = 21;
+            this.anexosDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.anexosDataGridView.Size = new System.Drawing.Size(424, 213);
+            this.anexosDataGridView.TabIndex = 10;
+            this.anexosDataGridView.Visible = false;
             // 
             // coluna_arquivo
             // 
@@ -103,27 +78,52 @@
             this.coluna_criptografar.Name = "coluna_criptografar";
             this.coluna_criptografar.Width = 70;
             // 
+            // anexar
+            // 
+            this.anexar.Multiselect = true;
+            this.anexar.Title = "Selecionar Arquivos";
+            // 
+            // okBotao
+            // 
+            this.okBotao.Location = new System.Drawing.Point(130, 232);
+            this.okBotao.Name = "okBotao";
+            this.okBotao.Size = new System.Drawing.Size(75, 23);
+            this.okBotao.TabIndex = 11;
+            this.okBotao.Text = "Ok";
+            this.okBotao.UseVisualStyleBackColor = true;
+            this.okBotao.Click += new System.EventHandler(this.okButtonClick);
+            // 
+            // cancelarBotao
+            // 
+            this.cancelarBotao.Location = new System.Drawing.Point(242, 232);
+            this.cancelarBotao.Name = "cancelarBotao";
+            this.cancelarBotao.Size = new System.Drawing.Size(75, 23);
+            this.cancelarBotao.TabIndex = 12;
+            this.cancelarBotao.Text = "Cancelar";
+            this.cancelarBotao.UseVisualStyleBackColor = true;
+            this.cancelarBotao.Click += new System.EventHandler(this.cancelarButtonClick);
+            // 
             // novaMensagemAnexar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 264);
-            this.Controls.Add(this.cancelar_botao);
-            this.Controls.Add(this.ok_botao);
-            this.Controls.Add(this.anexos_dataGridView);
+            this.Controls.Add(this.cancelarBotao);
+            this.Controls.Add(this.okBotao);
+            this.Controls.Add(this.anexosDataGridView);
             this.Name = "novaMensagemAnexar";
             this.Text = "Anexos";
-            ((System.ComponentModel.ISupportInitialize)(this.anexos_dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anexosDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView anexos_dataGridView;
+        private System.Windows.Forms.DataGridView anexosDataGridView;
         private System.Windows.Forms.OpenFileDialog anexar;
-        private System.Windows.Forms.Button ok_botao;
-        private System.Windows.Forms.Button cancelar_botao;
+        private System.Windows.Forms.Button okBotao;
+        private System.Windows.Forms.Button cancelarBotao;
         private System.Windows.Forms.DataGridViewTextBoxColumn coluna_arquivo;
         private System.Windows.Forms.DataGridViewCheckBoxColumn coluna_remover;
         private System.Windows.Forms.DataGridViewCheckBoxColumn coluna_criptografar;

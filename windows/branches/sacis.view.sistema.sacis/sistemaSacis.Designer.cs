@@ -1,6 +1,6 @@
 ﻿namespace sacis.view.cliente
 {
-    partial class sistema_sacis
+    partial class sistemaSacis
     {
         /// <summary>
         /// Required designer variable.
@@ -65,7 +65,7 @@
             this.sacis_ok.UseVisualStyleBackColor = true;
             this.sacis_ok.Click += new System.EventHandler(this.clickSacis);
             // 
-            // sistema_sacis
+            // sistemaSacis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -74,7 +74,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sacis_combo);
             this.KeyPreview = true;
-            this.Name = "sistema_sacis";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "sistemaSacis";
             this.Text = "Projeto S.A.C.I.S.";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.clickSacis);
             this.ResumeLayout(false);

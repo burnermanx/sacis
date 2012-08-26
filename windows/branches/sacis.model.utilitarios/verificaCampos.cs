@@ -27,10 +27,10 @@ namespace sacis.model.utilitarios
         ///</summary>
         public static bool verificaValidadeUsuario(usuario user) {
 
-            if (user.getchave() == "" || user.getchave() == null ||
-                verificaValidadeCampos(user.getnome()) == true || verificaValidadeCampos(user.getsenha()) == true ||
-                verificaValidadeCampos(user.getlogin()) == true || string.Compare(user.getlogin(), user.getsenha()) == 0 ||
-                string.Compare(user.getnome(), user.getsenha()) == 0 || string.Compare(user.getlogin(), user.getnome()) == 0)
+            if (user.getChave() == "" || user.getChave() == null ||
+                verificaValidadeCampos(user.getNome()) == true || verificaValidadeCampos(user.getSenha()) == true ||
+                verificaValidadeCampos(user.getLogin()) == true || string.Compare(user.getLogin(), user.getSenha()) == 0 ||
+                string.Compare(user.getNome(), user.getSenha()) == 0 || string.Compare(user.getLogin(), user.getNome()) == 0)
             {
 
                 throw new excecao.excecao(MSG_ERRO);

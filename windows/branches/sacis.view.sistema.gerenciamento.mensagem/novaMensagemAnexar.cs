@@ -1,10 +1,8 @@
-﻿/*
- * 
- * Implementação do formulario _de anexar arquivos _para a mensagem nova
- *
- * @author Fabio Augusto
- * 
- */
+﻿///<summary>
+/// Implementação do formulario de anexar arquivos para a mensagem nova
+///
+/// @author Fabio Augusto
+///</summary>
 
 using System;
 using System.Collections.Generic;
@@ -28,11 +26,11 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private HashSet<string> cancelaCripto = new HashSet<string>();
         private static int contador;
 
-        /**
-        *
-        * Metodo construtor _para inicializar os componentes do formulario
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo construtor para inicializar os componentes do formulario 
+        /// 
+        ///</summary>
         public novaMensagemAnexar()
         {
 
@@ -49,14 +47,12 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         }
 
-        /**
-        *
-        * Metodo construtor _para inicializar os componentes do formulario
-        *
-        * @param _arquivoCripto         Variavel do tipo HashSet<string>
-        * @param _arquivoPlain          Variavel do tipo HashSet<string>
-        * 
-        */
+        ///<summary>
+        ///
+        /// Metodo construtor para inicializar os componentes do formulario 
+        /// atraves das listas de arquivos a serem cifrados e os em claro passados
+        /// 
+        ///</summary>
         public novaMensagemAnexar(HashSet<string> cripto, HashSet<string> plain)
         {
             InitializeComponent();
@@ -76,27 +72,31 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         }
 
-        /**
-        *
-        * Metodo get _para retornar hashset dos arquivos a serem criptografados
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo get para retornar hashset dos arquivos a serem criptografados
+        /// 
+        ///</summary>
         public HashSet<string> getCriptoFiles()
         {
             return this.CriptoFiles;
         }
 
-        /**
-        *
-        * Metodo get _para retornar hashset dos arquivos que não serão criptografados
-        *
-        */
+        ///<summary>
+        ///
+        /// Metodo get para retornar hashset dos arquivos que não serão criptografados
+        /// 
+        ///</summary>
         public HashSet<string> getPlainFiles()
         {
             return this.PlainFiles;
         }
 
-        // faz a uniao dos hashsets e remove duplicidade de nomes
+        ///<summary>
+        ///
+        /// Metodo para unir os hashsets e remove duplicidade de nomes
+        /// 
+        ///</summary>
         private void uniaoHash(HashSet<string> hash) {
 
             HashSet<string> uniao = new HashSet<string>();
@@ -108,29 +108,27 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         
         }
 
-        /**
-         *
-         * Metodo _para inserir os dados do hashset no dataGridView
-         *
-         * @param _arquivoCripto         Variavel do tipo HashSet<string>
-         * 
-         */
+        ///<summary>
+        ///
+        /// Metodo para inserir os dados do hashset no dataGridView
+        /// 
+        ///</summary>
         private void dataGridInserir(HashSet<string> anexar)
         {            
             foreach (String file in anexar)
             {
                 String ret = gerenciaServlet.retornaNome(file);
 
-                anexos_dataGridView.Rows.Add(1);
-                anexos_dataGridView.Rows[contador].Cells[0].Value = ret;
-                anexos_dataGridView.Rows[contador].Cells[1].Value = false;
-                anexos_dataGridView.Rows[contador].Cells[2].Value = false;
+                anexosDataGridView.Rows.Add(1);
+                anexosDataGridView.Rows[contador].Cells[0].Value = ret;
+                anexosDataGridView.Rows[contador].Cells[1].Value = false;
+                anexosDataGridView.Rows[contador].Cells[2].Value = false;
 
                 if (cancelaCripto.Count != 0)
                 {
                     foreach (string str in cancelaCripto)
                     {
-                        if (file.Equals(str)) anexos_dataGridView.Rows[contador].Cells[2].Value = true;                        
+                        if (file.Equals(str)) anexosDataGridView.Rows[contador].Cells[2].Value = true;                        
                     }
                 }
 
@@ -138,54 +136,51 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             }                                
         }        
 
-        /**
-        *
-        * Metodo _para exibir dataGridView
-        * 
-        */
+        ///<summary>
+        ///
+        /// Metodo para exibir dataGridView
+        /// 
+        ///</summary>
         private void exibeDatagrid() {
 
-            anexos_dataGridView.Visible = true;
+            anexosDataGridView.Visible = true;
         
         }
 
-        /**
-        *
-        * Metodo _para remover os arquivos selecionados no dataGridView
-        * 
-        */
+        ///<summary>
+        ///
+        /// Metodo para remover os arquivos selecionados no dataGridView
+        /// 
+        ///</summary>
         private void removeArquivos()
         {
             for (int i = 0; i < contador; i++)
             {
-                //Se o checkbox Remover estiver checked
-                if (anexos_dataGridView.Rows[i].Cells[1].Value.Equals(true))
+                if (anexosDataGridView.Rows[i].Cells[1].Value.Equals(true))
                 {
-                    //apaga linha do dataGridView1
-                    anexos_dataGridView.Rows.Remove(anexos_dataGridView.Rows[i]);
+                    anexosDataGridView.Rows.Remove(anexosDataGridView.Rows[i]);
                     i--;
                     contador--;
                 }
             }     
         }
 
-        /**
-        *
-        * Metodo _para inserir o caminho dos arquivos nos hashsets CriptoFiles e PlainFiles 
-        * 
-        */
+        ///<summary>
+        ///
+        /// Metodo para inserir o caminho dos arquivos nos hashsets CriptoFiles e PlainFiles
+        /// 
+        ///</summary>
         private void atualizaHashset() {
         
             for (int i = 0; i < contador; i++)
             {
-                //Se checkbox Criptografar estiver checked
-                if (anexos_dataGridView.Rows[i].Cells[2].Value.Equals(true))
+                if (anexosDataGridView.Rows[i].Cells[2].Value.Equals(true))
                 {                    
                     foreach (string f in ConjFiles)
                     {
 
                         String ret = gerenciaServlet.retornaNome(f);
-                        String ret2 = anexos_dataGridView.Rows[i].Cells[0].Value.ToString();
+                        String ret2 = anexosDataGridView.Rows[i].Cells[0].Value.ToString();
 
                         if (ret.Equals(ret2)) CriptoFiles.Add(f);
 
@@ -193,12 +188,11 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 }
                 else
                 {
-                    //Adiciona arquivo Plain no hashset PlainFiles 
                     foreach (string f in ConjFiles)
                     {
 
                         String ret = gerenciaServlet.retornaNome(f);
-                        String ret2 = anexos_dataGridView.Rows[i].Cells[0].Value.ToString();
+                        String ret2 = anexosDataGridView.Rows[i].Cells[0].Value.ToString();
 
                         if (ret.Equals(ret2)) PlainFiles.Add(f);
 
@@ -207,34 +201,34 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             }           
         }
 
-        /**
-        *
-        * Metodo _para o botao _de ok
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base _para classes que contém dados _de evento
-        *
-        */
-        private void okButton_Click(object sender, EventArgs e)
+        ///<summary>
+        ///
+        /// Metodo para chamar metodos de remover arquivos, atualizar o hashset
+        /// e fechar formulario através do botão ok
+        /// 
+        ///</summary>
+        private void okButtonClick(object sender, EventArgs e)
         {            
             removeArquivos();
             atualizaHashset();
             fecharForm();
         }
 
-        /**
-        *
-        * Metodo _para o botao _de cancelar
-        *
-        * @param sender        Objeto com os dados do formulário
-        * @param e             Objeto base _para classes que contém dados _de evento
-        *
-        */
-        private void cancelarButton_Click(object sender, EventArgs e)
+        ///<summary>
+        ///
+        /// Metodo para o botao cancelar
+        /// 
+        ///</summary>
+        private void cancelarButtonClick(object sender, EventArgs e)
         {
             fecharForm();
         }
 
+        ///<summary>
+        ///
+        /// Metodo para fechar formulario
+        /// 
+        ///</summary>
         private void fecharForm() {
 
             this.Close();

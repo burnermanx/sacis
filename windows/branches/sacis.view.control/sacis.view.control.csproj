@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="armazenaServlet.cs" />
-    <Compile Include="cadastroServlet.cs" />
+    <Compile Include="manutencaoServlet.cs" />
     <Compile Include="gerenciaServlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
