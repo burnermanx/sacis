@@ -1,0 +1,16 @@
+<publishData>
+  <publishTarget publishUrl="ftp://ftp.sacis.com.br/www/ws/">
+    <file relUrl="bin/sacis.model.webService.dll" publishTime="05/24/2012 21:52:26" />
+    <file relUrl="bin/sacis.model.excecao.dll" publishTime="05/24/2012 21:52:22" />
+    <file relUrl="bin/sacis.model.webService.pdb" publishTime="05/24/2012 21:52:26" />
+    <file relUrl="bin/sacis.model.excecao.pdb" publishTime="05/24/2012 21:52:22" />
+    <file relUrl="bin/sacis.model.utilitarios.pdb" publishTime="05/24/2012 21:52:23" />
+    <file relUrl="bin/sacis.model.entidades.dll" publishTime="05/24/2012 21:52:22" />
+    <file relUrl="Web.config" publishTime="05/24/2012 21:33:50" />
+    <file relUrl="bin/sacis.model.bd.pdb" publishTime="05/24/2012 21:52:24" />
+    <file relUrl="bin/sacis.model.utilitarios.dll" publishTime="05/24/2012 21:52:23" />
+    <file relUrl="bin/sacis.model.entidades.pdb" publishTime="05/24/2012 21:52:22" />
+    <file relUrl="bin/sacis.model.bd.dll" publishTime="05/24/2012 21:52:25" />
+    <file relUrl="Service1.asmx" publishTime="05/24/2012 21:33:50" />
+  </publishTarget>
+</publishData>
