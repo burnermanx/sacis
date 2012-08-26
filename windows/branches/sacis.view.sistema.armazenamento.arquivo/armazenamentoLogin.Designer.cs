@@ -1,6 +1,6 @@
 ﻿namespace sacis.view.sistema.armazenamento
 {
-    partial class login
+    partial class armazenamentoLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.armazena_button = new System.Windows.Forms.Button();
+            this.armazenaButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textbox_login = new System.Windows.Forms.TextBox();
-            this.textbox_senha = new System.Windows.Forms.TextBox();
+            this.textboxLogin = new System.Windows.Forms.TextBox();
+            this.textboxSenha = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // armazena_button
+            // armazenaButton
             // 
-            this.armazena_button.Location = new System.Drawing.Point(83, 121);
-            this.armazena_button.Name = "armazena_button";
-            this.armazena_button.Size = new System.Drawing.Size(75, 23);
-            this.armazena_button.TabIndex = 3;
-            this.armazena_button.Text = "Ok";
-            this.armazena_button.UseVisualStyleBackColor = true;
-            this.armazena_button.Click += new System.EventHandler(this.armazenaButtonClick);
+            this.armazenaButton.Location = new System.Drawing.Point(83, 121);
+            this.armazenaButton.Name = "armazenaButton";
+            this.armazenaButton.Size = new System.Drawing.Size(75, 23);
+            this.armazenaButton.TabIndex = 2;
+            this.armazenaButton.Text = "Ok";
+            this.armazenaButton.UseVisualStyleBackColor = true;
+            this.armazenaButton.Click += new System.EventHandler(this.armazenaButtonClick);
             // 
             // label1
             // 
@@ -63,34 +63,36 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Senha:";
             // 
-            // textbox_login
+            // textboxLogin
             // 
-            this.textbox_login.Location = new System.Drawing.Point(95, 39);
-            this.textbox_login.Name = "textbox_login";
-            this.textbox_login.Size = new System.Drawing.Size(100, 20);
-            this.textbox_login.TabIndex = 1;
+            this.textboxLogin.Location = new System.Drawing.Point(95, 39);
+            this.textboxLogin.Name = "textboxLogin";
+            this.textboxLogin.Size = new System.Drawing.Size(100, 20);
+            this.textboxLogin.TabIndex = 0;
             // 
-            // textbox_senha
+            // textboxSenha
             // 
-            this.textbox_senha.Location = new System.Drawing.Point(96, 73);
-            this.textbox_senha.Name = "textbox_senha";
-            this.textbox_senha.PasswordChar = '*';
-            this.textbox_senha.Size = new System.Drawing.Size(100, 20);
-            this.textbox_senha.TabIndex = 2;
+            this.textboxSenha.Location = new System.Drawing.Point(96, 73);
+            this.textboxSenha.Name = "textboxSenha";
+            this.textboxSenha.PasswordChar = '*';
+            this.textboxSenha.Size = new System.Drawing.Size(100, 20);
+            this.textboxSenha.TabIndex = 1;
             // 
             // login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(249, 184);
-            this.Controls.Add(this.textbox_senha);
-            this.Controls.Add(this.textbox_login);
+            this.Controls.Add(this.textboxSenha);
+            this.Controls.Add(this.textboxLogin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.armazena_button);
+            this.Controls.Add(this.armazenaButton);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "login";
-            this.Text = "Login Armazenamento";
+            this.Text = "Sistema Armazenamento - Login";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.armazenaButtonClick);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -99,11 +101,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button armazena_button;
+        private System.Windows.Forms.Button armazenaButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textbox_login;
-        private System.Windows.Forms.TextBox textbox_senha;
+        private System.Windows.Forms.TextBox textboxLogin;
+        private System.Windows.Forms.TextBox textboxSenha;
 
     }
 }

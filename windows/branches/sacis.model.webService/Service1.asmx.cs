@@ -1,5 +1,5 @@
 ﻿///<summary>
-/// Classe para implementação do WebService 
+/// Classe para implementação dos metodos para o WebService 
 ///
 /// @author Fabio Augusto
 ///</summary>
@@ -25,9 +25,7 @@ using System.Collections.Generic;
 
 namespace sacis.model.webService
 {
-    /// <summary>
-    /// Summary description for Service1
-    /// </summary>
+
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]
@@ -45,11 +43,40 @@ namespace sacis.model.webService
         private static string CHAVEIRO = @"\chaveiro\";
         private static string ERRO_CADASTRO = "Erro ao Cadastrar Usuário!";
         private static string ERRO_REMOVER = "Erro ao Remover Contato!";
+        private static string EXTENSAO = ".key";
 
         [WebMethod]
         public string teste()
         {
             return "O teste foi um sucesso!!!";
+        }
+
+        ///<summary>
+        ///
+        /// Método Web que verifica se o usuario passado tem permissao de acesso ao sistema de manutenção
+        /// retornando verdadeiro caso usuario tenha permissão
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool verificaUsuarioManutencao(string login, string senha){
+
+            try
+            {
+                string str = "select permissao from conecta where login = '" + login + "' and senha = '" + senha + "'";
+                string result = retornaConsultaSql(str);
+
+                StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+                if (comparer.Compare("a", result) == 0) return true;
+                else return false;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        
         }
 
         ///<summary>
@@ -93,18 +120,23 @@ namespace sacis.model.webService
             {
                 usuario user = serial.Deserializar(xmluser, typeof(usuario)) as usuario;
 
-                string key = user.getlogin() + ".key";
+                string key = user.getLogin() + EXTENSAO;
+                char permissao;
 
                 MySqlConnection conecta = conectaMysql.conectaMSQL();
                 conecta.Open();
 
-                string str = "INSERT INTO conecta(login, senha, chave, nome)VALUES('" + user.getlogin() + "','" + user.getsenha() + "','" + key + "','" + user.getnome() + "')";
+                if (user.getPermissao() == 0) permissao = 'a';
+                else permissao = 'u';
+
+                string str = "INSERT INTO conecta(login, senha, nome, validade, permissao)VALUES('" + user.getLogin() + "','" + user.getSenha() + "','" + user.getNome() + "','" + user.getValidade() + "','" + permissao + "')";
 
                 MySqlCommand exec = new MySqlCommand(str, conecta);
                 exec.ExecuteNonQuery();
 
                 conectaMysql.desconectaMSQL();
                 criaDiretoriosUsuario(user, key);
+
             }
             catch (excecao.excecao except)
             {
@@ -120,12 +152,12 @@ namespace sacis.model.webService
         private void criaDiretoriosUsuario(usuario user, string key)
         {
 
-            manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getlogin());
-            manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getlogin() + ENTRADA);
-            manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getlogin() + ENVIADOS);
-            manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getlogin() + CONTATOS);
-            manipulaArquivo.copiaArquivo(user.getchave(), CAMINHO_SERVER + CHAVEIRO + key);
-            manipulaArquivo.criaArquivo(CAMINHO_SERVER + user.getlogin() + CONTATOS + ARQUIVO_CONTATO, null);
+            manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getLogin());
+            manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getLogin() + ENTRADA);
+            manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getLogin() + ENVIADOS);
+            manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getLogin() + CONTATOS);
+            manipulaArquivo.criaArquivoTexto(CAMINHO_SERVER + user.getLogin() + CONTATOS + ARQUIVO_CONTATO, null);
+            manipulaArquivo.criaArquivoTexto(CAMINHO_SERVER + CHAVEIRO + key, user.getChave());
 
         }
 
@@ -210,7 +242,7 @@ namespace sacis.model.webService
                 List<contato> uniao = new List<contato>();
 
                 List<contato> contatosXml = serial.Deserializar(xml, typeof(List<contato>)) as List<contato>;
-                string contatoLocal = manipulaArquivo.leArquivo(caminho);
+                string contatoLocal = manipulaArquivo.leArquivoTexto(caminho);
 
                 if (contatoLocal.Length != 0)
                 {
@@ -244,7 +276,7 @@ namespace sacis.model.webService
             try
             {
                 string caminho = CAMINHO_SERVER + user + CONTATOS + ARQUIVO_CONTATO;
-                string xml = manipulaArquivo.leArquivo(caminho);
+                string xml = manipulaArquivo.leArquivoTexto(caminho);
 
                 return xml;
             }

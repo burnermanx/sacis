@@ -16,7 +16,6 @@ using System.Windows.Forms;
 using sacis.view.control;
 using sacis.model.entidades;
 using sacis.model.excecao;
-using sacis.model.utilitarios;
 
 namespace sacis.view.manutencao.cadastro
 {
@@ -72,9 +71,11 @@ namespace sacis.view.manutencao.cadastro
         {
             try
             {
-                usuario user = new usuario(textBoxp_nome.Text, textBoxp_pass.Text, textBoxp_login.Text, textBoxp_chave.Text);
-
-                if (cadastroServlet.antesCadastro(user))
+                string data = manutencaoServlet.retornaData(textBoxpChave.Text);
+                
+                usuario user = new usuario(textBoxpNome.Text, textBoxpPass.Text, textBoxpLogin.Text, textBoxpChave.Text, data, comboBoxpPermissao.SelectedIndex);
+                
+                if (manutencaoServlet.antesCadastro(user))
                 {
                     MessageBox.Show(MSG_CADASTRO, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     limpaCampos();
@@ -127,7 +128,7 @@ namespace sacis.view.manutencao.cadastro
             {
                 foreach (String file in anexar.FileNames)
                 {
-                    textBoxp_chave.Text += file;
+                    textBoxpChave.Text += file;
                 }
             }        
         }
@@ -139,10 +140,11 @@ namespace sacis.view.manutencao.cadastro
         ///</summary>  
         private void limpaCampos()
         {
-            this.textBoxp_pass.Clear();
-            this.textBoxp_nome.Clear();
-            this.textBoxp_login.Clear();
-            this.textBoxp_chave.Clear();
-        }  
+            this.textBoxpPass.Clear();
+            this.textBoxpNome.Clear();
+            this.textBoxpLogin.Clear();
+            this.textBoxpChave.Clear();
+        }
+
     }
 }

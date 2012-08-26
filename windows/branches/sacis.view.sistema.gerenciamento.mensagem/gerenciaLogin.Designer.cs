@@ -30,9 +30,9 @@
         {
             this.label1_cliente = new System.Windows.Forms.Label();
             this.label2_cliente = new System.Windows.Forms.Label();
-            this.button_cliente = new System.Windows.Forms.Button();
-            this.textBox_nome = new System.Windows.Forms.TextBox();
-            this.textBox_pass = new System.Windows.Forms.TextBox();
+            this.buttonCliente = new System.Windows.Forms.Button();
+            this.textBoxNome = new System.Windows.Forms.TextBox();
+            this.textBoxPass = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1_cliente
@@ -52,45 +52,47 @@
             this.label2_cliente.TabIndex = 4;
             this.label2_cliente.Text = "Login:";
             // 
-            // button_cliente
+            // buttonCliente
             // 
-            this.button_cliente.Location = new System.Drawing.Point(87, 127);
-            this.button_cliente.Name = "button_cliente";
-            this.button_cliente.Size = new System.Drawing.Size(75, 23);
-            this.button_cliente.TabIndex = 3;
-            this.button_cliente.Text = "Ok";
-            this.button_cliente.UseVisualStyleBackColor = true;
-            this.button_cliente.Click += new System.EventHandler(this.click_cliente);
+            this.buttonCliente.Location = new System.Drawing.Point(87, 127);
+            this.buttonCliente.Name = "buttonCliente";
+            this.buttonCliente.Size = new System.Drawing.Size(75, 23);
+            this.buttonCliente.TabIndex = 3;
+            this.buttonCliente.Text = "Ok";
+            this.buttonCliente.UseVisualStyleBackColor = true;
+            this.buttonCliente.Click += new System.EventHandler(this.clickCliente);
             // 
-            // textBox_nome
+            // textBoxNome
             // 
-            this.textBox_nome.Location = new System.Drawing.Point(89, 41);
-            this.textBox_nome.Name = "textBox_nome";
-            this.textBox_nome.Size = new System.Drawing.Size(100, 20);
-            this.textBox_nome.TabIndex = 1;
+            this.textBoxNome.Location = new System.Drawing.Point(89, 41);
+            this.textBoxNome.Name = "textBoxNome";
+            this.textBoxNome.Size = new System.Drawing.Size(100, 20);
+            this.textBoxNome.TabIndex = 1;
             // 
-            // textBox_pass
+            // textBoxPass
             // 
-            this.textBox_pass.Location = new System.Drawing.Point(90, 77);
-            this.textBox_pass.Name = "textBox_pass";
-            this.textBox_pass.PasswordChar = '*';
-            this.textBox_pass.Size = new System.Drawing.Size(100, 20);
-            this.textBox_pass.TabIndex = 2;
+            this.textBoxPass.Location = new System.Drawing.Point(90, 77);
+            this.textBoxPass.Name = "textBoxPass";
+            this.textBoxPass.PasswordChar = '*';
+            this.textBoxPass.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPass.TabIndex = 2;
             // 
             // gerenciaLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 188);
-            this.Controls.Add(this.textBox_pass);
-            this.Controls.Add(this.textBox_nome);
-            this.Controls.Add(this.button_cliente);
+            this.ClientSize = new System.Drawing.Size(237, 188);
+            this.Controls.Add(this.textBoxPass);
+            this.Controls.Add(this.textBoxNome);
+            this.Controls.Add(this.buttonCliente);
             this.Controls.Add(this.label2_cliente);
             this.Controls.Add(this.label1_cliente);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "gerenciaLogin";
-            this.Text = "Login Gerenciamento";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.click_cliente);
+            this.Text = "Sistema Gerenciamento - Login";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.clickCliente);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,9 +102,9 @@
 
         private System.Windows.Forms.Label label1_cliente;
         private System.Windows.Forms.Label label2_cliente;
-        private System.Windows.Forms.Button button_cliente;
-        private System.Windows.Forms.TextBox textBox_nome;
-        private System.Windows.Forms.TextBox textBox_pass;
+        private System.Windows.Forms.Button buttonCliente;
+        private System.Windows.Forms.TextBox textBoxNome;
+        private System.Windows.Forms.TextBox textBoxPass;
         
     }
 }

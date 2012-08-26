@@ -18,14 +18,14 @@ using sacis.view.sistema.armazenamento;
 
 namespace sacis.view.cliente
 {
-    public partial class sistema_sacis : Form
+    public partial class sistemaSacis : Form
     {
         ///<summary>
         /// 
         /// Metodo para inicializar os componentes do formularios.
         /// 
         ///</summary>
-        public sistema_sacis()
+        public sistemaSacis()
         {
             InitializeComponent();
         }
@@ -72,7 +72,7 @@ namespace sacis.view.cliente
         ///</summary>
         private void armazenamento()
         {
-            login newForm = new login();
+            armazenamentoLogin newForm = new armazenamentoLogin();
             newForm.FormClosed += new FormClosedEventHandler(formVisivel);
             this.Visible = false;
             newForm.ShowDialog();

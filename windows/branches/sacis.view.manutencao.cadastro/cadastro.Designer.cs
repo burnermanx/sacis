@@ -31,13 +31,15 @@
             this.label1_privado = new System.Windows.Forms.Label();
             this.label2_privado = new System.Windows.Forms.Label();
             this.button_privado = new System.Windows.Forms.Button();
-            this.textBoxp_nome = new System.Windows.Forms.TextBox();
-            this.textBoxp_pass = new System.Windows.Forms.TextBox();
+            this.textBoxpNome = new System.Windows.Forms.TextBox();
+            this.textBoxpPass = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxp_login = new System.Windows.Forms.TextBox();
-            this.textBoxp_chave = new System.Windows.Forms.TextBox();
+            this.textBoxpLogin = new System.Windows.Forms.TextBox();
+            this.textBoxpChave = new System.Windows.Forms.TextBox();
             this.button_chave = new System.Windows.Forms.Button();
             this.anexar = new System.Windows.Forms.OpenFileDialog();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxpPermissao = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1_privado
@@ -58,7 +60,7 @@
             // 
             // button_privado
             // 
-            this.button_privado.Location = new System.Drawing.Point(85, 153);
+            this.button_privado.Location = new System.Drawing.Point(88, 191);
             this.button_privado.Name = "button_privado";
             this.button_privado.Size = new System.Drawing.Size(75, 23);
             this.button_privado.TabIndex = 7;
@@ -66,20 +68,20 @@
             this.button_privado.UseVisualStyleBackColor = true;
             this.button_privado.Click += new System.EventHandler(this.clickPrivado);
             // 
-            // textBoxp_nome
+            // textBoxpNome
             // 
-            this.textBoxp_nome.Location = new System.Drawing.Point(88, 21);
-            this.textBoxp_nome.Name = "textBoxp_nome";
-            this.textBoxp_nome.Size = new System.Drawing.Size(100, 20);
-            this.textBoxp_nome.TabIndex = 1;
+            this.textBoxpNome.Location = new System.Drawing.Point(88, 21);
+            this.textBoxpNome.Name = "textBoxpNome";
+            this.textBoxpNome.Size = new System.Drawing.Size(100, 20);
+            this.textBoxpNome.TabIndex = 1;
             // 
-            // textBoxp_pass
+            // textBoxpPass
             // 
-            this.textBoxp_pass.Location = new System.Drawing.Point(88, 75);
-            this.textBoxp_pass.Name = "textBoxp_pass";
-            this.textBoxp_pass.PasswordChar = '*';
-            this.textBoxp_pass.Size = new System.Drawing.Size(100, 20);
-            this.textBoxp_pass.TabIndex = 3;
+            this.textBoxpPass.Location = new System.Drawing.Point(88, 75);
+            this.textBoxpPass.Name = "textBoxpPass";
+            this.textBoxpPass.PasswordChar = '*';
+            this.textBoxpPass.Size = new System.Drawing.Size(100, 20);
+            this.textBoxpPass.TabIndex = 3;
             // 
             // label1
             // 
@@ -90,41 +92,64 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "Nome :";
             // 
-            // textBoxp_login
+            // textBoxpLogin
             // 
-            this.textBoxp_login.Location = new System.Drawing.Point(88, 47);
-            this.textBoxp_login.Name = "textBoxp_login";
-            this.textBoxp_login.Size = new System.Drawing.Size(100, 20);
-            this.textBoxp_login.TabIndex = 2;
+            this.textBoxpLogin.Location = new System.Drawing.Point(88, 47);
+            this.textBoxpLogin.Name = "textBoxpLogin";
+            this.textBoxpLogin.Size = new System.Drawing.Size(100, 20);
+            this.textBoxpLogin.TabIndex = 2;
             // 
-            // textBoxp_chave
+            // textBoxpChave
             // 
-            this.textBoxp_chave.Location = new System.Drawing.Point(88, 109);
-            this.textBoxp_chave.Name = "textBoxp_chave";
-            this.textBoxp_chave.Size = new System.Drawing.Size(100, 20);
-            this.textBoxp_chave.TabIndex = 6;
+            this.textBoxpChave.Location = new System.Drawing.Point(88, 139);
+            this.textBoxpChave.Name = "textBoxpChave";
+            this.textBoxpChave.Size = new System.Drawing.Size(100, 20);
+            this.textBoxpChave.TabIndex = 6;
             // 
             // button_chave
             // 
-            this.button_chave.Location = new System.Drawing.Point(24, 107);
+            this.button_chave.Location = new System.Drawing.Point(12, 136);
             this.button_chave.Name = "button_chave";
-            this.button_chave.Size = new System.Drawing.Size(56, 23);
+            this.button_chave.Size = new System.Drawing.Size(66, 23);
             this.button_chave.TabIndex = 5;
-            this.button_chave.Text = "Chave";
+            this.button_chave.Text = "Certificado";
             this.button_chave.UseVisualStyleBackColor = true;
             this.button_chave.Click += new System.EventHandler(this.buttonChaveClick);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 112);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Permissão :";
+            // 
+            // comboBoxpPermissao
+            // 
+            this.comboBoxpPermissao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxpPermissao.FormattingEnabled = true;
+            this.comboBoxpPermissao.Items.AddRange(new object[] {
+            "Administrador",
+            "Usuario"});
+            this.comboBoxpPermissao.Location = new System.Drawing.Point(88, 107);
+            this.comboBoxpPermissao.Name = "comboBoxpPermissao";
+            this.comboBoxpPermissao.Size = new System.Drawing.Size(100, 21);
+            this.comboBoxpPermissao.TabIndex = 13;
             // 
             // cadastro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 196);
+            this.ClientSize = new System.Drawing.Size(234, 226);
+            this.Controls.Add(this.comboBoxpPermissao);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button_chave);
-            this.Controls.Add(this.textBoxp_chave);
-            this.Controls.Add(this.textBoxp_login);
+            this.Controls.Add(this.textBoxpChave);
+            this.Controls.Add(this.textBoxpLogin);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxp_pass);
-            this.Controls.Add(this.textBoxp_nome);
+            this.Controls.Add(this.textBoxpPass);
+            this.Controls.Add(this.textBoxpNome);
             this.Controls.Add(this.button_privado);
             this.Controls.Add(this.label2_privado);
             this.Controls.Add(this.label1_privado);
@@ -142,13 +167,15 @@
         private System.Windows.Forms.Label label1_privado;
         private System.Windows.Forms.Label label2_privado;
         private System.Windows.Forms.Button button_privado;
-        private System.Windows.Forms.TextBox textBoxp_nome;
-        private System.Windows.Forms.TextBox textBoxp_pass;
+        private System.Windows.Forms.TextBox textBoxpNome;
+        private System.Windows.Forms.TextBox textBoxpPass;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxp_login;
-        private System.Windows.Forms.TextBox textBoxp_chave;
+        private System.Windows.Forms.TextBox textBoxpLogin;
+        private System.Windows.Forms.TextBox textBoxpChave;
         private System.Windows.Forms.Button button_chave;
         private System.Windows.Forms.OpenFileDialog anexar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBoxpPermissao;
 
     }
 }

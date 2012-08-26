@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(gerenciaMensagem));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.mc_novo = new System.Windows.Forms.ToolStripMenuItem();
-            this.catalogo_geral = new System.Windows.Forms.ToolStripMenuItem();
+            this.mcNovo = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoGeral = new System.Windows.Forms.ToolStripMenuItem();
             this.sair = new System.Windows.Forms.ToolStripMenuItem();
             this.mc_split = new System.Windows.Forms.SplitContainer();
-            this.mc_treeview = new System.Windows.Forms.TreeView();
+            this.mcTreeview = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.mc_list = new System.Windows.Forms.ListView();
+            this.mcList = new System.Windows.Forms.ListView();
             this.De = new System.Windows.Forms.ColumnHeader();
             this.Assunto = new System.Windows.Forms.ColumnHeader();
             this.Recebido = new System.Windows.Forms.ColumnHeader();
@@ -52,8 +52,8 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mc_novo,
-            this.catalogo_geral,
+            this.mcNovo,
+            this.catalogoGeral,
             this.sair});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -61,25 +61,25 @@
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // mc_novo
+            // mcNovo
             // 
-            this.mc_novo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mc_novo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.mc_novo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.mc_novo.Image = ((System.Drawing.Image)(resources.GetObject("mc_novo.Image")));
-            this.mc_novo.Name = "mc_novo";
-            this.mc_novo.Size = new System.Drawing.Size(65, 20);
-            this.mc_novo.Text = "&Novo";
-            this.mc_novo.Click += new System.EventHandler(this.novo_Click);
+            this.mcNovo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mcNovo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.mcNovo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.mcNovo.Image = ((System.Drawing.Image)(resources.GetObject("mcNovo.Image")));
+            this.mcNovo.Name = "mcNovo";
+            this.mcNovo.Size = new System.Drawing.Size(65, 20);
+            this.mcNovo.Text = "&Novo";
+            this.mcNovo.Click += new System.EventHandler(this.novoClick);
             // 
-            // catalogo_geral
+            // catalogoGeral
             // 
-            this.catalogo_geral.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.catalogo_geral.Image = ((System.Drawing.Image)(resources.GetObject("catalogo_geral.Image")));
-            this.catalogo_geral.Name = "catalogo_geral";
-            this.catalogo_geral.Size = new System.Drawing.Size(83, 20);
-            this.catalogo_geral.Text = "&Catálogo";
-            this.catalogo_geral.Click += new System.EventHandler(this.catalogoGeral_Click);
+            this.catalogoGeral.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.catalogoGeral.Image = ((System.Drawing.Image)(resources.GetObject("catalogoGeral.Image")));
+            this.catalogoGeral.Name = "catalogoGeral";
+            this.catalogoGeral.Size = new System.Drawing.Size(83, 20);
+            this.catalogoGeral.Text = "&Catálogo";
+            this.catalogoGeral.Click += new System.EventHandler(this.catalogoGeralClick);
             // 
             // sair
             // 
@@ -88,7 +88,7 @@
             this.sair.Name = "sair";
             this.sair.Size = new System.Drawing.Size(72, 20);
             this.sair.Text = "&Fechar";
-            this.sair.Click += new System.EventHandler(this.sair_Click);
+            this.sair.Click += new System.EventHandler(this.sairClick);
             // 
             // mc_split
             // 
@@ -100,26 +100,26 @@
             // 
             // mc_split.Panel1
             // 
-            this.mc_split.Panel1.Controls.Add(this.mc_treeview);
+            this.mc_split.Panel1.Controls.Add(this.mcTreeview);
             // 
             // mc_split.Panel2
             // 
-            this.mc_split.Panel2.Controls.Add(this.mc_list);
+            this.mc_split.Panel2.Controls.Add(this.mcList);
             this.mc_split.Size = new System.Drawing.Size(570, 256);
             this.mc_split.SplitterDistance = 181;
             this.mc_split.TabIndex = 2;
             // 
-            // mc_treeview
+            // mcTreeview
             // 
-            this.mc_treeview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mc_treeview.ImageKey = "pasta.jpg";
-            this.mc_treeview.ImageList = this.imageList1;
-            this.mc_treeview.Location = new System.Drawing.Point(0, 0);
-            this.mc_treeview.Name = "mc_treeview";
-            this.mc_treeview.SelectedImageIndex = 0;
-            this.mc_treeview.Size = new System.Drawing.Size(177, 252);
-            this.mc_treeview.TabIndex = 0;
-            this.mc_treeview.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.mc_treeview_node_click);
+            this.mcTreeview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mcTreeview.ImageKey = "pasta.jpg";
+            this.mcTreeview.ImageList = this.imageList1;
+            this.mcTreeview.Location = new System.Drawing.Point(0, 0);
+            this.mcTreeview.Name = "mcTreeview";
+            this.mcTreeview.SelectedImageIndex = 0;
+            this.mcTreeview.Size = new System.Drawing.Size(177, 252);
+            this.mcTreeview.TabIndex = 0;
+            this.mcTreeview.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.mcTreeviewNodeClick);
             // 
             // imageList1
             // 
@@ -127,24 +127,24 @@
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "pasta.jpg");
             // 
-            // mc_list
+            // mcList
             // 
-            this.mc_list.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.mcList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.De,
             this.Assunto,
             this.Recebido,
             this.Tamanho});
-            this.mc_list.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mc_list.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mc_list.Location = new System.Drawing.Point(0, 0);
-            this.mc_list.Name = "mc_list";
-            this.mc_list.Size = new System.Drawing.Size(381, 252);
-            this.mc_list.SmallImageList = this.imageList1;
-            this.mc_list.TabIndex = 0;
-            this.mc_list.UseCompatibleStateImageBehavior = false;
-            this.mc_list.View = System.Windows.Forms.View.Details;
-            this.mc_list.DoubleClick += new System.EventHandler(this.duplo_click);
-            this.mc_list.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.coluna_click);
+            this.mcList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mcList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mcList.Location = new System.Drawing.Point(0, 0);
+            this.mcList.Name = "mcList";
+            this.mcList.Size = new System.Drawing.Size(381, 252);
+            this.mcList.SmallImageList = this.imageList1;
+            this.mcList.TabIndex = 0;
+            this.mcList.UseCompatibleStateImageBehavior = false;
+            this.mcList.View = System.Windows.Forms.View.Details;
+            this.mcList.DoubleClick += new System.EventHandler(this.duploClick);
+            this.mcList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.colunaClick);
             // 
             // De
             // 
@@ -190,12 +190,12 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem mc_novo;
-        private System.Windows.Forms.ToolStripMenuItem catalogo_geral;
+        private System.Windows.Forms.ToolStripMenuItem mcNovo;
+        private System.Windows.Forms.ToolStripMenuItem catalogoGeral;
         private System.Windows.Forms.ToolStripMenuItem sair;
         private System.Windows.Forms.SplitContainer mc_split;
-        private System.Windows.Forms.TreeView mc_treeview;
-        private System.Windows.Forms.ListView mc_list;
+        private System.Windows.Forms.TreeView mcTreeview;
+        private System.Windows.Forms.ListView mcList;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ColumnHeader De;
         private System.Windows.Forms.ColumnHeader Assunto;

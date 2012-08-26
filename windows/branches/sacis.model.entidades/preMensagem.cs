@@ -45,60 +45,6 @@ namespace sacis.model.entidades
             _arquivoCripto = cripto;
             _arquivoPlain = plain;
         }
-        
-        ///<summary>
-        ///
-        /// Métodos de, para, texto, criptografar, assinar, arquivoCripto e arquivoPlain
-        /// sao gets e sets usados para a serialização e deserialização do objeto em XML
-        ///
-        ///</summary>
-        public string de
-        {
-            get { return _de; }
-            set { _de = value; }
-        }
-
-        public string para
-        {
-            get { return _para; }
-            set { _para = value; }
-        }
-
-        public string assunto
-        {
-            get { return _assunto; }
-            set { _assunto = value; }
-        }
-
-        public string texto
-        {
-            get { return _texto; }
-            set { _texto = value; }
-        }
-
-        public bool criptografar
-        {
-            get { return _criptografar; }
-            set { _criptografar = value; }
-        }
-
-        public bool assinar
-        {
-            get { return _assinar; }
-            set { _assinar = value; }
-        }
-
-        public HashSet<string> arquivoCripto
-        {
-            get { return _arquivoCripto; }
-            set { _arquivoCripto = value; }
-        }
-
-        public HashSet<string> arquivoPlain
-        {
-            get { return _arquivoPlain; }
-            set { _arquivoPlain = value; }
-        }
 
         ///<summary>
         ///

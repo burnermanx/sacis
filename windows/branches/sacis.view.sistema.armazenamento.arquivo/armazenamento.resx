@@ -117,10 +117,62 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="anexar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>186, 17</value>
+  <metadata name="colunaArquivoCripto.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
-  <metadata name="folderBrowserDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="colunaRemoverCripto.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="colunaRemoverCripto.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        /9j/4AAQSkZJRgABAQEASABIAAD/2wBDAA8KCgsLCw8MDA8WDw0PFhkTDw8TGR4XFxcXFx4eFxoaGhoX
+        Hh0iIyQjIh0sLC8vLCw7Ojo6Ozs7Ozs7Ozs7Ozv/2wBDARAPDxESERYSEhYXEhQSFx0YGBgYHScdHR0d
+        HScuJCAgICAkLiotJycnLSozMy4uMzM7Ozo7Ozs7Ozs7Ozs7Ozv/wAARCAAyACoDAREAAhEBAxEB/8QA
+        GQAAAgMBAAAAAAAAAAAAAAAAAwUBBAYC/8QANRAAAgEDAgIHBQcFAAAAAAAAAQIDAAQREiEFMRMiMlFh
+        cbEzQWKBkQYUFRYjJNFSgqHB4f/EABgBAQEBAQEAAAAAAAAAAAAAAAABAgME/8QAHxEBAAIBBQEBAQAA
+        AAAAAAAAAAECIQMREiIxQQQT/9oADAMBAAIRAxEAPwDXTteyXckfTGGFcaAq8879s1YSUmxZu07P/dW+
+        rO8qt1ZWCj9y2geLkU6G9itvy3EcjiDRt8E7/wDanU7L9hNneyvp5kG+JF1r9SBWWmgTpCqk4yRvUUJx
+        +q3iAf8AVahmQWQZ5V0wyG1tC/ajVvMZ9aYTdMVnbIerDGPJF/ipKrTDERHyx57VzaHqNBS4Dhvdg59a
+        Qks1xC54nb9JcK5VEfzQht18xXs04pbH15rTb034fdC+tUuAhQN7j4c8eFcbxxtMeu1cwtqtYV22+kfE
+        P5rLQtRQrlNaYHM5H1GKsTlJ8KrK8tYrJxO3Vt/aaxyydgK62rblj65xOMldjxy7/GRbM6TWch6KMRYC
+        r71YDn516L6Nf48sxf7u511O+3xqtNeN6EkdZR5msq7oOJSAhY8hv9KBHdPb3bzQiIKsq9Zh2jjcGt11
+        JiYz4zNYlVteFW1jKbmDUZsYUuQdOeeNq63/AE2vHGWa6URO6/Y3t2zlZeXfiuDoZfeFEgB/p9agsZoI
+        ddSle8YoEENtcWwELnTp8Mg+IO1BHErhrCLpHCyAd23rmgR2/wBpri6nEVvCEydzux/wKDRcOguWB1rj
+        W2ok8/nQOAm1B3QRgHmM0FKWCF3IaNWHcQDQHjt4IvZxqnLsqB6UBl5UE0H/2Q==
+</value>
+  </data>
+  <metadata name="colunaArquivoDescripto.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="colunaRemoverDescripto.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colunaRemoverDescripto.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        /9j/4AAQSkZJRgABAQEASABIAAD/2wBDAA8KCgsLCw8MDA8WDw0PFhkTDw8TGR4XFxcXFx4eFxoaGhoX
+        Hh0iIyQjIh0sLC8vLCw7Ojo6Ozs7Ozs7Ozs7Ozv/2wBDARAPDxESERYSEhYXEhQSFx0YGBgYHScdHR0d
+        HScuJCAgICAkLiotJycnLSozMy4uMzM7Ozo7Ozs7Ozs7Ozs7Ozv/wAARCAAyACoDAREAAhEBAxEB/8QA
+        GQAAAgMBAAAAAAAAAAAAAAAAAwUBBAYC/8QANRAAAgEDAgIHBQcFAAAAAAAAAQIDAAQREiEFMRMiMlFh
+        cbEzQWKBkQYUFRYjJNFSgqHB4f/EABgBAQEBAQEAAAAAAAAAAAAAAAABAgME/8QAHxEBAAIBBQEBAQAA
+        AAAAAAAAAAECIQMREiIxQQQT/9oADAMBAAIRAxEAPwDXTteyXckfTGGFcaAq8879s1YSUmxZu07P/dW+
+        rO8qt1ZWCj9y2geLkU6G9itvy3EcjiDRt8E7/wDanU7L9hNneyvp5kG+JF1r9SBWWmgTpCqk4yRvUUJx
+        +q3iAf8AVahmQWQZ5V0wyG1tC/ajVvMZ9aYTdMVnbIerDGPJF/ipKrTDERHyx57VzaHqNBS4Dhvdg59a
+        Qks1xC54nb9JcK5VEfzQht18xXs04pbH15rTb034fdC+tUuAhQN7j4c8eFcbxxtMeu1cwtqtYV22+kfE
+        P5rLQtRQrlNaYHM5H1GKsTlJ8KrK8tYrJxO3Vt/aaxyydgK62rblj65xOMldjxy7/GRbM6TWch6KMRYC
+        r71YDn516L6Nf48sxf7u511O+3xqtNeN6EkdZR5msq7oOJSAhY8hv9KBHdPb3bzQiIKsq9Zh2jjcGt11
+        JiYz4zNYlVteFW1jKbmDUZsYUuQdOeeNq63/AE2vHGWa6URO6/Y3t2zlZeXfiuDoZfeFEgB/p9agsZoI
+        ddSle8YoEENtcWwELnTp8Mg+IO1BHErhrCLpHCyAd23rmgR2/wBpri6nEVvCEydzux/wKDRcOguWB1rj
+        W2ok8/nQOAm1B3QRgHmM0FKWCF3IaNWHcQDQHjt4IvZxqnLsqB6UBl5UE0H/2Q==
+</value>
+  </data>
+  <metadata name="anexar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="selecionaPastaDestino.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>104, 17</value>
+  </metadata>
+  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
 </root>

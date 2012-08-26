@@ -11,7 +11,7 @@ using System.Text;
 
 namespace sacis.model.entidades
 {
-    public class mensagemNovo
+    public class mensagem
     {
         private string _de;
         private string _para;
@@ -25,7 +25,7 @@ namespace sacis.model.entidades
 
         ///<summary>
         ///
-        /// Métodos de, para, texto, criptografar, assinar e anexos
+        /// Métodos de, para, assunto, texto, criptografar, assinatura, anexos e assinar
         /// sao gets e sets usados para a serialização e deserialização do objeto em XML
         ///
         ///</summary>
@@ -82,14 +82,14 @@ namespace sacis.model.entidades
         /// Método contrutor para inicializar o objeto
         ///
         ///</summary>
-        public mensagemNovo() { }
+        public mensagem() { }
 
         ///<summary>
         ///
         /// Método contrutor para inicializar o objeto atraves de parâmetros
         ///
         ///</summary>
-        public mensagemNovo(string from, string to, string subject, string text, string signature, bool cript, bool sign, List<anexo> attachments) {
+        public mensagem(string from, string to, string subject, string text, string signature, bool cript, bool sign, List<anexo> attachments) {
 
             _de = from;
             _para = to;

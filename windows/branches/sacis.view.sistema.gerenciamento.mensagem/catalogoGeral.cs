@@ -28,9 +28,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         ///<summary>
         ///
-        /// Metodo contrutor _para inicializar os componentes do formulario
-        ///
-        /// @param usuario        Variavel do tipo string
+        /// Metodo contrutor para inicializar os componentes do formulario utilizando o login do usuario
         /// 
         ///</summary>
         public catalogoGeral(string usuario)
@@ -43,7 +41,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         ///<summary>
         ///
-        /// Metodo _para exibir os contatos no DataGridView _de catalogo geral
+        /// Metodo para exibir os contatos no DataGridView do catalogo geral
         ///
         ///</summary>
         private void exibeContatos() {
@@ -56,14 +54,14 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
                 foreach (contato c in contatos)
                 {
-                    catalogo_DataGridView.Rows.Add(1);
-                    catalogo_DataGridView.Rows[contador].Cells[0].Value = c.getNome();
-                    catalogo_DataGridView.Rows[contador].Cells[1].Value = c.getEmail();
-                    catalogo_DataGridView.Rows[contador].Cells[2].Value = false;
+                    catalogoDataGridView.Rows.Add(1);
+                    catalogoDataGridView.Rows[contador].Cells[0].Value = c.getNome();
+                    catalogoDataGridView.Rows[contador].Cells[1].Value = c.getEmail();
+                    catalogoDataGridView.Rows[contador].Cells[2].Value = false;
                     contador++;
                 }
 
-                catalogo_DataGridView.Visible = true;
+                catalogoDataGridView.Visible = true;
             }
             catch (excecao except)
             {
@@ -73,26 +71,23 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         ///<summary>
         ///
-        /// Metodo _para o botao Adicionar
-        ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base _para classes que contém dados _de evento
+        /// Método para adicionar contatos através do clique no botão Adicionar.
         ///
         ///</summary>
-        private void adicionaBotao_Click(object sender, EventArgs e)
+        private void adicionaBotaoClick(object sender, EventArgs e)
         {
             try
             {
-                int contagem = catalogo_DataGridView.Rows.Count;
+                int contagem = catalogoDataGridView.Rows.Count;
                 List<contato> lista = new List<contato>();
 
                 for (int i = 0; i < contagem; i++)
                 {
 
-                    if (catalogo_DataGridView.Rows[i].Cells[2].Value.Equals(true))
+                    if (catalogoDataGridView.Rows[i].Cells[2].Value.Equals(true))
                     {
-                        string nome = catalogo_DataGridView.Rows[i].Cells[0].Value.ToString();
-                        string email = catalogo_DataGridView.Rows[i].Cells[1].Value.ToString();
+                        string nome = catalogoDataGridView.Rows[i].Cells[0].Value.ToString();
+                        string email = catalogoDataGridView.Rows[i].Cells[1].Value.ToString();
                         contato contact = new contato(nome, email);
                         lista.Add(contact);
                     }
@@ -102,7 +97,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
                 for (int i = 0; i < contagem; i++)
                 {
-                    catalogo_DataGridView.Rows[i].Cells[2].Value = false;
+                    catalogoDataGridView.Rows[i].Cells[2].Value = false;
                 }
             }
             catch (excecao except)
@@ -113,13 +108,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         ///<summary>
         ///
-        /// Metodo _para o botao Cancelar
-        ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base _para classes que contém dados _de evento
+        /// Método para cancelar a adição de contatos através do botão Cancelar.
         ///
         ///</summary>
-        private void cancela_Click(object sender, EventArgs e)
+        private void cancelaClick(object sender, EventArgs e)
         {
             this.Close();
         }

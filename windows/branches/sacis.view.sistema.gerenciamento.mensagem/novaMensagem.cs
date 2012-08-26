@@ -36,9 +36,8 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         ///<summary>
         ///
-        /// Metodo contrutor _para inicializar os componentes do formulario
-        ///
-        /// @param nome       Variável do tipo string
+        /// Metodo construtor para inicializar os componentes do formulario 
+        /// atraves do login
         /// 
         ///</summary>
         public novaMensagem(string nome)
@@ -50,13 +49,10 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         ///<summary>
         ///
-        /// Metodo _para chamar formulario _para catalogo pessoal
+        /// Metodo para chamar o formulario do catalogo pessoal
         ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base _para classes que contém dados _de evento
-        /// 
         ///</summary>
-        private void para_label_Click(object sender, EventArgs e)
+        private void paraLabelClick(object sender, EventArgs e)
         {
             try
             {
@@ -69,11 +65,11 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 else
                 {
                     lista.Clear();
-                    lista = gerenciaServlet.converteParaLista(novo_para.Text);
+                    lista = gerenciaServlet.converteParaLista(novoPara.Text);
                     newForm = new catalogoPessoal(usuario, lista);
                 }
 
-                newForm.FormClosed += new FormClosedEventHandler(form_visivel);
+                newForm.FormClosed += new FormClosedEventHandler(formVisivel);
                 newForm.ShowDialog();
 
                 lista = newForm.getListaContatos();
@@ -83,13 +79,13 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             catch (excecao except)
             {
                 MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                novo_para.Clear();
+                novoPara.Clear();
             }
         }
 
         ///<summary>
         ///
-        /// Metodo _para exibir nome dos contatos no textbox _para
+        /// Metodo para exibir nome dos contatos no textbox para
         /// 
         ///</summary>
         private void exibeNomeContatos() {
@@ -98,19 +94,16 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
             foreach (contato c in lista) contatos += c.getNome() + "(" + c.getEmail() + ")" + ";";
 
-            novo_para.Text = contatos;
+            novoPara.Text = contatos;
         
         }
 
         ///<summary>
         ///
-        /// Metodo _para chamar formulario _para anexar arquivos
-        ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base _para classes que contém dados _de evento
+        /// Metodo para chamar o formulario de anexar arquivos
         ///
         ///</summary>
-        private void anexar_Click(object sender, EventArgs e)
+        private void anexarClick(object sender, EventArgs e)
         {
 
             novaMensagemAnexar newForm;
@@ -128,7 +121,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 
             }
 
-            newForm.FormClosed += new FormClosedEventHandler(form_visivel);
+            newForm.FormClosed += new FormClosedEventHandler(formVisivel);
             newForm.ShowDialog();
 
             foreach (String f in newForm.getCriptoFiles()) CriptoFiles.Add(f);
@@ -140,7 +133,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         ///<summary>
         ///
-        /// Metodo _para exibir o nome dos arquivos escolhidos no campo _de _anexos
+        /// Metodo para exibir o nome dos arquivos escolhidos no campo de anexos
         ///
         ///</summary>
         private void exibeNomeArquivos() {
@@ -161,24 +154,21 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
             }
 
-            nome_anexos.Text = naText;     
+            nomeAnexos.Text = naText;     
                 
         }
 
         ///<summary>
         ///
-        /// Metodo _para o botao _de enviar
-        ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base _para classes que contém dados _de evento
+        /// Metodo para enviar a nova mensagem através do botao de enviar
         ///
         ///</summary>
-        private void novo_enviar_Click(object sender, EventArgs e)
+        private void novoEnviarClick(object sender, EventArgs e)
         {
 
             try
             {
-                preMensagem msg = new preMensagem(usuario, novo_para.Text, novo_assunto.Text, novo_texto.Text, novo_cripto.Checked, novo_assina.Checked, CriptoFiles, PlainFiles);
+                preMensagem msg = new preMensagem(usuario, novoPara.Text, novoAssunto.Text, novoTexto.Text, novoCripto.Checked, novoAssina.Checked, CriptoFiles, PlainFiles);
                 bool ret = gerenciaServlet.criaMensagem(msg);
 
                 if (ret) MessageBox.Show(MSG_ENVIO_OK, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -189,20 +179,17 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             catch (excecao except)
             {
                 MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                novo_para.Clear();
+                novoPara.Clear();
             }
 
         }
 
         ///<summary>
         ///
-        /// Metodo _para o botao _de fechar
-        ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base _para classes que contém dados _de evento
+        /// Metodo para o botao de fechar
         ///
         ///</summary>
-        private void fechar_Click(object sender, EventArgs e)
+        private void fecharClick(object sender, EventArgs e)
         {
 
             if (DialogResult.OK == MessageBox.Show(MSG_CONFIRMA_SAIDA, MSG_SAIR, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1))
@@ -212,69 +199,54 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         ///<summary>
         ///
-        /// Metodo _para mudar a cor do label com o mouse sobre ele
-        ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base _para classes que contém dados _de evento
+        /// Metodo para mudar a cor do label com o mouse sobre ele
         ///
         ///</summary>
-        private void anexar_over(object sender, EventArgs e)
+        private void anexarOver(object sender, EventArgs e)
         {
-            novo_anarq.BorderStyle = BorderStyle.Fixed3D;
-            novo_anarq.BackColor = System.Drawing.Color.PaleGoldenrod;
+            novoAnarq.BorderStyle = BorderStyle.Fixed3D;
+            novoAnarq.BackColor = System.Drawing.Color.PaleGoldenrod;
         }
 
         ///<summary>
         ///
-        /// Metodo _para mudar a cor do label com o mouse fora dele
-        ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base _para classes que contém dados _de evento
+        /// Metodo para mudar a cor do label com o mouse fora dele
         ///
         ///</summary>
-        private void anexar_out(object sender, EventArgs e)
+        private void anexarOut(object sender, EventArgs e)
         {
-            novo_anarq.BorderStyle = BorderStyle.None;
-            novo_anarq.BackColor = System.Drawing.Color.Empty;
+            novoAnarq.BorderStyle = BorderStyle.None;
+            novoAnarq.BackColor = System.Drawing.Color.Empty;
         }
 
         ///<summary>
         ///
-        /// Metodo _para mudar a cor do label com o mouse sobre ele
-        ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base _para classes que contém dados _de evento
+        /// Metodo para mudar a cor do label com o mouse sobre ele
         ///
         ///</summary>
-        private void para_over(object sender, EventArgs e)
+        private void paraOver(object sender, EventArgs e)
         {
-            para_label.BorderStyle = BorderStyle.Fixed3D;
-            para_label.BackColor = System.Drawing.Color.PaleGoldenrod;
+            paraLabel.BorderStyle = BorderStyle.Fixed3D;
+            paraLabel.BackColor = System.Drawing.Color.PaleGoldenrod;
         }
 
         ///<summary>
         ///
-        /// Metodo _para mudar a cor do label com o mouse fora dele
-        ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base _para classes que contém dados _de evento
+        /// Metodo para mudar a cor do label com o mouse fora dele
         ///
         ///</summary>
-        private void para_out(object sender, EventArgs e)
+        private void paraOut(object sender, EventArgs e)
         {
-            para_label.BorderStyle = BorderStyle.None;
-            para_label.BackColor = System.Drawing.Color.Empty;
+            paraLabel.BorderStyle = BorderStyle.None;
+            paraLabel.BackColor = System.Drawing.Color.Empty;
         }
 
         ///<summary>
         ///
-        /// Método _para tornar o formulário visivel
-        ///
-        /// @param sender        Objeto com os dados do formulário
-        /// @param e             Objeto base contendo a tecla acionada no evento.
+        /// Método para tornar o formulário visivel
         ///
         ///</summary>
-        private void form_visivel(object sender, FormClosedEventArgs e)
+        private void formVisivel(object sender, FormClosedEventArgs e)
         {
             this.Visible = true;
         }

@@ -12,6 +12,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="verificaUsuarioManutencao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="verificaUsuarioManutencaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="verificaUsuarioManutencaoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="verificaUsuario">
         <s:complexType>
           <s:sequence>
@@ -113,6 +128,12 @@
   <wsdl:message name="testeSoapOut">
     <wsdl:part name="parameters" element="tns:testeResponse" />
   </wsdl:message>
+  <wsdl:message name="verificaUsuarioManutencaoSoapIn">
+    <wsdl:part name="parameters" element="tns:verificaUsuarioManutencao" />
+  </wsdl:message>
+  <wsdl:message name="verificaUsuarioManutencaoSoapOut">
+    <wsdl:part name="parameters" element="tns:verificaUsuarioManutencaoResponse" />
+  </wsdl:message>
   <wsdl:message name="verificaUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:verificaUsuario" />
   </wsdl:message>
@@ -160,6 +181,10 @@
       <wsdl:input message="tns:testeSoapIn" />
       <wsdl:output message="tns:testeSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="verificaUsuarioManutencao">
+      <wsdl:input message="tns:verificaUsuarioManutencaoSoapIn" />
+      <wsdl:output message="tns:verificaUsuarioManutencaoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="verificaUsuario">
       <wsdl:input message="tns:verificaUsuarioSoapIn" />
       <wsdl:output message="tns:verificaUsuarioSoapOut" />
@@ -193,6 +218,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="teste">
       <soap:operation soapAction="http://tempuri.org/teste" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verificaUsuarioManutencao">
+      <soap:operation soapAction="http://tempuri.org/verificaUsuarioManutencao" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -268,6 +302,15 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="teste">
       <soap12:operation soapAction="http://tempuri.org/teste" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verificaUsuarioManutencao">
+      <soap12:operation soapAction="http://tempuri.org/verificaUsuarioManutencao" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

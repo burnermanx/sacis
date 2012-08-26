@@ -51,6 +51,7 @@
     <Compile Include="serial.cs" />
     <Compile Include="verificaCampos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="verificaData.cs" />
     <Compile Include="verificaUsuario.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿///<summary>
-/// Implementação do formulario de login
-///
+/// Formulário de login para acessar o sistema de manutenção de usuarios
+/// 
 /// @author Fabio Augusto
 ///</summary>
 
@@ -15,122 +15,102 @@ using System.Windows.Forms;
 using sacis.view.control;
 using sacis.model.excecao;
 
-
-namespace sacis.view.sistema.gerenciamento.mensagem
+namespace sacis.view.manutencao.cadastro
 {
-    public partial class gerenciaLogin : Form
+    public partial class manutencaoLogin : Form
     {
-
         private static string MSG_ACESSO_NEGADO = "Acesso Negado!";
         private static string MSG_ERRO = "Erro";
 
         ///<summary>
-        ///
-        /// Metodo para inicializar os componentes do formularios
+        /// 
+        /// Metodo para inicializar os componentes do formulario.
         ///
         ///</summary>
-        public gerenciaLogin()
+        public manutencaoLogin()
         {
             InitializeComponent();
         }
 
         ///<summary>
         /// 
-        /// Método para chamar o metodo login atraves do click no botao de OK
-        /// 
+        /// Método para chamar o metodo acessaManutencao através do clique no botao OK.
+        ///
         ///</summary>
-        private void clickCliente(object sender, EventArgs e)
+        private void okManutencaoClick(object sender, EventArgs e)
         {
-
-            login();
-
+            acessaManutencao();
         }
-        
+
         ///<summary>
         /// 
-        /// Método para chamar o metodo login atraves do teclado
-        /// 
+        /// Método para chamar o metodo acessaManutencao através do teclado.
+        ///
         ///</summary>
-        private void clickCliente(object sender, KeyEventArgs e)
+        private void okManutencaoClick(object sender, KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.Enter)
             {
-
-                login();
-
+                acessaManutencao();
             }
             else if (e.KeyCode == Keys.Escape) this.Close();
-
         }
 
         ///<summary>
         /// 
-        /// Método para chamar formulário de gerenciamento de mensagens
-        /// 
+        /// Método para acessar formulário de manipulação de arquivos se usuario cadastrado
+        ///
         ///</summary>
-        private void login() {
-
+        private void acessaManutencao()
+        {
             try
             {
-                string name = textBoxNome.Text;
-                string pass = textBoxPass.Text;
+                string name = loginManutencaoTextBox.Text;
+                string pass = senhaManutencaoTextBox.Text;
 
-                string hash = gerenciaServlet.geraHash(pass);
+                string hashpass = manutencaoServlet.geraHash(pass);
 
-                if (gerenciaServlet.consultaUsuario(name, hash))
+                if (manutencaoServlet.verificaUsuario(name, hashpass))
                 {
-
-                    gerenciaServlet.atualizaUsuarioLogLocal(name, hash);
-
-                    gerenciaMensagem newForm = new gerenciaMensagem(name);
+                    manutencao newForm = new manutencao();
                     newForm.FormClosed += new FormClosedEventHandler(formVisivel);
                     this.Visible = false;
                     newForm.ShowDialog();
-
                 }
                 else
                 {
-
                     MessageBox.Show(MSG_ACESSO_NEGADO, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     limpaCampos();
-
                 }
+
             }
             catch (excecao except)
             {
-
                 MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 limpaCampos();
-
-            }           
-        
+            }   
         }
 
         ///<summary>
-        /// 
+        ///
         /// Método para tornar o formulário visivel
-        /// 
+        ///
         ///</summary>
         private void formVisivel(object sender, FormClosedEventArgs e)
         {
-
             this.Visible = true;
             limpaCampos();
-
         }
 
         ///<summary>
-        /// 
+        ///
         /// Método para limpar os campos do formulário
         /// 
-        ///</summary>
+        ///</summary>  
         private void limpaCampos()
         {
-
-            this.textBoxNome.Clear();
-            this.textBoxPass.Clear();
-
+            this.senhaManutencaoTextBox.Clear();
+            this.loginManutencaoTextBox.Clear();
         }
 
     }

@@ -27,19 +27,22 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Método para criar arquivo através de uma string contendo o caminho destino completo incluindo 
-        /// o nome do arquivo e sua extensão e uma string contendo o conteúdo do arquivo
+        /// Metodo para criar arquivo texto atraves do caminho destino e do conteudo em string
         ///       
         /// Retorna excecao: Erro de gravação
         ///
         ///</summary>
-        public static void criaArquivo(string destino, string conteudo)
-        {
-            try
-            {                
-                StreamWriter write = new StreamWriter(destino);
-                write.Write(conteudo);
-                write.Close();
+        public static void criaArquivoTexto(string caminho, string conteudo) {
+
+            try{
+
+                FileStream file = new FileStream(caminho, FileMode.Create, FileAccess.Write);
+                StreamWriter sw = new StreamWriter(file);
+                sw.Write(conteudo);
+
+                sw.Close();
+                file.Close();
+        
             }
             catch (Exception except)
             {
@@ -49,35 +52,92 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Método para retornar o conteúdo do arquivo passado através de uma string contendo 
+        /// Método para retornar uma string do conteúdo do arquivo passado através de uma string contendo 
         /// o caminho completo incluindo o nome do arquivo e sua extensão
         /// 
         /// Retorna excecao: Erro de leitura de arquivo
         ///
         ///</summary>
-        public static string leArquivo(string caminho)
+        public static string leArquivoTexto(string caminho)
         {
-            string conteudo = null;
 
             try
-            {                                
-                StreamReader le = new StreamReader(caminho,true);
-                conteudo = le.ReadToEnd();                
-                le.Close();
-                //Console.Out.WriteLine("copia - " + conteudo.Length);
-                //Console.Out.WriteLine(conteudo);
-                //FileInfo file = new FileInfo(caminho);
-                //FileStream f2 = file.OpenRead();
-                
-                //Console.Out.WriteLine(file.Length.ToString());
+            {
+                FileStream file = new FileStream(caminho, FileMode.Open, FileAccess.Read);
+                StreamReader sr = new StreamReader(file);
+
+                string conteudo = sr.ReadToEnd();
+
+                file.Close();
+                sr.Close();
+
                 return conteudo;
+
             }
             catch (Exception except)
-            {                
+            {
                 throw new excecao.excecao(MSG_ERRO_LEITURA);
-            }            
+            }
         }
+        
+        ///<summary>
+        ///
+        /// Metodo para recriar arquivo original atraves do caminho destino e do conteudo em byte
+        ///       
+        /// Retorna excecao: Erro de gravação
+        ///
+        ///</summary>
+        public static void arquivoCriaOriginal(string destino, byte[] conteudo)
+        {
+            try
+            {             
+                int tamanho = (int)conteudo.Length;
 
+                FileInfo info = new FileInfo(destino);
+                FileStream stream = info.OpenWrite();
+
+                stream.Write(conteudo, 0, tamanho);
+
+                stream.Close();
+
+            }
+            catch (Exception except)
+            {
+                throw new excecao.excecao(MSG_ERRO_GRAVACAO);
+            }
+        }
+        
+        ///<summary>
+        ///
+        /// Método para retornar o conteúdo em byte do arquivo original através de uma string contendo 
+        /// o caminho completo incluindo o nome do arquivo e sua extensão
+        /// 
+        /// Retorna excecao: Erro de leitura de arquivo
+        ///
+        ///</summary>
+        public static byte[] arquivoLeOriginal(string caminho)
+        {
+
+            try
+            {
+                FileInfo info = new FileInfo(caminho);
+                FileStream stream = info.OpenRead();
+
+                int tamanho = (int)stream.Length;
+                byte[] array = new byte[tamanho];
+                stream.Read(array, 0, tamanho);
+
+                stream.Close();
+
+                return array;
+
+            }
+            catch (Exception except)
+            {
+                throw new excecao.excecao(MSG_ERRO_LEITURA);
+            }
+        }
+        
         ///<summary>
         ///
         /// Metodo para atualizar arquivo de log local com o login e o hash da senha
@@ -89,13 +149,10 @@ namespace sacis.model.utilitarios
         {
             try
             {
-                //atualizar arquivo de log com login e hash
                 StreamWriter wr = new StreamWriter(CAMINHO_LOG, true);
 
-                //Escrevendo no arquivo
                 wr.WriteLine(login + " " + hash);
 
-                //fechando o arquivo
                 wr.Close();            
             }
             catch (Exception except)
@@ -120,12 +177,9 @@ namespace sacis.model.utilitarios
                 if (!info.Exists)
                 {
                     info.Create();
-
-                    //Cria o arquivo na pasta do programa. 
-                    //False sobrescreve todos os dados no arquivo enquanto true agrega.                
+               
                     StreamWriter wr = new StreamWriter(CAMINHO_LOG, false);
 
-                    //fechando o arquivo
                     wr.Close();
                 }
             }

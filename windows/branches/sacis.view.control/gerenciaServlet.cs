@@ -13,6 +13,7 @@ using sacis.model.excecao;
 using sacis.model.utilitarios;
 using System.IO;
 using sacis.model.entidades;
+using System.Net;
 
 namespace sacis.view.control
 {
@@ -26,6 +27,8 @@ namespace sacis.view.control
         private static string BARRA = @"\";
 
         private static localhost.Service1 WService = new localhost.Service1();
+
+
 
         ///<summary>
         ///
@@ -199,7 +202,7 @@ namespace sacis.view.control
                  
                 foreach (string s in msg.getArquivoPlain())
                 {
-                    string conteudo = manipulaArquivo.leArquivo(s);
+                    string conteudo = manipulaArquivo.leArquivoTexto(s);
                     string nome = manipulaString.retornaNomeArquivo(s);
                     anexo next = new anexo(nome, false, "", conteudo);
                     arquivosPlain.Add(next);
@@ -211,13 +214,13 @@ namespace sacis.view.control
 
                     foreach (string s in msg.getArquivoCripto())
                     {
-                        string conteudo = manipulaArquivo.leArquivo(s);
+                        string conteudo = manipulaArquivo.leArquivoTexto(s);
                         string name = manipulaString.retornaNomeArquivo(s);
                         string nomeCodificado = manipulaString.mudaExtensaoArquivo(name);
 
                         // fazer chamada para enviar conteudo lido para ser cifrado,
                         // retorná-lo junto com a chave simetrica
-                        // cifrar a chave simetrica com a cifra assimetrica
+                        //cifrar a chave simetrica com a cifra assimetrica
 
                         anexo next = new anexo(nomeCodificado, true, "cifra assimétrica da chave simetrica", conteudo);
                         arquivosCripto.Add(next);
@@ -231,11 +234,11 @@ namespace sacis.view.control
 
                     foreach (anexo a in arquivosCripto) arquivosPlain.Add(a);
 
-                    mensagemNovo mensagem = new mensagemNovo(de, nome, assunto, body, assinatura, cripto, sign, arquivosPlain);
+                    mensagem mensagem = new mensagem(de, nome, assunto, body, assinatura, cripto, sign, arquivosPlain);
                     
                     string xml = serial.serializarObjeto(mensagem);
-                    //Console.Out.WriteLine(xml);
-                    manipulaArquivo.criaArquivo(@"d:\"+nome+".txt", xml);
+                    Console.Out.WriteLine(xml);
+                    manipulaArquivo.criaArquivoTexto(@"d:\"+nome+".txt", xml);
 
                 }                               
 

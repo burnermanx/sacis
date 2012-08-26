@@ -15,7 +15,7 @@ namespace sacis.view.cliente
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new sistema_sacis());
+            Application.Run(new sistemaSacis());
         }
     }
 }
