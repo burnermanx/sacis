@@ -16,4 +16,5 @@
     <string name="sys_message">Sistema de Mensagens</string>
     <string name="sys_files">Sistema de Arquivos</string>
     <string name="file_chooser_save">Salvar</string>
+    <string name="menu_settings">Settings</string>
 </resources>
