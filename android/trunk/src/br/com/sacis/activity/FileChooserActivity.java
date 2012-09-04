@@ -3,16 +3,17 @@ package br.com.sacis.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.sacis.R;
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import br.com.sacis.R;
 
-public class FileChooserActivity extends Activity
+public class FileChooserActivity extends ListActivity
 {
 	private final int AttachFileRequestCode = 0;
 	
@@ -24,24 +25,41 @@ public class FileChooserActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.file_chooser);
+		//setContentView(R.layout.file_chooser);
 		ListView listView = getListView();
 		arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, listViewItems);
-		listView.setAdapter(arrayAdapter);
+		setListAdapter(arrayAdapter);
 		listView.setItemsCanFocus(false);
 		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 	}
 	
-	private ListView getListView()
-	{
-		return (ListView) this.findViewById(R.id.fileChooserListView);
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.filechooser_menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	switch (item.getItemId())
+		{
+		case R.id.menu_file_chooser:
+			chooseFile();
+			return true;
+		case R.id.menu_file_chooser_save:
+			saveFiles();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+    	
+    }
 	
 	/**
-	 * Acao ao clicar no botao de escolher arquivo
-	 * @param view
+	 * Acao ao clicar em escolher arquivo
 	 */
-	public void chooseFile(View view)
+	private void chooseFile()
 	{
 		//Por agora ira escolher um arquivo, sera implementada uma fileDialog para contornar esse problema
 		Intent fileChooserIntent = new Intent();
@@ -84,10 +102,9 @@ public class FileChooserActivity extends Activity
 	}
 	
 	/**
-	 * Ação ao clicar no botao de Salvar.
-	 * @param view
+	 * Ação ao clicar em Salvar.
 	 */
-	public void saveFiles(View view)
+	private void saveFiles()
 	{
 		
 	}
