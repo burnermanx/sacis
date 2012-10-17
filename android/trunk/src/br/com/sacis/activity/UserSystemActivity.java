@@ -25,7 +25,8 @@ public class UserSystemActivity extends GDActivity
 	
 	public void showMessageActivity(View view)
 	{
-		
+		Intent intent = new Intent(view.getContext(), MessagesInboxActivity.class);
+		startActivityForResult(intent, 0);
 	}
 }
 

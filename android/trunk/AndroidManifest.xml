@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="br.com.sacis"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.sacis"
     android:versionCode="1"
-    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="7" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
+        android:name="SacisApp"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@style/Theme.GDCatalog"
-        android:name="SacisApp">
-        <activity android:name=".activity.AdminActivity" android:configChanges="orientation" />
-        <activity android:name=".activity.UserLoginActivity" android:configChanges="orientation" />
+        android:theme="@style/Theme.GDCatalog" >
+        <activity
+            android:name=".activity.AdminActivity"
+            android:configChanges="orientation" />
+        <activity
+            android:name=".activity.UserLoginActivity"
+            android:configChanges="orientation" />
         <activity
             android:name=".activity.SacisMainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.FileChooserActivity"></activity>
-        <activity android:name=".activity.UserSystemActivity"></activity>
-        <activity android:name=".activity.FileTabActivity"></activity>
-        
+        <activity android:name=".activity.FileChooserActivity" >
+        </activity>
+        <activity android:name=".activity.UserSystemActivity" >
+        </activity>
+        <activity android:name=".activity.FileTabActivity" >
+        </activity>
+        <activity android:name=".activity.MessageComposerActivity" >
+        </activity>
+        <activity android:name=".activity.MessagesInboxActivity" >
+        </activity>
     </application>
 
 </manifest>

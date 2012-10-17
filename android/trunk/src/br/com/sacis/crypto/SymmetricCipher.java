@@ -1,7 +1,7 @@
 package br.com.sacis.crypto;
 
+import java.security.MessageDigest;
 import java.security.spec.AlgorithmParameterSpec;
-import java.util.Random;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -9,21 +9,30 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class SymmetricCipher
 {
+	private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
+	
+	private static final String CIPHER_ALGORITHM = "AES";
+	
+	private static final String MESSAGE_DIGEST_ALGORITHM = "SHA-256";
+	
+	// http://stackoverflow.com/questions/2090765/encryption-compatable-between-android-and-c-sharp
 	/**
 	 * 
 	 * @param inputBytes
 	 * @param ivBytes
-	 * @param keyBytes
+	 * @param passphrase
 	 * @return
 	 * @throws Exception
 	 */
 	public static byte[] encrypt(byte[] inputBytes, byte[] ivBytes,
-			byte[] keyBytes, char[] password) throws Exception
+			String passphrase) throws Exception
 	{
+		byte[] keyBytes = digest(passphrase);
+		SecretKeySpec secretKey = new SecretKeySpec(keyBytes, CIPHER_ALGORITHM);
 		AlgorithmParameterSpec ivSpec = new IvParameterSpec(ivBytes);
-		SecretKeySpec newKey = new SecretKeySpec(keyBytes, "AES");
-		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-		cipher.init(Cipher.ENCRYPT_MODE, newKey, ivSpec);
+		
+		Cipher cipher = Cipher.getInstance(CIPHER_TRANSFORMATION);
+		cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivSpec);
 		return cipher.doFinal(inputBytes);
 	}
 
@@ -31,36 +40,32 @@ public class SymmetricCipher
 	 * 
 	 * @param inputBytes
 	 * @param ivBytes
-	 * @param keyBytes
+	 * @param passphrase
 	 * @return
 	 * @throws Exception
 	 */
 	public static byte[] decrypt(byte[] inputBytes, byte[] ivBytes,
-			byte[] keyBytes) throws Exception
+			String passphrase) throws Exception
 	{
+		byte[] keyBytes = digest(passphrase);
+		SecretKeySpec secretKey = new SecretKeySpec(keyBytes, CIPHER_ALGORITHM);
 		AlgorithmParameterSpec ivSpec = new IvParameterSpec(ivBytes);
-		SecretKeySpec newKey = new SecretKeySpec(keyBytes, "AES");
-		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-		cipher.init(Cipher.DECRYPT_MODE, newKey, ivSpec);
+
+		Cipher cipher = Cipher.getInstance(CIPHER_TRANSFORMATION);
+		cipher.init(Cipher.DECRYPT_MODE, secretKey, ivSpec);
 		return cipher.doFinal(inputBytes);
 	}
 	
 	/**
-	 * Gera uma chave randomica.
+	 * 
+	 * @param text
 	 * @return
+	 * @throws Exception
 	 */
-	public static byte[] generateKey()
+	public static byte[] digest(String text) throws Exception
 	{
-		Random random = new Random();
-		StringBuilder key = new StringBuilder();
-		for (int i = 0; i < 32; i++)
-		{
-			MersenneTwister mt = new MersenneTwister(random.nextLong());
-			int genRandom = mt.next(32);
-			key.append(genRandom);
-		}
-		
-		return key.toString().getBytes();
+		MessageDigest digest = MessageDigest.getInstance(MESSAGE_DIGEST_ALGORITHM);
+		return digest.digest(text.getBytes());
 	}
 	
 }
