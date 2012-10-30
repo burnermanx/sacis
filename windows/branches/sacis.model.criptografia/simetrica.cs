@@ -17,13 +17,25 @@ namespace sacis.model.criptografia
     public class simetrica
     {
         private static string tipoSimetrica = "SHA256";
-        private static string vetorInicializacao = "@1B2c3D4e5F6g7H8";
+        //private static string vetorInicializacao = "@1B2c3D4e5F6g7H8";
         private static string MSG_CHAVE_INVALIDA = "Chave Invalida!";
         private const int N = 624;
         private const int M = 397;
         private static ulong[] mt = new ulong[N];
         private static int mti = N + 1;
         private static ulong[] matriz = {0x0,0x9908b0df};
+        private static string chave;
+
+        ///<summary>
+        /// 
+        /// Metodo para gerar o hash de uma string aleatoria
+        /// 
+        ///</summary>
+        public static string geraSenha(){
+
+            return hash.hashing(geradorCadeiaCaracteres());
+        
+        }
 
         ///<summary>
         ///
@@ -88,10 +100,10 @@ namespace sacis.model.criptografia
         
         ///<summary>
         ///
-        /// Metodo contendo algoritmo gerador de uma chave com 32 caracteres
+        /// Metodo contendo algoritmo gerador de uma cadeia de caracteres com 32 caracteres
         /// 
         ///</summary>
-        private static string geradorChaveSimetrica()
+        private static string geradorCadeiaCaracteres()
         {
             string final = "";
 
@@ -106,16 +118,26 @@ namespace sacis.model.criptografia
 
             return final;
         }
-                
+
+        ///<summary>
+        /// 
+        /// Metodo para gerar IV aleatoriamente de 16 caracteres
+        /// 
+        ///</summary>
+        private static string geradorIV()
+        {
+            string vetor = hash.hashing(geradorCadeiaCaracteres());
+            return vetor.Substring(0, 16); 
+        }
+
         ///<summary>
         ///
         /// Metodo para cifrar arquivos localmente
         /// 
         ///</summary>
-        public static string cifraArquivosLocais(string chave, string conteudo) { 
-        
-            return criptografar(chave, conteudo);
-        
+        public static string cifraArquivosLocais(string chave, string conteudo) 
+        {         
+            return criptografar(chave, conteudo);        
         }
 
         ///<summary>
@@ -125,9 +147,7 @@ namespace sacis.model.criptografia
         ///</summary>
         public static string decifraArquivosLocais(string chave, string conteudo)
         {
-
             return descriptografar(chave, conteudo);
-
         }
 
         ///<summary>
@@ -137,7 +157,7 @@ namespace sacis.model.criptografia
         ///</summary>
         public static string cifraMensagem(string conteudo)
         {
-            string chave = geradorChaveSimetrica();
+            string chave = geradorCadeiaCaracteres();
             string cripto = criptografar(chave, conteudo);
 
             return chave + cripto;
@@ -165,6 +185,8 @@ namespace sacis.model.criptografia
         {
             try{
 
+                string vetorInicializacao = geradorIV();                
+
                 byte[] vetorInicializacaoBytes = Encoding.ASCII.GetBytes(vetorInicializacao);
                 byte[] saltBytes = Encoding.ASCII.GetBytes(chave.Length.ToString());
                 byte[] conteudoBytes = Encoding.UTF8.GetBytes(conteudo);
@@ -191,20 +213,16 @@ namespace sacis.model.criptografia
 
                 string textoCifrado = Convert.ToBase64String(textoCifradoBytes);
 
-                return textoCifrado;
+                return vetorInicializacao + textoCifrado;
 
             }
             catch (CryptographicException cripto)
-            {
-                
+            {                
                 throw new excecao.excecao(MSG_CHAVE_INVALIDA);
-
             }
             catch (NullReferenceException nre)
             {
-
                 throw new excecao.excecao(MSG_CHAVE_INVALIDA);
-
             }
         }
 
@@ -217,6 +235,9 @@ namespace sacis.model.criptografia
         {
             try
             {
+                string vetorInicializacao = conteudo.Substring(0, 16);
+                conteudo = conteudo.Remove(0, 16);
+
                 byte[] vetorInicializacaoBytes = Encoding.ASCII.GetBytes(vetorInicializacao);
                 byte[] saltBytes = Encoding.ASCII.GetBytes(chave.Length.ToString());
                 byte[] conteudoBytes = Convert.FromBase64String(conteudo);
@@ -243,19 +264,14 @@ namespace sacis.model.criptografia
                 string textoClaro = Encoding.UTF8.GetString(textoClaroBytes, 0, contador);
 
                 return textoClaro;
-
             }
             catch (CryptographicException cripto)
-            {
-                
+            {                
                 throw new excecao.excecao(MSG_CHAVE_INVALIDA);
-
             }
             catch (NullReferenceException nre)
             {
-
                 throw new excecao.excecao(MSG_CHAVE_INVALIDA);
-
             }
 
         }

@@ -12,7 +12,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="verificaUsuarioManutencao">
+      <s:element name="verificaLoginUsuarioManutencao">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
@@ -20,10 +20,113 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="verificaUsuarioManutencaoResponse">
+      <s:element name="verificaLoginUsuarioManutencaoResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="verificaUsuarioManutencaoResult" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="verificaLoginUsuarioManutencaoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="verificaSenha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="verificaSenhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="verificaSenhaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="resetaSenha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="resetaSenhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="resetaSenhaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alteraSenha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alteraSenhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="alteraSenhaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alteraNome">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nome" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alteraNomeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="alteraNomeResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alteraPermissao">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="permissao" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alteraPermissaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="alteraPermissaoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alteraCertificado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="certificado" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="validade" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alteraCertificadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="alteraCertificadoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="excluiUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="excluiUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="excluiUsuarioResult" type="s:boolean" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -128,11 +231,53 @@
   <wsdl:message name="testeSoapOut">
     <wsdl:part name="parameters" element="tns:testeResponse" />
   </wsdl:message>
-  <wsdl:message name="verificaUsuarioManutencaoSoapIn">
-    <wsdl:part name="parameters" element="tns:verificaUsuarioManutencao" />
+  <wsdl:message name="verificaLoginUsuarioManutencaoSoapIn">
+    <wsdl:part name="parameters" element="tns:verificaLoginUsuarioManutencao" />
   </wsdl:message>
-  <wsdl:message name="verificaUsuarioManutencaoSoapOut">
-    <wsdl:part name="parameters" element="tns:verificaUsuarioManutencaoResponse" />
+  <wsdl:message name="verificaLoginUsuarioManutencaoSoapOut">
+    <wsdl:part name="parameters" element="tns:verificaLoginUsuarioManutencaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="verificaSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:verificaSenha" />
+  </wsdl:message>
+  <wsdl:message name="verificaSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:verificaSenhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="resetaSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:resetaSenha" />
+  </wsdl:message>
+  <wsdl:message name="resetaSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:resetaSenhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="alteraSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:alteraSenha" />
+  </wsdl:message>
+  <wsdl:message name="alteraSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:alteraSenhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="alteraNomeSoapIn">
+    <wsdl:part name="parameters" element="tns:alteraNome" />
+  </wsdl:message>
+  <wsdl:message name="alteraNomeSoapOut">
+    <wsdl:part name="parameters" element="tns:alteraNomeResponse" />
+  </wsdl:message>
+  <wsdl:message name="alteraPermissaoSoapIn">
+    <wsdl:part name="parameters" element="tns:alteraPermissao" />
+  </wsdl:message>
+  <wsdl:message name="alteraPermissaoSoapOut">
+    <wsdl:part name="parameters" element="tns:alteraPermissaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="alteraCertificadoSoapIn">
+    <wsdl:part name="parameters" element="tns:alteraCertificado" />
+  </wsdl:message>
+  <wsdl:message name="alteraCertificadoSoapOut">
+    <wsdl:part name="parameters" element="tns:alteraCertificadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="excluiUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:excluiUsuario" />
+  </wsdl:message>
+  <wsdl:message name="excluiUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:excluiUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="verificaUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:verificaUsuario" />
@@ -181,9 +326,37 @@
       <wsdl:input message="tns:testeSoapIn" />
       <wsdl:output message="tns:testeSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="verificaUsuarioManutencao">
-      <wsdl:input message="tns:verificaUsuarioManutencaoSoapIn" />
-      <wsdl:output message="tns:verificaUsuarioManutencaoSoapOut" />
+    <wsdl:operation name="verificaLoginUsuarioManutencao">
+      <wsdl:input message="tns:verificaLoginUsuarioManutencaoSoapIn" />
+      <wsdl:output message="tns:verificaLoginUsuarioManutencaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="verificaSenha">
+      <wsdl:input message="tns:verificaSenhaSoapIn" />
+      <wsdl:output message="tns:verificaSenhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="resetaSenha">
+      <wsdl:input message="tns:resetaSenhaSoapIn" />
+      <wsdl:output message="tns:resetaSenhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="alteraSenha">
+      <wsdl:input message="tns:alteraSenhaSoapIn" />
+      <wsdl:output message="tns:alteraSenhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="alteraNome">
+      <wsdl:input message="tns:alteraNomeSoapIn" />
+      <wsdl:output message="tns:alteraNomeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="alteraPermissao">
+      <wsdl:input message="tns:alteraPermissaoSoapIn" />
+      <wsdl:output message="tns:alteraPermissaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="alteraCertificado">
+      <wsdl:input message="tns:alteraCertificadoSoapIn" />
+      <wsdl:output message="tns:alteraCertificadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="excluiUsuario">
+      <wsdl:input message="tns:excluiUsuarioSoapIn" />
+      <wsdl:output message="tns:excluiUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="verificaUsuario">
       <wsdl:input message="tns:verificaUsuarioSoapIn" />
@@ -225,8 +398,71 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="verificaUsuarioManutencao">
-      <soap:operation soapAction="http://tempuri.org/verificaUsuarioManutencao" style="document" />
+    <wsdl:operation name="verificaLoginUsuarioManutencao">
+      <soap:operation soapAction="http://tempuri.org/verificaLoginUsuarioManutencao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verificaSenha">
+      <soap:operation soapAction="http://tempuri.org/verificaSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetaSenha">
+      <soap:operation soapAction="http://tempuri.org/resetaSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraSenha">
+      <soap:operation soapAction="http://tempuri.org/alteraSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraNome">
+      <soap:operation soapAction="http://tempuri.org/alteraNome" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraPermissao">
+      <soap:operation soapAction="http://tempuri.org/alteraPermissao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraCertificado">
+      <soap:operation soapAction="http://tempuri.org/alteraCertificado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="excluiUsuario">
+      <soap:operation soapAction="http://tempuri.org/excluiUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -309,8 +545,71 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="verificaUsuarioManutencao">
-      <soap12:operation soapAction="http://tempuri.org/verificaUsuarioManutencao" style="document" />
+    <wsdl:operation name="verificaLoginUsuarioManutencao">
+      <soap12:operation soapAction="http://tempuri.org/verificaLoginUsuarioManutencao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verificaSenha">
+      <soap12:operation soapAction="http://tempuri.org/verificaSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetaSenha">
+      <soap12:operation soapAction="http://tempuri.org/resetaSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraSenha">
+      <soap12:operation soapAction="http://tempuri.org/alteraSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraNome">
+      <soap12:operation soapAction="http://tempuri.org/alteraNome" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraPermissao">
+      <soap12:operation soapAction="http://tempuri.org/alteraPermissao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraCertificado">
+      <soap12:operation soapAction="http://tempuri.org/alteraCertificado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="excluiUsuario">
+      <soap12:operation soapAction="http://tempuri.org/excluiUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

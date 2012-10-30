@@ -40,9 +40,9 @@
             this.sacis_combo.Items.AddRange(new object[] {
             "Armazenamento de Arquivos",
             "Gerenciamento de Mensagens"});
-            this.sacis_combo.Location = new System.Drawing.Point(43, 86);
+            this.sacis_combo.Location = new System.Drawing.Point(35, 86);
             this.sacis_combo.Name = "sacis_combo";
-            this.sacis_combo.Size = new System.Drawing.Size(153, 21);
+            this.sacis_combo.Size = new System.Drawing.Size(172, 21);
             this.sacis_combo.TabIndex = 0;
             // 
             // label1

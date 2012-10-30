@@ -32,8 +32,7 @@ namespace sacis.model.webService
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
     public class Service1 : System.Web.Services.WebService
-    {
-
+    {        
         private static string CAMINHO_SERVER = @"c:\sacis\server\";
         private static string ENTRADA = @"\entrada";
         private static string ENVIADOS = @"\enviados";
@@ -41,8 +40,8 @@ namespace sacis.model.webService
         private static string ARQUIVO_CONTATO = @"\contatos.cnt";
         private static string EMAIL = "@sacis.com.br";
         private static string CHAVEIRO = @"\chaveiro\";
-        private static string ERRO_CADASTRO = "Erro ao Cadastrar Usuário!";
-        private static string ERRO_REMOVER = "Erro ao Remover Contato!";
+        private static string MSG_ERRO_CADASTRO = "Erro ao Cadastrar Usuário!";
+        private static string MSG_ERRO_REMOVER = "Erro ao Remover Contato!";
         private static string EXTENSAO = ".key";
 
         [WebMethod]
@@ -60,7 +59,7 @@ namespace sacis.model.webService
         /// 
         ///</summary>
         [WebMethod]
-        public bool verificaUsuarioManutencao(string login, string senha){
+        public bool verificaLoginUsuarioManutencao(string login, string senha){
 
             try
             {
@@ -79,6 +78,258 @@ namespace sacis.model.webService
         
         }
 
+        ///<summary>
+        ///
+        /// Método Web que verifica se a senha de um usuário cadastrado atraves do login passado
+        /// precisa ser alterada retornando verdadeiro caso seja necessário
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool verificaSenha(string login)
+        {
+            try
+            {
+                string str = "select alterasenha from conecta where login = '" + login + "'";
+                string result = retornaConsultaSql(str);
+
+                if (result.Equals("s")) return true;
+                else return false;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método Web que reseta a senha de um usuário cadastrado através do login e senha passados
+        /// retornando verdadeiro caso reset seja realizado com sucesso.
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool resetaSenha(string login)
+        {
+            try
+            {
+                if (verificaUsuario(login))
+                {
+                    MySqlConnection conecta = conectaMysql.conectaMSQL();
+                    conecta.Open();
+
+                    string str = "UPDATE conecta SET alterasenha = 's' WHERE login = '" + login + "'";
+
+                    MySqlCommand exec = new MySqlCommand(str, conecta);
+                    exec.ExecuteNonQuery();
+
+                    conectaMysql.desconectaMSQL();
+
+                    return true;
+                
+                } else return false;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método Web que altera a senha de um usuário cadastrado através do login e senha passados
+        /// retornando verdadeiro caso alteração seja realizada com sucesso.
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool alteraSenha(string login, string senha)
+        {
+            try
+            {
+                if (verificaSenha(login))
+                {
+                    MySqlConnection conecta = conectaMysql.conectaMSQL();
+                    conecta.Open();
+
+                    string str = "UPDATE conecta SET senha = '" + senha + "', alterasenha = 'n' WHERE login = '" + login + "'";
+
+                    MySqlCommand exec = new MySqlCommand(str, conecta);
+                    exec.ExecuteNonQuery();
+
+                    conectaMysql.desconectaMSQL();
+
+                    return true;
+
+                } else return false;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método Web que alterar o nome do usuário cadastrado através do login passado
+        /// retornando verdadeiro caso alteração seja realizada com sucesso.
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool alteraNome(string login, string nome)
+        {
+            try
+            {
+                if (verificaUsuario(login))
+                {
+
+                    MySqlConnection conecta = conectaMysql.conectaMSQL();
+                    conecta.Open();
+
+                    string str = "UPDATE conecta SET nome = '" + nome + "' WHERE login = '" + login + "'";
+
+                    MySqlCommand exec = new MySqlCommand(str, conecta);
+                    exec.ExecuteNonQuery();
+
+                    conectaMysql.desconectaMSQL();
+
+                    return true;
+                
+                } else return false;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método Web que altera a permissão do usuário cadastrado através do login passado
+        /// retornando verdadeiro caso alteração seja realizada com sucesso.
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool alteraPermissao(string login, int permissao)
+        {
+            try
+            {
+                if (verificaUsuario(login))
+                {
+                    char permite = 'u';
+
+                    MySqlConnection conecta = conectaMysql.conectaMSQL();
+                    conecta.Open();
+
+                    if (permissao == 0) permite = 'a';
+                    else if (permissao == 1) permite = 'u';
+
+                    string str = "UPDATE conecta SET permissao = '" + permite + "' WHERE login = '" + login + "'";
+
+                    MySqlCommand exec = new MySqlCommand(str, conecta);
+                    exec.ExecuteNonQuery();
+
+                    conectaMysql.desconectaMSQL();
+
+                    return true;
+
+                }
+                else return false;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+             
+        }
+
+        ///<summary>
+        ///
+        /// Método Web que alterar o certificado do usuário cadastrado através do login passado
+        /// retornando verdadeiro caso alteração seja realizada com sucesso.
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool alteraCertificado(string login, string certificado, string validade)
+        {
+            try
+            {
+                if (verificaUsuario(login))
+                {
+
+                    string key = login + EXTENSAO;
+                    manipulaArquivo.criaArquivoTexto(CAMINHO_SERVER + CHAVEIRO + key, certificado);
+
+                    MySqlConnection conecta = conectaMysql.conectaMSQL();
+                    conecta.Open();
+
+                    string str = "UPDATE conecta SET validade = '" + validade + "' WHERE login = '" + login + "'";
+
+                    MySqlCommand exec = new MySqlCommand(str, conecta);
+                    exec.ExecuteNonQuery();
+
+                    conectaMysql.desconectaMSQL();
+
+                    return true;
+
+                }
+                else return false;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método Web que exclui um usuário cadastrado através do login passado
+        /// retornando verdadeiro caso exclusão seja realizada com sucesso.
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool excluiUsuario(string login)
+        {
+            try
+            {
+                if (verificaUsuario(login))
+                {                                        
+                    MySqlConnection conecta = conectaMysql.conectaMSQL();
+                    conecta.Open();
+
+                    string str = "DELETE FROM conecta WHERE login = '" + login + "'";
+
+                    MySqlCommand exec = new MySqlCommand(str, conecta);
+                    exec.ExecuteNonQuery();
+
+                    conectaMysql.desconectaMSQL();
+
+                    string key = login + EXTENSAO;
+                    manipulaArquivo.excluiArquivoTexto(CAMINHO_SERVER + CHAVEIRO + key);
+                    manipulaArquivo.excluiDiretorios(CAMINHO_SERVER + login);
+
+                    return true;
+
+                } else return false;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        } 
+        
         ///<summary>
         ///
         /// Método Web que verifica a existencia de um usuario cadastrado atraves do login passado
@@ -121,13 +372,13 @@ namespace sacis.model.webService
                 usuario user = serial.Deserializar(xmluser, typeof(usuario)) as usuario;
 
                 string key = user.getLogin() + EXTENSAO;
-                char permissao;
+                char permissao = 'u';
 
                 MySqlConnection conecta = conectaMysql.conectaMSQL();
                 conecta.Open();
 
                 if (user.getPermissao() == 0) permissao = 'a';
-                else permissao = 'u';
+                else if (user.getPermissao() == 1) permissao = 'u';              
 
                 string str = "INSERT INTO conecta(login, senha, nome, validade, permissao)VALUES('" + user.getLogin() + "','" + user.getSenha() + "','" + user.getNome() + "','" + user.getValidade() + "','" + permissao + "')";
 
@@ -259,7 +510,7 @@ namespace sacis.model.webService
             }
             catch (Exception excp)
             {
-                throw new excecao.excecao(ERRO_CADASTRO);
+                throw new excecao.excecao(MSG_ERRO_CADASTRO);
             }
         }
 
@@ -306,7 +557,7 @@ namespace sacis.model.webService
             }
             catch (Exception excp)
             {
-                throw new excecao.excecao(ERRO_REMOVER);
+                throw new excecao.excecao(MSG_ERRO_REMOVER);
             }
         }
 
@@ -317,7 +568,6 @@ namespace sacis.model.webService
         ///</summary>
         private string retornaConsultaSql(string sql)
         {
-
             MySqlConnection conecta = conectaMysql.conectaMSQL();
             conecta.Open();
 

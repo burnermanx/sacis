@@ -72,6 +72,12 @@
     <Compile Include="gerenciaMensagem.Designer.cs">
       <DependentUpon>gerenciaMensagem.cs</DependentUpon>
     </Compile>
+    <Compile Include="gerenciaSenha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gerenciaSenha.Designer.cs">
+      <DependentUpon>gerenciaSenha.cs</DependentUpon>
+    </Compile>
     <Compile Include="novaMensagem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="gerenciaMensagem.resx">
       <DependentUpon>gerenciaMensagem.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gerenciaSenha.resx">
+      <DependentUpon>gerenciaSenha.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="novaMensagem.resx">
@@ -137,6 +147,10 @@
     <ProjectReference Include="..\sacis.model.excecao\sacis.model.excecao.csproj">
       <Project>{F11AC024-7818-4B8B-AD14-D3369F5D5EA1}</Project>
       <Name>sacis.model.excecao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sacis.model.utilitarios\sacis.model.utilitarios.csproj">
+      <Project>{0A85CBB0-EFBC-4F2A-94AA-2AE7558998FF}</Project>
+      <Name>sacis.model.utilitarios</Name>
     </ProjectReference>
     <ProjectReference Include="..\sacis.view.control\sacis.view.control.csproj">
       <Project>{26FF3171-8019-4F0C-AEEC-AF5E60313860}</Project>

@@ -31,7 +31,21 @@ namespace sacis.view.control.localhost {
         
         private System.Threading.SendOrPostCallback testeOperationCompleted;
         
-        private System.Threading.SendOrPostCallback verificaUsuarioManutencaoOperationCompleted;
+        private System.Threading.SendOrPostCallback verificaLoginUsuarioManutencaoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback verificaSenhaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback resetaSenhaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback alteraSenhaOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback alteraNomeOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback alteraPermissaoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback alteraCertificadoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback excluiUsuarioOperationCompleted;
         
         private System.Threading.SendOrPostCallback verificaUsuarioOperationCompleted;
         
@@ -89,7 +103,28 @@ namespace sacis.view.control.localhost {
         public event testeCompletedEventHandler testeCompleted;
         
         /// <remarks/>
-        public event verificaUsuarioManutencaoCompletedEventHandler verificaUsuarioManutencaoCompleted;
+        public event verificaLoginUsuarioManutencaoCompletedEventHandler verificaLoginUsuarioManutencaoCompleted;
+        
+        /// <remarks/>
+        public event verificaSenhaCompletedEventHandler verificaSenhaCompleted;
+        
+        /// <remarks/>
+        public event resetaSenhaCompletedEventHandler resetaSenhaCompleted;
+        
+        /// <remarks/>
+        public event alteraSenhaCompletedEventHandler alteraSenhaCompleted;
+        
+        /// <remarks/>
+        public event alteraNomeCompletedEventHandler alteraNomeCompleted;
+        
+        /// <remarks/>
+        public event alteraPermissaoCompletedEventHandler alteraPermissaoCompleted;
+        
+        /// <remarks/>
+        public event alteraCertificadoCompletedEventHandler alteraCertificadoCompleted;
+        
+        /// <remarks/>
+        public event excluiUsuarioCompletedEventHandler excluiUsuarioCompleted;
         
         /// <remarks/>
         public event verificaUsuarioCompletedEventHandler verificaUsuarioCompleted;
@@ -140,33 +175,246 @@ namespace sacis.view.control.localhost {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/verificaUsuarioManutencao", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool verificaUsuarioManutencao(string login, string senha) {
-            object[] results = this.Invoke("verificaUsuarioManutencao", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/verificaLoginUsuarioManutencao", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool verificaLoginUsuarioManutencao(string login, string senha) {
+            object[] results = this.Invoke("verificaLoginUsuarioManutencao", new object[] {
                         login,
                         senha});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void verificaUsuarioManutencaoAsync(string login, string senha) {
-            this.verificaUsuarioManutencaoAsync(login, senha, null);
+        public void verificaLoginUsuarioManutencaoAsync(string login, string senha) {
+            this.verificaLoginUsuarioManutencaoAsync(login, senha, null);
         }
         
         /// <remarks/>
-        public void verificaUsuarioManutencaoAsync(string login, string senha, object userState) {
-            if ((this.verificaUsuarioManutencaoOperationCompleted == null)) {
-                this.verificaUsuarioManutencaoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnverificaUsuarioManutencaoOperationCompleted);
+        public void verificaLoginUsuarioManutencaoAsync(string login, string senha, object userState) {
+            if ((this.verificaLoginUsuarioManutencaoOperationCompleted == null)) {
+                this.verificaLoginUsuarioManutencaoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnverificaLoginUsuarioManutencaoOperationCompleted);
             }
-            this.InvokeAsync("verificaUsuarioManutencao", new object[] {
+            this.InvokeAsync("verificaLoginUsuarioManutencao", new object[] {
                         login,
-                        senha}, this.verificaUsuarioManutencaoOperationCompleted, userState);
+                        senha}, this.verificaLoginUsuarioManutencaoOperationCompleted, userState);
         }
         
-        private void OnverificaUsuarioManutencaoOperationCompleted(object arg) {
-            if ((this.verificaUsuarioManutencaoCompleted != null)) {
+        private void OnverificaLoginUsuarioManutencaoOperationCompleted(object arg) {
+            if ((this.verificaLoginUsuarioManutencaoCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.verificaUsuarioManutencaoCompleted(this, new verificaUsuarioManutencaoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.verificaLoginUsuarioManutencaoCompleted(this, new verificaLoginUsuarioManutencaoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/verificaSenha", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool verificaSenha(string login) {
+            object[] results = this.Invoke("verificaSenha", new object[] {
+                        login});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void verificaSenhaAsync(string login) {
+            this.verificaSenhaAsync(login, null);
+        }
+        
+        /// <remarks/>
+        public void verificaSenhaAsync(string login, object userState) {
+            if ((this.verificaSenhaOperationCompleted == null)) {
+                this.verificaSenhaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnverificaSenhaOperationCompleted);
+            }
+            this.InvokeAsync("verificaSenha", new object[] {
+                        login}, this.verificaSenhaOperationCompleted, userState);
+        }
+        
+        private void OnverificaSenhaOperationCompleted(object arg) {
+            if ((this.verificaSenhaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.verificaSenhaCompleted(this, new verificaSenhaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/resetaSenha", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool resetaSenha(string login) {
+            object[] results = this.Invoke("resetaSenha", new object[] {
+                        login});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void resetaSenhaAsync(string login) {
+            this.resetaSenhaAsync(login, null);
+        }
+        
+        /// <remarks/>
+        public void resetaSenhaAsync(string login, object userState) {
+            if ((this.resetaSenhaOperationCompleted == null)) {
+                this.resetaSenhaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnresetaSenhaOperationCompleted);
+            }
+            this.InvokeAsync("resetaSenha", new object[] {
+                        login}, this.resetaSenhaOperationCompleted, userState);
+        }
+        
+        private void OnresetaSenhaOperationCompleted(object arg) {
+            if ((this.resetaSenhaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.resetaSenhaCompleted(this, new resetaSenhaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/alteraSenha", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool alteraSenha(string login, string senha) {
+            object[] results = this.Invoke("alteraSenha", new object[] {
+                        login,
+                        senha});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void alteraSenhaAsync(string login, string senha) {
+            this.alteraSenhaAsync(login, senha, null);
+        }
+        
+        /// <remarks/>
+        public void alteraSenhaAsync(string login, string senha, object userState) {
+            if ((this.alteraSenhaOperationCompleted == null)) {
+                this.alteraSenhaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnalteraSenhaOperationCompleted);
+            }
+            this.InvokeAsync("alteraSenha", new object[] {
+                        login,
+                        senha}, this.alteraSenhaOperationCompleted, userState);
+        }
+        
+        private void OnalteraSenhaOperationCompleted(object arg) {
+            if ((this.alteraSenhaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.alteraSenhaCompleted(this, new alteraSenhaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/alteraNome", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool alteraNome(string login, string nome) {
+            object[] results = this.Invoke("alteraNome", new object[] {
+                        login,
+                        nome});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void alteraNomeAsync(string login, string nome) {
+            this.alteraNomeAsync(login, nome, null);
+        }
+        
+        /// <remarks/>
+        public void alteraNomeAsync(string login, string nome, object userState) {
+            if ((this.alteraNomeOperationCompleted == null)) {
+                this.alteraNomeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnalteraNomeOperationCompleted);
+            }
+            this.InvokeAsync("alteraNome", new object[] {
+                        login,
+                        nome}, this.alteraNomeOperationCompleted, userState);
+        }
+        
+        private void OnalteraNomeOperationCompleted(object arg) {
+            if ((this.alteraNomeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.alteraNomeCompleted(this, new alteraNomeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/alteraPermissao", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool alteraPermissao(string login, int permissao) {
+            object[] results = this.Invoke("alteraPermissao", new object[] {
+                        login,
+                        permissao});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void alteraPermissaoAsync(string login, int permissao) {
+            this.alteraPermissaoAsync(login, permissao, null);
+        }
+        
+        /// <remarks/>
+        public void alteraPermissaoAsync(string login, int permissao, object userState) {
+            if ((this.alteraPermissaoOperationCompleted == null)) {
+                this.alteraPermissaoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnalteraPermissaoOperationCompleted);
+            }
+            this.InvokeAsync("alteraPermissao", new object[] {
+                        login,
+                        permissao}, this.alteraPermissaoOperationCompleted, userState);
+        }
+        
+        private void OnalteraPermissaoOperationCompleted(object arg) {
+            if ((this.alteraPermissaoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.alteraPermissaoCompleted(this, new alteraPermissaoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/alteraCertificado", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool alteraCertificado(string login, string certificado, string validade) {
+            object[] results = this.Invoke("alteraCertificado", new object[] {
+                        login,
+                        certificado,
+                        validade});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void alteraCertificadoAsync(string login, string certificado, string validade) {
+            this.alteraCertificadoAsync(login, certificado, validade, null);
+        }
+        
+        /// <remarks/>
+        public void alteraCertificadoAsync(string login, string certificado, string validade, object userState) {
+            if ((this.alteraCertificadoOperationCompleted == null)) {
+                this.alteraCertificadoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnalteraCertificadoOperationCompleted);
+            }
+            this.InvokeAsync("alteraCertificado", new object[] {
+                        login,
+                        certificado,
+                        validade}, this.alteraCertificadoOperationCompleted, userState);
+        }
+        
+        private void OnalteraCertificadoOperationCompleted(object arg) {
+            if ((this.alteraCertificadoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.alteraCertificadoCompleted(this, new alteraCertificadoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/excluiUsuario", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool excluiUsuario(string login) {
+            object[] results = this.Invoke("excluiUsuario", new object[] {
+                        login});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void excluiUsuarioAsync(string login) {
+            this.excluiUsuarioAsync(login, null);
+        }
+        
+        /// <remarks/>
+        public void excluiUsuarioAsync(string login, object userState) {
+            if ((this.excluiUsuarioOperationCompleted == null)) {
+                this.excluiUsuarioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnexcluiUsuarioOperationCompleted);
+            }
+            this.InvokeAsync("excluiUsuario", new object[] {
+                        login}, this.excluiUsuarioOperationCompleted, userState);
+        }
+        
+        private void OnexcluiUsuarioOperationCompleted(object arg) {
+            if ((this.excluiUsuarioCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.excluiUsuarioCompleted(this, new excluiUsuarioCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -423,17 +671,199 @@ namespace sacis.view.control.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
-    public delegate void verificaUsuarioManutencaoCompletedEventHandler(object sender, verificaUsuarioManutencaoCompletedEventArgs e);
+    public delegate void verificaLoginUsuarioManutencaoCompletedEventHandler(object sender, verificaLoginUsuarioManutencaoCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class verificaUsuarioManutencaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class verificaLoginUsuarioManutencaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal verificaUsuarioManutencaoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal verificaLoginUsuarioManutencaoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void verificaSenhaCompletedEventHandler(object sender, verificaSenhaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class verificaSenhaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal verificaSenhaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void resetaSenhaCompletedEventHandler(object sender, resetaSenhaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class resetaSenhaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal resetaSenhaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void alteraSenhaCompletedEventHandler(object sender, alteraSenhaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class alteraSenhaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal alteraSenhaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void alteraNomeCompletedEventHandler(object sender, alteraNomeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class alteraNomeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal alteraNomeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void alteraPermissaoCompletedEventHandler(object sender, alteraPermissaoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class alteraPermissaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal alteraPermissaoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void alteraCertificadoCompletedEventHandler(object sender, alteraCertificadoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class alteraCertificadoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal alteraCertificadoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    public delegate void excluiUsuarioCompletedEventHandler(object sender, excluiUsuarioCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.5420")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class excluiUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal excluiUsuarioCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

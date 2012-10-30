@@ -28,9 +28,9 @@ namespace sacis.model.utilitarios
         public static bool verificaValidadeUsuario(usuario user) {
 
             if (user.getChave() == "" || user.getChave() == null ||
-                verificaValidadeCampos(user.getNome()) == true || verificaValidadeCampos(user.getSenha()) == true ||
-                verificaValidadeCampos(user.getLogin()) == true || string.Compare(user.getLogin(), user.getSenha()) == 0 ||
-                string.Compare(user.getNome(), user.getSenha()) == 0 || string.Compare(user.getLogin(), user.getNome()) == 0)
+                verificaValidadeCampos(user.getNome()) == true || 
+                verificaValidadeCampos(user.getLogin()) == true ||
+                string.Compare(user.getLogin(), user.getNome()) == 0)
             {
 
                 throw new excecao.excecao(MSG_ERRO);
@@ -49,13 +49,13 @@ namespace sacis.model.utilitarios
 
             int cont = 0, i;
 
-            // Verifica se _texto é nulo, vazio ou tem menos _de 8 caracteres
+            // Verifica se texto é nulo, vazio ou tem menos de 8 caracteres
             if (texto == "" || texto.Length == 0 || texto.Length < 8) return true;
 
-            // Verifica se _texto inicia com caracteres abaixo do 32, del e espaço em ASCII
+            // Verifica se texto inicia com caracteres abaixo do 32, del e espaço em ASCII
             if (texto[0] <= 32 || texto[0] == 127 || texto[0] == 240 || texto[0] == 255) return true;
 
-            // Verifica se _texto termina com caracteres abaixo do 32, del e espaço em ASCII
+            // Verifica se texto termina com caracteres abaixo do 32, del e espaço em ASCII
             if (texto[texto.Length - 1] <= 32 || texto[texto.Length - 1] == 127 || texto[texto.Length - 1] == 240 || texto[texto.Length - 1] == 255) return true;
 
             // Verifica caracteres da string se contem dois espaços seguidos, estao entre 32 e 255 e tem del
