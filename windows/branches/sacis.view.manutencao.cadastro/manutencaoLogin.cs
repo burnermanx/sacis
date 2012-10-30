@@ -70,7 +70,7 @@ namespace sacis.view.manutencao.cadastro
 
                 string hashpass = manutencaoServlet.geraHash(pass);
 
-                if (manutencaoServlet.verificaUsuario(name, hashpass))
+                if (manutencaoServlet.verificaLoginUsuario(name, hashpass))
                 {
                     manutencao newForm = new manutencao();
                     newForm.FormClosed += new FormClosedEventHandler(formVisivel);

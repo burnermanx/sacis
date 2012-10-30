@@ -22,7 +22,9 @@ namespace sacis.view.sistema.gerenciamento.mensagem
     {
 
         private static string MSG_ACESSO_NEGADO = "Acesso Negado!";
-        private static string MSG_ERRO = "Erro";
+        private static string MSG_ERRO = "Erro!";
+        private static string MSG_AVISO = "Aviso!";
+        private static string MSG_ALTERACAO = "Senha expirada! É necessária sua alteração para acessar novamente o sistema.";
 
         ///<summary>
         ///
@@ -77,32 +79,35 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 string pass = textBoxPass.Text;
 
                 string hash = gerenciaServlet.geraHash(pass);
+                
+                if (gerenciaServlet.verificaSenha(name)){
 
-                if (gerenciaServlet.consultaUsuario(name, hash))
+                    MessageBox.Show(MSG_ALTERACAO, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    gerenciaSenha newForm = new gerenciaSenha(name);
+                    newForm.FormClosed += new FormClosedEventHandler(formVisivel);
+                    this.Visible = false;
+                    newForm.ShowDialog();
+
+                } else if (gerenciaServlet.consultaUsuario(name, hash))
                 {
-
                     gerenciaServlet.atualizaUsuarioLogLocal(name, hash);
 
                     gerenciaMensagem newForm = new gerenciaMensagem(name);
                     newForm.FormClosed += new FormClosedEventHandler(formVisivel);
                     this.Visible = false;
                     newForm.ShowDialog();
-
                 }
                 else
                 {
-
                     MessageBox.Show(MSG_ACESSO_NEGADO, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     limpaCampos();
-
                 }
             }
             catch (excecao except)
             {
-
                 MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 limpaCampos();
-
             }           
         
         }
@@ -114,10 +119,8 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///</summary>
         private void formVisivel(object sender, FormClosedEventArgs e)
         {
-
             this.Visible = true;
             limpaCampos();
-
         }
 
         ///<summary>
@@ -127,10 +130,8 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///</summary>
         private void limpaCampos()
         {
-
             this.textBoxNome.Clear();
             this.textBoxPass.Clear();
-
         }
 
     }

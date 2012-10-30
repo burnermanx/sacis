@@ -23,12 +23,68 @@ namespace sacis.view.control
         private static string CAMINHO_CHAVEIRO = @"C:\sacis\server\chaveiro\";
         private static string CAMINHO_SERVER = @"C:\sacis\server\";
         private static string MSG_PASTA_NAO_ENCONTRADA = @"Pasta nao encontrada";
+        private static string USUARIO_INEXISTENTE = "Digite Usuário Válido!";
         private static string EXTENSAO = ".key";
         private static string BARRA = @"\";
 
         private static localhost.Service1 WService = new localhost.Service1();
 
+        ///<summary>
+        ///
+        /// Método Web que verifica se a senha de um usuário cadastrado atraves do login passado
+        /// precisa ser alterada retornando verdadeiro caso seja necessário
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados e de usuario inexistente
+        /// 
+        ///</summary>
+        public static bool verificaSenha(string usuario) {
 
+            try
+            {
+                if (WService.verificaSenha(usuario))
+                {
+                    return true;
+                }
+                else return false;
+            }
+            catch (excecao except)
+            {
+                throw except;
+            }
+            catch (System.Web.Services.Protocols.SoapException se) {
+
+                throw new excecao(USUARIO_INEXISTENTE);
+            
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método que altera a senha de um usuário cadastrado no web service atraves do login e 
+        /// senha passados retornando verdadeiro caso seja alterada a senha
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados e de usuario inexistente
+        /// 
+        ///</summary>
+        public static bool alteraSenha(string login, string senha)
+        {
+
+            string hashsenha = hash.hashing(senha);
+
+            try
+            {
+                if (WService.alteraSenha(login,hashsenha))
+                {
+                    return true;
+                }
+                else return false;
+            }
+            catch (excecao except)
+            {
+                throw except;
+            }
+
+        }
 
         ///<summary>
         ///

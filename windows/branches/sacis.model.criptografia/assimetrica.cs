@@ -17,6 +17,7 @@ namespace sacis.model.criptografia
     public class assimetrica
     {
         private static string MSG_CERTIFICADO = "Certificado Inválido ou com senha!";
+        private static string MSG_CERTIFICADO_INEXISTENTE = "Certificado Inexistente!";
 
         ///<summary>
         ///
@@ -30,14 +31,17 @@ namespace sacis.model.criptografia
 
             try
             {
-
-                X509Certificate2 data = new X509Certificate2(caminho);
-                return data.GetExpirationDateString();
+                    X509Certificate2 data = new X509Certificate2(caminho);
+                    return data.GetExpirationDateString();
 
             } catch (CryptographicException ce) {
             
                 throw new excecao.excecao(MSG_CERTIFICADO);
-            
+
+            } catch (ArgumentException ae) {
+
+                throw new excecao.excecao(MSG_CERTIFICADO_INEXISTENTE);
+
             }
         
         }

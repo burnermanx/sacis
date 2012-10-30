@@ -24,6 +24,50 @@ namespace sacis.model.utilitarios
         private static string MSG_ERRO_CRIACAO = "Erro ao Criar Arquivo ou Diretorio";
         private static string CAMINHO_USUARIOS = @"C:\sacis\usuarios\";
         private static string CAMINHO_LOG = @"C:\sacis\sacis.log";
+        private static string MSG_ERRO_EXCLUSAO_ARQUIVO = "Erro ao Excluir Arquivo!";
+        private static string MSG_ERRO_EXCLUSAO_DIRETORIO = "Erro ao Excluir Diretorio!";
+
+        ///<summary>
+        ///
+        /// Metodo para excluir arquivo texto através do caminho
+        ///       
+        /// Retorna excecao: Erro de exclusão de arquivo
+        ///
+        ///</summary>
+        public static void excluiArquivoTexto(string caminho) {
+            
+            try
+            {
+                FileInfo file = new FileInfo(caminho);
+                file.Delete();
+            }
+            catch (Exception except)
+            {
+                throw new excecao.excecao(MSG_ERRO_EXCLUSAO_ARQUIVO);
+            }
+
+        }
+
+        ///<summary>
+        ///
+        /// Metodo para excluir diretorios e subdiretorios através do caminho
+        ///       
+        /// Retorna excecao: Erro de exclusão de diretorio
+        ///
+        ///</summary>
+        public static void excluiDiretorios(string caminho) {
+            
+            try
+            {
+                DirectoryInfo diretorio = new DirectoryInfo(caminho);
+                diretorio.Delete(true);                                
+            }
+            catch (Exception except)
+            {
+                throw new excecao.excecao(MSG_ERRO_EXCLUSAO_DIRETORIO);
+            }
+
+        }
 
         ///<summary>
         ///
