@@ -134,14 +134,20 @@ namespace sacis.view.control
             {
                 manipulaArquivo.criaDiretorioLogLocal();
 
-                if (verificaUsuario.verificaCadastroUsuarioLocal(login, senha) == false)
+                if (!verificaUsuario.verificaCadastroUsuarioLocal(login, senha))
                 {
-                    //mudar este codigo para acessar webservice e
-                    //copiar chave publica para diretorio do chaveiro local
-                    FileInfo arquivo = new FileInfo(CAMINHO_CHAVEIRO + login + EXTENSAO);
-                    arquivo.CopyTo(CAMINHO_USUARIOS + login + EXTENSAO);
-
-                    manipulaArquivo.atualizaLog(login, senha);
+                    if (verificaUsuario.verificaCadastroUsuarioLocal(login))
+                    {
+                        manipulaArquivo.atualizaUsuarioLog(login, senha);
+                    }
+                    else
+                    {
+                        //mudar este codigo para acessar webservice e
+                        //copiar chave publica para diretorio do chaveiro local
+                        FileInfo arquivo = new FileInfo(CAMINHO_CHAVEIRO + login + EXTENSAO);
+                        arquivo.CopyTo(CAMINHO_USUARIOS + login + EXTENSAO);
+                        manipulaArquivo.atualizaLog(login, senha);
+                    }
                 }
             }
             catch (excecao except)
@@ -263,9 +269,11 @@ namespace sacis.view.control
                     anexo next = new anexo(nome, false, "", conteudo);
                     arquivosPlain.Add(next);
                 }
+                               
 
                 foreach (string nome in para)
                 {
+
                     arquivosCripto.Clear();
 
                     foreach (string s in msg.getArquivoCripto())
@@ -282,8 +290,9 @@ namespace sacis.view.control
                         arquivosCripto.Add(next);
                     }
 
-                    if (sign) {
-                    
+                    if (sign)
+                    {
+
                         // fazer a parte da assinatura
 
                     }

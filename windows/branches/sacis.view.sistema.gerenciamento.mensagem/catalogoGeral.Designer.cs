@@ -107,6 +107,8 @@
             this.Controls.Add(this.cancelarBotao);
             this.Controls.Add(this.adicionaBotao);
             this.Controls.Add(this.catalogoDataGridView);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "catalogoGeral";
             this.Text = "Catálogo Geral";
             ((System.ComponentModel.ISupportInitialize)(this.catalogoDataGridView)).EndInit();

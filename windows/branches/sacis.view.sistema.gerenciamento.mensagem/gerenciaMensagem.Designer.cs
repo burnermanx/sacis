@@ -32,7 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(gerenciaMensagem));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mcNovo = new System.Windows.Forms.ToolStripMenuItem();
-            this.catalogoGeral = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogo = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoGeralItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoPessoalItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sair = new System.Windows.Forms.ToolStripMenuItem();
             this.mc_split = new System.Windows.Forms.SplitContainer();
             this.mcTreeview = new System.Windows.Forms.TreeView();
@@ -53,7 +55,7 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mcNovo,
-            this.catalogoGeral,
+            this.catalogo,
             this.sair});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -72,14 +74,30 @@
             this.mcNovo.Text = "&Novo";
             this.mcNovo.Click += new System.EventHandler(this.novoClick);
             // 
-            // catalogoGeral
+            // catalogo
             // 
-            this.catalogoGeral.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.catalogoGeral.Image = ((System.Drawing.Image)(resources.GetObject("catalogoGeral.Image")));
-            this.catalogoGeral.Name = "catalogoGeral";
-            this.catalogoGeral.Size = new System.Drawing.Size(83, 20);
-            this.catalogoGeral.Text = "&Catálogo";
-            this.catalogoGeral.Click += new System.EventHandler(this.catalogoGeralClick);
+            this.catalogo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.catalogoGeralItem,
+            this.catalogoPessoalItem});
+            this.catalogo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.catalogo.Image = ((System.Drawing.Image)(resources.GetObject("catalogo.Image")));
+            this.catalogo.Name = "catalogo";
+            this.catalogo.Size = new System.Drawing.Size(83, 20);
+            this.catalogo.Text = "&Catálogo";
+            // 
+            // catalogoGeralItem
+            // 
+            this.catalogoGeralItem.Name = "catalogoGeralItem";
+            this.catalogoGeralItem.Size = new System.Drawing.Size(152, 22);
+            this.catalogoGeralItem.Text = "Geral";
+            this.catalogoGeralItem.Click += new System.EventHandler(this.catalogoGeralItem_Click);
+            // 
+            // catalogoPessoalItem
+            // 
+            this.catalogoPessoalItem.Name = "catalogoPessoalItem";
+            this.catalogoPessoalItem.Size = new System.Drawing.Size(152, 22);
+            this.catalogoPessoalItem.Text = "Pessoal";
+            this.catalogoPessoalItem.Click += new System.EventHandler(this.catalogoPessoalItem_Click);
             // 
             // sair
             // 
@@ -191,7 +209,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mcNovo;
-        private System.Windows.Forms.ToolStripMenuItem catalogoGeral;
+        private System.Windows.Forms.ToolStripMenuItem catalogo;
         private System.Windows.Forms.ToolStripMenuItem sair;
         private System.Windows.Forms.SplitContainer mc_split;
         private System.Windows.Forms.TreeView mcTreeview;
@@ -201,6 +219,8 @@
         private System.Windows.Forms.ColumnHeader Assunto;
         private System.Windows.Forms.ColumnHeader Recebido;
         private System.Windows.Forms.ColumnHeader Tamanho;
+        private System.Windows.Forms.ToolStripMenuItem catalogoGeralItem;
+        private System.Windows.Forms.ToolStripMenuItem catalogoPessoalItem;
     
     }
 }

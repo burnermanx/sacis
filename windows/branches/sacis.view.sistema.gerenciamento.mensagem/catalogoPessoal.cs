@@ -25,7 +25,6 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private static string MSG_INFO = "Informação";
         private static string MSG_REMOCAO_OK = "Contatos Removidos com Sucesso!";
         private static string MSG_SELECAO = "Selecione Contato a Ser Removido!";
-        private List<contato> listaAdicionar = new List<contato>();
 
         ///<summary>
         ///
@@ -38,32 +37,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             InitializeComponent();
             exibeContatos();
         }
-
-        ///<summary>
-        ///
-        /// Metodo contrutor para inicializar os componentes do formulario utilizando o login do usuario
-        /// e passando a lista de contatos        
-        /// 
-        ///</summary>
-        public catalogoPessoal(string usuario, List<contato> lista)
-        {
-            user = usuario;
-            listaAdicionar = lista;
-            InitializeComponent();
-            exibeContatos();
-        }
-
-        ///<summary>
-        ///
-        /// Metodo get para listaAdicionar
-        ///
-        ///</summary>
-        public List<contato> getListaContatos() {
-
-            return listaAdicionar;
-        
-        }
-
+                
         ///<summary>
         ///
         /// Metodo para listar os contatos pessoais no dataGridView
@@ -83,7 +57,6 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                     catalogoPessoalDataGridView.Rows[contador].Cells[0].Value = c.getNome();
                     catalogoPessoalDataGridView.Rows[contador].Cells[1].Value = c.getEmail();
                     catalogoPessoalDataGridView.Rows[contador].Cells[2].Value = false;
-                    catalogoPessoalDataGridView.Rows[contador].Cells[3].Value = false;
                     contador++;
                 }
 
@@ -93,50 +66,6 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             {
                 MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }        
-        }
-
-        ///<summary>
-        ///
-        /// Metodo para o botao ok inserir na lista os contatos selecionados
-        ///
-        ///</summary>
-        private void okButtonClick(object sender, EventArgs e)
-        {
-            int contagem = catalogoPessoalDataGridView.Rows.Count;
-            List<contato> listaAdd = new List<contato>();
-
-            for (int i = 0; i < contagem; i++)
-            {
-                if (catalogoPessoalDataGridView.Rows[i].Cells[2].Value.Equals(true))
-                {
-                    string nome = catalogoPessoalDataGridView.Rows[i].Cells[0].Value.ToString();
-                    string email = catalogoPessoalDataGridView.Rows[i].Cells[1].Value.ToString();
-                    contato contact = new contato(nome, email);
-                    listaAdd.Add(contact);                
-                }
-
-            }
-                                    
-            removeDuplicidade(listaAdd);
-
-            this.Close();
-
-        }
-
-        ///<summary>
-        ///
-        /// Metodo para remover contatos duplicados na lista de contatos
-        ///
-        ///</summary>
-        private void removeDuplicidade(List<contato> lista) {
-
-            List<contato> listaAdd = new List<contato>();
-            IEnumerable<contato> IContatos = listaAdicionar.Union<contato>(lista);
-            
-            foreach (contato c in IContatos) listaAdd.Add(c);
-            listaAdicionar.Clear();
-            listaAdicionar = listaAdd;
-
         }
 
         ///<summary>
@@ -165,14 +94,14 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
                 for (int i = 0; i < contagem; i++)
                 {
-                    if (catalogoPessoalDataGridView.Rows[i].Cells[3].Value.Equals(false))
+                    if (catalogoPessoalDataGridView.Rows[i].Cells[2].Value.Equals(false))
                     {
                         string nome = catalogoPessoalDataGridView.Rows[i].Cells[0].Value.ToString();
                         string email = catalogoPessoalDataGridView.Rows[i].Cells[1].Value.ToString();
                         contato contact = new contato(nome, email);
                         lista.Add(contact);
                     }
-                    else if (catalogoPessoalDataGridView.Rows[i].Cells[3].Value.Equals(true))
+                    else if (catalogoPessoalDataGridView.Rows[i].Cells[2].Value.Equals(true))
                     {
                         cels.Add(i);
                         vazio = false;                        

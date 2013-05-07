@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.model.criptografia", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.view.sistema.sacis", "sacis.view.sistema.sacis\sacis.view.sistema.sacis.csproj", "{A2DAE341-42FE-485E-B301-A66EECCBE203}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.view.manutencao.cadastro", "sacis.view.manutencao.cadastro\sacis.view.manutencao.cadastro.csproj", "{80A344DA-B2AD-4A04-82C5-65726B531F7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.view.sistema.manutencao", "sacis.view.manutencao.cadastro\sacis.view.sistema.manutencao.csproj", "{80A344DA-B2AD-4A04-82C5-65726B531F7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.view.sistema.gerenciamento.mensagem", "sacis.view.sistema.gerenciamento.mensagem\sacis.view.sistema.gerenciamento.mensagem.csproj", "{9BC49C69-AD6D-4246-9B48-EB0A139ED4B6}"
 EndProject

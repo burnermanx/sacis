@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sacis.com.br" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://sacis.com.br" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
-      <s:element name="teste">
-        <s:complexType />
-      </s:element>
-      <s:element name="testeResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="testeResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sacis.com.br">
       <s:element name="verificaLoginUsuarioManutencao">
         <s:complexType>
           <s:sequence>
@@ -27,17 +17,17 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="verificaSenha">
+      <s:element name="verificaUsuario">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="verificaSenhaResponse">
+      <s:element name="verificaUsuarioResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="verificaSenhaResult" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="verificaUsuarioResult" type="s:boolean" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -52,21 +42,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="resetaSenhaResult" type="s:boolean" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="alteraSenha">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="senha" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="alteraSenhaResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="alteraSenhaResult" type="s:boolean" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -130,20 +105,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="verificaUsuario">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="verificaUsuarioResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="verificaUsuarioResult" type="s:boolean" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="cadastraUsuario">
         <s:complexType>
           <s:sequence>
@@ -166,6 +127,35 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="consultaUsuarioResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="verificaSenha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="verificaSenhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="verificaSenhaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alteraSenha">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senha" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="alteraSenhaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="alteraSenhaResult" type="s:boolean" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -225,35 +215,23 @@
       </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="testeSoapIn">
-    <wsdl:part name="parameters" element="tns:teste" />
-  </wsdl:message>
-  <wsdl:message name="testeSoapOut">
-    <wsdl:part name="parameters" element="tns:testeResponse" />
-  </wsdl:message>
   <wsdl:message name="verificaLoginUsuarioManutencaoSoapIn">
     <wsdl:part name="parameters" element="tns:verificaLoginUsuarioManutencao" />
   </wsdl:message>
   <wsdl:message name="verificaLoginUsuarioManutencaoSoapOut">
     <wsdl:part name="parameters" element="tns:verificaLoginUsuarioManutencaoResponse" />
   </wsdl:message>
-  <wsdl:message name="verificaSenhaSoapIn">
-    <wsdl:part name="parameters" element="tns:verificaSenha" />
+  <wsdl:message name="verificaUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:verificaUsuario" />
   </wsdl:message>
-  <wsdl:message name="verificaSenhaSoapOut">
-    <wsdl:part name="parameters" element="tns:verificaSenhaResponse" />
+  <wsdl:message name="verificaUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:verificaUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="resetaSenhaSoapIn">
     <wsdl:part name="parameters" element="tns:resetaSenha" />
   </wsdl:message>
   <wsdl:message name="resetaSenhaSoapOut">
     <wsdl:part name="parameters" element="tns:resetaSenhaResponse" />
-  </wsdl:message>
-  <wsdl:message name="alteraSenhaSoapIn">
-    <wsdl:part name="parameters" element="tns:alteraSenha" />
-  </wsdl:message>
-  <wsdl:message name="alteraSenhaSoapOut">
-    <wsdl:part name="parameters" element="tns:alteraSenhaResponse" />
   </wsdl:message>
   <wsdl:message name="alteraNomeSoapIn">
     <wsdl:part name="parameters" element="tns:alteraNome" />
@@ -279,12 +257,6 @@
   <wsdl:message name="excluiUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:excluiUsuarioResponse" />
   </wsdl:message>
-  <wsdl:message name="verificaUsuarioSoapIn">
-    <wsdl:part name="parameters" element="tns:verificaUsuario" />
-  </wsdl:message>
-  <wsdl:message name="verificaUsuarioSoapOut">
-    <wsdl:part name="parameters" element="tns:verificaUsuarioResponse" />
-  </wsdl:message>
   <wsdl:message name="cadastraUsuarioSoapIn">
     <wsdl:part name="parameters" element="tns:cadastraUsuario" />
   </wsdl:message>
@@ -296,6 +268,18 @@
   </wsdl:message>
   <wsdl:message name="consultaUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:consultaUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="verificaSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:verificaSenha" />
+  </wsdl:message>
+  <wsdl:message name="verificaSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:verificaSenhaResponse" />
+  </wsdl:message>
+  <wsdl:message name="alteraSenhaSoapIn">
+    <wsdl:part name="parameters" element="tns:alteraSenha" />
+  </wsdl:message>
+  <wsdl:message name="alteraSenhaSoapOut">
+    <wsdl:part name="parameters" element="tns:alteraSenhaResponse" />
   </wsdl:message>
   <wsdl:message name="retornaContatosSoapIn">
     <wsdl:part name="parameters" element="tns:retornaContatos" />
@@ -322,25 +306,17 @@
     <wsdl:part name="parameters" element="tns:removeContatoPessoalResponse" />
   </wsdl:message>
   <wsdl:portType name="Service1Soap">
-    <wsdl:operation name="teste">
-      <wsdl:input message="tns:testeSoapIn" />
-      <wsdl:output message="tns:testeSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="verificaLoginUsuarioManutencao">
       <wsdl:input message="tns:verificaLoginUsuarioManutencaoSoapIn" />
       <wsdl:output message="tns:verificaLoginUsuarioManutencaoSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="verificaSenha">
-      <wsdl:input message="tns:verificaSenhaSoapIn" />
-      <wsdl:output message="tns:verificaSenhaSoapOut" />
+    <wsdl:operation name="verificaUsuario">
+      <wsdl:input message="tns:verificaUsuarioSoapIn" />
+      <wsdl:output message="tns:verificaUsuarioSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="resetaSenha">
       <wsdl:input message="tns:resetaSenhaSoapIn" />
       <wsdl:output message="tns:resetaSenhaSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="alteraSenha">
-      <wsdl:input message="tns:alteraSenhaSoapIn" />
-      <wsdl:output message="tns:alteraSenhaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="alteraNome">
       <wsdl:input message="tns:alteraNomeSoapIn" />
@@ -358,10 +334,6 @@
       <wsdl:input message="tns:excluiUsuarioSoapIn" />
       <wsdl:output message="tns:excluiUsuarioSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="verificaUsuario">
-      <wsdl:input message="tns:verificaUsuarioSoapIn" />
-      <wsdl:output message="tns:verificaUsuarioSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="cadastraUsuario">
       <wsdl:input message="tns:cadastraUsuarioSoapIn" />
       <wsdl:output message="tns:cadastraUsuarioSoapOut" />
@@ -369,6 +341,14 @@
     <wsdl:operation name="consultaUsuario">
       <wsdl:input message="tns:consultaUsuarioSoapIn" />
       <wsdl:output message="tns:consultaUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="verificaSenha">
+      <wsdl:input message="tns:verificaSenhaSoapIn" />
+      <wsdl:output message="tns:verificaSenhaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="alteraSenha">
+      <wsdl:input message="tns:alteraSenhaSoapIn" />
+      <wsdl:output message="tns:alteraSenhaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="retornaContatos">
       <wsdl:input message="tns:retornaContatosSoapIn" />
@@ -389,80 +369,8 @@
   </wsdl:portType>
   <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="teste">
-      <soap:operation soapAction="http://tempuri.org/teste" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="verificaLoginUsuarioManutencao">
-      <soap:operation soapAction="http://tempuri.org/verificaLoginUsuarioManutencao" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="verificaSenha">
-      <soap:operation soapAction="http://tempuri.org/verificaSenha" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="resetaSenha">
-      <soap:operation soapAction="http://tempuri.org/resetaSenha" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="alteraSenha">
-      <soap:operation soapAction="http://tempuri.org/alteraSenha" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="alteraNome">
-      <soap:operation soapAction="http://tempuri.org/alteraNome" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="alteraPermissao">
-      <soap:operation soapAction="http://tempuri.org/alteraPermissao" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="alteraCertificado">
-      <soap:operation soapAction="http://tempuri.org/alteraCertificado" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="excluiUsuario">
-      <soap:operation soapAction="http://tempuri.org/excluiUsuario" style="document" />
+      <soap:operation soapAction="http://sacis.com.br/verificaLoginUsuarioManutencao" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -471,7 +379,52 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="verificaUsuario">
-      <soap:operation soapAction="http://tempuri.org/verificaUsuario" style="document" />
+      <soap:operation soapAction="http://sacis.com.br/verificaUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetaSenha">
+      <soap:operation soapAction="http://sacis.com.br/resetaSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraNome">
+      <soap:operation soapAction="http://sacis.com.br/alteraNome" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraPermissao">
+      <soap:operation soapAction="http://sacis.com.br/alteraPermissao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraCertificado">
+      <soap:operation soapAction="http://sacis.com.br/alteraCertificado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="excluiUsuario">
+      <soap:operation soapAction="http://sacis.com.br/excluiUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -480,7 +433,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="cadastraUsuario">
-      <soap:operation soapAction="http://tempuri.org/cadastraUsuario" style="document" />
+      <soap:operation soapAction="http://sacis.com.br/cadastraUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -489,7 +442,25 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="consultaUsuario">
-      <soap:operation soapAction="http://tempuri.org/consultaUsuario" style="document" />
+      <soap:operation soapAction="http://sacis.com.br/consultaUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verificaSenha">
+      <soap:operation soapAction="http://sacis.com.br/verificaSenha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraSenha">
+      <soap:operation soapAction="http://sacis.com.br/alteraSenha" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -498,7 +469,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="retornaContatos">
-      <soap:operation soapAction="http://tempuri.org/retornaContatos" style="document" />
+      <soap:operation soapAction="http://sacis.com.br/retornaContatos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -507,7 +478,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="cadastraContatoPessoal">
-      <soap:operation soapAction="http://tempuri.org/cadastraContatoPessoal" style="document" />
+      <soap:operation soapAction="http://sacis.com.br/cadastraContatoPessoal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -516,7 +487,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="retornaContatoPessoal">
-      <soap:operation soapAction="http://tempuri.org/retornaContatoPessoal" style="document" />
+      <soap:operation soapAction="http://sacis.com.br/retornaContatoPessoal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -525,7 +496,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="removeContatoPessoal">
-      <soap:operation soapAction="http://tempuri.org/removeContatoPessoal" style="document" />
+      <soap:operation soapAction="http://sacis.com.br/removeContatoPessoal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -536,80 +507,8 @@
   </wsdl:binding>
   <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="teste">
-      <soap12:operation soapAction="http://tempuri.org/teste" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="verificaLoginUsuarioManutencao">
-      <soap12:operation soapAction="http://tempuri.org/verificaLoginUsuarioManutencao" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="verificaSenha">
-      <soap12:operation soapAction="http://tempuri.org/verificaSenha" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="resetaSenha">
-      <soap12:operation soapAction="http://tempuri.org/resetaSenha" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="alteraSenha">
-      <soap12:operation soapAction="http://tempuri.org/alteraSenha" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="alteraNome">
-      <soap12:operation soapAction="http://tempuri.org/alteraNome" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="alteraPermissao">
-      <soap12:operation soapAction="http://tempuri.org/alteraPermissao" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="alteraCertificado">
-      <soap12:operation soapAction="http://tempuri.org/alteraCertificado" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="excluiUsuario">
-      <soap12:operation soapAction="http://tempuri.org/excluiUsuario" style="document" />
+      <soap12:operation soapAction="http://sacis.com.br/verificaLoginUsuarioManutencao" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -618,7 +517,52 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="verificaUsuario">
-      <soap12:operation soapAction="http://tempuri.org/verificaUsuario" style="document" />
+      <soap12:operation soapAction="http://sacis.com.br/verificaUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resetaSenha">
+      <soap12:operation soapAction="http://sacis.com.br/resetaSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraNome">
+      <soap12:operation soapAction="http://sacis.com.br/alteraNome" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraPermissao">
+      <soap12:operation soapAction="http://sacis.com.br/alteraPermissao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraCertificado">
+      <soap12:operation soapAction="http://sacis.com.br/alteraCertificado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="excluiUsuario">
+      <soap12:operation soapAction="http://sacis.com.br/excluiUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -627,7 +571,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="cadastraUsuario">
-      <soap12:operation soapAction="http://tempuri.org/cadastraUsuario" style="document" />
+      <soap12:operation soapAction="http://sacis.com.br/cadastraUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -636,7 +580,25 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="consultaUsuario">
-      <soap12:operation soapAction="http://tempuri.org/consultaUsuario" style="document" />
+      <soap12:operation soapAction="http://sacis.com.br/consultaUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verificaSenha">
+      <soap12:operation soapAction="http://sacis.com.br/verificaSenha" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="alteraSenha">
+      <soap12:operation soapAction="http://sacis.com.br/alteraSenha" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -645,7 +607,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="retornaContatos">
-      <soap12:operation soapAction="http://tempuri.org/retornaContatos" style="document" />
+      <soap12:operation soapAction="http://sacis.com.br/retornaContatos" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -654,7 +616,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="cadastraContatoPessoal">
-      <soap12:operation soapAction="http://tempuri.org/cadastraContatoPessoal" style="document" />
+      <soap12:operation soapAction="http://sacis.com.br/cadastraContatoPessoal" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -663,7 +625,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="retornaContatoPessoal">
-      <soap12:operation soapAction="http://tempuri.org/retornaContatoPessoal" style="document" />
+      <soap12:operation soapAction="http://sacis.com.br/retornaContatoPessoal" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -672,7 +634,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="removeContatoPessoal">
-      <soap12:operation soapAction="http://tempuri.org/removeContatoPessoal" style="document" />
+      <soap12:operation soapAction="http://sacis.com.br/removeContatoPessoal" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -683,10 +645,10 @@
   </wsdl:binding>
   <wsdl:service name="Service1">
     <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
-      <soap:address location="http://localhost:51664/Service1.asmx" />
+      <soap:address location="http://localhost:8080/Service1.asmx" />
     </wsdl:port>
     <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
-      <soap12:address location="http://localhost:51664/Service1.asmx" />
+      <soap12:address location="http://localhost:8080/Service1.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

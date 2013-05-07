@@ -40,6 +40,27 @@ namespace sacis.model.utilitarios
             le.Close();
 
             return false;
-        }    
+        }
+
+        public static bool verificaCadastroUsuarioLocal(string login) {
+
+            StreamReader le = new StreamReader(CAM_LOG);
+
+            string nome;
+
+            while ((nome = le.ReadLine()) != null)
+            {
+                if (nome.Contains(login))
+                {
+                    le.Close();
+                    return true;
+                }
+            }
+
+            le.Close();
+
+            return false;
+        
+        }
     }
 }

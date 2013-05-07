@@ -24,6 +24,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private static string MSG_ADICIONAR = "Contatos Adicionados!";
         private static string MSG_AVISO = "Mensagem de Aviso";
         private static string MSG_ERRO = "Mensagem de Erro";
+        private static string MSG_SELECAO = "Selecione Contato a Ser Adicionado!";
         private static string user;
 
         ///<summary>
@@ -78,12 +79,12 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         {
             try
             {
+                int contador = 0;
                 int contagem = catalogoDataGridView.Rows.Count;
                 List<contato> lista = new List<contato>();
 
                 for (int i = 0; i < contagem; i++)
                 {
-
                     if (catalogoDataGridView.Rows[i].Cells[2].Value.Equals(true))
                     {
                         string nome = catalogoDataGridView.Rows[i].Cells[0].Value.ToString();
@@ -91,9 +92,13 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                         contato contact = new contato(nome, email);
                         lista.Add(contact);
                     }
+                    else {
+                        contador++;
+                    }
                 }
 
-                if (gerenciaServlet.insereContatosPessoal(lista, user)) MessageBox.Show(MSG_ADICIONAR, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (contador == contagem) MessageBox.Show(MSG_SELECAO, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else if (gerenciaServlet.insereContatosPessoal(lista, user)) MessageBox.Show(MSG_ADICIONAR, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 for (int i = 0; i < contagem; i++)
                 {

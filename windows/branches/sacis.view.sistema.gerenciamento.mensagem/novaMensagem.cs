@@ -54,19 +54,19 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///</summary>
         private void paraLabelClick(object sender, EventArgs e)
         {
-            try
+           try
             {
-                catalogoPessoal newForm;
+                catalogoPara newForm;
 
                 if (lista.Count == 0)
                 {
-                    newForm = new catalogoPessoal(usuario);
+                    newForm = new catalogoPara(usuario);
                 }
                 else
                 {
                     lista.Clear();
                     lista = gerenciaServlet.converteParaLista(novoPara.Text);
-                    newForm = new catalogoPessoal(usuario, lista);
+                    newForm = new catalogoPara(usuario, lista);
                 }
 
                 newForm.FormClosed += new FormClosedEventHandler(formVisivel);
@@ -81,6 +81,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 novoPara.Clear();
             }
+ 
         }
 
         ///<summary>
@@ -165,7 +166,6 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///</summary>
         private void novoEnviarClick(object sender, EventArgs e)
         {
-
             try
             {
                 preMensagem msg = new preMensagem(usuario, novoPara.Text, novoAssunto.Text, novoTexto.Text, novoCripto.Checked, novoAssina.Checked, CriptoFiles, PlainFiles);

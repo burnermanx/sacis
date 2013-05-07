@@ -111,6 +111,8 @@
             this.Controls.Add(this.cancelarBotao);
             this.Controls.Add(this.okBotao);
             this.Controls.Add(this.anexosDataGridView);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "novaMensagemAnexar";
             this.Text = "Anexos";
             ((System.ComponentModel.ISupportInitialize)(this.anexosDataGridView)).EndInit();
