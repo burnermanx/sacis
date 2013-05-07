@@ -17,7 +17,7 @@ namespace sacis.model.bd
     public class conectaMysql
     {
 
-        private static string DADOS_CONEXAO = @"Persist Security info=False; server=localhost; database=conectividade; uid=root; pwd='123';";
+        private static string DADOS_CONEXAO = @"Persist Security info=False; server=localhost; database=conectividade; uid=root; pwd='123';"; //database=bdsacis; iud=sacis; pwd='q1w2e3r4'; --> para conectar no servidor web
         private static string MSG_CONEXAO = "Erro Conectando ao Banco de Dados!";
         private static string MSG_DESCONEXAO = "Erro Desconectando ao Banco de Dados!";
         private static MySqlConnection bdConn;

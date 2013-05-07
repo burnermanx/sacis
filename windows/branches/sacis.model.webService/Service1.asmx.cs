@@ -26,7 +26,7 @@ using System.Collections.Generic;
 namespace sacis.model.webService
 {
 
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://sacis.com.br")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -44,11 +44,7 @@ namespace sacis.model.webService
         private static string MSG_ERRO_REMOVER = "Erro ao Remover Contato!";
         private static string EXTENSAO = ".key";
 
-        [WebMethod]
-        public string teste()
-        {
-            return "O teste foi um sucesso!!!";
-        }
+        #region Sistema Manutenção              
 
         ///<summary>
         ///
@@ -80,21 +76,23 @@ namespace sacis.model.webService
 
         ///<summary>
         ///
-        /// Método Web que verifica se a senha de um usuário cadastrado atraves do login passado
-        /// precisa ser alterada retornando verdadeiro caso seja necessário
+        /// Método Web que verifica a existencia de um usuario cadastrado atraves do login passado
+        /// retornando verdadeiro caso usuario seja cadastrado
         ///                    
         /// Retorna excecao: Erro de conexão com o banco de dados
         /// 
         ///</summary>
         [WebMethod]
-        public bool verificaSenha(string login)
+        public bool verificaUsuario(string login)
         {
             try
             {
-                string str = "select alterasenha from conecta where login = '" + login + "'";
+                string str = "select login from conecta where login = '" + login + "'";
                 string result = retornaConsultaSql(str);
 
-                if (result.Equals("s")) return true;
+                StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+                if (comparer.Compare(login, result) == 0) return true;
                 else return false;
             }
             catch (excecao.excecao except)
@@ -129,43 +127,9 @@ namespace sacis.model.webService
                     conectaMysql.desconectaMSQL();
 
                     return true;
-                
-                } else return false;
-            }
-            catch (excecao.excecao except)
-            {
-                throw except;
-            }
-        }
 
-        ///<summary>
-        ///
-        /// Método Web que altera a senha de um usuário cadastrado através do login e senha passados
-        /// retornando verdadeiro caso alteração seja realizada com sucesso.
-        ///                    
-        /// Retorna excecao: Erro de conexão com o banco de dados
-        /// 
-        ///</summary>
-        [WebMethod]
-        public bool alteraSenha(string login, string senha)
-        {
-            try
-            {
-                if (verificaSenha(login))
-                {
-                    MySqlConnection conecta = conectaMysql.conectaMSQL();
-                    conecta.Open();
-
-                    string str = "UPDATE conecta SET senha = '" + senha + "', alterasenha = 'n' WHERE login = '" + login + "'";
-
-                    MySqlCommand exec = new MySqlCommand(str, conecta);
-                    exec.ExecuteNonQuery();
-
-                    conectaMysql.desconectaMSQL();
-
-                    return true;
-
-                } else return false;
+                }
+                else return false;
             }
             catch (excecao.excecao except)
             {
@@ -200,8 +164,9 @@ namespace sacis.model.webService
                     conectaMysql.desconectaMSQL();
 
                     return true;
-                
-                } else return false;
+
+                }
+                else return false;
             }
             catch (excecao.excecao except)
             {
@@ -248,7 +213,7 @@ namespace sacis.model.webService
             {
                 throw except;
             }
-             
+
         }
 
         ///<summary>
@@ -305,7 +270,7 @@ namespace sacis.model.webService
             try
             {
                 if (verificaUsuario(login))
-                {                                        
+                {
                     MySqlConnection conecta = conectaMysql.conectaMSQL();
                     conecta.Open();
 
@@ -322,40 +287,14 @@ namespace sacis.model.webService
 
                     return true;
 
-                } else return false;
-            }
-            catch (excecao.excecao except)
-            {
-                throw except;
-            }
-        } 
-        
-        ///<summary>
-        ///
-        /// Método Web que verifica a existencia de um usuario cadastrado atraves do login passado
-        /// retornando verdadeiro caso usuario seja cadastrado
-        ///                    
-        /// Retorna excecao: Erro de conexão com o banco de dados
-        /// 
-        ///</summary>
-        [WebMethod]
-        public bool verificaUsuario(string login)
-        {
-            try
-            {
-                string str = "select login from conecta where login = '" + login + "'";
-                string result = retornaConsultaSql(str);
-
-                StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-
-                if (comparer.Compare(login, result) == 0) return true;
+                }
                 else return false;
             }
             catch (excecao.excecao except)
             {
                 throw except;
             }
-        }
+        }        
 
         ///<summary>
         ///
@@ -412,6 +351,10 @@ namespace sacis.model.webService
 
         }
 
+        #endregion
+
+        #region Sistema de Mensagens
+
         ///<summary>
         ///
         /// Método Web que consulta o login e hash da senha passado retornando 
@@ -431,6 +374,67 @@ namespace sacis.model.webService
                 StringComparer comparer = StringComparer.OrdinalIgnoreCase;
 
                 if (comparer.Compare(senha, result) == 0) return true;
+                else return false;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método Web que verifica se a senha de um usuário cadastrado atraves do login passado
+        /// precisa ser alterada retornando verdadeiro caso seja necessário
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool verificaSenha(string login)
+        {
+            try
+            {
+                string str = "select alterasenha from conecta where login = '" + login + "'";
+                string result = retornaConsultaSql(str);
+
+                if (result.Equals("s")) return true;
+                else return false;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método Web que altera a senha de um usuário cadastrado através do login e senha passados
+        /// retornando verdadeiro caso alteração seja realizada com sucesso.
+        ///                    
+        /// Retorna excecao: Erro de conexão com o banco de dados
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool alteraSenha(string login, string senha)
+        {
+            try
+            {
+                if (verificaSenha(login))
+                {
+                    MySqlConnection conecta = conectaMysql.conectaMSQL();
+                    conecta.Open();
+
+                    string str = "UPDATE conecta SET senha = '" + senha + "', alterasenha = 'n' WHERE login = '" + login + "'";
+
+                    MySqlCommand exec = new MySqlCommand(str, conecta);
+                    exec.ExecuteNonQuery();
+
+                    conectaMysql.desconectaMSQL();
+
+                    return true;
+
+                }
                 else return false;
             }
             catch (excecao.excecao except)
@@ -599,5 +603,8 @@ namespace sacis.model.webService
 
             return ds;
         }
+
+        #endregion
+        
     }
 }

@@ -260,13 +260,25 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
         ///<summary>
         ///
-        /// Metodo para o botao Catálogo chamar formulario
+        /// Metodo para o botao Catálogo Geral chamar formulario
         ///
         ///</summary>
-        private void catalogoGeralClick(object sender, EventArgs e)
+        private void catalogoGeralItem_Click(object sender, EventArgs e)
         {
             catalogoGeral newform = new catalogoGeral(usuario);
-            newform.ShowDialog();        
+            newform.ShowDialog();   
+        }
+
+        ///<summary>
+        ///
+        /// Metodo para o botao Catálogo Pessoal chamar formulario
+        ///
+        ///</summary>
+        private void catalogoPessoalItem_Click(object sender, EventArgs e)
+        {
+            catalogoPessoal newForm = new catalogoPessoal(usuario);
+            newForm.ShowDialog(); 
+
         }
     }
 

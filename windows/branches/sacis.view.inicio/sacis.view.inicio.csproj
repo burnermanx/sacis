@@ -84,9 +84,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\sacis.view.manutencao.cadastro\sacis.view.manutencao.cadastro.csproj">
+    <ProjectReference Include="..\sacis.view.manutencao.cadastro\sacis.view.sistema.manutencao.csproj">
       <Project>{80A344DA-B2AD-4A04-82C5-65726B531F7E}</Project>
-      <Name>sacis.view.manutencao.cadastro</Name>
+      <Name>sacis.view.sistema.manutencao</Name>
     </ProjectReference>
     <ProjectReference Include="..\sacis.view.sistema.sacis\sacis.view.sistema.sacis.csproj">
       <Project>{A2DAE341-42FE-485E-B301-A66EECCBE203}</Project>

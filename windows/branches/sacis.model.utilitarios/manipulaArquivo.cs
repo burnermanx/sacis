@@ -26,6 +26,7 @@ namespace sacis.model.utilitarios
         private static string CAMINHO_LOG = @"C:\sacis\sacis.log";
         private static string MSG_ERRO_EXCLUSAO_ARQUIVO = "Erro ao Excluir Arquivo!";
         private static string MSG_ERRO_EXCLUSAO_DIRETORIO = "Erro ao Excluir Diretorio!";
+        private static string EXTENSAO = ".key";
 
         ///<summary>
         ///
@@ -294,5 +295,28 @@ namespace sacis.model.utilitarios
             }
         }
 
+        public static void atualizaUsuarioLog(string login, string senha) {
+
+            StreamReader le = new StreamReader(CAMINHO_LOG);
+            List<string> lista = new List<string>();
+            String nome;
+            lista.Add(login + " " + senha);
+            
+            while ((nome = le.ReadLine()) != null) {             
+                if(!nome.Contains(login)){
+                    lista.Add(nome);
+                }          
+            }
+            le.Close();
+            atualizaLog(lista);        
+        
+        }
+
+        public static void atualizaLog(List<String> lista)
+        {
+            StreamWriter wr = new StreamWriter(CAMINHO_LOG, false);
+            foreach(String str in lista) wr.WriteLine(str);
+            wr.Close();        
+        }
     }
 }

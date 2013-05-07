@@ -17,7 +17,6 @@ namespace sacis.model.criptografia
     public class simetrica
     {
         private static string tipoSimetrica = "SHA256";
-        //private static string vetorInicializacao = "@1B2c3D4e5F6g7H8";
         private static string MSG_CHAVE_INVALIDA = "Chave Invalida!";
         private const int N = 624;
         private const int M = 397;
@@ -126,7 +125,7 @@ namespace sacis.model.criptografia
         ///</summary>
         private static string geradorIV()
         {
-            string vetor = hash.hashing(geradorCadeiaCaracteres());
+            string vetor = geradorCadeiaCaracteres();
             return vetor.Substring(0, 16); 
         }
 
