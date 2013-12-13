@@ -51,12 +51,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.alterarLoginTextBox = new System.Windows.Forms.TextBox();
             this.abaExcluirUsuario = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.excluirLoginTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.sairButton = new System.Windows.Forms.Button();
             this.anexar = new System.Windows.Forms.OpenFileDialog();
-            this.label5 = new System.Windows.Forms.Label();
-            this.excluirLoginTextBox = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.abasManutencao.SuspendLayout();
             this.abaCadastrarUsuario.SuspendLayout();
             this.abaAlterarUsuario.SuspendLayout();
@@ -237,9 +237,9 @@
             this.resetarSenhaCheckBox.AutoSize = true;
             this.resetarSenhaCheckBox.Location = new System.Drawing.Point(65, 50);
             this.resetarSenhaCheckBox.Name = "resetarSenhaCheckBox";
-            this.resetarSenhaCheckBox.Size = new System.Drawing.Size(97, 17);
+            this.resetarSenhaCheckBox.Size = new System.Drawing.Size(90, 17);
             this.resetarSenhaCheckBox.TabIndex = 1;
-            this.resetarSenhaCheckBox.Text = "Resetar Senha";
+            this.resetarSenhaCheckBox.Text = "Alterar Senha";
             this.resetarSenhaCheckBox.UseVisualStyleBackColor = true;
             // 
             // alterarPermissaoComboBox
@@ -300,6 +300,31 @@
             this.abaExcluirUsuario.TabIndex = 3;
             this.abaExcluirUsuario.Text = "Excluir Usuário";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(73, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(197, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Digite o Login do Usuário a ser Excluído";
+            // 
+            // excluirLoginTextBox
+            // 
+            this.excluirLoginTextBox.Location = new System.Drawing.Point(147, 99);
+            this.excluirLoginTextBox.Name = "excluirLoginTextBox";
+            this.excluirLoginTextBox.Size = new System.Drawing.Size(100, 20);
+            this.excluirLoginTextBox.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(96, 102);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(36, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Login:";
+            // 
             // okButton
             // 
             this.okButton.Location = new System.Drawing.Point(84, 238);
@@ -319,31 +344,6 @@
             this.sairButton.Text = "Sair";
             this.sairButton.UseVisualStyleBackColor = true;
             this.sairButton.Click += new System.EventHandler(this.sairButtonClick);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(96, 102);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Login:";
-            // 
-            // excluirLoginTextBox
-            // 
-            this.excluirLoginTextBox.Location = new System.Drawing.Point(147, 99);
-            this.excluirLoginTextBox.Name = "excluirLoginTextBox";
-            this.excluirLoginTextBox.Size = new System.Drawing.Size(100, 20);
-            this.excluirLoginTextBox.TabIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(73, 48);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(197, 13);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Digite o Login do Usuário a ser Excluído";
             // 
             // manutencao
             // 

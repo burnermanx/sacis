@@ -16,22 +16,27 @@ using sacis.view.control;
 using sacis.model.excecao;
 using System.IO;
 using System.Collections;
+using sacis.model.entidades;
 
 namespace sacis.view.sistema.gerenciamento.mensagem
 {
     public partial class gerenciaMensagem : Form
     {
 
-        private static string MSG_ERRO = "Erro";
+        private static string MSG_ERRO = "Erro ao abrir mensagem";
         private static string MSG_APAGAR = "Apagar Mensagem";
-        private static string ARQUIVO = "Arquivo";
+        private static string MSG_APAGAR_SUCESSO = "Mensagem apagada com sucesso!";
+        private static string MSG_APAGAR_NAO_SUCESSO = "Ocorreu um erro e a mensagem não foi apagada.";
         private static string MSG_CONFIRMA_APAGAR = "Deseja realmente apagar a mensagem?";
         private static string MSG_CONFIRMA_SAIDA = "Deseja realmente sair?";
         private static string MSG_SAIR = "Saida do Sistema";
-        private static string ENTRADA = "entrada";
-        private static string ENVIADOS = "enviados";
-        private string caminhoCompleto = null;
+        private static string ENTRADA = "ENTRADA";
+        private static string ENVIADOS = "ENVIADOS";
         private string usuario;
+        private List<mensagemCabecalho> listaEntrada;
+        private List<mensagemCabecalho> listaEnviados;
+        private static string remete = "Remetente";
+        private static string destino = "Destinatário";
 
         ///<summary>
         ///
@@ -52,56 +57,42 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         {
             InitializeComponent();
             usuario = nome;
-            MCLoad(nome);          
+            listaEntrada = gerenciaServlet.buscaCabecalho(nome, ENTRADA);
+            carregaLista(remete);
+            
         }
 
         ///<summary>
         ///
-        /// Metodo para carregar a treewiew automaticamente
+        /// Metodo para carregar a list view através do parametro passado 
         ///
         ///</summary>
-        private void MCLoad(string nome)
+        private void carregaLista(string tipo)
         {
+            mensagensGridView.Columns[0].HeaderText = tipo;
+            mensagensGridView.Columns[0].Name = tipo.ToLower();
 
-            try
+            List<mensagemCabecalho> lista = new List<mensagemCabecalho>();
+            
+            if (tipo.Equals(remete)) lista = listaEntrada;
+            else if (tipo.Equals(destino)) lista = listaEnviados;
+
+            if (lista != null)
             {
-                DirectoryInfo info = gerenciaServlet.listaDiretorios(nome);
+                mensagensGridView.Rows.Clear();
+                mensagensGridView.Rows.Add(lista.Count());
                 
-                TreeNode root = new TreeNode(info.Name);
-                
-                GetDirectories(info.GetDirectories(), root);
+                for(int i=0; i < lista.Count(); i++){
 
-                mcTreeview.Nodes.Add(root);
-
-                root.Expand();
-
-            }
-            catch (excecao except)
-            {
-
-                MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-
-        }
-
-        ///<summary>
-        ///
-        /// Metodo para visualizar o conteudo dos diretorios
-        ///
-        ///</summary>
-        private void GetDirectories(DirectoryInfo[] subDirs, TreeNode nodeToAddTo)
-        {
-            foreach (DirectoryInfo subDir in subDirs)
-            {
-                if (subDir.Name == ENTRADA || subDir.Name == ENVIADOS)
-                {
-                    TreeNode aNode = new TreeNode(subDir.Name, 0, 0);
-                    DirectoryInfo[] subSubDirs = subDir.GetDirectories();
-                    GetDirectories(subSubDirs, aNode);
-                    nodeToAddTo.Nodes.Add(aNode);
+                    mensagemCabecalho item = lista[i];
+                    mensagensGridView.Rows[i].Cells[0].Value = item.getLogremdest();
+                    mensagensGridView.Rows[i].Cells[1].Value = item.getAssunto();
+                    mensagensGridView.Rows[i].Cells[2].Value = item.getData();
+                    mensagensGridView.Rows[i].Cells[3].Value = item.getTamanho();
+                    mensagensGridView.Rows[i].Cells[4].Value = item.getCodigo();
                 }
             }
+            else if (lista == null) mensagensGridView.Rows.Clear();
         }
 
         ///<summary>
@@ -111,40 +102,16 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///
         ///</summary>
         private void mcTreeviewNodeClick(object sender, TreeNodeMouseClickEventArgs no)
-        {
+        {            
+            string nomeNo = no.Node.FullPath;
 
-            caminhoCompleto = gerenciaServlet.caminhoTotal(no.Node.FullPath);
-
-            TreeNode selecionado = no.Node;
-
-            mcList.Items.Clear();
-
-            DirectoryInfo nodir = gerenciaServlet.listaDiretorios(no.Node.FullPath);
-
-            ListViewItem.ListViewSubItem[] subitems;
-
-            ListViewItem item = null;
-
-            if (nodir.Exists)
-            {
-
-                foreach (FileInfo file in nodir.GetFiles())
-                {
-
-                    item = new ListViewItem(file.Name, 1);
-
-                    subitems = new ListViewItem.ListViewSubItem[]{ new ListViewItem.ListViewSubItem(item, ARQUIVO), 
-                               new ListViewItem.ListViewSubItem(item, file.LastAccessTime.ToShortDateString()),
-                               new ListViewItem.ListViewSubItem(item, file.Length.ToString())};
-
-                    item.SubItems.AddRange(subitems);
-
-                    mcList.Items.Add(item);
-
-                }
-
-                mcList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-
+            if (nomeNo.ToUpper().Contains(ENTRADA)) {
+                listaEntrada = gerenciaServlet.buscaCabecalho(usuario, ENTRADA);
+                carregaLista(remete);
+            }
+            else if (nomeNo.ToUpper().Contains(ENVIADOS)) {
+                listaEnviados = gerenciaServlet.buscaCabecalho(usuario, ENVIADOS);
+                carregaLista(destino);
             }
 
         }
@@ -156,10 +123,8 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///</summary>
         private void novoClick(object sender, EventArgs e)
         {
-
             novaMensagem newform = new novaMensagem(usuario);
             newform.ShowDialog();
-
         }
 
         ///<summary>
@@ -169,9 +134,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///</summary>
         private void sairClick(object sender, EventArgs e)
         {
-
             saidaSistema();
-
         }
 
         ///<summary>
@@ -183,9 +146,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         {
             if (e.KeyCode == Keys.Escape)
             {
-
                 saidaSistema();
-
             }
         }
 
@@ -197,65 +158,11 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private void saidaSistema() {
 
             if (DialogResult.OK == MessageBox.Show(MSG_CONFIRMA_SAIDA, MSG_SAIR, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1))
-                this.Close();        
-        
-        }
-
-        ///<summary>
-        ///
-        /// Metodo para ordenar colunas
-        ///
-        ///</summary>
-        private void colunaClick(object sender, ColumnClickEventArgs e)
-        {
-
-            this.mcList.Sorting = ((this.mcList.Sorting.Equals(SortOrder.Ascending)) ?
-                                    SortOrder.Descending : SortOrder.Ascending);
-
-            this.mcList.ListViewItemSorter = new OrdenaListView(this.mcList.Sorting, e.Column);
-
-            this.mcList.Sort();
-
-        }
-
-        ///<summary>
-        ///
-        /// Metodo para abrir a mensagem com duplo click
-        ///
-        ///</summary>
-        private void duploClick(object sender, EventArgs e)
-        {
-
-            string arq = mcList.SelectedItems[0].SubItems[0].Text;
-
-            gerenciaServlet.abreArquivo(caminhoCompleto + arq);
-
-        }
-
-        ///<summary>
-        ///
-        /// Metodo para apagar mensagem
-        ///
-        ///</summary>
-        private void apagar(object sender, KeyEventArgs e)
-       {
-
-            if (e.KeyCode == Keys.Delete)
             {
-
-                string arq = mcList.SelectedItems[0].SubItems[0].Text;
-
-                if (DialogResult.OK == MessageBox.Show(MSG_CONFIRMA_APAGAR, MSG_APAGAR, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1))
-                {
-
-                    gerenciaServlet.apagaArquivo(caminhoCompleto + arq);
-                    mcList.Items.Remove(mcList.SelectedItems[0]);
-                    mcList.Refresh();
-
-                }
-
+                gerenciaServlet.excluiArquivos();
+                this.Close();
             }
-
+        
         }
 
         ///<summary>
@@ -280,54 +187,66 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             newForm.ShowDialog(); 
 
         }
-    }
-
-    ///<summary>
-    ///
-    /// Classe para ordenar as mensagens
-    ///
-    ///</summary>
-    public class OrdenaListView : IComparer
-    {
-
-        private int col;
-        private SortOrder sortOrder;
 
         ///<summary>
         ///
-        /// Metodo construtor para inicializar as variaveis da classe
-        /// atraves do modo da ordenação e a coluna a ser ordenada passados
-        /// 
+        /// Metodo para abrir a mensagem com duplo click
+        ///
         ///</summary>
-        public OrdenaListView(SortOrder sortOrder, int col)
+        private void mensagensGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                int id = Convert.ToInt32(mensagensGridView.Rows[e.RowIndex].Cells[4].Value.ToString());
 
-            this.sortOrder = sortOrder;
-            this.col = col;
+                if (e.ColumnIndex != 5)
+                {
+                    abrirMensagem newform = new abrirMensagem(id);
+                    newform.ShowDialog();
+                }                
+            }
+            catch (ArgumentOutOfRangeException exception)
+            {
+              
+            } catch (excecao ex){
+                MessageBox.Show(ex.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+            }
         }
-
-        #region IComparer Members
 
         ///<summary>
         ///
-        /// Metodo para comparar dois objetos passados da classe para ordená-los
-        /// 
+        /// Metodo para apagar mensagem
+        ///
         ///</summary>
-        public int Compare(object x, object y)
+        private void mensagensGridView_MouseClick(object sender, MouseEventArgs e)
         {
+            try
+            {
+                int linha = Convert.ToInt32(mensagensGridView.SelectedCells[0].RowIndex.ToString());
+                int coluna = Convert.ToInt16(mensagensGridView.SelectedCells[0].ColumnIndex.ToString());
 
-            ListViewItem objetoA = (ListViewItem)x;
-            ListViewItem objetoB = (ListViewItem)y;
+                if (coluna == 5)
+                {
+                    int id = Convert.ToInt32(mensagensGridView.Rows[linha].Cells[4].Value.ToString());
 
-            if (this.sortOrder.Equals(SortOrder.Ascending))
-                return objetoA.SubItems[this.col].Text.CompareTo(objetoB.SubItems[this.col].Text);
-            else
-                return objetoB.SubItems[this.col].Text.CompareTo(objetoA.SubItems[this.col].Text);
-
-        }
-
-        #endregion
-
+                    if (DialogResult.OK == MessageBox.Show(MSG_CONFIRMA_APAGAR, MSG_APAGAR, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1))
+                    {
+                        if (gerenciaServlet.apagaMensagem(id))
+                        {
+                            mensagensGridView.Rows.RemoveAt(linha);
+                            mensagensGridView.ClearSelection();
+                            MessageBox.Show(MSG_APAGAR_SUCESSO, MSG_APAGAR, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                        }
+                        else {
+                            MessageBox.Show(MSG_APAGAR_NAO_SUCESSO, MSG_APAGAR, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                        }
+                    }
+                }
+            }
+            catch (ArgumentOutOfRangeException exception)
+            {
+                
+            }           
+        }       
     }
-
 }

@@ -14,6 +14,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Services.Protocols;
 using System.Xml.Linq;
+using System.Diagnostics;
 using sacis.model.excecao;
 using sacis.model.bd;
 using sacis.model.entidades;
@@ -22,6 +23,8 @@ using sacis.model.utilitarios;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+
+using System.Xml.Serialization;
 
 namespace sacis.model.webService
 {
@@ -59,7 +62,7 @@ namespace sacis.model.webService
 
             try
             {
-                string str = "select permissao from conecta where login = '" + login + "' and senha = '" + senha + "'";
+                string str = "select permissao from usuario where login = '" + login + "' and senha = '" + senha + "'";
                 string result = retornaConsultaSql(str);
 
                 StringComparer comparer = StringComparer.OrdinalIgnoreCase;
@@ -87,7 +90,7 @@ namespace sacis.model.webService
         {
             try
             {
-                string str = "select login from conecta where login = '" + login + "'";
+                string str = "select login from usuario where login = '" + login + "'";
                 string result = retornaConsultaSql(str);
 
                 StringComparer comparer = StringComparer.OrdinalIgnoreCase;
@@ -119,7 +122,7 @@ namespace sacis.model.webService
                     MySqlConnection conecta = conectaMysql.conectaMSQL();
                     conecta.Open();
 
-                    string str = "UPDATE conecta SET alterasenha = 's' WHERE login = '" + login + "'";
+                    string str = "UPDATE usuario SET alterasenha = 's' WHERE login = '" + login + "'";
 
                     MySqlCommand exec = new MySqlCommand(str, conecta);
                     exec.ExecuteNonQuery();
@@ -156,7 +159,7 @@ namespace sacis.model.webService
                     MySqlConnection conecta = conectaMysql.conectaMSQL();
                     conecta.Open();
 
-                    string str = "UPDATE conecta SET nome = '" + nome + "' WHERE login = '" + login + "'";
+                    string str = "UPDATE usuario SET nome = '" + nome + "' WHERE login = '" + login + "'";
 
                     MySqlCommand exec = new MySqlCommand(str, conecta);
                     exec.ExecuteNonQuery();
@@ -197,7 +200,7 @@ namespace sacis.model.webService
                     if (permissao == 0) permite = 'a';
                     else if (permissao == 1) permite = 'u';
 
-                    string str = "UPDATE conecta SET permissao = '" + permite + "' WHERE login = '" + login + "'";
+                    string str = "UPDATE usuario SET permissao = '" + permite + "' WHERE login = '" + login + "'";
 
                     MySqlCommand exec = new MySqlCommand(str, conecta);
                     exec.ExecuteNonQuery();
@@ -231,14 +234,13 @@ namespace sacis.model.webService
             {
                 if (verificaUsuario(login))
                 {
-
                     string key = login + EXTENSAO;
                     manipulaArquivo.criaArquivoTexto(CAMINHO_SERVER + CHAVEIRO + key, certificado);
 
                     MySqlConnection conecta = conectaMysql.conectaMSQL();
                     conecta.Open();
 
-                    string str = "UPDATE conecta SET validade = '" + validade + "' WHERE login = '" + login + "'";
+                    string str = "UPDATE usuario SET expirachave = 'n', validade = '" + validade + "' WHERE login = '" + login + "';";
 
                     MySqlCommand exec = new MySqlCommand(str, conecta);
                     exec.ExecuteNonQuery();
@@ -246,7 +248,6 @@ namespace sacis.model.webService
                     conectaMysql.desconectaMSQL();
 
                     return true;
-
                 }
                 else return false;
             }
@@ -274,7 +275,7 @@ namespace sacis.model.webService
                     MySqlConnection conecta = conectaMysql.conectaMSQL();
                     conecta.Open();
 
-                    string str = "DELETE FROM conecta WHERE login = '" + login + "'";
+                    string str = "DELETE FROM usuario WHERE login = '" + login + "'";
 
                     MySqlCommand exec = new MySqlCommand(str, conecta);
                     exec.ExecuteNonQuery();
@@ -319,7 +320,7 @@ namespace sacis.model.webService
                 if (user.getPermissao() == 0) permissao = 'a';
                 else if (user.getPermissao() == 1) permissao = 'u';              
 
-                string str = "INSERT INTO conecta(login, senha, nome, validade, permissao)VALUES('" + user.getLogin() + "','" + user.getSenha() + "','" + user.getNome() + "','" + user.getValidade() + "','" + permissao + "')";
+                string str = "INSERT INTO usuario(login, senha, nome, validade, permissao, expirachave)VALUES('" + user.getLogin() + "','" + user.getSenha() + "','" + user.getNome() + "','" + user.getValidade() + "','" + permissao + "','n');";
 
                 MySqlCommand exec = new MySqlCommand(str, conecta);
                 exec.ExecuteNonQuery();
@@ -341,14 +342,12 @@ namespace sacis.model.webService
         ///</summary>
         private void criaDiretoriosUsuario(usuario user, string key)
         {
-
             manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getLogin());
             manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getLogin() + ENTRADA);
             manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getLogin() + ENVIADOS);
             manipulaArquivo.criaDiretorio(CAMINHO_SERVER + user.getLogin() + CONTATOS);
             manipulaArquivo.criaArquivoTexto(CAMINHO_SERVER + user.getLogin() + CONTATOS + ARQUIVO_CONTATO, null);
             manipulaArquivo.criaArquivoTexto(CAMINHO_SERVER + CHAVEIRO + key, user.getChave());
-
         }
 
         #endregion
@@ -364,46 +363,40 @@ namespace sacis.model.webService
         /// 
         ///</summary>
         [WebMethod]
-        public bool consultaUsuario(string login, string senha)
+        public int consultaUsuario(string login, string senha)
         {
             try
             {
-                string str = "select senha from conecta where login = '" + login + "'";
-                string result = retornaConsultaSql(str);
+                string sql = "select senha, alterasenha, expirachave, dias from usuario where login = '" + login + "'";
+                
+                string pass = "";
+                string alteraSenha = "";
+                string expirachave = "";
+                string dias = "";
 
-                StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+                DataTable data = retornaDataTableSql(sql);
 
-                if (comparer.Compare(senha, result) == 0) return true;
-                else return false;
+                if (data.Rows.Count > 0)
+                {
+                    pass = data.Rows[0][data.Columns[0]].ToString();
+                    alteraSenha = data.Rows[0][data.Columns[1]].ToString();
+                    expirachave = data.Rows[0][data.Columns[2]].ToString();
+                    dias = data.Rows[0][data.Columns[3]].ToString();
+                }
+                
+                if (alteraSenha.Equals("s")) return 1;
+                else if (expirachave.Equals("s")) return 2;
+                else if (expirachave.Equals("t")) return 100 + Convert.ToInt32(dias);
+                else if (senha.Equals(pass)) return 0;                
+                else return 3;
             }
             catch (excecao.excecao except)
             {
                 throw except;
             }
-        }
-
-        ///<summary>
-        ///
-        /// Método Web que verifica se a senha de um usuário cadastrado atraves do login passado
-        /// precisa ser alterada retornando verdadeiro caso seja necessário
-        ///                    
-        /// Retorna excecao: Erro de conexão com o banco de dados
-        /// 
-        ///</summary>
-        [WebMethod]
-        public bool verificaSenha(string login)
-        {
-            try
+            catch (NullReferenceException nu)
             {
-                string str = "select alterasenha from conecta where login = '" + login + "'";
-                string result = retornaConsultaSql(str);
-
-                if (result.Equals("s")) return true;
-                else return false;
-            }
-            catch (excecao.excecao except)
-            {
-                throw except;
+                return 3;            
             }
         }
 
@@ -420,27 +413,24 @@ namespace sacis.model.webService
         {
             try
             {
-                if (verificaSenha(login))
-                {
-                    MySqlConnection conecta = conectaMysql.conectaMSQL();
-                    conecta.Open();
+                MySqlConnection conecta = conectaMysql.conectaMSQL();
+                conecta.Open();
 
-                    string str = "UPDATE conecta SET senha = '" + senha + "', alterasenha = 'n' WHERE login = '" + login + "'";
+                string str = "UPDATE usuario SET senha = '" + senha + "', alterasenha = 'n' WHERE login = '" + login + "'";
 
-                    MySqlCommand exec = new MySqlCommand(str, conecta);
-                    exec.ExecuteNonQuery();
+                MySqlCommand exec = new MySqlCommand(str, conecta);
+                exec.ExecuteNonQuery();
 
-                    conectaMysql.desconectaMSQL();
+                conectaMysql.desconectaMSQL();
 
-                    return true;
+                return true;
 
-                }
-                else return false;
             }
             catch (excecao.excecao except)
             {
                 throw except;
             }
+            
         }
 
         ///<summary>
@@ -455,7 +445,7 @@ namespace sacis.model.webService
         {
             try
             {
-                string str = "select nome,login from conecta";
+                string str = "select nome,login from usuario";
                 List<contato> lista = new List<contato>();
 
                 DataTable data = retornaDataTableSql(str);
@@ -604,6 +594,305 @@ namespace sacis.model.webService
             return ds;
         }
 
+        ///<summary>
+        ///
+        /// Método para enviar as mensagem aos destinatarios
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool enviaMensagem(string xml) {
+            try{
+                mensagem mensagem = serial.Deserializar(xml, typeof(mensagem)) as mensagem;
+                            
+                string caminhoDestinatario = CAMINHO_SERVER + mensagem.getPara() + ENTRADA + "\\";
+                string caminhoRemetente = CAMINHO_SERVER + mensagem.getDe() + ENVIADOS + "\\";
+                string caminhoRemetenteErro = CAMINHO_SERVER + mensagem.getDe() + ENTRADA + "\\";
+                string INSERT = "INSERT INTO mensagem(id, loginusuario, assunto, lida, logremdest, tipo, data, tamanho, listadestinatarios)VALUES";
+
+                MySqlConnection conecta = conectaMysql.conectaMSQL();
+                conecta.Open();
+
+                string sql = "select id from seq_mensagem;";                
+                MySqlCommand exec = new MySqlCommand(sql, conecta);
+                string maxId = exec.ExecuteScalar().ToString();
+                int id = Convert.ToInt16(maxId)+1;
+
+                sql = "Update seq_mensagem set id = " + id + ";";
+                new MySqlCommand(sql, conecta).ExecuteNonQuery();
+
+                if (mensagem.getDe() == mensagem.getPara())
+                {
+                    sql = INSERT + "(" + id + ",'" + mensagem.getDe() + "','" + mensagem.getAssunto() + "'," + 1 + ",'" + mensagem.getPara() + "','ENVIADOS', now()," + xml.Length + ",'" + mensagem.getListaDestinatarios() + "');";
+                    manipulaArquivo.criaArquivoTexto(caminhoRemetente + id + ".msg", xml);
+                }
+                else
+                {
+                    sql = INSERT + "(" + id + ",'" + mensagem.getPara() + "','" + mensagem.getAssunto() + "', 0 ,'" + mensagem.getDe() + "','ENTRADA', now()," + xml.Length + ",'" + mensagem.getListaDestinatarios() + "');";
+                    manipulaArquivo.criaArquivoTexto(caminhoDestinatario + id + ".msg", xml);
+                }
+
+                new MySqlCommand(sql, conecta).ExecuteNonQuery();     
+        
+                conectaMysql.desconectaMSQL();
+                return true;            
+            
+            }catch (excecao.excecao except)
+            {
+                throw except;
+            }
+          }
+
+        ///<summary>
+        ///
+        /// Método para enviar o cabeçalho das mensagem do usuario
+        /// 
+        ///</summary>
+        [WebMethod]
+        public string retornaCabecalho(string login, string tipo){
+
+            try
+            {
+                string xml = null;
+                string sql = "select id, assunto, data, tamanho, logremdest, lida from mensagem where tipo = '" + tipo + "' and loginusuario = '" + login + "';";
+
+                List<mensagemCabecalho> listaCabecalho = new List<mensagemCabecalho>();
+
+                DataTable data = retornaDataTableSql(sql);
+                int i;
+
+                    for (i = 0; i < data.Rows.Count; i++)
+                    {
+                        int codigo = Convert.ToInt32(data.Rows[i][data.Columns[0]]);
+                        string assunto = data.Rows[i][data.Columns[1]].ToString();
+                        DateTime date = Convert.ToDateTime(data.Rows[i][data.Columns[2]]);
+                        int tamanho = Convert.ToInt32(data.Rows[i][data.Columns[3]]);
+                        string logremdest = data.Rows[i][data.Columns[4]].ToString();
+                        bool lida = Convert.ToBoolean(data.Rows[i][data.Columns[5]]);
+
+                        mensagemCabecalho cabeca = new mensagemCabecalho(codigo, date, assunto, tipo, lida, tamanho, logremdest);
+
+                        listaCabecalho.Add(cabeca);
+                    }
+
+                    if (listaCabecalho.Count > 0) xml = serial.serializarObjeto(listaCabecalho);
+
+                    return xml;
+                
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método para apagar mensagem do usuario
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool apagaMensagem(int id) {
+ 
+            try
+            {
+                string sql = "select loginusuario, tipo from mensagem where id = " + id + ";";
+
+                DataTable data = retornaDataTableSql(sql);
+
+                if (data.Rows.Count > 0)
+                {
+
+                    string login = data.Rows[0][data.Columns[0]].ToString();
+                    string tipo = data.Rows[0][data.Columns[1]].ToString();
+
+                    string caminho = CAMINHO_SERVER + "\\" + login + "\\" + tipo + "\\" + id + ".msg";
+
+                    manipulaArquivo.excluiArquivoTexto(caminho);
+
+                    MySqlConnection conecta = conectaMysql.conectaMSQL();
+                    conecta.Open();
+
+                    sql = "delete from mensagem where id = " + id + ";";
+
+                    MySqlCommand exec = new MySqlCommand(sql, conecta);
+                    exec.ExecuteNonQuery();
+
+                    conectaMysql.desconectaMSQL();
+
+                    return true;
+
+                } else return false;
+
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+
+        }
+
+        ///<summary>
+        ///
+        /// Método para retornar mensagem do usuario
+        /// 
+        ///</summary>
+        [WebMethod]
+        public string buscaMensagem(int id) {
+
+            try
+            {
+                string sql = "select loginusuario, tipo from mensagem where id = " + id + ";";
+
+                DataTable data = retornaDataTableSql(sql);
+
+                if (data.Rows.Count > 0)
+                {
+                    string login = data.Rows[0][data.Columns[0]].ToString();
+                    string tipo = data.Rows[0][data.Columns[1]].ToString();
+
+                    string caminho = CAMINHO_SERVER + "\\" + login + "\\" + tipo + "\\" + id + ".msg";
+                    string xml = manipulaArquivo.leArquivoTexto(caminho);
+                    
+                    mensagem msg = serial.Deserializar(xml, typeof(mensagem)) as mensagem;
+
+                    for (int i = 0; i < msg.anexos.Count; i++)
+                    {
+                        msg.anexos[i].setChave("");
+                        msg.anexos[i].setConteudo("");
+                    }
+
+                    return serial.serializarObjeto(msg);  
+
+                }
+                else return null;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método para retornar anexo do usuario ao encaminhar
+        /// 
+        ///</summary>
+        [WebMethod]
+        public string buscaAnexo(int id)
+        {
+            try
+            {
+                string sql = "select loginusuario, tipo from mensagem where id = " + id + ";";
+
+                DataTable data = retornaDataTableSql(sql);
+
+                string login = data.Rows[0][data.Columns[0]].ToString();
+                string tipo = data.Rows[0][data.Columns[1]].ToString();
+
+                string caminho = CAMINHO_SERVER + "\\" + login + "\\" + tipo + "\\" + id + ".msg";
+                string xml = manipulaArquivo.leArquivoTexto(caminho);
+
+                mensagem msg = serial.Deserializar(xml, typeof(mensagem)) as mensagem;
+
+                return serial.serializarObjeto(msg.anexos);
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+        
+        ///<summary>
+        ///
+        /// Método para abrir anexo do usuario
+        /// 
+        ///</summary>
+        [WebMethod]
+        public string abreAnexo(string nomeArq, int id)
+        {
+
+            try
+            {
+                string sql = "select loginusuario, tipo from mensagem where id = " + id + ";";
+
+                DataTable data = retornaDataTableSql(sql);
+
+                string login = data.Rows[0][data.Columns[0]].ToString();
+                string tipo = data.Rows[0][data.Columns[1]].ToString();
+
+                string caminho = CAMINHO_SERVER + "\\" + login + "\\" + tipo + "\\" + id + ".msg";
+                string xml = manipulaArquivo.leArquivoTexto(caminho);
+
+                mensagem msg = serial.Deserializar(xml, typeof(mensagem)) as mensagem;
+
+                anexo anexoFinal = new anexo();
+
+                foreach (anexo a in msg.anexos)
+                {
+                    if (a.getNome().Equals(nomeArq)) 
+                    {
+                        anexoFinal = a;
+                    }
+                }
+
+                return serial.serializarObjeto(anexoFinal);
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+
+        ///<summary>
+        ///
+        /// Método para retornar a chave publica de um usuario
+        /// 
+        ///</summary>
+        [WebMethod]
+        public string retornaChavePublica(string destinatario) {
+
+            string chave = manipulaArquivo.leArquivoTexto(CAMINHO_SERVER+CHAVEIRO+destinatario+EXTENSAO);
+
+            return chave;
+        }
+
+        ///<summary>
+        ///
+        /// Método para verificar se a mensagem do usuario está criptografada
+        /// 
+        ///</summary>
+        [WebMethod]
+        public bool verificaMensagemCriptografada(int id) {
+            try
+            {
+                bool verifica = false;
+
+                string sql = "select loginusuario, tipo from mensagem where id = " + id + ";";
+
+                DataTable data = retornaDataTableSql(sql);
+
+                if (data.Rows.Count > 0)
+                {
+                    string login = data.Rows[0][data.Columns[0]].ToString();
+                    string tipo = data.Rows[0][data.Columns[1]].ToString();
+
+                    string caminho = CAMINHO_SERVER + "\\" + login + "\\" + tipo + "\\" + id + ".msg";
+                    string xml = manipulaArquivo.leArquivoTexto(caminho);
+
+                    mensagem msg = serial.Deserializar(xml, typeof(mensagem)) as mensagem;
+
+                    if (msg.getCriptografar()) verifica = true;
+                    else verifica = false;
+                }
+                
+                return verifica;
+            }
+            catch (excecao.excecao except)
+            {
+                throw except;
+            }
+        }
+        
         #endregion
         
     }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.catalogoPessoalDataGridView = new System.Windows.Forms.DataGridView();
-            this.okBotao = new System.Windows.Forms.Button();
-            this.sairBotao = new System.Windows.Forms.Button();
             this.coluna_nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.coluna_email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.coluna_adicionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.okBotao = new System.Windows.Forms.Button();
+            this.sairBotao = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.catalogoPessoalDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,26 +59,6 @@
             this.catalogoPessoalDataGridView.TabIndex = 10;
             this.catalogoPessoalDataGridView.Visible = false;
             // 
-            // okBotao
-            // 
-            this.okBotao.Location = new System.Drawing.Point(104, 232);
-            this.okBotao.Name = "okBotao";
-            this.okBotao.Size = new System.Drawing.Size(75, 23);
-            this.okBotao.TabIndex = 11;
-            this.okBotao.Text = "Ok";
-            this.okBotao.UseVisualStyleBackColor = true;
-            this.okBotao.Click += new System.EventHandler(this.okButtonClick);
-            // 
-            // sairBotao
-            // 
-            this.sairBotao.Location = new System.Drawing.Point(230, 232);
-            this.sairBotao.Name = "sairBotao";
-            this.sairBotao.Size = new System.Drawing.Size(75, 23);
-            this.sairBotao.TabIndex = 12;
-            this.sairBotao.Text = "Sair";
-            this.sairBotao.UseVisualStyleBackColor = true;
-            this.sairBotao.Click += new System.EventHandler(this.cancelarButtonClick);
-            // 
             // coluna_nome
             // 
             this.coluna_nome.HeaderText = "Nome";
@@ -99,6 +79,26 @@
             this.coluna_adicionar.Name = "coluna_adicionar";
             this.coluna_adicionar.Width = 70;
             // 
+            // okBotao
+            // 
+            this.okBotao.Location = new System.Drawing.Point(104, 232);
+            this.okBotao.Name = "okBotao";
+            this.okBotao.Size = new System.Drawing.Size(75, 23);
+            this.okBotao.TabIndex = 11;
+            this.okBotao.Text = "Ok";
+            this.okBotao.UseVisualStyleBackColor = true;
+            this.okBotao.Click += new System.EventHandler(this.okButtonClick);
+            // 
+            // sairBotao
+            // 
+            this.sairBotao.Location = new System.Drawing.Point(230, 232);
+            this.sairBotao.Name = "sairBotao";
+            this.sairBotao.Size = new System.Drawing.Size(75, 23);
+            this.sairBotao.TabIndex = 12;
+            this.sairBotao.Text = "Sair";
+            this.sairBotao.UseVisualStyleBackColor = true;
+            this.sairBotao.Click += new System.EventHandler(this.cancelarButtonClick);
+            // 
             // catalogoPara
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -110,7 +110,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "catalogoPara";
-            this.Text = "Catálogo Pessoal";
+            this.Text = "Destinatarios";
             ((System.ComponentModel.ISupportInitialize)(this.catalogoPessoalDataGridView)).EndInit();
             this.ResumeLayout(false);
 

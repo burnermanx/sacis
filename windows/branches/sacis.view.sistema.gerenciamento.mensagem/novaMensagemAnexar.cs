@@ -24,7 +24,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private HashSet<string> PlainFiles = new HashSet<string>();
         private HashSet<string> cancelaPlain = new HashSet<string>();
         private HashSet<string> cancelaCripto = new HashSet<string>();
-        private static int contador;
+        private static DialogResult resultado;
 
         ///<summary>
         ///
@@ -33,18 +33,8 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///</summary>
         public novaMensagemAnexar()
         {
-
             InitializeComponent();
-            contador = 0;
-
-            if (anexar.ShowDialog() == DialogResult.OK)
-            {
-                foreach (String file in anexar.FileNames) ConjFiles.Add(file);
-                dataGridInserir(ConjFiles);
-            }
-
             exibeDatagrid();
-
         }
 
         ///<summary>
@@ -56,20 +46,13 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         public novaMensagemAnexar(HashSet<string> cripto, HashSet<string> plain)
         {
             InitializeComponent();
-            contador = 0;
-            cancelaCripto = cripto;
-            cancelaPlain = plain;
-
-            if (anexar.ShowDialog() == DialogResult.OK)
-            {
-                foreach (String file in anexar.FileNames) ConjFiles.Add(file);                
-            }
+            foreach (string s in cripto) cancelaCripto.Add(s);
+            foreach (string s in plain) cancelaPlain.Add(s);
 
             uniaoHash(cripto);
             uniaoHash(plain);
-            dataGridInserir(ConjFiles);
+            dataGridInserir();
             exibeDatagrid();
-
         }
 
         ///<summary>
@@ -113,11 +96,15 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         /// Metodo para inserir os dados do hashset no dataGridView
         /// 
         ///</summary>
-        private void dataGridInserir(HashSet<string> anexar)
-        {            
-            foreach (String file in anexar)
+        private void dataGridInserir()
+        {
+            int contador = 0;
+
+            anexosDataGridView.Rows.Clear();
+
+            foreach (String file in ConjFiles)
             {
-                String ret = gerenciaServlet.retornaNome(file);
+                String ret = file;// gerenciaServlet.retornaNome(file);
 
                 anexosDataGridView.Rows.Add(1);
                 anexosDataGridView.Rows[contador].Cells[0].Value = ret;
@@ -154,15 +141,20 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///</summary>
         private void removeArquivos()
         {
-            for (int i = 0; i < contador; i++)
+            int i = 0;
+            HashSet<string> excluir = new HashSet<string>();
+
+            foreach (string f in ConjFiles)
             {
                 if (anexosDataGridView.Rows[i].Cells[1].Value.Equals(true))
-                {
-                    anexosDataGridView.Rows.Remove(anexosDataGridView.Rows[i]);
-                    i--;
-                    contador--;
-                }
-            }     
+                {                    
+                    anexosDataGridView.Rows.Remove(anexosDataGridView.Rows[i]);                      
+                    excluir.Add(f);                    
+                } 
+                else i++;
+            }
+
+            foreach (string f in excluir) ConjFiles.Remove(f);
         }
 
         ///<summary>
@@ -170,35 +162,22 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         /// Metodo para inserir o caminho dos arquivos nos hashsets CriptoFiles e PlainFiles
         /// 
         ///</summary>
-        private void atualizaHashset() {
-        
-            for (int i = 0; i < contador; i++)
+        private void atualizaHashset() 
+        {        
+            int i = 0;
+
+            foreach (string f in ConjFiles)
             {
-                if (anexosDataGridView.Rows[i].Cells[2].Value.Equals(true))
-                {                    
-                    foreach (string f in ConjFiles)
-                    {
-
-                        String ret = gerenciaServlet.retornaNome(f);
-                        String ret2 = anexosDataGridView.Rows[i].Cells[0].Value.ToString();
-
-                        if (ret.Equals(ret2)) CriptoFiles.Add(f);
-
-                    }
-                }
-                else
+                if (anexosDataGridView.Rows[i].Cells[2].Value.Equals(false))
                 {
-                    foreach (string f in ConjFiles)
-                    {
-
-                        String ret = gerenciaServlet.retornaNome(f);
-                        String ret2 = anexosDataGridView.Rows[i].Cells[0].Value.ToString();
-
-                        if (ret.Equals(ret2)) PlainFiles.Add(f);
-
-                    }
+                    PlainFiles.Add(f);
                 }
-            }           
+                else if (anexosDataGridView.Rows[i].Cells[2].Value.Equals(true))
+                {
+                    CriptoFiles.Add(f);
+                }
+                i++;
+            }    
         }
 
         ///<summary>
@@ -221,6 +200,8 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         ///</summary>
         private void cancelarButtonClick(object sender, EventArgs e)
         {
+            CriptoFiles = cancelaCripto;
+            PlainFiles = cancelaPlain;
             fecharForm();
         }
 
@@ -233,6 +214,27 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
             this.Close();
         
+        }
+
+        ///<summary>
+        ///
+        /// Metodo para selecionar arquivos para anexar a mensagem
+        /// 
+        ///</summary>
+        private void selecionarBotao_Click(object sender, EventArgs e)
+        {
+            resultado = anexar.ShowDialog();
+            HashSet<string> conjunto = new HashSet<string>();
+
+            if (resultado.Equals(DialogResult.OK))
+            {
+                foreach (string file in anexar.FileNames)
+                {
+                    conjunto.Add(file);
+                }
+                uniaoHash(conjunto);
+                dataGridInserir();
+            }
         }
     }
 }
