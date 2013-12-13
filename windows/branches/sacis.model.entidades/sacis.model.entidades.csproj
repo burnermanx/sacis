@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="anexo.cs" />
     <Compile Include="contato.cs" />
+    <Compile Include="mensagemCabecalho.cs" />
     <Compile Include="mensagem.cs" />
     <Compile Include="preMensagem.cs" />
     <Compile Include="usuario.cs" />

@@ -20,6 +20,7 @@ namespace sacis.model.entidades
         private string _assinatura;
         private bool _criptografar;
         private bool _assinar;
+        private string _listaDestinatarios;
         private List<anexo> _anexos;
 
 
@@ -77,6 +78,12 @@ namespace sacis.model.entidades
             set { _anexos = value; }
         }
 
+        public string listaDestinatarios
+        {
+            get { return _listaDestinatarios; }
+            set { _listaDestinatarios = value; }
+        }
+
         ///<summary>
         ///
         /// Método contrutor para inicializar o objeto
@@ -89,7 +96,8 @@ namespace sacis.model.entidades
         /// Método contrutor para inicializar o objeto atraves de parâmetros
         ///
         ///</summary>
-        public mensagem(string from, string to, string subject, string text, string signature, bool cript, bool sign, List<anexo> attachments) {
+        public mensagem(string from, string to, string subject, string text, string signature, bool cript, bool sign, List<anexo> attachments, string listaDestinatarios)
+        {
 
             _de = from;
             _para = to;
@@ -99,6 +107,7 @@ namespace sacis.model.entidades
             _criptografar = cript;
             _assinar = sign;
             _anexos = attachments;
+            _listaDestinatarios = listaDestinatarios;
 
         }
 
@@ -243,6 +252,25 @@ namespace sacis.model.entidades
             _assinar = sign;
         }
 
+        ///<summary>
+        ///
+        /// Método get para a listaDestinatarios da mensagem
+        ///
+        ///</summary>
+        public string getListaDestinatarios()
+        {
+            return _listaDestinatarios;
+        }
+
+        ///<summary>
+        ///
+        /// Método set para a listaDestinatarios da mensagem
+        ///
+        ///</summary>
+        public void setListaDestinatarios(string listaDestinatarios)
+        {
+            _listaDestinatarios = listaDestinatarios;
+        }
 
         ///<summary>
         ///

@@ -70,19 +70,15 @@ namespace sacis.view.control
             try
             {
                 data = assimetrica.dataExpiracao(caminho);
-
                 verificaData.comparaData(data);
-
                 data = verificaData.converteData(data);
                                
-            } catch (excecao except){
-
+            } catch (excecao except)
+            {
                 throw except;
-
             }       
         
             return data;
-
         }
 
         ///<summary>
@@ -214,8 +210,8 @@ namespace sacis.view.control
         /// Retorna excecao: Login invalido
         /// 
         ///</summary>
-        public static bool alterarCertificado(string login, string caminho, string validade) {
-
+        public static bool alterarCertificado(string login, string caminho, string validade) 
+        {
             try
             {
                 string conteudo = manipulaArquivo.leArquivoTexto(caminho);

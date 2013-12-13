@@ -35,6 +35,7 @@
             this.anexar = new System.Windows.Forms.OpenFileDialog();
             this.okBotao = new System.Windows.Forms.Button();
             this.cancelarBotao = new System.Windows.Forms.Button();
+            this.selecionarBotao = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.anexosDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +86,7 @@
             // 
             // okBotao
             // 
-            this.okBotao.Location = new System.Drawing.Point(130, 232);
+            this.okBotao.Location = new System.Drawing.Point(78, 232);
             this.okBotao.Name = "okBotao";
             this.okBotao.Size = new System.Drawing.Size(75, 23);
             this.okBotao.TabIndex = 11;
@@ -95,7 +96,7 @@
             // 
             // cancelarBotao
             // 
-            this.cancelarBotao.Location = new System.Drawing.Point(242, 232);
+            this.cancelarBotao.Location = new System.Drawing.Point(179, 232);
             this.cancelarBotao.Name = "cancelarBotao";
             this.cancelarBotao.Size = new System.Drawing.Size(75, 23);
             this.cancelarBotao.TabIndex = 12;
@@ -103,11 +104,22 @@
             this.cancelarBotao.UseVisualStyleBackColor = true;
             this.cancelarBotao.Click += new System.EventHandler(this.cancelarButtonClick);
             // 
+            // selecionarBotao
+            // 
+            this.selecionarBotao.Location = new System.Drawing.Point(277, 232);
+            this.selecionarBotao.Name = "selecionarBotao";
+            this.selecionarBotao.Size = new System.Drawing.Size(75, 23);
+            this.selecionarBotao.TabIndex = 13;
+            this.selecionarBotao.Text = "Selecionar";
+            this.selecionarBotao.UseVisualStyleBackColor = true;
+            this.selecionarBotao.Click += new System.EventHandler(this.selecionarBotao_Click);
+            // 
             // novaMensagemAnexar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 264);
+            this.Controls.Add(this.selecionarBotao);
             this.Controls.Add(this.cancelarBotao);
             this.Controls.Add(this.okBotao);
             this.Controls.Add(this.anexosDataGridView);
@@ -129,6 +141,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn coluna_arquivo;
         private System.Windows.Forms.DataGridViewCheckBoxColumn coluna_remover;
         private System.Windows.Forms.DataGridViewCheckBoxColumn coluna_criptografar;
+        private System.Windows.Forms.Button selecionarBotao;
 
     }
 }

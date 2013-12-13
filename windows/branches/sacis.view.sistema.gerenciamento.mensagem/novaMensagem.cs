@@ -20,15 +20,27 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 {
     public partial class novaMensagem : Form
     {
+        private static string MSG_ERRO_EXCLUIR = "Ocorreu um erro ao excluir arquivos temporários.";
         private static string MSG_CONFIRMA_SAIDA = "Deseja realmente descartar a mensagem?";
+        private static string MSG_SEM_DESTINATARIO = "Mensagem não pode ser enviada sem um destinatário!";
         private static string MSG_SAIR = "Sair da Mensagem";
         private static string MSG_ENVIO_OK = "Mensagem enviada com Sucesso!";
-        private static string MSG_ENVIO_FAIL = "Ocorreu um erro ao enviar a mensagem!";
+        //private static string MSG_ENVIO_FAIL = "Ocorreu um erro ao enviar a mensagem!";
+        private static string MSG_ENVIO_OK_DESTINATARIOS_INEXISTENTES = "Mensagem enviada com Sucesso, porém os seguintes destinatários nao foram encontrados: ";
         private static string MSG_INFO = "Informação";
         private static string MSG_ERRO = "Erro";
-
+        private static string EMAIL = "@sacis.com.br;";
+        private static string RE = "RE: ";
+        private static string TRACEJADO = "=============================================";
+        private static string DE = "De: ";
+        private static string PARA = "Para: ";
+        private static string ASSUNTO = "Assunto: ";
+        private static string SEPARADOR = ";";
+        private string caminho = @"C:\sacis\temp\";
         private int controleAnexos;
-        private string usuario;
+        private string usuario;        
+        private int control = 0;
+        
 
         private HashSet<String> CriptoFiles = new HashSet<String>();
         private HashSet<String> PlainFiles = new HashSet<String>();
@@ -45,6 +57,55 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             usuario = nome;
             controleAnexos = 0;
             InitializeComponent();
+        }
+
+        ///<summary>
+        ///
+        /// Metodo construtor para inicializar os componentes do formulario 
+        /// atraves de uma premensagem e um indicador do tipo de mensagem nova
+        /// 
+        ///</summary>
+        public novaMensagem(preMensagem msg, int flag, int idmensagem)
+        {
+            control = flag;
+            usuario = msg.getPara();
+            controleAnexos = 0;            
+            InitializeComponent();
+            novoAssunto.Text = RE + msg.getAssunto();
+            novoTexto.Text = Environment.NewLine + Environment.NewLine + Environment.NewLine + TRACEJADO + Environment.NewLine + DE + msg.getDe() + EMAIL + Environment.NewLine + PARA + msg.getPara() + EMAIL + Environment.NewLine + ASSUNTO + msg.getAssunto() + Environment.NewLine + Environment.NewLine + msg.getTexto();
+            
+            if (flag == 1) 
+            {
+                string caminhoChave = "";
+
+                if(msg.getArquivoCripto().Count > 0)
+                {
+                    foreach (string s in msg.getArquivoCripto()) 
+                    {
+                        string nome = gerenciaServlet.recuperaNomeOriginalArquivo(s);
+                        nomeAnexos.Text = nome + "; " + nomeAnexos.Text;
+                        CriptoFiles.Add(caminho + s);                   
+                    }
+
+                    gerenciaChave gerenciaChaveForm = new gerenciaChave();
+                    gerenciaChaveForm.ShowDialog();
+                    caminhoChave = gerenciaChaveForm.getCaminho(); 
+                }
+
+                if (msg.getArquivoPlain().Count > 0)
+                {
+                    foreach (string s in msg.getArquivoPlain())
+                    {
+                        nomeAnexos.Text = s + "; " + nomeAnexos.Text;
+                        PlainFiles.Add(caminho + s);
+                    }
+                }
+
+                if (CriptoFiles.Count > 0 || PlainFiles.Count > 0) controleAnexos = 1;
+
+                gerenciaServlet.anexoEncaminhar(idmensagem, caminhoChave);
+            }
+            else novoPara.Text = msg.getDe() + EMAIL;
         }
 
         ///<summary>
@@ -118,8 +179,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             {
                 newForm = new novaMensagemAnexar(CriptoFiles, PlainFiles);
                 CriptoFiles.Clear();
-                PlainFiles.Clear();
-                
+                PlainFiles.Clear();                
             }
 
             newForm.FormClosed += new FormClosedEventHandler(formVisivel);
@@ -128,8 +188,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             foreach (String f in newForm.getCriptoFiles()) CriptoFiles.Add(f);
             foreach (String f in newForm.getPlainFiles()) PlainFiles.Add(f);
 
-            exibeNomeArquivos();
-            
+            exibeNomeArquivos();            
         }
 
         ///<summary>
@@ -145,18 +204,15 @@ namespace sacis.view.sistema.gerenciamento.mensagem
             {
                 String ret = gerenciaServlet.retornaNome(f);
                 naText += ret + "; ";
-
             }
 
             foreach (String f in PlainFiles)
             {
                 String ret = gerenciaServlet.retornaNome(f);
                 naText += ret + "; ";
-
             }
 
-            nomeAnexos.Text = naText;     
-                
+            nomeAnexos.Text = naText;                
         }
 
         ///<summary>
@@ -167,21 +223,45 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private void novoEnviarClick(object sender, EventArgs e)
         {
             try
-            {
-                preMensagem msg = new preMensagem(usuario, novoPara.Text, novoAssunto.Text, novoTexto.Text, novoCripto.Checked, novoAssina.Checked, CriptoFiles, PlainFiles);
-                bool ret = gerenciaServlet.criaMensagem(msg);
+            {                
+                string destinatarios = novoPara.Text;
+                if (!destinatarios.EndsWith(SEPARADOR)) destinatarios += SEPARADOR;
 
-                if (ret) MessageBox.Show(MSG_ENVIO_OK, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                else MessageBox.Show(MSG_ENVIO_FAIL, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                preMensagem msg = new preMensagem(usuario, destinatarios, novoAssunto.Text, novoTexto.Text, novoCripto.Checked, novoAssina.Checked, CriptoFiles, PlainFiles);
+                string caminhoChave = "";
 
-                this.Close();
+                if (novoAssina.Checked) 
+                {
+                    gerenciaChave gerenciaChaveForm = new gerenciaChave();
+                    gerenciaChaveForm.ShowDialog();
+                    caminhoChave = gerenciaChaveForm.getCaminho();  
+                }
+
+                if (novoPara.Text == null || novoPara.Text == "") MessageBox.Show(MSG_SEM_DESTINATARIO, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                {
+                    List<string> destinatariosInexistentes = gerenciaServlet.criaMensagem(msg, caminhoChave);
+                    //bool ret = gerenciaServlet.criaMensagem(msg,caminhoChave);
+
+                    if (destinatariosInexistentes.Count == 0) MessageBox.Show(MSG_ENVIO_OK, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else if (destinatariosInexistentes.Count > 1)
+                    {
+                        string nomesInexistentes = "";
+                        foreach (string s in destinatariosInexistentes) nomesInexistentes += s + ", ";
+                        nomesInexistentes = nomesInexistentes.Remove(nomesInexistentes.LastIndexOf(", "), 2);
+                        
+                        MessageBox.Show(MSG_ENVIO_OK_DESTINATARIOS_INEXISTENTES + nomesInexistentes, MSG_INFO, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }//else MessageBox.Show(MSG_ENVIO_FAIL, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    
+                    gerenciaServlet.excluiArquivos();
+                    this.Close();
+                }
             }
             catch (excecao except)
             {
                 MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 novoPara.Clear();
             }
-
         }
 
         ///<summary>
@@ -192,8 +272,18 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private void fecharClick(object sender, EventArgs e)
         {
 
-            if (DialogResult.OK == MessageBox.Show(MSG_CONFIRMA_SAIDA, MSG_SAIR, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1))
-                this.Close();
+            try
+            {
+                if (DialogResult.OK == MessageBox.Show(MSG_CONFIRMA_SAIDA, MSG_SAIR, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1))
+                {
+                    gerenciaServlet.excluiArquivos();
+                    this.Close();
+                }
+            }
+            catch (excecao ex)
+            {
+                MessageBox.Show(MSG_ERRO_EXCLUIR, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+            }
 
         }
 
@@ -249,6 +339,67 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private void formVisivel(object sender, FormClosedEventArgs e)
         {
             this.Visible = true;
+        }
+
+        private void nomeAnexos_DoubleClick(object sender, EventArgs e)
+        { 
+            if (!String.IsNullOrEmpty(nomeAnexos.Text))
+            {                
+                int selInicio = nomeAnexos.SelectionStart;
+                int selFim = nomeAnexos.Text.IndexOf(";", selInicio);
+                int selTamanho = selFim - selInicio;
+
+                string nome = nomeAnexos.Text.Substring(selInicio, selTamanho);
+
+                nomeAnexos.SelectionStart = selInicio;
+                nomeAnexos.SelectionLength = selTamanho;
+
+                string[] listArq = nomeAnexos.Text.Split(';');
+                int listCount = 0;
+                int count = 0;
+                int listCountInicio = 0;
+                int listCountFim = 0;
+
+                foreach (string arq in listArq)
+                {
+                    listCountFim += arq.Trim().Length + 2;
+                    if (arq.Contains(nome) && listCountInicio <= selInicio && listCountFim > selInicio)
+                    {
+                        nome = arq.Trim();
+                        selInicio = listCountInicio;
+                        break;
+                    }
+                    listCountInicio = listCountFim;
+                }
+                
+                if (control == 1)
+                {
+                    if(nome.Contains(".sac")) nome = gerenciaServlet.recuperaNomeOriginalArquivo(nome);
+                    System.Diagnostics.Process.Start(caminho + nome);
+                }
+                else
+                {                    
+                    HashSet<string> files = new HashSet<string>();
+                    
+                    if(CriptoFiles != null) foreach(string path in CriptoFiles) files.Add(path);
+                    if(PlainFiles != null) foreach(string path in PlainFiles) files.Add(path);
+
+                    foreach (string file in files)
+                    {
+                        if (file.Contains(nome) && count == selInicio)
+                        {
+                            nome = files.ElementAt(listCount);
+                            break;
+                        }
+
+                        count += gerenciaServlet.retornaNome(file).Length + 2;
+                        listCount++;
+                    }
+                    
+                    System.Diagnostics.Process.Start(nome);
+                }
+
+            }
         }
         
     }

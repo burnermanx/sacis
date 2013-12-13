@@ -13,12 +13,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using sacis.view.control;
+using sacis.model.excecao;
 
 namespace sacis.view.sistema.armazenamento
 {
     public partial class armazenamentoLogin : Form
     {
-        private static string MSG_ACESSO_NEGADO = "Acesso Negado!";
+        private static string MSG_ACESSO_NEGADO = "Usuário ou Senha Inválido!";
         private static string MSG_ERRO = "Erro";
 
         ///<summary>
@@ -61,24 +62,33 @@ namespace sacis.view.sistema.armazenamento
         ///
         ///</summary>
         private void acessaArmazenamento() {
-                         
-            string name = textboxLogin.Text;
-            string pass = textboxSenha.Text;
 
-            string hashpass = armazenaServlet.geraHash(pass);
-
-            if (armazenaServlet.confirmaUsuario(name, hashpass))
+            try
             {
-                armazenamento newForm = new armazenamento();
-                newForm.FormClosed += new FormClosedEventHandler(formVisivel);
-                this.Visible = false;
-                newForm.ShowDialog();
+                string name = textboxLogin.Text;
+                string pass = textboxSenha.Text;
+
+                string hashpass = armazenaServlet.geraHash(pass);
+
+                if (armazenaServlet.confirmaUsuario(name, hashpass))
+                {
+                    armazenamento newForm = new armazenamento();
+                    newForm.FormClosed += new FormClosedEventHandler(formVisivel);
+                    this.Visible = false;
+                    newForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show(MSG_ACESSO_NEGADO, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    limpaCampos();
+                }
             }
-            else
-            {
-                MessageBox.Show(MSG_ACESSO_NEGADO, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch (excecao except)
+            {                
+                MessageBox.Show(except.Message, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 limpaCampos();
-            }               
+            }
+         
         }
 
         ///<summary>

@@ -138,7 +138,7 @@ namespace sacis.model.utilitarios
 
         ///<summary>
         ///
-        /// Método que retorna um array de logins apartir de uma string passada contendo o email dos 
+        /// Método que retorna um array de logins a partir de uma string passada contendo o email dos 
         /// contatos.
         /// 
         /// Retorna excecao: Erro de contato invalido.
@@ -168,15 +168,34 @@ namespace sacis.model.utilitarios
                     }
                     else if (s.Contains(arroba))
                     {
-                        int indexArroba = s.IndexOf(arroba);
-                        log = s.Substring(0, indexArroba);
-                        logins[contador] = log;
-                        contador++;
+                        try
+                        {
+                            int indexArroba = s.IndexOf(arroba);
+                            log = s.Substring(0, indexArroba);
+                            logins[contador] = log;
+                            contador++;
+                        }
+                        catch (Exception ex)
+                        {                            
+                            throw new excecao.excecao(MSG_CONTATO);
+                        }
                     }
                     else throw new excecao.excecao(MSG_CONTATO);
                 }
             }
             return logins;
         }
+
+        ///<summary>
+        ///
+        /// Método que substitui os espaços pelo "_"
+        ///
+        ///</summary>
+        public static string substituiEspacos(string nome) {
+
+            return nome.Replace(" ", sublinhado);
+        
+        }
+
     }
 }

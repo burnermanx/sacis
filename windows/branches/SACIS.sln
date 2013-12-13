@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.view.inicio", "sacis.view.inicio\sacis.view.inicio.csproj", "{A8DD6C48-A99D-40BD-BF7A-2A1B5C5A31F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.view.control", "sacis.view.control\sacis.view.control.csproj", "{26FF3171-8019-4F0C-AEEC-AF5E60313860}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.control.servlet", "sacis.view.control\sacis.control.servlet.csproj", "{26FF3171-8019-4F0C-AEEC-AF5E60313860}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sacis.model.excecao", "sacis.model.excecao\sacis.model.excecao.csproj", "{F11AC024-7818-4B8B-AD14-D3369F5D5EA1}"
 EndProject

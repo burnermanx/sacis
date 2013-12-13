@@ -21,10 +21,13 @@ namespace sacis.view.sistema.gerenciamento.mensagem
     public partial class gerenciaLogin : Form
     {
 
-        private static string MSG_ACESSO_NEGADO = "Acesso Negado!";
+        private static string MSG_ACESSO_NEGADO = "Acesso Negado! Login ou Senha não existe!";
+        private static string MSG_CHAVE_EXPIRADA = "Acesso Negado! Chave Certificada Expirada!";
         private static string MSG_ERRO = "Erro!";
         private static string MSG_AVISO = "Aviso!";
         private static string MSG_ALTERACAO = "Senha expirada! É necessária sua alteração para acessar novamente o sistema.";
+        private static string MSG_FALTA = "Faltam ";
+        private static string MSG_EXPIRA = " dias para seu Certificado expirar! Entre em contato com o Administrador e efetue a troca de seu Certificado o mais breve possível.";
 
         ///<summary>
         ///
@@ -80,16 +83,29 @@ namespace sacis.view.sistema.gerenciamento.mensagem
 
                 string hash = gerenciaServlet.geraHash(pass);
                 
-                if (gerenciaServlet.verificaSenha(name)){
+                int indice = gerenciaServlet.consultaUsuario(name, hash);
 
+                if (indice >= 100 && indice <= 130) 
+                {
+                    MessageBox.Show(MSG_FALTA + indice + MSG_EXPIRA, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    indice = 0;
+                }
+
+                if (indice == 1)
+                {
                     MessageBox.Show(MSG_ALTERACAO, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
                     gerenciaSenha newForm = new gerenciaSenha(name);
                     newForm.FormClosed += new FormClosedEventHandler(formVisivel);
                     this.Visible = false;
                     newForm.ShowDialog();
-
-                } else if (gerenciaServlet.consultaUsuario(name, hash))
+                }
+                else if (indice == 2)
+                {
+                    MessageBox.Show(MSG_CHAVE_EXPIRADA, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    limpaCampos();
+                }
+                else if (indice == 0)
                 {
                     gerenciaServlet.atualizaUsuarioLogLocal(name, hash);
 
@@ -98,7 +114,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                     this.Visible = false;
                     newForm.ShowDialog();
                 }
-                else
+                else if (indice == 3)
                 {
                     MessageBox.Show(MSG_ACESSO_NEGADO, MSG_ERRO, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     limpaCampos();

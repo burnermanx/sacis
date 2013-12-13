@@ -160,6 +160,7 @@
             this.nomeAnexos.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.nomeAnexos.Size = new System.Drawing.Size(396, 20);
             this.nomeAnexos.TabIndex = 9;
+            this.nomeAnexos.DoubleClick += new System.EventHandler(this.nomeAnexos_DoubleClick);
             // 
             // novaMensagem
             // 

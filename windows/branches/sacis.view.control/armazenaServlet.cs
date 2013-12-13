@@ -29,7 +29,7 @@ namespace sacis.view.control
             return hash.hashing(texto);            
         
         }
-
+        
         ///<summary>
         ///
         /// Método que verifica a existencia do login e hash da senha passados no arquivo local
@@ -38,8 +38,15 @@ namespace sacis.view.control
         ///</summary>
         public static bool confirmaUsuario(string login, string senha) {
 
-            if (verificaUsuario.verificaCadastroUsuarioLocal(login, senha)) return true;
-            else return false;
+            try
+            {
+                if (verificaUsuario.verificaCadastroUsuarioLocal(login, senha)) return true;
+                else return false;
+            }
+            catch (excecao except)
+            {                
+                throw except;
+            }
         
         }
 
@@ -61,9 +68,10 @@ namespace sacis.view.control
                 byte[] conteudoByte = manipulaArquivo.arquivoLeOriginal(origem);
                 string conteudo = serial.serializarObjeto(conteudoByte);               
                 string conteudoCifrado = simetrica.cifraArquivosLocais(chave, conteudo);
+                string conteudoHexa = simetrica.convertToHexa(conteudoCifrado);
 
-                manipulaArquivo.criaArquivoTexto(destinoFinal, conteudoCifrado);
-                
+                manipulaArquivo.criaArquivoTexto(destinoFinal, conteudoHexa);
+                manipulaArquivo.excluiArquivoTexto(origem);
             }
             catch (excecao except)
             {
@@ -87,13 +95,14 @@ namespace sacis.view.control
                 string novoArquivo = manipulaString.recuperaNomeOriginalArquivo(arquivo);
                 string destinoFinal = pastaDestino(destino, novoArquivo);
 
-                string conteudoCifrado = manipulaArquivo.leArquivoTexto(origem);                
+                string conteudoHexa = manipulaArquivo.leArquivoTexto(origem);
+                string conteudoCifrado = simetrica.convertToString(conteudoHexa);                
                 string conteudo = simetrica.decifraArquivosLocais(chave, conteudoCifrado);
                 byte[] conteudoByte = serial.Deserializar(conteudo, typeof(byte[])) as byte[]; 
                
                 manipulaArquivo.arquivoCriaOriginal(destinoFinal, conteudoByte);
-
-            }
+                manipulaArquivo.excluiArquivoTexto(origem);
+             }
             catch (excecao except)
             {
                 throw except;

@@ -19,6 +19,8 @@ namespace sacis.model.entidades
         private string _chave;
         private string _validade;
         private int _permissao;
+        private char _expiraChave;
+        private int _dias;
 
         ///<summary>
         ///
@@ -77,6 +79,24 @@ namespace sacis.model.entidades
             get { return _permissao; }
 
             set { _permissao = value; }
+
+        }
+
+        public char expiraChave
+        {
+
+            get { return _expiraChave; }
+
+            set { _expiraChave = value; }
+
+        }
+
+        public int dias
+        {
+
+            get { return _dias; }
+
+            set { _dias = value; }
 
         }
 
@@ -250,6 +270,46 @@ namespace sacis.model.entidades
 
             return _permissao;
 
+        }
+
+        ///<summary>
+        ///
+        /// Método set para expiraChave    
+        /// 
+        ///</summary>
+        public void setExpiraChave(char expiraChave)
+        {
+            _expiraChave = expiraChave;
+        }
+
+        ///<summary>
+        ///
+        /// Método get para expiraChave    
+        /// 
+        ///</summary>
+        public char getexpiraChave()
+        {
+            return _expiraChave;
+        }
+
+        ///<summary>
+        ///
+        /// Método set para dias    
+        /// 
+        ///</summary>
+        public void setDias(int dias)
+        {
+            _dias = dias;
+        }
+
+        ///<summary>
+        ///
+        /// Método get para dias    
+        /// 
+        ///</summary>
+        public int getDias()
+        {
+            return _dias;
         }
 
     }

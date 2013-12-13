@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(gerenciaMensagem));
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Caixa de Entrada");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Enviados");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mcNovo = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogo = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,15 +41,18 @@
             this.mc_split = new System.Windows.Forms.SplitContainer();
             this.mcTreeview = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.mcList = new System.Windows.Forms.ListView();
-            this.De = new System.Windows.Forms.ColumnHeader();
-            this.Assunto = new System.Windows.Forms.ColumnHeader();
-            this.Recebido = new System.Windows.Forms.ColumnHeader();
-            this.Tamanho = new System.Windows.Forms.ColumnHeader();
+            this.mensagensGridView = new System.Windows.Forms.DataGridView();
+            this.remetente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.assunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.data = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tamanho = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lixeira = new System.Windows.Forms.DataGridViewImageColumn();
             this.menuStrip1.SuspendLayout();
             this.mc_split.Panel1.SuspendLayout();
             this.mc_split.Panel2.SuspendLayout();
             this.mc_split.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mensagensGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -59,7 +64,7 @@
             this.sair});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(570, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(561, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -88,14 +93,14 @@
             // catalogoGeralItem
             // 
             this.catalogoGeralItem.Name = "catalogoGeralItem";
-            this.catalogoGeralItem.Size = new System.Drawing.Size(152, 22);
+            this.catalogoGeralItem.Size = new System.Drawing.Size(114, 22);
             this.catalogoGeralItem.Text = "Geral";
             this.catalogoGeralItem.Click += new System.EventHandler(this.catalogoGeralItem_Click);
             // 
             // catalogoPessoalItem
             // 
             this.catalogoPessoalItem.Name = "catalogoPessoalItem";
-            this.catalogoPessoalItem.Size = new System.Drawing.Size(152, 22);
+            this.catalogoPessoalItem.Size = new System.Drawing.Size(114, 22);
             this.catalogoPessoalItem.Text = "Pessoal";
             this.catalogoPessoalItem.Click += new System.EventHandler(this.catalogoPessoalItem_Click);
             // 
@@ -122,9 +127,9 @@
             // 
             // mc_split.Panel2
             // 
-            this.mc_split.Panel2.Controls.Add(this.mcList);
-            this.mc_split.Size = new System.Drawing.Size(570, 256);
-            this.mc_split.SplitterDistance = 181;
+            this.mc_split.Panel2.Controls.Add(this.mensagensGridView);
+            this.mc_split.Size = new System.Drawing.Size(561, 256);
+            this.mc_split.SplitterDistance = 148;
             this.mc_split.TabIndex = 2;
             // 
             // mcTreeview
@@ -134,8 +139,16 @@
             this.mcTreeview.ImageList = this.imageList1;
             this.mcTreeview.Location = new System.Drawing.Point(0, 0);
             this.mcTreeview.Name = "mcTreeview";
+            treeNode1.Name = "entrada";
+            treeNode1.Text = "Caixa de Entrada";
+            treeNode2.Name = "enviados";
+            treeNode2.Text = "Enviados";
+            this.mcTreeview.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
+            this.mcTreeview.RightToLeftLayout = true;
             this.mcTreeview.SelectedImageIndex = 0;
-            this.mcTreeview.Size = new System.Drawing.Size(177, 252);
+            this.mcTreeview.Size = new System.Drawing.Size(144, 252);
             this.mcTreeview.TabIndex = 0;
             this.mcTreeview.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.mcTreeviewNodeClick);
             // 
@@ -145,61 +158,96 @@
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "pasta.jpg");
             // 
-            // mcList
+            // mensagensGridView
             // 
-            this.mcList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.De,
-            this.Assunto,
-            this.Recebido,
-            this.Tamanho});
-            this.mcList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mcList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mcList.Location = new System.Drawing.Point(0, 0);
-            this.mcList.Name = "mcList";
-            this.mcList.Size = new System.Drawing.Size(381, 252);
-            this.mcList.SmallImageList = this.imageList1;
-            this.mcList.TabIndex = 0;
-            this.mcList.UseCompatibleStateImageBehavior = false;
-            this.mcList.View = System.Windows.Forms.View.Details;
-            this.mcList.DoubleClick += new System.EventHandler(this.duploClick);
-            this.mcList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.colunaClick);
+            this.mensagensGridView.AllowUserToAddRows = false;
+            this.mensagensGridView.AllowUserToDeleteRows = false;
+            this.mensagensGridView.AllowUserToOrderColumns = true;
+            this.mensagensGridView.AllowUserToResizeColumns = false;
+            this.mensagensGridView.AllowUserToResizeRows = false;
+            this.mensagensGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.mensagensGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.mensagensGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mensagensGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.mensagensGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.remetente,
+            this.assunto,
+            this.data,
+            this.tamanho,
+            this.id,
+            this.Lixeira});
+            this.mensagensGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mensagensGridView.GridColor = System.Drawing.SystemColors.Window;
+            this.mensagensGridView.Location = new System.Drawing.Point(0, 0);
+            this.mensagensGridView.Name = "mensagensGridView";
+            this.mensagensGridView.ReadOnly = true;
+            this.mensagensGridView.RowHeadersVisible = false;
+            this.mensagensGridView.Size = new System.Drawing.Size(405, 252);
+            this.mensagensGridView.TabIndex = 0;
+            this.mensagensGridView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mensagensGridView_MouseClick);
+            this.mensagensGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.mensagensGridView_CellContentDoubleClick);
             // 
-            // De
+            // remetente
             // 
-            this.De.Text = "De";
-            this.De.Width = 124;
+            this.remetente.FillWeight = 86.60805F;
+            this.remetente.HeaderText = "Remetente";
+            this.remetente.Name = "remetente";
+            this.remetente.ReadOnly = true;
             // 
-            // Assunto
+            // assunto
             // 
-            this.Assunto.Text = "Assunto";
-            this.Assunto.Width = 82;
+            this.assunto.FillWeight = 86.60805F;
+            this.assunto.HeaderText = "Assunto";
+            this.assunto.Name = "assunto";
+            this.assunto.ReadOnly = true;
             // 
-            // Recebido
+            // data
             // 
-            this.Recebido.Text = "Recebido em";
-            this.Recebido.Width = 93;
+            this.data.FillWeight = 86.60805F;
+            this.data.HeaderText = "Data";
+            this.data.Name = "data";
+            this.data.ReadOnly = true;
             // 
-            // Tamanho
+            // tamanho
             // 
-            this.Tamanho.Text = "Tamanho";
-            this.Tamanho.Width = 77;
+            this.tamanho.FillWeight = 86.60805F;
+            this.tamanho.HeaderText = "Tamanho";
+            this.tamanho.Name = "tamanho";
+            this.tamanho.ReadOnly = true;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // Lixeira
+            // 
+            this.Lixeira.FillWeight = 62.23333F;
+            this.Lixeira.HeaderText = "";
+            this.Lixeira.Image = ((System.Drawing.Image)(resources.GetObject("Lixeira.Image")));
+            this.Lixeira.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Lixeira.Name = "Lixeira";
+            this.Lixeira.ReadOnly = true;
+            this.Lixeira.ToolTipText = "Excluir Mensagem";
             // 
             // gerenciaMensagem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 280);
+            this.ClientSize = new System.Drawing.Size(561, 280);
             this.Controls.Add(this.mc_split);
             this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
             this.Name = "gerenciaMensagem";
             this.Text = "Projeto S.A.C.I.S. - Gerenciamento de Mensagens";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.apagar);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.mc_split.Panel1.ResumeLayout(false);
             this.mc_split.Panel2.ResumeLayout(false);
             this.mc_split.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mensagensGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,14 +261,16 @@
         private System.Windows.Forms.ToolStripMenuItem sair;
         private System.Windows.Forms.SplitContainer mc_split;
         private System.Windows.Forms.TreeView mcTreeview;
-        private System.Windows.Forms.ListView mcList;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.ColumnHeader De;
-        private System.Windows.Forms.ColumnHeader Assunto;
-        private System.Windows.Forms.ColumnHeader Recebido;
-        private System.Windows.Forms.ColumnHeader Tamanho;
         private System.Windows.Forms.ToolStripMenuItem catalogoGeralItem;
         private System.Windows.Forms.ToolStripMenuItem catalogoPessoalItem;
+        private System.Windows.Forms.DataGridView mensagensGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn remetente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn assunto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn data;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tamanho;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewImageColumn Lixeira;
     
     }
 }

@@ -25,7 +25,7 @@ namespace sacis.view.sistema.gerenciamento.mensagem
         private static string MSG_AVISO = "Aviso!";
         private static string MSG_SAIDA = "Deseja Realmente Sair Sem Alterar a Senha?";
         private static string MSG_ERRO = "Erro de Alteração!";
-        private static string MSG_ERRO_ALTERACAO = "Erro ao Alterar Senha! Digite Senha Válida.";
+        private static string MSG_ERRO_ALTERACAO = "Erro ao Trocar Senha! Digite Senha Válida.";
 
         ///<summary>
         ///
@@ -82,8 +82,9 @@ namespace sacis.view.sistema.gerenciamento.mensagem
                 string senha = novaSenhaTextBox.Text;
                 string confirma = confirmaSenhaTextBox.Text;
                 
-                if (senha.Equals(confirma) && !sacis.model.utilitarios.verificaCampos.verificaValidadeCampos(senha) && gerenciaServlet.alteraSenha(nome, senha))
+                if (senha.Equals(confirma) && !verificaCampos.verificaValidadeCampos(senha))
                 {
+                    gerenciaServlet.alteraSenha(nome, senha);
                     MessageBox.Show(MSG_ALTERACAO, MSG_AVISO, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }

@@ -25,6 +25,7 @@ namespace sacis.model.utilitarios
         private static string CAMINHO_USUARIOS = @"C:\sacis\usuarios\";
         private static string CAMINHO_LOG = @"C:\sacis\sacis.log";
         private static string MSG_ERRO_EXCLUSAO_ARQUIVO = "Erro ao Excluir Arquivo!";
+        private static string MSG_ERRO_EXCLUSAO_ARQUIVOS = "Erro ao Excluir Arquivos!";
         private static string MSG_ERRO_EXCLUSAO_DIRETORIO = "Erro ao Excluir Diretorio!";
         private static string EXTENSAO = ".key";
 
@@ -47,6 +48,27 @@ namespace sacis.model.utilitarios
                 throw new excecao.excecao(MSG_ERRO_EXCLUSAO_ARQUIVO);
             }
 
+        }
+
+        ///<summary>
+        ///
+        /// Metodo para limpar diretorio através do caminho
+        ///       
+        /// Retorna excecao: Erro ao excluir arquivos
+        ///
+        ///</summary>
+        public static void limpaDiretorio(string caminho) {            
+            try
+            {
+                DirectoryInfo diretorio = new DirectoryInfo(caminho);
+                FileInfo[] arquivos = diretorio.GetFiles();
+                
+                if(arquivos.Length > 0) foreach (FileInfo file in arquivos) file.Delete();
+            }
+            catch (Exception except)
+            {
+                throw new excecao.excecao(MSG_ERRO_EXCLUSAO_ARQUIVOS);
+            }
         }
 
         ///<summary>
@@ -224,7 +246,6 @@ namespace sacis.model.utilitarios
                     info.Create();
                
                     StreamWriter wr = new StreamWriter(CAMINHO_LOG, false);
-
                     wr.Close();
                 }
             }

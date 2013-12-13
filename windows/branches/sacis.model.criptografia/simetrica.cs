@@ -11,6 +11,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 using sacis.model.excecao;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace sacis.model.criptografia
 {
@@ -24,6 +25,39 @@ namespace sacis.model.criptografia
         private static int mti = N + 1;
         private static ulong[] matriz = {0x0,0x9908b0df};
         private static string chave;
+
+        ///<summary>
+        ///
+        /// Método get para a chave
+        ///
+        ///</summary>
+        public static string getChave()
+        {
+            return chave;
+        }
+        
+        ///<summary>
+        ///
+        /// Metodo para cifrar arquivos anexados na mensagem
+        /// 
+        ///</summary>
+        public static string cifraAnexos(string conteudo)
+        {
+            chave = "";
+            chave = geradorCadeiaCaracteres();
+            string cripto = criptografar(chave, conteudo);
+            return cripto;
+        }
+
+        ///<summary>
+        ///
+        /// Metodo para decifrar arquivos anexados na mensagem
+        /// 
+        ///</summary>
+        public static string decifraAnexos(string chave, string conteudo)
+        {
+            return descriptografar(chave, conteudo);
+        }
 
         ///<summary>
         /// 
@@ -154,12 +188,17 @@ namespace sacis.model.criptografia
         /// Metodo para cifrar mensagens
         /// 
         ///</summary>
-        public static string cifraMensagem(string conteudo)
+        public static string cifraMensagem(string conteudo, string caminhoChave)
         {
             string chave = geradorCadeiaCaracteres();
             string cripto = criptografar(chave, conteudo);
 
-            return chave + cripto;
+            string chaveSimetricaCripto = assimetrica.cifraAssimetrica(caminhoChave, chave);
+
+            string tamanhoChave = chaveSimetricaCripto.Length.ToString();
+            string tamanhoDoTamanhoDaChave = tamanhoChave.Length.ToString();
+
+            return tamanhoDoTamanhoDaChave + tamanhoChave + chaveSimetricaCripto + cripto;            
         }
 
         ///<summary>
@@ -167,12 +206,22 @@ namespace sacis.model.criptografia
         /// Metodo para decifrar mensagens
         /// 
         ///</summary>
-        public static string decifraMensagem(string conteudo)
+        public static string decifraMensagem(string conteudoCifrado, string caminhoChave)
         {
-            string chave = conteudo.Substring(0, 32);
-            conteudo = conteudo.Remove(0, 32);
+            string conteudo = conteudoCifrado;
+            int tamanhoDoTamanhoDaChave = Convert.ToInt32(conteudo.Substring(0, 1));
+            conteudo = conteudo.Remove(0, 1);
 
-            return descriptografar(chave, conteudo);
+            int tamanhoChave = Convert.ToInt32(conteudo.Substring(0, tamanhoDoTamanhoDaChave));
+            conteudo = conteudo.Remove(0, tamanhoDoTamanhoDaChave);
+
+            string chaveSimetricaCripto = conteudo.Substring(0, tamanhoChave);
+            conteudo = conteudo.Remove(0, tamanhoChave);
+
+            string chaveSimetricaDescripto = assimetrica.decifraAssimetrica(caminhoChave, chaveSimetricaCripto);
+            string conteudoDecifrado = descriptografar(chaveSimetricaDescripto, conteudo);
+
+            return conteudoDecifrado;
         }
 
         ///<summary>
@@ -183,7 +232,7 @@ namespace sacis.model.criptografia
         private static string criptografar(string chave, string conteudo)
         {
             try{
-
+                
                 string vetorInicializacao = geradorIV();                
 
                 byte[] vetorInicializacaoBytes = Encoding.ASCII.GetBytes(vetorInicializacao);
@@ -274,6 +323,29 @@ namespace sacis.model.criptografia
             }
 
         }
-        
+
+        ///<summary>
+        ///
+        /// Metodo para converter string em uma string hexadecimal
+        /// 
+        ///</summary>
+        public static string convertToHexa(string hexa) 
+        {
+            byte[] toBytes = Encoding.ASCII.GetBytes(hexa);
+            SoapHexBinary shb = new SoapHexBinary(toBytes);
+            return shb.ToString();
+        }
+
+        ///<summary>
+        ///
+        /// Metodo para converter string hexadecimal em uma string
+        /// 
+        ///</summary>
+        public static string convertToString(string HexValue)
+        {
+            SoapHexBinary shb = SoapHexBinary.Parse(HexValue); 
+            return Encoding.ASCII.GetString(shb.Value); 
+        }
+
     }
 }

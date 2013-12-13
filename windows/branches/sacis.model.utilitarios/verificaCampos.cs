@@ -42,7 +42,7 @@ namespace sacis.model.utilitarios
         ///<summary>
         ///
         /// Método que verifica se o texto passado está de acordo com os parâmetros determinados 
-        /// na função retornando verdadeiro caso válido
+        /// na função retornando verdadeiro caso nao seja válido
         /// 
         ///</summary>
         public static bool verificaValidadeCampos(string texto) {

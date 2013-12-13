@@ -98,9 +98,9 @@
       <Project>{F11AC024-7818-4B8B-AD14-D3369F5D5EA1}</Project>
       <Name>sacis.model.excecao</Name>
     </ProjectReference>
-    <ProjectReference Include="..\sacis.view.control\sacis.view.control.csproj">
+    <ProjectReference Include="..\sacis.view.control\sacis.control.servlet.csproj">
       <Project>{26FF3171-8019-4F0C-AEEC-AF5E60313860}</Project>
-      <Name>sacis.view.control</Name>
+      <Name>sacis.control.servlet</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

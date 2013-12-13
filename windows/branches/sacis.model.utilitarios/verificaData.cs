@@ -14,7 +14,7 @@ namespace sacis.model.utilitarios
     public class verificaData
     {
 
-        private static string MSG_DATA_INVALIDA = "Certificado Expirado";
+        private static string MSG_DATA_INVALIDA = "Certificado Expirado!";
 
         ///<summary>
         ///
