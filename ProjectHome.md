@@ -1,0 +1,1 @@
+troca de mensagens criptografadas
